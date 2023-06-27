@@ -1,0 +1,16 @@
+# 进入当前目录
+cd `dirname $0`
+
+# 查看 python3 环境
+if [ python3 ]; then
+    alias py='python3'
+elif [ python ]; then
+    alias py='python'
+else
+    echo "Please install Python3 to run this script correctly. "
+    open "https://python.org"
+    exit 0
+fi
+
+# 运行
+py main.py $*
