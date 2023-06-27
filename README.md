@@ -1,12 +1,13 @@
 # CAIE Code
 CAIE Pseudocode Interpreter
 
-## Grammar
-语法使用 **BNF** 定义
-
-```
-
-```
+## 安装与使用
+1. 安装 `Python3` 环境
+2. 克隆此项目 `git clone https://github.com/iewnfod/CAIE_Code.git`
+3. 进入项目 `cd CAIE_Code`
+4. 安装依赖 `pip install -r requirements.txt`
+4. 若是`MacOS`或`Linux`，使用指令`./cpc`，或直接双击目录内`cpc`文件即可运行
+5. 若是`Windows`，请使用`python main.py`运行
 
 ## 标准
 ### 基本标准
