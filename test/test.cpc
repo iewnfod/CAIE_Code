@@ -1,10 +1,12 @@
-DECLARE a : ARRAY[1:10] OF STRING
+CONSTANT N = 5
 
-FOR i <- 1 TO 10
+DECLARE a : ARRAY[1:N] OF STRING
+
+FOR i <- 1 TO N
     OUTPUT i, ": "
     INPUT a[i]
 NEXT i
 
-FOR i <- 1 TO 10
+FOR i <- 1 TO N
     OUTPUT i, ". ", a[i]
 NEXT i
