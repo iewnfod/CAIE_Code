@@ -132,6 +132,7 @@ def p_for_statement(p):
 
 def p_repeat_statement(p):
     """statement : REPEAT statements UNTIL expression"""
+    p[0] = AST.Repeat(p[2], p[4])
 
 def p_while_statement(p):
     """statement : WHILE expression statements ENDWHILE"""

@@ -1,8 +1,11 @@
-DECLARE a : STRING
-INPUT a
+DECLARE a : INTEGER
+a <- 0
 
-CASE OF a
-    "1" : OUTPUT "a is 1";
-    "2" : OUTPUT "a is 2";
-    OTHERWISE : OUTPUT "a is not 1 or 2";
-ENDCASE
+REPEAT
+    a <- a + 1
+    CASE OF a
+        1 TO 9 : OUTPUT a, " is between 1 and 9";
+        10 TO 19 : OUTPUT a, " is between 10 and 19";
+        OTHERWISE : OUTPUT a, " is not between 1 and 19";
+    ENDCASE
+UNTIL a >= 20

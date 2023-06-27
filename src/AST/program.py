@@ -19,8 +19,8 @@ class Statements:
         for statement in self.statements:
             try:
                 result.append(statement.exe())
-            except Exception as e:
-                raise e
+            except:
+                print(self.get_tree())
 
         return result
 
@@ -152,7 +152,7 @@ class Range:
 
     def exe(self):
         n1 = self.start.exe()
-        n2 = self.start.exe()
+        n2 = self.end.exe()
         if n1[1] == 'INTEGER' and n2[1] == 'INTEGER':
             l = []
             for i in range(n1[0], n2[0]+1):
@@ -160,3 +160,18 @@ class Range:
             return l
         else:
             print(f'Expect `INTEGER` for a range argument, but found `{n1[1]}` and `{n2[1]}`')
+
+class Repeat:
+    def __init__(self, true_statement, condition):
+        self.type = 'REPEAT'
+        self.true_statement = true_statement
+        self.condition = condition
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.true_statement.get_tree(level+1) + '\n' + self.condition.get_tree(level+1)
+
+    def exe(self):
+        while 1:
+            self.true_statement.exe()
+            if self.condition.exe()[0]:
+                break
