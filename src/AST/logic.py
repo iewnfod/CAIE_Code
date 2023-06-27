@@ -10,7 +10,7 @@ class Logic_and:
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        return self.left.exe() and self.right.exe()
+        return self.left.exe()[0] and self.right.exe()[0]
 
 class Logic_or:
     def __init__(self, left, right):
@@ -22,7 +22,7 @@ class Logic_or:
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        return self.left.exe() or self.right.exe()
+        return self.left.exe()[0] or self.right.exe()[0]
 
 class Logic_not:
     def __init__(self, value):
@@ -33,4 +33,4 @@ class Logic_not:
         return LEVEL_STR * level + self.type + '\n' + self.value.get_tree(level+1)
 
     def exe(self):
-        return not self.value.exe()
+        return not self.value.exe()[0]

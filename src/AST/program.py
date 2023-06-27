@@ -40,7 +40,7 @@ class If:
         return result
 
     def exe(self):
-        if self.condition.exe():
+        if self.condition.exe()[0]:
             self.true_statement.exe()
         else:
             if self.false_statement:

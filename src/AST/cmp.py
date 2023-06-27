@@ -10,7 +10,7 @@ class Cmp_less:
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        return self.left.exe() < self.right.exe()
+        return (self.left.exe()[0] < self.right.exe()[0], 'BOOLEAN')
 
 class Cmp_greater:
     def __init__(self, left, right):
@@ -22,7 +22,7 @@ class Cmp_greater:
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        return self.left.exe() > self.right.exe()
+        return (self.left.exe()[0] > self.right.exe()[0], 'BOOLEAN')
 
 class Cmp_less_equal:
     def __init__(self, left, right):
@@ -34,7 +34,7 @@ class Cmp_less_equal:
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        return self.left.exe() <= self.right.exe()
+        return (self.left.exe()[0] <= self.right.exe()[0], 'BOOLEAN')
 
 class Cmp_greater_equal:
     def __init__(self, left, right):
@@ -46,7 +46,7 @@ class Cmp_greater_equal:
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        return self.left.exe() >= self.right.exe()
+        return (self.left.exe()[0] >= self.right.exe()[0], 'BOOLEAN')
 
 class Cmp_equal:
     def __init__(self, left, right):
@@ -58,7 +58,7 @@ class Cmp_equal:
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        return self.left.exe() == self.right.exe()
+        return (self.left.exe()[0] == self.right.exe()[0], 'BOOLEAN')
 
 class Cmp_not_equal:
     def __init__(self, left, right):
@@ -70,4 +70,4 @@ class Cmp_not_equal:
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        return self.left.exe() != self.right.exe()
+        return (self.left.exe()[0] != self.right.exe()[0], 'BOOLEAN')

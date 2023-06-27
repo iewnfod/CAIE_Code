@@ -5,3 +5,5 @@ from src.AST.io import *
 from src.AST.logic import *
 from src.AST.program import *
 from src.AST.var import *
+from src.AST.function import *
+from src.AST.array import *

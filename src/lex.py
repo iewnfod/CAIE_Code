@@ -97,9 +97,37 @@ t_GREATER_EQUAL = r">="
 t_NOT_EQUAL = r"<>"
 t_POINTER = r"\^"
 # 忽视空格
-t_ignore = r" \t"
+t_ignore = r" "
 
 # 规则行为
+def t_BOOLEAN(t):
+    r'TRUE|FALSE'
+    if t.value == 'TRUE':
+        t.value = True
+    elif t.value == 'FALSE':
+        t.value = False
+    return t
+
+def t_CHAR(t):
+    r'\'[\s\S]\''
+    t.value = str(t.value[1:-1])
+    return t
+
+def t_STRING(t):
+    r'\"[\s\S]*?\"'
+    t.value = str(t.value[1:-1])
+    return t
+
+def t_REAL(t):
+    r'-*\d*\.\d+'
+    t.value = float(t.value)
+    return t
+
+def t_INTEGER(t):
+    r'-*\d+'
+    t.value = int(t.value)
+    return t
+
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     # 如果是关键字
@@ -107,31 +135,6 @@ def t_ID(t):
         t.type = t.value
     else:
         t.type = 'ID'
-    return t
-
-def t_BOOLEAN(t):
-    r'TRUE|FALSE'
-    t.value = bool(t.value)
-    return t
-
-def t_CHAR(t):
-    r'\'[\s\S]\''
-    t.value = str(t.value)
-    return t
-
-def t_STRING(t):
-    r'\"[\s\S+]+\"'
-    t.value = str(t.value)
-    return t
-
-def t_REAL(t):
-    r'\d+\.\d+'
-    t.value = float(t.value)
-    return t
-
-def t_INTEGER(t):
-    r'\d+'
-    t.value = int(t.value)
     return t
 
 # 意外处理

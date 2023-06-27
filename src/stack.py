@@ -29,11 +29,12 @@ class Stack:
                     if self.spaces[i][1][id][1] == type:
                     # 如果存在这个量，并且是变量，并且类型相同
                         self.spaces[i][1][id] = (value, type, False)
-                        return
                     else:
                         print(f'Cannot assign `{type}` to `{self.spaces[i][1][id][1]}`. ')
                 else:
                     print(f'Cannot assign value of constant `{id}`. ')
+                # 如果找到了这个变量存在，不管什么错误，都退出
+                break
         else:
             print(f'Variable `{id}` has not been declared yet. ')
 
