@@ -94,13 +94,37 @@ def p_if_statement(p):
 
 def p_case_statement(p):
     """statement : CASE OF ID cases ENDCASE"""
+    p[0] = AST.Case(p[3], p[4])
 
 def p_cases(p):
     """cases : cases case
-            | case
+            | case"""
+    if len(p) == 2:
+        p[0] = AST.Cases()
+        p[0].add_case(p[1])
+    else:
+        p[1].add_case(p[2])
+        p[0] = p[1]
 
-        case : expression COLON statements
-            | OTHERWISE COLON statements"""
+def p_case(p):
+    """case : case_expression COLON statements SEMICOLON
+            | otherwise_statement SEMICOLON"""
+    if len(p) == 3:
+        p[0] = p[1]
+    else:
+        p[0] = AST.A_case(p[1], p[3])
+
+def p_case_expression(p):
+    """case_expression : expression TO expression
+            | expression"""
+    if len(p) == 2:
+        p[0] = p[1]
+    else:
+        p[0] = AST.Range(p[1], p[3])
+
+def p_otherwise_statement(p):
+    """otherwise_statement : OTHERWISE COLON statements"""
+    p[0] = AST.A_case(None, p[3], True)
 
 def p_for_statement(p):
     """statement : FOR ID ASSIGN expression TO expression statements NEXT ID"""

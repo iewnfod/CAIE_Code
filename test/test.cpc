@@ -1,12 +1,8 @@
-CONSTANT N = 5
+DECLARE a : STRING
+INPUT a
 
-DECLARE a : ARRAY[1:N] OF STRING
-
-FOR i <- 1 TO N
-    OUTPUT i, ": "
-    INPUT a[i]
-NEXT i
-
-FOR i <- 1 TO N
-    OUTPUT i, ". ", a[i]
-NEXT i
+CASE OF a
+    "1" : OUTPUT "a is 1";
+    "2" : OUTPUT "a is 2";
+    OTHERWISE : OUTPUT "a is not 1 or 2";
+ENDCASE

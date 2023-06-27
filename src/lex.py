@@ -61,6 +61,7 @@ tokens = (
     "COMMA", # ,
     "DOT", # .
     "POINTER", # ^
+    "SEMICOLON", # ;
     # 逻辑运算
     "LESS",
     "GREATER",
@@ -96,6 +97,7 @@ t_LESS_EQUAL = r"<="
 t_GREATER_EQUAL = r">="
 t_NOT_EQUAL = r"<>"
 t_POINTER = r"\^"
+t_SEMICOLON = r";"
 # 忽视空格
 t_ignore = r" "
 

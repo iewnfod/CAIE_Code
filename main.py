@@ -24,14 +24,12 @@ def with_input():
 def with_file(path):
     with open(path, 'r') as f:
         text = remove_comment(f.read())
-    try:
-        ast = parser.parse(text)
-        ast.exe()
-    except:
-        pass
+    ast = parser.parse(text)
+    ast.exe()
 
 
 def main():
+    with_file('test/test.cpc')
     if len(sys.argv) == 1:
         with_input()
     else:
