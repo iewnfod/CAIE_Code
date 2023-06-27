@@ -46,7 +46,7 @@ Rule 19    statement -> IF expression THEN statements ENDIF
 Rule 20    statement -> CASE OF ID cases ENDCASE
 Rule 21    cases -> cases case
 Rule 22    cases -> case
-Rule 23    case -> indexes COLON statements
+Rule 23    case -> expression COLON statements
 Rule 24    case -> OTHERWISE COLON statements
 Rule 25    statement -> FOR ID ASSIGN expression TO expression statements NEXT ID
 Rule 26    statement -> REPEAT statements UNTIL expression
@@ -148,8 +148,8 @@ case                 : 21 22
 cases                : 20 21
 dimension            : 6 7
 dimensions           : 5 6
-expression           : 4 8 8 9 10 11 12 16 17 18 19 25 25 26 27 28 31 31 32 32 33 34 34 35 35 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44
-indexes              : 10 11 14 23 30
+expression           : 4 8 8 9 10 11 12 16 17 18 19 23 25 25 26 27 28 31 31 32 32 33 34 34 35 35 36 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44
+indexes              : 10 11 14 30
 output_expression    : 15 16
 statement            : 1 2
 statements           : 1 18 18 19 23 24 25 26 27 0
@@ -2067,7 +2067,6 @@ state 52
 
     RIGHT_SQUARE    reduce using rule 12 (indexes -> expression .)
     COMMA           reduce using rule 12 (indexes -> expression .)
-    COLON           reduce using rule 12 (indexes -> expression .)
     OR              shift and go to state 26
     AND             shift and go to state 27
     EQUAL           shift and go to state 28
@@ -3190,10 +3189,8 @@ state 70
     (20) statement -> CASE OF ID . cases ENDCASE
     (21) cases -> . cases case
     (22) cases -> . case
-    (23) case -> . indexes COLON statements
+    (23) case -> . expression COLON statements
     (24) case -> . OTHERWISE COLON statements
-    (11) indexes -> . indexes COMMA expression
-    (12) indexes -> . expression
     (29) expression -> . ID
     (30) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (31) expression -> . expression OR expression
@@ -3228,8 +3225,7 @@ state 70
 
     cases                          shift and go to state 84
     case                           shift and go to state 85
-    indexes                        shift and go to state 86
-    expression                     shift and go to state 52
+    expression                     shift and go to state 86
 
 state 71
 
@@ -3732,10 +3728,8 @@ state 84
 
     (20) statement -> CASE OF ID cases . ENDCASE
     (21) cases -> cases . case
-    (23) case -> . indexes COLON statements
+    (23) case -> . expression COLON statements
     (24) case -> . OTHERWISE COLON statements
-    (11) indexes -> . indexes COMMA expression
-    (12) indexes -> . expression
     (29) expression -> . ID
     (30) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (31) expression -> . expression OR expression
@@ -3770,8 +3764,7 @@ state 84
     INTEGER         shift and go to state 20
 
     case                           shift and go to state 99
-    indexes                        shift and go to state 86
-    expression                     shift and go to state 52
+    expression                     shift and go to state 86
 
 state 85
 
@@ -3791,11 +3784,33 @@ state 85
 
 state 86
 
-    (23) case -> indexes . COLON statements
-    (11) indexes -> indexes . COMMA expression
+    (23) case -> expression . COLON statements
+    (31) expression -> expression . OR expression
+    (32) expression -> expression . AND expression
+    (34) expression -> expression . EQUAL expression
+    (35) expression -> expression . NOT_EQUAL expression
+    (36) expression -> expression . LESS expression
+    (37) expression -> expression . GREATER expression
+    (38) expression -> expression . LESS_EQUAL expression
+    (39) expression -> expression . GREATER_EQUAL expression
+    (40) expression -> expression . MUL expression
+    (41) expression -> expression . DIV expression
+    (42) expression -> expression . PLUS expression
+    (43) expression -> expression . MINUS expression
 
     COLON           shift and go to state 100
-    COMMA           shift and go to state 78
+    OR              shift and go to state 26
+    AND             shift and go to state 27
+    EQUAL           shift and go to state 28
+    NOT_EQUAL       shift and go to state 29
+    LESS            shift and go to state 30
+    GREATER         shift and go to state 31
+    LESS_EQUAL      shift and go to state 32
+    GREATER_EQUAL   shift and go to state 33
+    MUL             shift and go to state 34
+    DIV             shift and go to state 35
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
 
 
 state 87
@@ -4017,7 +4032,6 @@ state 93
 
     RIGHT_SQUARE    reduce using rule 11 (indexes -> indexes COMMA expression .)
     COMMA           reduce using rule 11 (indexes -> indexes COMMA expression .)
-    COLON           reduce using rule 11 (indexes -> indexes COMMA expression .)
     OR              shift and go to state 26
     AND             shift and go to state 27
     EQUAL           shift and go to state 28
@@ -4256,7 +4270,7 @@ state 99
 
 state 100
 
-    (23) case -> indexes COLON . statements
+    (23) case -> expression COLON . statements
     (1) statements -> . statements statement
     (2) statements -> . statement
     (3) statement -> . DECLARE ID COLON ID
@@ -4314,9 +4328,9 @@ state 100
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
+    expression                     shift and go to state 6
     statements                     shift and go to state 108
     statement                      shift and go to state 2
-    expression                     shift and go to state 6
 
 state 101
 
@@ -4586,7 +4600,7 @@ state 107
 
 state 108
 
-    (23) case -> indexes COLON statements .
+    (23) case -> expression COLON statements .
     (1) statements -> statements . statement
     (3) statement -> . DECLARE ID COLON ID
     (4) statement -> . CONSTANT ID EQUAL expression
@@ -4633,8 +4647,8 @@ state 108
   ! shift/reduce conflict for STRING resolved as shift
   ! shift/reduce conflict for REAL resolved as shift
   ! shift/reduce conflict for INTEGER resolved as shift
-    ENDCASE         reduce using rule 23 (case -> indexes COLON statements .)
-    OTHERWISE       reduce using rule 23 (case -> indexes COLON statements .)
+    ENDCASE         reduce using rule 23 (case -> expression COLON statements .)
+    OTHERWISE       reduce using rule 23 (case -> expression COLON statements .)
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -4653,17 +4667,17 @@ state 108
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-  ! ID              [ reduce using rule 23 (case -> indexes COLON statements .) ]
-  ! NOT             [ reduce using rule 23 (case -> indexes COLON statements .) ]
-  ! LEFT_PAREN      [ reduce using rule 23 (case -> indexes COLON statements .) ]
-  ! BOOLEAN         [ reduce using rule 23 (case -> indexes COLON statements .) ]
-  ! CHAR            [ reduce using rule 23 (case -> indexes COLON statements .) ]
-  ! STRING          [ reduce using rule 23 (case -> indexes COLON statements .) ]
-  ! REAL            [ reduce using rule 23 (case -> indexes COLON statements .) ]
-  ! INTEGER         [ reduce using rule 23 (case -> indexes COLON statements .) ]
+  ! ID              [ reduce using rule 23 (case -> expression COLON statements .) ]
+  ! NOT             [ reduce using rule 23 (case -> expression COLON statements .) ]
+  ! LEFT_PAREN      [ reduce using rule 23 (case -> expression COLON statements .) ]
+  ! BOOLEAN         [ reduce using rule 23 (case -> expression COLON statements .) ]
+  ! CHAR            [ reduce using rule 23 (case -> expression COLON statements .) ]
+  ! STRING          [ reduce using rule 23 (case -> expression COLON statements .) ]
+  ! REAL            [ reduce using rule 23 (case -> expression COLON statements .) ]
+  ! INTEGER         [ reduce using rule 23 (case -> expression COLON statements .) ]
 
-    statement                      shift and go to state 21
     expression                     shift and go to state 6
+    statement                      shift and go to state 21
 
 state 109
 

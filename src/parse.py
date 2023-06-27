@@ -99,12 +99,12 @@ def p_cases(p):
     """cases : cases case
             | case
 
-        case : indexes COLON statements
+        case : expression COLON statements
             | OTHERWISE COLON statements"""
 
 def p_for_statement(p):
     """statement : FOR ID ASSIGN expression TO expression statements NEXT ID"""
-
+    p[0] = AST.For(p[2], p[4], p[6], p[7], p[9])
 
 def p_repeat_statement(p):
     """statement : REPEAT statements UNTIL expression"""

@@ -1,0 +1,10 @@
+DECLARE a : ARRAY[1:10] OF STRING
+
+FOR i <- 1 TO 10
+    OUTPUT i, ": "
+    INPUT a[i]
+NEXT i
+
+FOR i <- 1 TO 10
+    OUTPUT i, ". ", a[i]
+NEXT i
