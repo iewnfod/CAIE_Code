@@ -1,2 +1,2 @@
-ply
+ply=3.11
 platform
