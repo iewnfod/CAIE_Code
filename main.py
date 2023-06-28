@@ -51,6 +51,14 @@ def with_file(path):
         print(ast.get_tree())
     ast.exe()
 
+def preload_scripts():
+    for p, dir_list, file_list in os.walk('scripts'):
+        for i in file_list:
+            with open(os.path.join(p, i), 'r') as f:
+                text = remove_comment(f.read())
+            ast = parser.parse(text)
+            ast.exe()
+
 def help():
     standard_output()
 
@@ -100,6 +108,9 @@ def main():
                 break
         else:
             file_path = arg
+
+    # 预加载文件
+    preload_scripts()
 
     # 选择模式运行
     if not file_path:

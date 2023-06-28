@@ -1,0 +1,8 @@
+FUNCTION MOD(n1 : INTEGER, n2 : INTEGER) RETURNS INTEGER
+    IF n1 < n2 THEN
+        RETURN 0
+    ENDIF
+    DECLARE quotient : INTEGER
+    quotient <- INT(n1 / n2)
+    RETURN n1 - INT(quotient * n2)
+ENDFUNCTION

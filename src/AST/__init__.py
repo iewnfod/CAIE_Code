@@ -7,3 +7,4 @@ from src.AST.program import *
 from src.AST.var import *
 from src.AST.function import *
 from src.AST.array import *
+from src.AST.insert_func import *

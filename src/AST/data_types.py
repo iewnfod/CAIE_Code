@@ -25,7 +25,7 @@ class Real:
 class Char:
     def __init__(self, value):
         self.type = 'CHAR'
-        self.value = value
+        self.value = format(value)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.value)

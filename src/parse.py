@@ -1,5 +1,5 @@
 import src.AST as AST
-from src.status import *
+from src.AST.insert_func import *
 
 start = 'statements'
 
@@ -289,7 +289,10 @@ def p_call_function_expression(p):
     if len(p) == 4:
         p[0] = AST.Call_function(p[1])
     else:
-        p[0] = AST.Call_function(p[1], p[3])
+        if p[1] in insert_functions:
+            p[0] = insert_functions[p[1]](p[3])
+        else:
+            p[0] = AST.Call_function(p[1], p[3])
 
 def p_return_statement(p):
     """statement : RETURN expression"""

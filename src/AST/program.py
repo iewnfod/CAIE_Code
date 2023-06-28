@@ -17,10 +17,15 @@ class Statements:
     def exe(self):
         result = []
         for statement in self.statements:
+            # 如果当前请求返回了，那就直接停止运行这个表达式块
+            if stack.return_request:
+                break
+            # 尝试运行，如果失败，直接定制当前表达式块
             try:
                 result.append(statement.exe())
-            except:
-                print(self.get_tree())
+            except Exception as e:
+                print(e)
+                break
 
         return result
 
