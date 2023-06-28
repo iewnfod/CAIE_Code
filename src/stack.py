@@ -1,7 +1,9 @@
 class Stack:
     def __init__(self) -> None:
         self.spaces = [('GLOBAL', {})]  # [(空间名, {变量名: (值, 类型, 是否是常量)})]
+        self.functions = {}  # {函数名: 函数AST实例}
         self.return_variables = []
+        self.return_request = False
 
     def global_space(self):
         return self.spaces[-1]
@@ -43,12 +45,22 @@ class Stack:
         self.return_request = False
 
     def new_space(self, space_name, var_dict):
-        self.spaces.append((space_name, var_dict))
+        self.spaces.insert(0, (space_name, var_dict))
 
     def set_return_variables(self, variables):
         self.return_variables = variables
+        self.return_request = True
 
     def get_return_variables(self):
         v = self.return_variables
         self.return_variables = []
         return v
+
+    def add_function(self, function):
+        self.functions[function.id] = function
+
+    def get_function(self, id):
+        if id in self.functions.keys():
+            return self.functions[id]
+        else:
+            print(f'No function with id: `{id}`')

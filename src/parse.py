@@ -1,4 +1,5 @@
 import src.AST as AST
+from src.status import *
 
 start = 'statements'
 
@@ -231,3 +232,65 @@ def p_real_expression(p):
 def p_int_expression(p):
     """expression : INTEGER"""
     p[0] = AST.Integer(p[1])
+
+
+# 函数的声明与调用
+def p_declare_parameters(p):
+    """declare_parameters : declare_parameters COMMA declare_parameter
+            | declare_parameter"""
+    if len(p) == 2:
+        p[0] = AST.Declare_parameters()
+        p[0].add_parameter(p[1])
+    else:
+        p[1].add_parameter(p[3])
+        p[0] = p[1]
+
+def p_declare_parameter(p):
+    """declare_parameter : ID COLON ID"""
+    p[0] = AST.Declare_parameter(p[1], p[3])
+
+def p_parameters(p):
+    """parameters : parameters COMMA expression
+            | expression"""
+    if len(p) == 2:
+        p[0] = AST.Parameters()
+        p[0].add_parameter(p[1])
+    else:
+        p[1].add_parameter(p[3])
+        p[0] = p[1]
+
+def p_procedure_statement(p):
+    """statement : PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
+            | PROCEDURE ID statements ENDPROCEDURE"""
+    if len(p) == 5:
+        p[0] = AST.Function(p[2], None, p[3])
+    else:
+        p[0] = AST.Function(p[2], p[4], p[6])
+
+def p_call_procedure_statement(p):
+    """statement : CALL ID LEFT_PAREN parameters RIGHT_PAREN
+            | CALL ID"""
+    if len(p) == 3:
+        p[0] = AST.Call_function(p[2])
+    else:
+        p[0] = AST.Call_function(p[2], p[4])
+
+def p_function_statement(p):
+    """statement : FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+            | FUNCTION ID RETURNS ID statements ENDFUNCTION"""
+    if len(p) == 7:
+        p[0] = AST.Function(p[2], None, p[5], p[4])
+    else:
+        p[0] = AST.Function(p[2], p[4], p[8], p[7])
+
+def p_call_function_expression(p):
+    """expression : ID LEFT_PAREN parameters RIGHT_PAREN
+            | ID LEFT_PAREN RIGHT_PAREN"""
+    if len(p) == 4:
+        p[0] = AST.Call_function(p[1])
+    else:
+        p[0] = AST.Call_function(p[1], p[3])
+
+def p_return_statement(p):
+    """statement : RETURN expression"""
+    p[0] = AST.Return(p[2])

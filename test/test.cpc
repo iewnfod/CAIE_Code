@@ -1,11 +1,15 @@
-DECLARE a : INTEGER
-a <- 0
+PROCEDURE outputName(name: STRING)
+    OUTPUT "Name: ", name
+ENDPROCEDURE
 
-WHILE a <= 20
-    a <- a + 1
-    CASE OF a
-        1 TO 9 : OUTPUT a, " is between 1 and 9";
-        10 TO 19 : OUTPUT a, " is between 10 and 19";
-        OTHERWISE : OUTPUT a, " is not between 1 and 19";
-    ENDCASE
-ENDWHILE
+FUNCTION connect_name(s1 : STRING, s2 : STRING) RETURNS STRING
+    DECLARE a : STRING
+    a <- s1 & '·' & s2
+    CALL outputName(a)
+    RETURN a
+ENDFUNCTION
+
+DECLARE a : STRING
+a <- "hcr"
+a <- connect_name(a, "ifsaiojaf")
+OUTPUT a

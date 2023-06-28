@@ -1,15 +1,17 @@
 from src.lex import *
 from src.parse import *
+from src.status import *
 from ply import yacc
 from ply import lex
 import sys
 import platform
 import signal
+import os
 
 VERSION = 'v0.1.0'
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
-show_tree = False
+preline = '$'
 
 def remove_comment(text):
     text = text.split('\n')
@@ -27,14 +29,16 @@ def standard_output():
     print('All Rights Reserved. ')
 
 
-def with_input():
+def with_line():
     # 基准输出
     standard_output()
     # 运行
     while 1:
-        text = remove_comment(input('$ '))
+        text = remove_comment(input(f'{preline} '))
         try:
-            ast = parser.parse(text)
+            ast = parser.parse(text, debug=debug)
+            if show_tree:
+                print(ast.get_tree())
             ast.exe()
         except Exception as e:
             print('Error:', e)
@@ -42,7 +46,7 @@ def with_input():
 def with_file(path):
     with open(path, 'r') as f:
         text = remove_comment(f.read())
-    ast = parser.parse(text)
+    ast = parser.parse(text, debug=debug)
     if show_tree:
         print(ast.get_tree())
     ast.exe()
@@ -67,6 +71,10 @@ def get_tree():
     global show_tree
     show_tree = True
 
+def open_debug():
+    global debug
+    debug = True
+
 def version():
     print('Version:', VERSION)
     exit(0)
@@ -74,25 +82,39 @@ def version():
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),
     ('-v', '--version', version, 'To show the version of this interpreter'),
-    ('-h', '--help', help, 'To show this help page')
+    ('-h', '--help', help, 'To show this help page'),
+    ('-d', '--debug', open_debug, 'To show debug information during running'),
 ]
 
-def main():
-    if len(sys.argv) == 1:
-        with_input()
-    else:
-        for arg in sys.argv:
-            for i in arguments:
-                if arg == i[0] or arg == i[1]:
-                    i[2]()
-                    break
-            else:
-                path = arg
+def wrong_argument(msg):
+    print(f'Wrong arguments: \033[1m{msg}\033[0m\n')
+    help()
 
-        with_file(path)
+def main():
+    # 解析参数
+    file_path = ''
+    for arg in sys.argv[1:]:
+        for i in arguments:
+            if arg == i[0] or arg == i[1]:
+                i[2]()
+                break
+        else:
+            file_path = arg
+
+    # 选择模式运行
+    if not file_path:
+        with_line()
+    else:
+        if os.path.exists(file_path):
+            if os.path.isfile(file_path):
+                with_file(file_path)
+            else:
+                wrong_argument(f'`{file_path}` is not a file')
+        else:
+            wrong_argument(f'`{file_path}` does not exist')
 
 def ctrl_c_handle(signal, frame):
-    print('\nKeyboard Interrupt\n$ ', end='')
+    print(f'\nKeyboard Interrupt\n{preline} ', end='')
 
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, ctrl_c_handle)
