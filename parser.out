@@ -70,25 +70,27 @@ Rule 43    expression -> expression MUL expression
 Rule 44    expression -> expression DIV expression
 Rule 45    expression -> expression PLUS expression
 Rule 46    expression -> expression MINUS expression
-Rule 47    expression -> LEFT_PAREN expression RIGHT_PAREN
-Rule 48    expression -> BOOLEAN
-Rule 49    expression -> CHAR
-Rule 50    expression -> STRING
-Rule 51    expression -> REAL
-Rule 52    expression -> INTEGER
+Rule 47    expression -> expression CONNECT expression
+Rule 48    expression -> LEFT_PAREN expression RIGHT_PAREN
+Rule 49    expression -> BOOLEAN
+Rule 50    expression -> CHAR
+Rule 51    expression -> STRING
+Rule 52    expression -> REAL
+Rule 53    expression -> INTEGER
 
 Terminals, with rules where they appear
 
 AND                  : 35
 ARRAY                : 5
 ASSIGN               : 9 10 28
-BOOLEAN              : 48
+BOOLEAN              : 49
 CALL                 : 
 CASE                 : 20
-CHAR                 : 49
+CHAR                 : 50
 CLASS                : 
 COLON                : 3 5 8 23 27
 COMMA                : 6 11 16
+CONNECT              : 47
 CONSTANT             : 4
 DECLARE              : 3 5
 DIV                  : 44
@@ -109,9 +111,9 @@ ID                   : 3 3 4 5 5 9 10 13 14 20 28 28 32 33
 IF                   : 18 19
 INHERITS             : 
 INPUT                : 13 14
-INTEGER              : 52
+INTEGER              : 53
 LEFT_BRACE           : 
-LEFT_PAREN           : 47
+LEFT_PAREN           : 48
 LEFT_SQUARE          : 5 10 14 33
 LESS                 : 39
 LESS_EQUAL           : 41
@@ -130,15 +132,15 @@ POINTER              :
 PRIVATE              : 
 PROCEDURE            : 
 PUBLIC               : 
-REAL                 : 51
+REAL                 : 52
 REPEAT               : 29
 RETURN               : 
 RETURNS              : 
 RIGHT_BRACE          : 
-RIGHT_PAREN          : 47
+RIGHT_PAREN          : 48
 RIGHT_SQUARE         : 5 10 14 33
 SEMICOLON            : 23 24
-STRING               : 50
+STRING               : 51
 THEN                 : 18 19
 TO                   : 25 28
 TYPE                 : 
@@ -153,7 +155,7 @@ case_expression      : 23
 cases                : 20 21
 dimension            : 6 7
 dimensions           : 5 6
-expression           : 4 8 8 9 10 11 12 16 17 18 19 25 25 26 28 28 29 30 31 34 34 35 35 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 45 46 46 47
+expression           : 4 8 8 9 10 11 12 16 17 18 19 25 25 26 28 28 29 30 31 34 34 35 35 36 37 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 45 46 46 47 47 48
 indexes              : 10 11 14 33
 otherwise_statement  : 24
 output_expression    : 15 16
@@ -197,12 +199,13 @@ state 0
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
@@ -260,12 +263,13 @@ state 1
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
@@ -347,6 +351,7 @@ state 4
     DIV             reduce using rule 32 (expression -> ID .)
     PLUS            reduce using rule 32 (expression -> ID .)
     MINUS           reduce using rule 32 (expression -> ID .)
+    CONNECT         reduce using rule 32 (expression -> ID .)
     DECLARE         reduce using rule 32 (expression -> ID .)
     CONSTANT        reduce using rule 32 (expression -> ID .)
     ID              reduce using rule 32 (expression -> ID .)
@@ -395,6 +400,7 @@ state 6
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     DECLARE         reduce using rule 31 (statement -> expression .)
     CONSTANT        reduce using rule 31 (statement -> expression .)
@@ -432,6 +438,7 @@ state 6
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
 state 7
@@ -439,7 +446,7 @@ state 7
     (13) statement -> INPUT . ID
     (14) statement -> INPUT . ID LEFT_SQUARE indexes RIGHT_SQUARE
 
-    ID              shift and go to state 38
+    ID              shift and go to state 39
 
 
 state 8
@@ -462,14 +469,15 @@ state 8
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -478,8 +486,8 @@ state 8
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    output_expression              shift and go to state 39
-    expression                     shift and go to state 40
+    output_expression              shift and go to state 40
+    expression                     shift and go to state 41
 
 state 9
 
@@ -500,14 +508,15 @@ state 9
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -516,20 +525,20 @@ state 9
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 42
+    expression                     shift and go to state 43
 
 state 10
 
     (20) statement -> CASE . OF ID cases ENDCASE
 
-    OF              shift and go to state 43
+    OF              shift and go to state 44
 
 
 state 11
 
     (28) statement -> FOR . ID ASSIGN expression TO expression statements NEXT ID
 
-    ID              shift and go to state 44
+    ID              shift and go to state 45
 
 
 state 12
@@ -567,12 +576,13 @@ state 12
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
@@ -592,7 +602,7 @@ state 12
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    statements                     shift and go to state 45
+    statements                     shift and go to state 46
     expression                     shift and go to state 6
     statement                      shift and go to state 2
 
@@ -614,14 +624,15 @@ state 13
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -630,7 +641,7 @@ state 13
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 46
+    expression                     shift and go to state 47
 
 state 14
 
@@ -650,14 +661,15 @@ state 14
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -666,11 +678,11 @@ state 14
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 47
+    expression                     shift and go to state 48
 
 state 15
 
-    (47) expression -> LEFT_PAREN . expression RIGHT_PAREN
+    (48) expression -> LEFT_PAREN . expression RIGHT_PAREN
     (32) expression -> . ID
     (33) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (34) expression -> . expression OR expression
@@ -686,14 +698,15 @@ state 15
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -702,246 +715,251 @@ state 15
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 48
+    expression                     shift and go to state 49
 
 state 16
 
-    (48) expression -> BOOLEAN .
+    (49) expression -> BOOLEAN .
 
-    OR              reduce using rule 48 (expression -> BOOLEAN .)
-    AND             reduce using rule 48 (expression -> BOOLEAN .)
-    EQUAL           reduce using rule 48 (expression -> BOOLEAN .)
-    NOT_EQUAL       reduce using rule 48 (expression -> BOOLEAN .)
-    LESS            reduce using rule 48 (expression -> BOOLEAN .)
-    GREATER         reduce using rule 48 (expression -> BOOLEAN .)
-    LESS_EQUAL      reduce using rule 48 (expression -> BOOLEAN .)
-    GREATER_EQUAL   reduce using rule 48 (expression -> BOOLEAN .)
-    MUL             reduce using rule 48 (expression -> BOOLEAN .)
-    DIV             reduce using rule 48 (expression -> BOOLEAN .)
-    PLUS            reduce using rule 48 (expression -> BOOLEAN .)
-    MINUS           reduce using rule 48 (expression -> BOOLEAN .)
-    DECLARE         reduce using rule 48 (expression -> BOOLEAN .)
-    CONSTANT        reduce using rule 48 (expression -> BOOLEAN .)
-    ID              reduce using rule 48 (expression -> BOOLEAN .)
-    INPUT           reduce using rule 48 (expression -> BOOLEAN .)
-    OUTPUT          reduce using rule 48 (expression -> BOOLEAN .)
-    IF              reduce using rule 48 (expression -> BOOLEAN .)
-    CASE            reduce using rule 48 (expression -> BOOLEAN .)
-    FOR             reduce using rule 48 (expression -> BOOLEAN .)
-    REPEAT          reduce using rule 48 (expression -> BOOLEAN .)
-    WHILE           reduce using rule 48 (expression -> BOOLEAN .)
-    NOT             reduce using rule 48 (expression -> BOOLEAN .)
-    LEFT_PAREN      reduce using rule 48 (expression -> BOOLEAN .)
-    BOOLEAN         reduce using rule 48 (expression -> BOOLEAN .)
-    CHAR            reduce using rule 48 (expression -> BOOLEAN .)
-    STRING          reduce using rule 48 (expression -> BOOLEAN .)
-    REAL            reduce using rule 48 (expression -> BOOLEAN .)
-    INTEGER         reduce using rule 48 (expression -> BOOLEAN .)
-    $end            reduce using rule 48 (expression -> BOOLEAN .)
-    COMMA           reduce using rule 48 (expression -> BOOLEAN .)
-    UNTIL           reduce using rule 48 (expression -> BOOLEAN .)
-    ENDWHILE        reduce using rule 48 (expression -> BOOLEAN .)
-    ELSE            reduce using rule 48 (expression -> BOOLEAN .)
-    ENDIF           reduce using rule 48 (expression -> BOOLEAN .)
-    SEMICOLON       reduce using rule 48 (expression -> BOOLEAN .)
-    NEXT            reduce using rule 48 (expression -> BOOLEAN .)
-    THEN            reduce using rule 48 (expression -> BOOLEAN .)
-    RIGHT_PAREN     reduce using rule 48 (expression -> BOOLEAN .)
-    RIGHT_SQUARE    reduce using rule 48 (expression -> BOOLEAN .)
-    TO              reduce using rule 48 (expression -> BOOLEAN .)
-    COLON           reduce using rule 48 (expression -> BOOLEAN .)
+    OR              reduce using rule 49 (expression -> BOOLEAN .)
+    AND             reduce using rule 49 (expression -> BOOLEAN .)
+    EQUAL           reduce using rule 49 (expression -> BOOLEAN .)
+    NOT_EQUAL       reduce using rule 49 (expression -> BOOLEAN .)
+    LESS            reduce using rule 49 (expression -> BOOLEAN .)
+    GREATER         reduce using rule 49 (expression -> BOOLEAN .)
+    LESS_EQUAL      reduce using rule 49 (expression -> BOOLEAN .)
+    GREATER_EQUAL   reduce using rule 49 (expression -> BOOLEAN .)
+    MUL             reduce using rule 49 (expression -> BOOLEAN .)
+    DIV             reduce using rule 49 (expression -> BOOLEAN .)
+    PLUS            reduce using rule 49 (expression -> BOOLEAN .)
+    MINUS           reduce using rule 49 (expression -> BOOLEAN .)
+    CONNECT         reduce using rule 49 (expression -> BOOLEAN .)
+    DECLARE         reduce using rule 49 (expression -> BOOLEAN .)
+    CONSTANT        reduce using rule 49 (expression -> BOOLEAN .)
+    ID              reduce using rule 49 (expression -> BOOLEAN .)
+    INPUT           reduce using rule 49 (expression -> BOOLEAN .)
+    OUTPUT          reduce using rule 49 (expression -> BOOLEAN .)
+    IF              reduce using rule 49 (expression -> BOOLEAN .)
+    CASE            reduce using rule 49 (expression -> BOOLEAN .)
+    FOR             reduce using rule 49 (expression -> BOOLEAN .)
+    REPEAT          reduce using rule 49 (expression -> BOOLEAN .)
+    WHILE           reduce using rule 49 (expression -> BOOLEAN .)
+    NOT             reduce using rule 49 (expression -> BOOLEAN .)
+    LEFT_PAREN      reduce using rule 49 (expression -> BOOLEAN .)
+    BOOLEAN         reduce using rule 49 (expression -> BOOLEAN .)
+    CHAR            reduce using rule 49 (expression -> BOOLEAN .)
+    STRING          reduce using rule 49 (expression -> BOOLEAN .)
+    REAL            reduce using rule 49 (expression -> BOOLEAN .)
+    INTEGER         reduce using rule 49 (expression -> BOOLEAN .)
+    $end            reduce using rule 49 (expression -> BOOLEAN .)
+    COMMA           reduce using rule 49 (expression -> BOOLEAN .)
+    UNTIL           reduce using rule 49 (expression -> BOOLEAN .)
+    ENDWHILE        reduce using rule 49 (expression -> BOOLEAN .)
+    ELSE            reduce using rule 49 (expression -> BOOLEAN .)
+    ENDIF           reduce using rule 49 (expression -> BOOLEAN .)
+    SEMICOLON       reduce using rule 49 (expression -> BOOLEAN .)
+    NEXT            reduce using rule 49 (expression -> BOOLEAN .)
+    THEN            reduce using rule 49 (expression -> BOOLEAN .)
+    RIGHT_PAREN     reduce using rule 49 (expression -> BOOLEAN .)
+    RIGHT_SQUARE    reduce using rule 49 (expression -> BOOLEAN .)
+    TO              reduce using rule 49 (expression -> BOOLEAN .)
+    COLON           reduce using rule 49 (expression -> BOOLEAN .)
 
 
 state 17
 
-    (49) expression -> CHAR .
+    (50) expression -> CHAR .
 
-    OR              reduce using rule 49 (expression -> CHAR .)
-    AND             reduce using rule 49 (expression -> CHAR .)
-    EQUAL           reduce using rule 49 (expression -> CHAR .)
-    NOT_EQUAL       reduce using rule 49 (expression -> CHAR .)
-    LESS            reduce using rule 49 (expression -> CHAR .)
-    GREATER         reduce using rule 49 (expression -> CHAR .)
-    LESS_EQUAL      reduce using rule 49 (expression -> CHAR .)
-    GREATER_EQUAL   reduce using rule 49 (expression -> CHAR .)
-    MUL             reduce using rule 49 (expression -> CHAR .)
-    DIV             reduce using rule 49 (expression -> CHAR .)
-    PLUS            reduce using rule 49 (expression -> CHAR .)
-    MINUS           reduce using rule 49 (expression -> CHAR .)
-    DECLARE         reduce using rule 49 (expression -> CHAR .)
-    CONSTANT        reduce using rule 49 (expression -> CHAR .)
-    ID              reduce using rule 49 (expression -> CHAR .)
-    INPUT           reduce using rule 49 (expression -> CHAR .)
-    OUTPUT          reduce using rule 49 (expression -> CHAR .)
-    IF              reduce using rule 49 (expression -> CHAR .)
-    CASE            reduce using rule 49 (expression -> CHAR .)
-    FOR             reduce using rule 49 (expression -> CHAR .)
-    REPEAT          reduce using rule 49 (expression -> CHAR .)
-    WHILE           reduce using rule 49 (expression -> CHAR .)
-    NOT             reduce using rule 49 (expression -> CHAR .)
-    LEFT_PAREN      reduce using rule 49 (expression -> CHAR .)
-    BOOLEAN         reduce using rule 49 (expression -> CHAR .)
-    CHAR            reduce using rule 49 (expression -> CHAR .)
-    STRING          reduce using rule 49 (expression -> CHAR .)
-    REAL            reduce using rule 49 (expression -> CHAR .)
-    INTEGER         reduce using rule 49 (expression -> CHAR .)
-    $end            reduce using rule 49 (expression -> CHAR .)
-    COMMA           reduce using rule 49 (expression -> CHAR .)
-    UNTIL           reduce using rule 49 (expression -> CHAR .)
-    ENDWHILE        reduce using rule 49 (expression -> CHAR .)
-    ELSE            reduce using rule 49 (expression -> CHAR .)
-    ENDIF           reduce using rule 49 (expression -> CHAR .)
-    SEMICOLON       reduce using rule 49 (expression -> CHAR .)
-    NEXT            reduce using rule 49 (expression -> CHAR .)
-    THEN            reduce using rule 49 (expression -> CHAR .)
-    RIGHT_PAREN     reduce using rule 49 (expression -> CHAR .)
-    RIGHT_SQUARE    reduce using rule 49 (expression -> CHAR .)
-    TO              reduce using rule 49 (expression -> CHAR .)
-    COLON           reduce using rule 49 (expression -> CHAR .)
+    OR              reduce using rule 50 (expression -> CHAR .)
+    AND             reduce using rule 50 (expression -> CHAR .)
+    EQUAL           reduce using rule 50 (expression -> CHAR .)
+    NOT_EQUAL       reduce using rule 50 (expression -> CHAR .)
+    LESS            reduce using rule 50 (expression -> CHAR .)
+    GREATER         reduce using rule 50 (expression -> CHAR .)
+    LESS_EQUAL      reduce using rule 50 (expression -> CHAR .)
+    GREATER_EQUAL   reduce using rule 50 (expression -> CHAR .)
+    MUL             reduce using rule 50 (expression -> CHAR .)
+    DIV             reduce using rule 50 (expression -> CHAR .)
+    PLUS            reduce using rule 50 (expression -> CHAR .)
+    MINUS           reduce using rule 50 (expression -> CHAR .)
+    CONNECT         reduce using rule 50 (expression -> CHAR .)
+    DECLARE         reduce using rule 50 (expression -> CHAR .)
+    CONSTANT        reduce using rule 50 (expression -> CHAR .)
+    ID              reduce using rule 50 (expression -> CHAR .)
+    INPUT           reduce using rule 50 (expression -> CHAR .)
+    OUTPUT          reduce using rule 50 (expression -> CHAR .)
+    IF              reduce using rule 50 (expression -> CHAR .)
+    CASE            reduce using rule 50 (expression -> CHAR .)
+    FOR             reduce using rule 50 (expression -> CHAR .)
+    REPEAT          reduce using rule 50 (expression -> CHAR .)
+    WHILE           reduce using rule 50 (expression -> CHAR .)
+    NOT             reduce using rule 50 (expression -> CHAR .)
+    LEFT_PAREN      reduce using rule 50 (expression -> CHAR .)
+    BOOLEAN         reduce using rule 50 (expression -> CHAR .)
+    CHAR            reduce using rule 50 (expression -> CHAR .)
+    STRING          reduce using rule 50 (expression -> CHAR .)
+    REAL            reduce using rule 50 (expression -> CHAR .)
+    INTEGER         reduce using rule 50 (expression -> CHAR .)
+    $end            reduce using rule 50 (expression -> CHAR .)
+    COMMA           reduce using rule 50 (expression -> CHAR .)
+    UNTIL           reduce using rule 50 (expression -> CHAR .)
+    ENDWHILE        reduce using rule 50 (expression -> CHAR .)
+    ELSE            reduce using rule 50 (expression -> CHAR .)
+    ENDIF           reduce using rule 50 (expression -> CHAR .)
+    SEMICOLON       reduce using rule 50 (expression -> CHAR .)
+    NEXT            reduce using rule 50 (expression -> CHAR .)
+    THEN            reduce using rule 50 (expression -> CHAR .)
+    RIGHT_PAREN     reduce using rule 50 (expression -> CHAR .)
+    RIGHT_SQUARE    reduce using rule 50 (expression -> CHAR .)
+    TO              reduce using rule 50 (expression -> CHAR .)
+    COLON           reduce using rule 50 (expression -> CHAR .)
 
 
 state 18
 
-    (50) expression -> STRING .
+    (51) expression -> STRING .
 
-    OR              reduce using rule 50 (expression -> STRING .)
-    AND             reduce using rule 50 (expression -> STRING .)
-    EQUAL           reduce using rule 50 (expression -> STRING .)
-    NOT_EQUAL       reduce using rule 50 (expression -> STRING .)
-    LESS            reduce using rule 50 (expression -> STRING .)
-    GREATER         reduce using rule 50 (expression -> STRING .)
-    LESS_EQUAL      reduce using rule 50 (expression -> STRING .)
-    GREATER_EQUAL   reduce using rule 50 (expression -> STRING .)
-    MUL             reduce using rule 50 (expression -> STRING .)
-    DIV             reduce using rule 50 (expression -> STRING .)
-    PLUS            reduce using rule 50 (expression -> STRING .)
-    MINUS           reduce using rule 50 (expression -> STRING .)
-    DECLARE         reduce using rule 50 (expression -> STRING .)
-    CONSTANT        reduce using rule 50 (expression -> STRING .)
-    ID              reduce using rule 50 (expression -> STRING .)
-    INPUT           reduce using rule 50 (expression -> STRING .)
-    OUTPUT          reduce using rule 50 (expression -> STRING .)
-    IF              reduce using rule 50 (expression -> STRING .)
-    CASE            reduce using rule 50 (expression -> STRING .)
-    FOR             reduce using rule 50 (expression -> STRING .)
-    REPEAT          reduce using rule 50 (expression -> STRING .)
-    WHILE           reduce using rule 50 (expression -> STRING .)
-    NOT             reduce using rule 50 (expression -> STRING .)
-    LEFT_PAREN      reduce using rule 50 (expression -> STRING .)
-    BOOLEAN         reduce using rule 50 (expression -> STRING .)
-    CHAR            reduce using rule 50 (expression -> STRING .)
-    STRING          reduce using rule 50 (expression -> STRING .)
-    REAL            reduce using rule 50 (expression -> STRING .)
-    INTEGER         reduce using rule 50 (expression -> STRING .)
-    $end            reduce using rule 50 (expression -> STRING .)
-    COMMA           reduce using rule 50 (expression -> STRING .)
-    UNTIL           reduce using rule 50 (expression -> STRING .)
-    ENDWHILE        reduce using rule 50 (expression -> STRING .)
-    ELSE            reduce using rule 50 (expression -> STRING .)
-    ENDIF           reduce using rule 50 (expression -> STRING .)
-    SEMICOLON       reduce using rule 50 (expression -> STRING .)
-    NEXT            reduce using rule 50 (expression -> STRING .)
-    THEN            reduce using rule 50 (expression -> STRING .)
-    RIGHT_PAREN     reduce using rule 50 (expression -> STRING .)
-    RIGHT_SQUARE    reduce using rule 50 (expression -> STRING .)
-    TO              reduce using rule 50 (expression -> STRING .)
-    COLON           reduce using rule 50 (expression -> STRING .)
+    OR              reduce using rule 51 (expression -> STRING .)
+    AND             reduce using rule 51 (expression -> STRING .)
+    EQUAL           reduce using rule 51 (expression -> STRING .)
+    NOT_EQUAL       reduce using rule 51 (expression -> STRING .)
+    LESS            reduce using rule 51 (expression -> STRING .)
+    GREATER         reduce using rule 51 (expression -> STRING .)
+    LESS_EQUAL      reduce using rule 51 (expression -> STRING .)
+    GREATER_EQUAL   reduce using rule 51 (expression -> STRING .)
+    MUL             reduce using rule 51 (expression -> STRING .)
+    DIV             reduce using rule 51 (expression -> STRING .)
+    PLUS            reduce using rule 51 (expression -> STRING .)
+    MINUS           reduce using rule 51 (expression -> STRING .)
+    CONNECT         reduce using rule 51 (expression -> STRING .)
+    DECLARE         reduce using rule 51 (expression -> STRING .)
+    CONSTANT        reduce using rule 51 (expression -> STRING .)
+    ID              reduce using rule 51 (expression -> STRING .)
+    INPUT           reduce using rule 51 (expression -> STRING .)
+    OUTPUT          reduce using rule 51 (expression -> STRING .)
+    IF              reduce using rule 51 (expression -> STRING .)
+    CASE            reduce using rule 51 (expression -> STRING .)
+    FOR             reduce using rule 51 (expression -> STRING .)
+    REPEAT          reduce using rule 51 (expression -> STRING .)
+    WHILE           reduce using rule 51 (expression -> STRING .)
+    NOT             reduce using rule 51 (expression -> STRING .)
+    LEFT_PAREN      reduce using rule 51 (expression -> STRING .)
+    BOOLEAN         reduce using rule 51 (expression -> STRING .)
+    CHAR            reduce using rule 51 (expression -> STRING .)
+    STRING          reduce using rule 51 (expression -> STRING .)
+    REAL            reduce using rule 51 (expression -> STRING .)
+    INTEGER         reduce using rule 51 (expression -> STRING .)
+    $end            reduce using rule 51 (expression -> STRING .)
+    COMMA           reduce using rule 51 (expression -> STRING .)
+    UNTIL           reduce using rule 51 (expression -> STRING .)
+    ENDWHILE        reduce using rule 51 (expression -> STRING .)
+    ELSE            reduce using rule 51 (expression -> STRING .)
+    ENDIF           reduce using rule 51 (expression -> STRING .)
+    SEMICOLON       reduce using rule 51 (expression -> STRING .)
+    NEXT            reduce using rule 51 (expression -> STRING .)
+    THEN            reduce using rule 51 (expression -> STRING .)
+    RIGHT_PAREN     reduce using rule 51 (expression -> STRING .)
+    RIGHT_SQUARE    reduce using rule 51 (expression -> STRING .)
+    TO              reduce using rule 51 (expression -> STRING .)
+    COLON           reduce using rule 51 (expression -> STRING .)
 
 
 state 19
 
-    (51) expression -> REAL .
+    (52) expression -> REAL .
 
-    OR              reduce using rule 51 (expression -> REAL .)
-    AND             reduce using rule 51 (expression -> REAL .)
-    EQUAL           reduce using rule 51 (expression -> REAL .)
-    NOT_EQUAL       reduce using rule 51 (expression -> REAL .)
-    LESS            reduce using rule 51 (expression -> REAL .)
-    GREATER         reduce using rule 51 (expression -> REAL .)
-    LESS_EQUAL      reduce using rule 51 (expression -> REAL .)
-    GREATER_EQUAL   reduce using rule 51 (expression -> REAL .)
-    MUL             reduce using rule 51 (expression -> REAL .)
-    DIV             reduce using rule 51 (expression -> REAL .)
-    PLUS            reduce using rule 51 (expression -> REAL .)
-    MINUS           reduce using rule 51 (expression -> REAL .)
-    DECLARE         reduce using rule 51 (expression -> REAL .)
-    CONSTANT        reduce using rule 51 (expression -> REAL .)
-    ID              reduce using rule 51 (expression -> REAL .)
-    INPUT           reduce using rule 51 (expression -> REAL .)
-    OUTPUT          reduce using rule 51 (expression -> REAL .)
-    IF              reduce using rule 51 (expression -> REAL .)
-    CASE            reduce using rule 51 (expression -> REAL .)
-    FOR             reduce using rule 51 (expression -> REAL .)
-    REPEAT          reduce using rule 51 (expression -> REAL .)
-    WHILE           reduce using rule 51 (expression -> REAL .)
-    NOT             reduce using rule 51 (expression -> REAL .)
-    LEFT_PAREN      reduce using rule 51 (expression -> REAL .)
-    BOOLEAN         reduce using rule 51 (expression -> REAL .)
-    CHAR            reduce using rule 51 (expression -> REAL .)
-    STRING          reduce using rule 51 (expression -> REAL .)
-    REAL            reduce using rule 51 (expression -> REAL .)
-    INTEGER         reduce using rule 51 (expression -> REAL .)
-    $end            reduce using rule 51 (expression -> REAL .)
-    COMMA           reduce using rule 51 (expression -> REAL .)
-    UNTIL           reduce using rule 51 (expression -> REAL .)
-    ENDWHILE        reduce using rule 51 (expression -> REAL .)
-    ELSE            reduce using rule 51 (expression -> REAL .)
-    ENDIF           reduce using rule 51 (expression -> REAL .)
-    SEMICOLON       reduce using rule 51 (expression -> REAL .)
-    NEXT            reduce using rule 51 (expression -> REAL .)
-    THEN            reduce using rule 51 (expression -> REAL .)
-    RIGHT_PAREN     reduce using rule 51 (expression -> REAL .)
-    RIGHT_SQUARE    reduce using rule 51 (expression -> REAL .)
-    TO              reduce using rule 51 (expression -> REAL .)
-    COLON           reduce using rule 51 (expression -> REAL .)
+    OR              reduce using rule 52 (expression -> REAL .)
+    AND             reduce using rule 52 (expression -> REAL .)
+    EQUAL           reduce using rule 52 (expression -> REAL .)
+    NOT_EQUAL       reduce using rule 52 (expression -> REAL .)
+    LESS            reduce using rule 52 (expression -> REAL .)
+    GREATER         reduce using rule 52 (expression -> REAL .)
+    LESS_EQUAL      reduce using rule 52 (expression -> REAL .)
+    GREATER_EQUAL   reduce using rule 52 (expression -> REAL .)
+    MUL             reduce using rule 52 (expression -> REAL .)
+    DIV             reduce using rule 52 (expression -> REAL .)
+    PLUS            reduce using rule 52 (expression -> REAL .)
+    MINUS           reduce using rule 52 (expression -> REAL .)
+    CONNECT         reduce using rule 52 (expression -> REAL .)
+    DECLARE         reduce using rule 52 (expression -> REAL .)
+    CONSTANT        reduce using rule 52 (expression -> REAL .)
+    ID              reduce using rule 52 (expression -> REAL .)
+    INPUT           reduce using rule 52 (expression -> REAL .)
+    OUTPUT          reduce using rule 52 (expression -> REAL .)
+    IF              reduce using rule 52 (expression -> REAL .)
+    CASE            reduce using rule 52 (expression -> REAL .)
+    FOR             reduce using rule 52 (expression -> REAL .)
+    REPEAT          reduce using rule 52 (expression -> REAL .)
+    WHILE           reduce using rule 52 (expression -> REAL .)
+    NOT             reduce using rule 52 (expression -> REAL .)
+    LEFT_PAREN      reduce using rule 52 (expression -> REAL .)
+    BOOLEAN         reduce using rule 52 (expression -> REAL .)
+    CHAR            reduce using rule 52 (expression -> REAL .)
+    STRING          reduce using rule 52 (expression -> REAL .)
+    REAL            reduce using rule 52 (expression -> REAL .)
+    INTEGER         reduce using rule 52 (expression -> REAL .)
+    $end            reduce using rule 52 (expression -> REAL .)
+    COMMA           reduce using rule 52 (expression -> REAL .)
+    UNTIL           reduce using rule 52 (expression -> REAL .)
+    ENDWHILE        reduce using rule 52 (expression -> REAL .)
+    ELSE            reduce using rule 52 (expression -> REAL .)
+    ENDIF           reduce using rule 52 (expression -> REAL .)
+    SEMICOLON       reduce using rule 52 (expression -> REAL .)
+    NEXT            reduce using rule 52 (expression -> REAL .)
+    THEN            reduce using rule 52 (expression -> REAL .)
+    RIGHT_PAREN     reduce using rule 52 (expression -> REAL .)
+    RIGHT_SQUARE    reduce using rule 52 (expression -> REAL .)
+    TO              reduce using rule 52 (expression -> REAL .)
+    COLON           reduce using rule 52 (expression -> REAL .)
 
 
 state 20
 
-    (52) expression -> INTEGER .
+    (53) expression -> INTEGER .
 
-    OR              reduce using rule 52 (expression -> INTEGER .)
-    AND             reduce using rule 52 (expression -> INTEGER .)
-    EQUAL           reduce using rule 52 (expression -> INTEGER .)
-    NOT_EQUAL       reduce using rule 52 (expression -> INTEGER .)
-    LESS            reduce using rule 52 (expression -> INTEGER .)
-    GREATER         reduce using rule 52 (expression -> INTEGER .)
-    LESS_EQUAL      reduce using rule 52 (expression -> INTEGER .)
-    GREATER_EQUAL   reduce using rule 52 (expression -> INTEGER .)
-    MUL             reduce using rule 52 (expression -> INTEGER .)
-    DIV             reduce using rule 52 (expression -> INTEGER .)
-    PLUS            reduce using rule 52 (expression -> INTEGER .)
-    MINUS           reduce using rule 52 (expression -> INTEGER .)
-    DECLARE         reduce using rule 52 (expression -> INTEGER .)
-    CONSTANT        reduce using rule 52 (expression -> INTEGER .)
-    ID              reduce using rule 52 (expression -> INTEGER .)
-    INPUT           reduce using rule 52 (expression -> INTEGER .)
-    OUTPUT          reduce using rule 52 (expression -> INTEGER .)
-    IF              reduce using rule 52 (expression -> INTEGER .)
-    CASE            reduce using rule 52 (expression -> INTEGER .)
-    FOR             reduce using rule 52 (expression -> INTEGER .)
-    REPEAT          reduce using rule 52 (expression -> INTEGER .)
-    WHILE           reduce using rule 52 (expression -> INTEGER .)
-    NOT             reduce using rule 52 (expression -> INTEGER .)
-    LEFT_PAREN      reduce using rule 52 (expression -> INTEGER .)
-    BOOLEAN         reduce using rule 52 (expression -> INTEGER .)
-    CHAR            reduce using rule 52 (expression -> INTEGER .)
-    STRING          reduce using rule 52 (expression -> INTEGER .)
-    REAL            reduce using rule 52 (expression -> INTEGER .)
-    INTEGER         reduce using rule 52 (expression -> INTEGER .)
-    $end            reduce using rule 52 (expression -> INTEGER .)
-    COMMA           reduce using rule 52 (expression -> INTEGER .)
-    UNTIL           reduce using rule 52 (expression -> INTEGER .)
-    ENDWHILE        reduce using rule 52 (expression -> INTEGER .)
-    ELSE            reduce using rule 52 (expression -> INTEGER .)
-    ENDIF           reduce using rule 52 (expression -> INTEGER .)
-    SEMICOLON       reduce using rule 52 (expression -> INTEGER .)
-    NEXT            reduce using rule 52 (expression -> INTEGER .)
-    THEN            reduce using rule 52 (expression -> INTEGER .)
-    RIGHT_PAREN     reduce using rule 52 (expression -> INTEGER .)
-    RIGHT_SQUARE    reduce using rule 52 (expression -> INTEGER .)
-    TO              reduce using rule 52 (expression -> INTEGER .)
-    COLON           reduce using rule 52 (expression -> INTEGER .)
+    OR              reduce using rule 53 (expression -> INTEGER .)
+    AND             reduce using rule 53 (expression -> INTEGER .)
+    EQUAL           reduce using rule 53 (expression -> INTEGER .)
+    NOT_EQUAL       reduce using rule 53 (expression -> INTEGER .)
+    LESS            reduce using rule 53 (expression -> INTEGER .)
+    GREATER         reduce using rule 53 (expression -> INTEGER .)
+    LESS_EQUAL      reduce using rule 53 (expression -> INTEGER .)
+    GREATER_EQUAL   reduce using rule 53 (expression -> INTEGER .)
+    MUL             reduce using rule 53 (expression -> INTEGER .)
+    DIV             reduce using rule 53 (expression -> INTEGER .)
+    PLUS            reduce using rule 53 (expression -> INTEGER .)
+    MINUS           reduce using rule 53 (expression -> INTEGER .)
+    CONNECT         reduce using rule 53 (expression -> INTEGER .)
+    DECLARE         reduce using rule 53 (expression -> INTEGER .)
+    CONSTANT        reduce using rule 53 (expression -> INTEGER .)
+    ID              reduce using rule 53 (expression -> INTEGER .)
+    INPUT           reduce using rule 53 (expression -> INTEGER .)
+    OUTPUT          reduce using rule 53 (expression -> INTEGER .)
+    IF              reduce using rule 53 (expression -> INTEGER .)
+    CASE            reduce using rule 53 (expression -> INTEGER .)
+    FOR             reduce using rule 53 (expression -> INTEGER .)
+    REPEAT          reduce using rule 53 (expression -> INTEGER .)
+    WHILE           reduce using rule 53 (expression -> INTEGER .)
+    NOT             reduce using rule 53 (expression -> INTEGER .)
+    LEFT_PAREN      reduce using rule 53 (expression -> INTEGER .)
+    BOOLEAN         reduce using rule 53 (expression -> INTEGER .)
+    CHAR            reduce using rule 53 (expression -> INTEGER .)
+    STRING          reduce using rule 53 (expression -> INTEGER .)
+    REAL            reduce using rule 53 (expression -> INTEGER .)
+    INTEGER         reduce using rule 53 (expression -> INTEGER .)
+    $end            reduce using rule 53 (expression -> INTEGER .)
+    COMMA           reduce using rule 53 (expression -> INTEGER .)
+    UNTIL           reduce using rule 53 (expression -> INTEGER .)
+    ENDWHILE        reduce using rule 53 (expression -> INTEGER .)
+    ELSE            reduce using rule 53 (expression -> INTEGER .)
+    ENDIF           reduce using rule 53 (expression -> INTEGER .)
+    SEMICOLON       reduce using rule 53 (expression -> INTEGER .)
+    NEXT            reduce using rule 53 (expression -> INTEGER .)
+    THEN            reduce using rule 53 (expression -> INTEGER .)
+    RIGHT_PAREN     reduce using rule 53 (expression -> INTEGER .)
+    RIGHT_SQUARE    reduce using rule 53 (expression -> INTEGER .)
+    TO              reduce using rule 53 (expression -> INTEGER .)
+    COLON           reduce using rule 53 (expression -> INTEGER .)
 
 
 state 21
@@ -979,7 +997,7 @@ state 22
     (3) statement -> DECLARE ID . COLON ID
     (5) statement -> DECLARE ID . COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
 
-    COLON           shift and go to state 49
+    COLON           shift and go to state 50
 
 
 state 23
@@ -1000,14 +1018,15 @@ state 23
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1016,7 +1035,7 @@ state 23
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 50
+    expression                     shift and go to state 51
 
 state 24
 
@@ -1039,14 +1058,15 @@ state 24
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1055,14 +1075,14 @@ state 24
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    indexes                        shift and go to state 51
-    expression                     shift and go to state 52
+    indexes                        shift and go to state 52
+    expression                     shift and go to state 53
 
 state 25
 
     (4) statement -> CONSTANT ID . EQUAL expression
 
-    EQUAL           shift and go to state 53
+    EQUAL           shift and go to state 54
 
 
 state 26
@@ -1083,14 +1103,15 @@ state 26
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1099,7 +1120,7 @@ state 26
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 54
+    expression                     shift and go to state 55
 
 state 27
 
@@ -1119,14 +1140,15 @@ state 27
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1135,7 +1157,7 @@ state 27
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 55
+    expression                     shift and go to state 56
 
 state 28
 
@@ -1155,14 +1177,15 @@ state 28
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1171,7 +1194,7 @@ state 28
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 56
+    expression                     shift and go to state 57
 
 state 29
 
@@ -1191,14 +1214,15 @@ state 29
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1207,7 +1231,7 @@ state 29
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 57
+    expression                     shift and go to state 58
 
 state 30
 
@@ -1227,14 +1251,15 @@ state 30
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1243,7 +1268,7 @@ state 30
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 58
+    expression                     shift and go to state 59
 
 state 31
 
@@ -1263,14 +1288,15 @@ state 31
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1279,7 +1305,7 @@ state 31
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 59
+    expression                     shift and go to state 60
 
 state 32
 
@@ -1299,14 +1325,15 @@ state 32
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1315,7 +1342,7 @@ state 32
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 60
+    expression                     shift and go to state 61
 
 state 33
 
@@ -1335,14 +1362,15 @@ state 33
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1351,7 +1379,7 @@ state 33
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 61
+    expression                     shift and go to state 62
 
 state 34
 
@@ -1371,14 +1399,15 @@ state 34
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1387,7 +1416,7 @@ state 34
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 62
+    expression                     shift and go to state 63
 
 state 35
 
@@ -1407,14 +1436,15 @@ state 35
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1423,7 +1453,7 @@ state 35
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 63
+    expression                     shift and go to state 64
 
 state 36
 
@@ -1443,14 +1473,15 @@ state 36
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1459,7 +1490,7 @@ state 36
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 64
+    expression                     shift and go to state 65
 
 state 37
 
@@ -1479,14 +1510,15 @@ state 37
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -1495,9 +1527,46 @@ state 37
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 65
+    expression                     shift and go to state 66
 
 state 38
+
+    (47) expression -> expression CONNECT . expression
+    (32) expression -> . ID
+    (33) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (34) expression -> . expression OR expression
+    (35) expression -> . expression AND expression
+    (36) expression -> . NOT expression
+    (37) expression -> . expression EQUAL expression
+    (38) expression -> . expression NOT_EQUAL expression
+    (39) expression -> . expression LESS expression
+    (40) expression -> . expression GREATER expression
+    (41) expression -> . expression LESS_EQUAL expression
+    (42) expression -> . expression GREATER_EQUAL expression
+    (43) expression -> . expression MUL expression
+    (44) expression -> . expression DIV expression
+    (45) expression -> . expression PLUS expression
+    (46) expression -> . expression MINUS expression
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
+
+    ID              shift and go to state 42
+    NOT             shift and go to state 14
+    LEFT_PAREN      shift and go to state 15
+    BOOLEAN         shift and go to state 16
+    CHAR            shift and go to state 17
+    STRING          shift and go to state 18
+    REAL            shift and go to state 19
+    INTEGER         shift and go to state 20
+
+    expression                     shift and go to state 67
+
+state 39
 
     (13) statement -> INPUT ID .
     (14) statement -> INPUT ID . LEFT_SQUARE indexes RIGHT_SQUARE
@@ -1526,10 +1595,10 @@ state 38
     ENDIF           reduce using rule 13 (statement -> INPUT ID .)
     SEMICOLON       reduce using rule 13 (statement -> INPUT ID .)
     NEXT            reduce using rule 13 (statement -> INPUT ID .)
-    LEFT_SQUARE     shift and go to state 66
+    LEFT_SQUARE     shift and go to state 68
 
 
-state 39
+state 40
 
     (15) statement -> OUTPUT output_expression .
     (16) output_expression -> output_expression . COMMA expression
@@ -1558,10 +1627,10 @@ state 39
     ENDIF           reduce using rule 15 (statement -> OUTPUT output_expression .)
     SEMICOLON       reduce using rule 15 (statement -> OUTPUT output_expression .)
     NEXT            reduce using rule 15 (statement -> OUTPUT output_expression .)
-    COMMA           shift and go to state 67
+    COMMA           shift and go to state 69
 
 
-state 40
+state 41
 
     (17) output_expression -> expression .
     (34) expression -> expression . OR expression
@@ -1576,6 +1645,7 @@ state 40
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     COMMA           reduce using rule 17 (output_expression -> expression .)
     DECLARE         reduce using rule 17 (output_expression -> expression .)
@@ -1614,9 +1684,10 @@ state 40
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 41
+state 42
 
     (32) expression -> ID .
     (33) expression -> ID . LEFT_SQUARE indexes RIGHT_SQUARE
@@ -1633,6 +1704,7 @@ state 41
     DIV             reduce using rule 32 (expression -> ID .)
     PLUS            reduce using rule 32 (expression -> ID .)
     MINUS           reduce using rule 32 (expression -> ID .)
+    CONNECT         reduce using rule 32 (expression -> ID .)
     COMMA           reduce using rule 32 (expression -> ID .)
     DECLARE         reduce using rule 32 (expression -> ID .)
     CONSTANT        reduce using rule 32 (expression -> ID .)
@@ -1663,10 +1735,10 @@ state 41
     RIGHT_SQUARE    reduce using rule 32 (expression -> ID .)
     TO              reduce using rule 32 (expression -> ID .)
     COLON           reduce using rule 32 (expression -> ID .)
-    LEFT_SQUARE     shift and go to state 68
+    LEFT_SQUARE     shift and go to state 70
 
 
-state 42
+state 43
 
     (18) statement -> IF expression . THEN statements ELSE statements ENDIF
     (19) statement -> IF expression . THEN statements ENDIF
@@ -1682,8 +1754,9 @@ state 42
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
-    THEN            shift and go to state 69
+    THEN            shift and go to state 71
     OR              shift and go to state 26
     AND             shift and go to state 27
     EQUAL           shift and go to state 28
@@ -1696,23 +1769,24 @@ state 42
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
-
-
-state 43
-
-    (20) statement -> CASE OF . ID cases ENDCASE
-
-    ID              shift and go to state 70
+    CONNECT         shift and go to state 38
 
 
 state 44
 
-    (28) statement -> FOR ID . ASSIGN expression TO expression statements NEXT ID
+    (20) statement -> CASE OF . ID cases ENDCASE
 
-    ASSIGN          shift and go to state 71
+    ID              shift and go to state 72
 
 
 state 45
+
+    (28) statement -> FOR ID . ASSIGN expression TO expression statements NEXT ID
+
+    ASSIGN          shift and go to state 73
+
+
+state 46
 
     (29) statement -> REPEAT statements . UNTIL expression
     (1) statements -> statements . statement
@@ -1746,14 +1820,15 @@ state 45
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    UNTIL           shift and go to state 72
+    UNTIL           shift and go to state 74
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -1775,7 +1850,7 @@ state 45
     expression                     shift and go to state 6
     statement                      shift and go to state 21
 
-state 46
+state 47
 
     (30) statement -> WHILE expression . statements ENDWHILE
     (34) expression -> expression . OR expression
@@ -1790,6 +1865,7 @@ state 46
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
     (1) statements -> . statements statement
     (2) statements -> . statement
     (3) statement -> . DECLARE ID COLON ID
@@ -1822,12 +1898,13 @@ state 46
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     OR              shift and go to state 26
     AND             shift and go to state 27
@@ -1841,6 +1918,7 @@ state 46
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -1860,10 +1938,10 @@ state 46
     INTEGER         shift and go to state 20
 
     expression                     shift and go to state 6
-    statements                     shift and go to state 73
+    statements                     shift and go to state 75
     statement                      shift and go to state 2
 
-state 47
+state 48
 
     (36) expression -> NOT expression .
     (34) expression -> expression . OR expression
@@ -1878,6 +1956,7 @@ state 47
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     OR              reduce using rule 36 (expression -> NOT expression .)
     AND             reduce using rule 36 (expression -> NOT expression .)
@@ -1891,6 +1970,7 @@ state 47
     DIV             reduce using rule 36 (expression -> NOT expression .)
     PLUS            reduce using rule 36 (expression -> NOT expression .)
     MINUS           reduce using rule 36 (expression -> NOT expression .)
+    CONNECT         reduce using rule 36 (expression -> NOT expression .)
     DECLARE         reduce using rule 36 (expression -> NOT expression .)
     CONSTANT        reduce using rule 36 (expression -> NOT expression .)
     ID              reduce using rule 36 (expression -> NOT expression .)
@@ -1934,11 +2014,12 @@ state 47
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 48
+state 49
 
-    (47) expression -> LEFT_PAREN expression . RIGHT_PAREN
+    (48) expression -> LEFT_PAREN expression . RIGHT_PAREN
     (34) expression -> expression . OR expression
     (35) expression -> expression . AND expression
     (37) expression -> expression . EQUAL expression
@@ -1951,8 +2032,9 @@ state 48
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
-    RIGHT_PAREN     shift and go to state 74
+    RIGHT_PAREN     shift and go to state 76
     OR              shift and go to state 26
     AND             shift and go to state 27
     EQUAL           shift and go to state 28
@@ -1965,18 +2047,19 @@ state 48
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 49
+state 50
 
     (3) statement -> DECLARE ID COLON . ID
     (5) statement -> DECLARE ID COLON . ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
 
-    ID              shift and go to state 75
-    ARRAY           shift and go to state 76
+    ID              shift and go to state 77
+    ARRAY           shift and go to state 78
 
 
-state 50
+state 51
 
     (9) statement -> ID ASSIGN expression .
     (34) expression -> expression . OR expression
@@ -1991,6 +2074,7 @@ state 50
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     DECLARE         reduce using rule 9 (statement -> ID ASSIGN expression .)
     CONSTANT        reduce using rule 9 (statement -> ID ASSIGN expression .)
@@ -2028,19 +2112,20 @@ state 50
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 51
+state 52
 
     (10) statement -> ID LEFT_SQUARE indexes . RIGHT_SQUARE ASSIGN expression
     (33) expression -> ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (11) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 77
-    COMMA           shift and go to state 78
+    RIGHT_SQUARE    shift and go to state 79
+    COMMA           shift and go to state 80
 
 
-state 52
+state 53
 
     (12) indexes -> expression .
     (34) expression -> expression . OR expression
@@ -2055,6 +2140,7 @@ state 52
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     RIGHT_SQUARE    reduce using rule 12 (indexes -> expression .)
     COMMA           reduce using rule 12 (indexes -> expression .)
@@ -2070,9 +2156,10 @@ state 52
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 53
+state 54
 
     (4) statement -> CONSTANT ID EQUAL . expression
     (32) expression -> . ID
@@ -2090,14 +2177,15 @@ state 53
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -2106,9 +2194,9 @@ state 53
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 79
+    expression                     shift and go to state 81
 
-state 54
+state 55
 
     (34) expression -> expression OR expression .
     (34) expression -> expression . OR expression
@@ -2123,6 +2211,7 @@ state 54
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     OR              reduce using rule 34 (expression -> expression OR expression .)
     AND             reduce using rule 34 (expression -> expression OR expression .)
@@ -2136,6 +2225,7 @@ state 54
     DIV             reduce using rule 34 (expression -> expression OR expression .)
     PLUS            reduce using rule 34 (expression -> expression OR expression .)
     MINUS           reduce using rule 34 (expression -> expression OR expression .)
+    CONNECT         reduce using rule 34 (expression -> expression OR expression .)
     DECLARE         reduce using rule 34 (expression -> expression OR expression .)
     CONSTANT        reduce using rule 34 (expression -> expression OR expression .)
     ID              reduce using rule 34 (expression -> expression OR expression .)
@@ -2179,9 +2269,10 @@ state 54
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 55
+state 56
 
     (35) expression -> expression AND expression .
     (34) expression -> expression . OR expression
@@ -2196,6 +2287,7 @@ state 55
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     AND             reduce using rule 35 (expression -> expression AND expression .)
     EQUAL           reduce using rule 35 (expression -> expression AND expression .)
@@ -2208,6 +2300,7 @@ state 55
     DIV             reduce using rule 35 (expression -> expression AND expression .)
     PLUS            reduce using rule 35 (expression -> expression AND expression .)
     MINUS           reduce using rule 35 (expression -> expression AND expression .)
+    CONNECT         reduce using rule 35 (expression -> expression AND expression .)
     DECLARE         reduce using rule 35 (expression -> expression AND expression .)
     CONSTANT        reduce using rule 35 (expression -> expression AND expression .)
     ID              reduce using rule 35 (expression -> expression AND expression .)
@@ -2252,9 +2345,10 @@ state 55
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 56
+state 57
 
     (37) expression -> expression EQUAL expression .
     (34) expression -> expression . OR expression
@@ -2269,6 +2363,7 @@ state 56
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     EQUAL           reduce using rule 37 (expression -> expression EQUAL expression .)
     NOT_EQUAL       reduce using rule 37 (expression -> expression EQUAL expression .)
@@ -2280,6 +2375,7 @@ state 56
     DIV             reduce using rule 37 (expression -> expression EQUAL expression .)
     PLUS            reduce using rule 37 (expression -> expression EQUAL expression .)
     MINUS           reduce using rule 37 (expression -> expression EQUAL expression .)
+    CONNECT         reduce using rule 37 (expression -> expression EQUAL expression .)
     DECLARE         reduce using rule 37 (expression -> expression EQUAL expression .)
     CONSTANT        reduce using rule 37 (expression -> expression EQUAL expression .)
     ID              reduce using rule 37 (expression -> expression EQUAL expression .)
@@ -2325,9 +2421,10 @@ state 56
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 57
+state 58
 
     (38) expression -> expression NOT_EQUAL expression .
     (34) expression -> expression . OR expression
@@ -2342,6 +2439,7 @@ state 57
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     EQUAL           reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     NOT_EQUAL       reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
@@ -2353,6 +2451,7 @@ state 57
     DIV             reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     PLUS            reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     MINUS           reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
+    CONNECT         reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     DECLARE         reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     CONSTANT        reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     ID              reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
@@ -2398,9 +2497,10 @@ state 57
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 58
+state 59
 
     (39) expression -> expression LESS expression .
     (34) expression -> expression . OR expression
@@ -2415,6 +2515,7 @@ state 58
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     EQUAL           reduce using rule 39 (expression -> expression LESS expression .)
     NOT_EQUAL       reduce using rule 39 (expression -> expression LESS expression .)
@@ -2426,6 +2527,7 @@ state 58
     DIV             reduce using rule 39 (expression -> expression LESS expression .)
     PLUS            reduce using rule 39 (expression -> expression LESS expression .)
     MINUS           reduce using rule 39 (expression -> expression LESS expression .)
+    CONNECT         reduce using rule 39 (expression -> expression LESS expression .)
     DECLARE         reduce using rule 39 (expression -> expression LESS expression .)
     CONSTANT        reduce using rule 39 (expression -> expression LESS expression .)
     ID              reduce using rule 39 (expression -> expression LESS expression .)
@@ -2471,9 +2573,10 @@ state 58
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 59
+state 60
 
     (40) expression -> expression GREATER expression .
     (34) expression -> expression . OR expression
@@ -2488,6 +2591,7 @@ state 59
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     EQUAL           reduce using rule 40 (expression -> expression GREATER expression .)
     NOT_EQUAL       reduce using rule 40 (expression -> expression GREATER expression .)
@@ -2499,6 +2603,7 @@ state 59
     DIV             reduce using rule 40 (expression -> expression GREATER expression .)
     PLUS            reduce using rule 40 (expression -> expression GREATER expression .)
     MINUS           reduce using rule 40 (expression -> expression GREATER expression .)
+    CONNECT         reduce using rule 40 (expression -> expression GREATER expression .)
     DECLARE         reduce using rule 40 (expression -> expression GREATER expression .)
     CONSTANT        reduce using rule 40 (expression -> expression GREATER expression .)
     ID              reduce using rule 40 (expression -> expression GREATER expression .)
@@ -2544,9 +2649,10 @@ state 59
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 60
+state 61
 
     (41) expression -> expression LESS_EQUAL expression .
     (34) expression -> expression . OR expression
@@ -2561,6 +2667,7 @@ state 60
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     EQUAL           reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     NOT_EQUAL       reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
@@ -2572,6 +2679,7 @@ state 60
     DIV             reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     PLUS            reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     MINUS           reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
+    CONNECT         reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     DECLARE         reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     CONSTANT        reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     ID              reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
@@ -2617,9 +2725,10 @@ state 60
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 61
+state 62
 
     (42) expression -> expression GREATER_EQUAL expression .
     (34) expression -> expression . OR expression
@@ -2634,6 +2743,7 @@ state 61
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     EQUAL           reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     NOT_EQUAL       reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
@@ -2645,6 +2755,7 @@ state 61
     DIV             reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     PLUS            reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     MINUS           reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
+    CONNECT         reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     DECLARE         reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     CONSTANT        reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     ID              reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
@@ -2690,9 +2801,10 @@ state 61
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 62
+state 63
 
     (43) expression -> expression MUL expression .
     (34) expression -> expression . OR expression
@@ -2707,11 +2819,13 @@ state 62
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     MUL             reduce using rule 43 (expression -> expression MUL expression .)
     DIV             reduce using rule 43 (expression -> expression MUL expression .)
     PLUS            reduce using rule 43 (expression -> expression MUL expression .)
     MINUS           reduce using rule 43 (expression -> expression MUL expression .)
+    CONNECT         reduce using rule 43 (expression -> expression MUL expression .)
     DECLARE         reduce using rule 43 (expression -> expression MUL expression .)
     CONSTANT        reduce using rule 43 (expression -> expression MUL expression .)
     ID              reduce using rule 43 (expression -> expression MUL expression .)
@@ -2763,9 +2877,10 @@ state 62
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 63
+state 64
 
     (44) expression -> expression DIV expression .
     (34) expression -> expression . OR expression
@@ -2780,11 +2895,13 @@ state 63
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     MUL             reduce using rule 44 (expression -> expression DIV expression .)
     DIV             reduce using rule 44 (expression -> expression DIV expression .)
     PLUS            reduce using rule 44 (expression -> expression DIV expression .)
     MINUS           reduce using rule 44 (expression -> expression DIV expression .)
+    CONNECT         reduce using rule 44 (expression -> expression DIV expression .)
     DECLARE         reduce using rule 44 (expression -> expression DIV expression .)
     CONSTANT        reduce using rule 44 (expression -> expression DIV expression .)
     ID              reduce using rule 44 (expression -> expression DIV expression .)
@@ -2836,9 +2953,10 @@ state 63
   ! DIV             [ shift and go to state 35 ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 64
+state 65
 
     (45) expression -> expression PLUS expression .
     (34) expression -> expression . OR expression
@@ -2853,9 +2971,11 @@ state 64
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     PLUS            reduce using rule 45 (expression -> expression PLUS expression .)
     MINUS           reduce using rule 45 (expression -> expression PLUS expression .)
+    CONNECT         reduce using rule 45 (expression -> expression PLUS expression .)
     DECLARE         reduce using rule 45 (expression -> expression PLUS expression .)
     CONSTANT        reduce using rule 45 (expression -> expression PLUS expression .)
     ID              reduce using rule 45 (expression -> expression PLUS expression .)
@@ -2909,9 +3029,10 @@ state 64
   ! DIV             [ reduce using rule 45 (expression -> expression PLUS expression .) ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 65
+state 66
 
     (46) expression -> expression MINUS expression .
     (34) expression -> expression . OR expression
@@ -2926,9 +3047,11 @@ state 65
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     PLUS            reduce using rule 46 (expression -> expression MINUS expression .)
     MINUS           reduce using rule 46 (expression -> expression MINUS expression .)
+    CONNECT         reduce using rule 46 (expression -> expression MINUS expression .)
     DECLARE         reduce using rule 46 (expression -> expression MINUS expression .)
     CONSTANT        reduce using rule 46 (expression -> expression MINUS expression .)
     ID              reduce using rule 46 (expression -> expression MINUS expression .)
@@ -2982,9 +3105,99 @@ state 65
   ! DIV             [ reduce using rule 46 (expression -> expression MINUS expression .) ]
   ! PLUS            [ shift and go to state 36 ]
   ! MINUS           [ shift and go to state 37 ]
+  ! CONNECT         [ shift and go to state 38 ]
 
 
-state 66
+state 67
+
+    (47) expression -> expression CONNECT expression .
+    (34) expression -> expression . OR expression
+    (35) expression -> expression . AND expression
+    (37) expression -> expression . EQUAL expression
+    (38) expression -> expression . NOT_EQUAL expression
+    (39) expression -> expression . LESS expression
+    (40) expression -> expression . GREATER expression
+    (41) expression -> expression . LESS_EQUAL expression
+    (42) expression -> expression . GREATER_EQUAL expression
+    (43) expression -> expression . MUL expression
+    (44) expression -> expression . DIV expression
+    (45) expression -> expression . PLUS expression
+    (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
+
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for EQUAL resolved as shift
+  ! shift/reduce conflict for NOT_EQUAL resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS_EQUAL resolved as shift
+  ! shift/reduce conflict for GREATER_EQUAL resolved as shift
+  ! shift/reduce conflict for MUL resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for CONNECT resolved as shift
+    DECLARE         reduce using rule 47 (expression -> expression CONNECT expression .)
+    CONSTANT        reduce using rule 47 (expression -> expression CONNECT expression .)
+    ID              reduce using rule 47 (expression -> expression CONNECT expression .)
+    INPUT           reduce using rule 47 (expression -> expression CONNECT expression .)
+    OUTPUT          reduce using rule 47 (expression -> expression CONNECT expression .)
+    IF              reduce using rule 47 (expression -> expression CONNECT expression .)
+    CASE            reduce using rule 47 (expression -> expression CONNECT expression .)
+    FOR             reduce using rule 47 (expression -> expression CONNECT expression .)
+    REPEAT          reduce using rule 47 (expression -> expression CONNECT expression .)
+    WHILE           reduce using rule 47 (expression -> expression CONNECT expression .)
+    NOT             reduce using rule 47 (expression -> expression CONNECT expression .)
+    LEFT_PAREN      reduce using rule 47 (expression -> expression CONNECT expression .)
+    BOOLEAN         reduce using rule 47 (expression -> expression CONNECT expression .)
+    CHAR            reduce using rule 47 (expression -> expression CONNECT expression .)
+    STRING          reduce using rule 47 (expression -> expression CONNECT expression .)
+    REAL            reduce using rule 47 (expression -> expression CONNECT expression .)
+    INTEGER         reduce using rule 47 (expression -> expression CONNECT expression .)
+    $end            reduce using rule 47 (expression -> expression CONNECT expression .)
+    COMMA           reduce using rule 47 (expression -> expression CONNECT expression .)
+    UNTIL           reduce using rule 47 (expression -> expression CONNECT expression .)
+    ENDWHILE        reduce using rule 47 (expression -> expression CONNECT expression .)
+    ELSE            reduce using rule 47 (expression -> expression CONNECT expression .)
+    ENDIF           reduce using rule 47 (expression -> expression CONNECT expression .)
+    SEMICOLON       reduce using rule 47 (expression -> expression CONNECT expression .)
+    NEXT            reduce using rule 47 (expression -> expression CONNECT expression .)
+    THEN            reduce using rule 47 (expression -> expression CONNECT expression .)
+    RIGHT_PAREN     reduce using rule 47 (expression -> expression CONNECT expression .)
+    RIGHT_SQUARE    reduce using rule 47 (expression -> expression CONNECT expression .)
+    TO              reduce using rule 47 (expression -> expression CONNECT expression .)
+    COLON           reduce using rule 47 (expression -> expression CONNECT expression .)
+    OR              shift and go to state 26
+    AND             shift and go to state 27
+    EQUAL           shift and go to state 28
+    NOT_EQUAL       shift and go to state 29
+    LESS            shift and go to state 30
+    GREATER         shift and go to state 31
+    LESS_EQUAL      shift and go to state 32
+    GREATER_EQUAL   shift and go to state 33
+    MUL             shift and go to state 34
+    DIV             shift and go to state 35
+    PLUS            shift and go to state 36
+    MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
+
+  ! OR              [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! AND             [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! EQUAL           [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! NOT_EQUAL       [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! LESS            [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! GREATER         [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! MUL             [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! DIV             [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! PLUS            [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! MINUS           [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+  ! CONNECT         [ reduce using rule 47 (expression -> expression CONNECT expression .) ]
+
+
+state 68
 
     (14) statement -> INPUT ID LEFT_SQUARE . indexes RIGHT_SQUARE
     (11) indexes -> . indexes COMMA expression
@@ -3004,14 +3217,15 @@ state 66
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3020,10 +3234,10 @@ state 66
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    indexes                        shift and go to state 80
-    expression                     shift and go to state 52
+    indexes                        shift and go to state 82
+    expression                     shift and go to state 53
 
-state 67
+state 69
 
     (16) output_expression -> output_expression COMMA . expression
     (32) expression -> . ID
@@ -3041,14 +3255,15 @@ state 67
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3057,9 +3272,9 @@ state 67
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 81
+    expression                     shift and go to state 83
 
-state 68
+state 70
 
     (33) expression -> ID LEFT_SQUARE . indexes RIGHT_SQUARE
     (11) indexes -> . indexes COMMA expression
@@ -3079,14 +3294,15 @@ state 68
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3095,10 +3311,10 @@ state 68
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    indexes                        shift and go to state 82
-    expression                     shift and go to state 52
+    indexes                        shift and go to state 84
+    expression                     shift and go to state 53
 
-state 69
+state 71
 
     (18) statement -> IF expression THEN . statements ELSE statements ENDIF
     (19) statement -> IF expression THEN . statements ENDIF
@@ -3134,12 +3350,13 @@ state 69
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
@@ -3160,10 +3377,10 @@ state 69
     INTEGER         shift and go to state 20
 
     expression                     shift and go to state 6
-    statements                     shift and go to state 83
+    statements                     shift and go to state 85
     statement                      shift and go to state 2
 
-state 70
+state 72
 
     (20) statement -> CASE OF ID . cases ENDCASE
     (21) cases -> . cases case
@@ -3188,15 +3405,16 @@ state 70
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    OTHERWISE       shift and go to state 89
-    ID              shift and go to state 41
+    OTHERWISE       shift and go to state 91
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3205,13 +3423,13 @@ state 70
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    cases                          shift and go to state 84
-    case                           shift and go to state 85
-    case_expression                shift and go to state 86
-    otherwise_statement            shift and go to state 87
-    expression                     shift and go to state 88
+    cases                          shift and go to state 86
+    case                           shift and go to state 87
+    case_expression                shift and go to state 88
+    otherwise_statement            shift and go to state 89
+    expression                     shift and go to state 90
 
-state 71
+state 73
 
     (28) statement -> FOR ID ASSIGN . expression TO expression statements NEXT ID
     (32) expression -> . ID
@@ -3229,14 +3447,15 @@ state 71
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3245,9 +3464,9 @@ state 71
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 90
+    expression                     shift and go to state 92
 
-state 72
+state 74
 
     (29) statement -> REPEAT statements UNTIL . expression
     (32) expression -> . ID
@@ -3265,14 +3484,15 @@ state 72
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3281,9 +3501,9 @@ state 72
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 91
+    expression                     shift and go to state 93
 
-state 73
+state 75
 
     (30) statement -> WHILE expression statements . ENDWHILE
     (1) statements -> statements . statement
@@ -3317,14 +3537,15 @@ state 73
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ENDWHILE        shift and go to state 92
+    ENDWHILE        shift and go to state 94
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -3346,55 +3567,56 @@ state 73
     expression                     shift and go to state 6
     statement                      shift and go to state 21
 
-state 74
+state 76
 
-    (47) expression -> LEFT_PAREN expression RIGHT_PAREN .
+    (48) expression -> LEFT_PAREN expression RIGHT_PAREN .
 
-    OR              reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    AND             reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    EQUAL           reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    NOT_EQUAL       reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    LESS            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    GREATER         reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    LESS_EQUAL      reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    GREATER_EQUAL   reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    MUL             reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    DIV             reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    PLUS            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    MINUS           reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    DECLARE         reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    CONSTANT        reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    ID              reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    INPUT           reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    OUTPUT          reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    IF              reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    CASE            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    FOR             reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    REPEAT          reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    WHILE           reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    NOT             reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    LEFT_PAREN      reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    BOOLEAN         reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    CHAR            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    STRING          reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    REAL            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    INTEGER         reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    $end            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    COMMA           reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    UNTIL           reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    ENDWHILE        reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    ELSE            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    ENDIF           reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    SEMICOLON       reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    NEXT            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    THEN            reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    RIGHT_PAREN     reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    RIGHT_SQUARE    reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    TO              reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
-    COLON           reduce using rule 47 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    OR              reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    AND             reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    EQUAL           reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    NOT_EQUAL       reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    LESS            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    GREATER         reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    LESS_EQUAL      reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    GREATER_EQUAL   reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    MUL             reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    DIV             reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    PLUS            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    MINUS           reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    CONNECT         reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    DECLARE         reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    CONSTANT        reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    ID              reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    INPUT           reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    OUTPUT          reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    IF              reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    CASE            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    FOR             reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    REPEAT          reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    WHILE           reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    NOT             reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    LEFT_PAREN      reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    BOOLEAN         reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    CHAR            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    STRING          reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    REAL            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    INTEGER         reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    $end            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    COMMA           reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    UNTIL           reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    ENDWHILE        reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    ELSE            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    ENDIF           reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    SEMICOLON       reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    NEXT            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    THEN            reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    RIGHT_PAREN     reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    RIGHT_SQUARE    reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    TO              reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
+    COLON           reduce using rule 48 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
 
 
-state 75
+state 77
 
     (3) statement -> DECLARE ID COLON ID .
 
@@ -3424,19 +3646,19 @@ state 75
     NEXT            reduce using rule 3 (statement -> DECLARE ID COLON ID .)
 
 
-state 76
+state 78
 
     (5) statement -> DECLARE ID COLON ARRAY . LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
 
-    LEFT_SQUARE     shift and go to state 93
+    LEFT_SQUARE     shift and go to state 95
 
 
-state 77
+state 79
 
     (10) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE . ASSIGN expression
     (33) expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
-    ASSIGN          shift and go to state 94
+    ASSIGN          shift and go to state 96
     OR              reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     AND             reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     EQUAL           reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
@@ -3449,6 +3671,7 @@ state 77
     DIV             reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     PLUS            reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     MINUS           reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
+    CONNECT         reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     DECLARE         reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     CONSTANT        reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     ID              reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
@@ -3475,7 +3698,7 @@ state 77
     NEXT            reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 78
+state 80
 
     (11) indexes -> indexes COMMA . expression
     (32) expression -> . ID
@@ -3493,14 +3716,15 @@ state 78
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3509,9 +3733,9 @@ state 78
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 95
+    expression                     shift and go to state 97
 
-state 79
+state 81
 
     (4) statement -> CONSTANT ID EQUAL expression .
     (34) expression -> expression . OR expression
@@ -3526,6 +3750,7 @@ state 79
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     DECLARE         reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
     CONSTANT        reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
@@ -3563,18 +3788,19 @@ state 79
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 80
+state 82
 
     (14) statement -> INPUT ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (11) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 96
-    COMMA           shift and go to state 78
+    RIGHT_SQUARE    shift and go to state 98
+    COMMA           shift and go to state 80
 
 
-state 81
+state 83
 
     (16) output_expression -> output_expression COMMA expression .
     (34) expression -> expression . OR expression
@@ -3589,6 +3815,7 @@ state 81
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     COMMA           reduce using rule 16 (output_expression -> output_expression COMMA expression .)
     DECLARE         reduce using rule 16 (output_expression -> output_expression COMMA expression .)
@@ -3627,18 +3854,19 @@ state 81
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 82
+state 84
 
     (33) expression -> ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (11) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 97
-    COMMA           shift and go to state 78
+    RIGHT_SQUARE    shift and go to state 99
+    COMMA           shift and go to state 80
 
 
-state 83
+state 85
 
     (18) statement -> IF expression THEN statements . ELSE statements ENDIF
     (19) statement -> IF expression THEN statements . ENDIF
@@ -3673,15 +3901,16 @@ state 83
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ELSE            shift and go to state 98
-    ENDIF           shift and go to state 99
+    ELSE            shift and go to state 100
+    ENDIF           shift and go to state 101
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -3703,7 +3932,7 @@ state 83
     expression                     shift and go to state 6
     statement                      shift and go to state 21
 
-state 84
+state 86
 
     (20) statement -> CASE OF ID cases . ENDCASE
     (21) cases -> cases . case
@@ -3727,16 +3956,17 @@ state 84
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ENDCASE         shift and go to state 100
-    OTHERWISE       shift and go to state 89
-    ID              shift and go to state 41
+    ENDCASE         shift and go to state 102
+    OTHERWISE       shift and go to state 91
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3745,12 +3975,12 @@ state 84
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    case                           shift and go to state 101
-    case_expression                shift and go to state 86
-    otherwise_statement            shift and go to state 87
-    expression                     shift and go to state 88
+    case                           shift and go to state 103
+    case_expression                shift and go to state 88
+    otherwise_statement            shift and go to state 89
+    expression                     shift and go to state 90
 
-state 85
+state 87
 
     (22) cases -> case .
 
@@ -3766,21 +3996,21 @@ state 85
     INTEGER         reduce using rule 22 (cases -> case .)
 
 
-state 86
+state 88
 
     (23) case -> case_expression . COLON statements SEMICOLON
 
-    COLON           shift and go to state 102
+    COLON           shift and go to state 104
 
 
-state 87
+state 89
 
     (24) case -> otherwise_statement . SEMICOLON
 
-    SEMICOLON       shift and go to state 103
+    SEMICOLON       shift and go to state 105
 
 
-state 88
+state 90
 
     (25) case_expression -> expression . TO expression
     (26) case_expression -> expression .
@@ -3796,8 +4026,9 @@ state 88
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
-    TO              shift and go to state 104
+    TO              shift and go to state 106
     COLON           reduce using rule 26 (case_expression -> expression .)
     OR              shift and go to state 26
     AND             shift and go to state 27
@@ -3811,16 +4042,17 @@ state 88
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 89
+state 91
 
     (27) otherwise_statement -> OTHERWISE . COLON statements
 
-    COLON           shift and go to state 105
+    COLON           shift and go to state 107
 
 
-state 90
+state 92
 
     (28) statement -> FOR ID ASSIGN expression . TO expression statements NEXT ID
     (34) expression -> expression . OR expression
@@ -3835,8 +4067,9 @@ state 90
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
-    TO              shift and go to state 106
+    TO              shift and go to state 108
     OR              shift and go to state 26
     AND             shift and go to state 27
     EQUAL           shift and go to state 28
@@ -3849,9 +4082,10 @@ state 90
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 91
+state 93
 
     (29) statement -> REPEAT statements UNTIL expression .
     (34) expression -> expression . OR expression
@@ -3866,6 +4100,7 @@ state 91
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     DECLARE         reduce using rule 29 (statement -> REPEAT statements UNTIL expression .)
     CONSTANT        reduce using rule 29 (statement -> REPEAT statements UNTIL expression .)
@@ -3903,9 +4138,10 @@ state 91
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 92
+state 94
 
     (30) statement -> WHILE expression statements ENDWHILE .
 
@@ -3935,7 +4171,7 @@ state 92
     NEXT            reduce using rule 30 (statement -> WHILE expression statements ENDWHILE .)
 
 
-state 93
+state 95
 
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE . dimensions RIGHT_SQUARE OF ID
     (6) dimensions -> . dimensions COMMA dimension
@@ -3956,14 +4192,15 @@ state 93
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -3972,11 +4209,11 @@ state 93
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    dimensions                     shift and go to state 107
-    dimension                      shift and go to state 108
-    expression                     shift and go to state 109
+    dimensions                     shift and go to state 109
+    dimension                      shift and go to state 110
+    expression                     shift and go to state 111
 
-state 94
+state 96
 
     (10) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN . expression
     (32) expression -> . ID
@@ -3994,14 +4231,15 @@ state 94
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -4010,9 +4248,9 @@ state 94
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 110
+    expression                     shift and go to state 112
 
-state 95
+state 97
 
     (11) indexes -> indexes COMMA expression .
     (34) expression -> expression . OR expression
@@ -4027,6 +4265,7 @@ state 95
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     RIGHT_SQUARE    reduce using rule 11 (indexes -> indexes COMMA expression .)
     COMMA           reduce using rule 11 (indexes -> indexes COMMA expression .)
@@ -4042,9 +4281,10 @@ state 95
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 96
+state 98
 
     (14) statement -> INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
@@ -4074,7 +4314,7 @@ state 96
     NEXT            reduce using rule 14 (statement -> INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 97
+state 99
 
     (33) expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
@@ -4090,6 +4330,7 @@ state 97
     DIV             reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     PLUS            reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     MINUS           reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
+    CONNECT         reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     COMMA           reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     DECLARE         reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     CONSTANT        reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
@@ -4122,7 +4363,7 @@ state 97
     COLON           reduce using rule 33 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 98
+state 100
 
     (18) statement -> IF expression THEN statements ELSE . statements ENDIF
     (1) statements -> . statements statement
@@ -4157,12 +4398,13 @@ state 98
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
@@ -4183,10 +4425,10 @@ state 98
     INTEGER         shift and go to state 20
 
     expression                     shift and go to state 6
-    statements                     shift and go to state 111
+    statements                     shift and go to state 113
     statement                      shift and go to state 2
 
-state 99
+state 101
 
     (19) statement -> IF expression THEN statements ENDIF .
 
@@ -4216,7 +4458,7 @@ state 99
     NEXT            reduce using rule 19 (statement -> IF expression THEN statements ENDIF .)
 
 
-state 100
+state 102
 
     (20) statement -> CASE OF ID cases ENDCASE .
 
@@ -4246,7 +4488,7 @@ state 100
     NEXT            reduce using rule 20 (statement -> CASE OF ID cases ENDCASE .)
 
 
-state 101
+state 103
 
     (21) cases -> cases case .
 
@@ -4262,7 +4504,7 @@ state 101
     INTEGER         reduce using rule 21 (cases -> cases case .)
 
 
-state 102
+state 104
 
     (23) case -> case_expression COLON . statements SEMICOLON
     (1) statements -> . statements statement
@@ -4297,12 +4539,13 @@ state 102
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
@@ -4322,11 +4565,11 @@ state 102
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    statements                     shift and go to state 112
+    statements                     shift and go to state 114
     statement                      shift and go to state 2
     expression                     shift and go to state 6
 
-state 103
+state 105
 
     (24) case -> otherwise_statement SEMICOLON .
 
@@ -4342,7 +4585,7 @@ state 103
     INTEGER         reduce using rule 24 (case -> otherwise_statement SEMICOLON .)
 
 
-state 104
+state 106
 
     (25) case_expression -> expression TO . expression
     (32) expression -> . ID
@@ -4360,14 +4603,15 @@ state 104
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -4376,9 +4620,9 @@ state 104
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 113
+    expression                     shift and go to state 115
 
-state 105
+state 107
 
     (27) otherwise_statement -> OTHERWISE COLON . statements
     (1) statements -> . statements statement
@@ -4413,12 +4657,13 @@ state 105
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
@@ -4438,11 +4683,11 @@ state 105
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    statements                     shift and go to state 114
+    statements                     shift and go to state 116
     statement                      shift and go to state 2
     expression                     shift and go to state 6
 
-state 106
+state 108
 
     (28) statement -> FOR ID ASSIGN expression TO . expression statements NEXT ID
     (32) expression -> . ID
@@ -4460,14 +4705,15 @@ state 106
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -4476,18 +4722,18 @@ state 106
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 115
+    expression                     shift and go to state 117
 
-state 107
+state 109
 
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions . RIGHT_SQUARE OF ID
     (6) dimensions -> dimensions . COMMA dimension
 
-    RIGHT_SQUARE    shift and go to state 116
-    COMMA           shift and go to state 117
+    RIGHT_SQUARE    shift and go to state 118
+    COMMA           shift and go to state 119
 
 
-state 108
+state 110
 
     (7) dimensions -> dimension .
 
@@ -4495,7 +4741,7 @@ state 108
     COMMA           reduce using rule 7 (dimensions -> dimension .)
 
 
-state 109
+state 111
 
     (8) dimension -> expression . COLON expression
     (34) expression -> expression . OR expression
@@ -4510,8 +4756,9 @@ state 109
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
-    COLON           shift and go to state 118
+    COLON           shift and go to state 120
     OR              shift and go to state 26
     AND             shift and go to state 27
     EQUAL           shift and go to state 28
@@ -4524,9 +4771,10 @@ state 109
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 110
+state 112
 
     (10) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression .
     (34) expression -> expression . OR expression
@@ -4541,6 +4789,7 @@ state 110
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     DECLARE         reduce using rule 10 (statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression .)
     CONSTANT        reduce using rule 10 (statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression .)
@@ -4578,9 +4827,10 @@ state 110
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 111
+state 113
 
     (18) statement -> IF expression THEN statements ELSE statements . ENDIF
     (1) statements -> statements . statement
@@ -4614,14 +4864,15 @@ state 111
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ENDIF           shift and go to state 119
+    ENDIF           shift and go to state 121
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -4643,7 +4894,7 @@ state 111
     expression                     shift and go to state 6
     statement                      shift and go to state 21
 
-state 112
+state 114
 
     (23) case -> case_expression COLON statements . SEMICOLON
     (1) statements -> statements . statement
@@ -4677,14 +4928,15 @@ state 112
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    SEMICOLON       shift and go to state 120
+    SEMICOLON       shift and go to state 122
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -4706,7 +4958,7 @@ state 112
     statement                      shift and go to state 21
     expression                     shift and go to state 6
 
-state 113
+state 115
 
     (25) case_expression -> expression TO expression .
     (34) expression -> expression . OR expression
@@ -4721,6 +4973,7 @@ state 113
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     COLON           reduce using rule 25 (case_expression -> expression TO expression .)
     OR              shift and go to state 26
@@ -4735,9 +4988,10 @@ state 113
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 114
+state 116
 
     (27) otherwise_statement -> OTHERWISE COLON statements .
     (1) statements -> statements . statement
@@ -4771,12 +5025,13 @@ state 114
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     SEMICOLON       reduce using rule 27 (otherwise_statement -> OTHERWISE COLON statements .)
     DECLARE         shift and go to state 3
@@ -4800,7 +5055,7 @@ state 114
     statement                      shift and go to state 21
     expression                     shift and go to state 6
 
-state 115
+state 117
 
     (28) statement -> FOR ID ASSIGN expression TO expression . statements NEXT ID
     (34) expression -> expression . OR expression
@@ -4815,6 +5070,7 @@ state 115
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
     (1) statements -> . statements statement
     (2) statements -> . statement
     (3) statement -> . DECLARE ID COLON ID
@@ -4847,12 +5103,13 @@ state 115
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
     OR              shift and go to state 26
     AND             shift and go to state 27
@@ -4866,6 +5123,7 @@ state 115
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -4885,17 +5143,17 @@ state 115
     INTEGER         shift and go to state 20
 
     expression                     shift and go to state 6
-    statements                     shift and go to state 121
+    statements                     shift and go to state 123
     statement                      shift and go to state 2
 
-state 116
+state 118
 
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE . OF ID
 
-    OF              shift and go to state 122
+    OF              shift and go to state 124
 
 
-state 117
+state 119
 
     (6) dimensions -> dimensions COMMA . dimension
     (8) dimension -> . expression COLON expression
@@ -4914,14 +5172,15 @@ state 117
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -4930,10 +5189,10 @@ state 117
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    dimension                      shift and go to state 123
-    expression                     shift and go to state 109
+    dimension                      shift and go to state 125
+    expression                     shift and go to state 111
 
-state 118
+state 120
 
     (8) dimension -> expression COLON . expression
     (32) expression -> . ID
@@ -4951,14 +5210,15 @@ state 118
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    ID              shift and go to state 41
+    ID              shift and go to state 42
     NOT             shift and go to state 14
     LEFT_PAREN      shift and go to state 15
     BOOLEAN         shift and go to state 16
@@ -4967,9 +5227,9 @@ state 118
     REAL            shift and go to state 19
     INTEGER         shift and go to state 20
 
-    expression                     shift and go to state 124
+    expression                     shift and go to state 126
 
-state 119
+state 121
 
     (18) statement -> IF expression THEN statements ELSE statements ENDIF .
 
@@ -4999,7 +5259,7 @@ state 119
     NEXT            reduce using rule 18 (statement -> IF expression THEN statements ELSE statements ENDIF .)
 
 
-state 120
+state 122
 
     (23) case -> case_expression COLON statements SEMICOLON .
 
@@ -5015,7 +5275,7 @@ state 120
     INTEGER         reduce using rule 23 (case -> case_expression COLON statements SEMICOLON .)
 
 
-state 121
+state 123
 
     (28) statement -> FOR ID ASSIGN expression TO expression statements . NEXT ID
     (1) statements -> statements . statement
@@ -5049,14 +5309,15 @@ state 121
     (44) expression -> . expression DIV expression
     (45) expression -> . expression PLUS expression
     (46) expression -> . expression MINUS expression
-    (47) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (48) expression -> . BOOLEAN
-    (49) expression -> . CHAR
-    (50) expression -> . STRING
-    (51) expression -> . REAL
-    (52) expression -> . INTEGER
+    (47) expression -> . expression CONNECT expression
+    (48) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (49) expression -> . BOOLEAN
+    (50) expression -> . CHAR
+    (51) expression -> . STRING
+    (52) expression -> . REAL
+    (53) expression -> . INTEGER
 
-    NEXT            shift and go to state 125
+    NEXT            shift and go to state 127
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -5078,14 +5339,14 @@ state 121
     expression                     shift and go to state 6
     statement                      shift and go to state 21
 
-state 122
+state 124
 
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF . ID
 
-    ID              shift and go to state 126
+    ID              shift and go to state 128
 
 
-state 123
+state 125
 
     (6) dimensions -> dimensions COMMA dimension .
 
@@ -5093,7 +5354,7 @@ state 123
     COMMA           reduce using rule 6 (dimensions -> dimensions COMMA dimension .)
 
 
-state 124
+state 126
 
     (8) dimension -> expression COLON expression .
     (34) expression -> expression . OR expression
@@ -5108,6 +5369,7 @@ state 124
     (44) expression -> expression . DIV expression
     (45) expression -> expression . PLUS expression
     (46) expression -> expression . MINUS expression
+    (47) expression -> expression . CONNECT expression
 
     RIGHT_SQUARE    reduce using rule 8 (dimension -> expression COLON expression .)
     COMMA           reduce using rule 8 (dimension -> expression COLON expression .)
@@ -5123,16 +5385,17 @@ state 124
     DIV             shift and go to state 35
     PLUS            shift and go to state 36
     MINUS           shift and go to state 37
+    CONNECT         shift and go to state 38
 
 
-state 125
+state 127
 
     (28) statement -> FOR ID ASSIGN expression TO expression statements NEXT . ID
 
-    ID              shift and go to state 127
+    ID              shift and go to state 129
 
 
-state 126
+state 128
 
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID .
 
@@ -5162,7 +5425,7 @@ state 126
     NEXT            reduce using rule 5 (statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID .)
 
 
-state 127
+state 129
 
     (28) statement -> FOR ID ASSIGN expression TO expression statements NEXT ID .
 
@@ -5191,3 +5454,19 @@ state 127
     SEMICOLON       reduce using rule 28 (statement -> FOR ID ASSIGN expression TO expression statements NEXT ID .)
     NEXT            reduce using rule 28 (statement -> FOR ID ASSIGN expression TO expression statements NEXT ID .)
 
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for OR in state 67 resolved as shift
+WARNING: shift/reduce conflict for AND in state 67 resolved as shift
+WARNING: shift/reduce conflict for EQUAL in state 67 resolved as shift
+WARNING: shift/reduce conflict for NOT_EQUAL in state 67 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 67 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 67 resolved as shift
+WARNING: shift/reduce conflict for LESS_EQUAL in state 67 resolved as shift
+WARNING: shift/reduce conflict for GREATER_EQUAL in state 67 resolved as shift
+WARNING: shift/reduce conflict for MUL in state 67 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 67 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 67 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 67 resolved as shift
+WARNING: shift/reduce conflict for CONNECT in state 67 resolved as shift

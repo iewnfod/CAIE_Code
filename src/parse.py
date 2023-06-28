@@ -202,6 +202,10 @@ def p_minus_expression(p):
     """expression : expression MINUS expression"""
     p[0] = AST.Op_minus(p[1], p[3])
 
+def p_connect_expression(p):
+    """expression : expression CONNECT expression"""
+    p[0] = AST.Op_connect(p[1], p[3])
+
 # 括号
 def p_paren_expression(p):
     """expression : LEFT_PAREN expression RIGHT_PAREN"""

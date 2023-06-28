@@ -71,3 +71,20 @@ class Op_div:
             return (n1[0] / n2[0], 'REAL')
         else:
             print(f'Cannot divide `{n1[1]}` with `{n2[1]}`')
+
+class Op_connect:
+    def __init__(self, left, right):
+        self.type = 'CONNECT'
+        self.left = left
+        self.right = right
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+
+    def exe(self):
+        s1 = self.left.exe()
+        s2 = self.right.exe()
+        if (s1[1] == 'STRING' or s1[1] == 'CHAR') and (s2[1] == 'STRING' or s2[1] == 'CHAR'):
+            return (s1[0] + s2[0], 'STRING')
+        else:
+            print(f'Cannot connect `{s1[1]}` with `{s2[1]}`')
