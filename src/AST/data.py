@@ -1,4 +1,4 @@
 from src.stack import Stack
 
-LEVEL_STR = '\t'
+LEVEL_STR = '| '
 stack = Stack()

@@ -8,7 +8,7 @@ class Array:
         self.dimensions = dimensions
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + str(self.var_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + str(self.var_type)
 
     # 通过.来表达从属关系，然后推入stack
     def add_variables(self, base_name, dimensions):
@@ -67,7 +67,7 @@ class Array_assign:
         self.value = value
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.value.get_tree(level+1)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.value.get_tree(level+1)
 
     def exe(self):
         indexes = self.indexes.exe()
@@ -107,7 +107,7 @@ class Array_get:
         self.result = {}
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.value.get_tree(level+1)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.value.get_tree(level+1)
 
     def exe(self):
         indexes = self.indexes.exe()

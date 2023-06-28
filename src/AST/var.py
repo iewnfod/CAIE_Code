@@ -7,7 +7,7 @@ class Constant:
         self.value = value
 
     def get_tree(self, level=0):
-        result = LEVEL_STR * level + self.type + '\n' + str(self.id) + '\n' + str(self.value)
+        result = LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + str(self.value)
         return result
 
     def exe(self):
@@ -21,7 +21,7 @@ class Variable:
         self.var_type = type
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + str(self.id) + '\n' + str(self.var_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
 
     def exe(self):
         stack.new_variable(self.id, self.var_type)
@@ -33,7 +33,7 @@ class Assign:
         self.expression = expression
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level + 1) + str(self.id) + '\n' + self.expression.get_tree(level + 1)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.expression.get_tree(level + 1)
 
     def exe(self):
         r = self.expression.exe()

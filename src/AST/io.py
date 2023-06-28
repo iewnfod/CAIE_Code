@@ -53,7 +53,7 @@ class Array_input:
         self.indexes = indexes
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + str(self.id) + '\n' + self.indexes.get_tree(level+1)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)
 
     def exe(self):
         indexes = self.indexes.exe()

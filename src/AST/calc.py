@@ -7,7 +7,7 @@ class Op_minus:
         self.right = right
 
     def get_tree(self, level=0):
-        return LEVEL_STR * self.level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
         n1 = self.left.exe()
@@ -26,7 +26,7 @@ class Op_plus:
         self.right = right
 
     def get_tree(self, level=0):
-        return LEVEL_STR * self.level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
         n1 = self.left.exe()
@@ -45,7 +45,7 @@ class Op_mul:
         self.right = right
 
     def get_tree(self, level=0):
-        return LEVEL_STR * self.level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
         n1 = self.left.exe()
@@ -62,7 +62,7 @@ class Op_div:
         self.right = right
 
     def get_tree(self, level=0):
-        return LEVEL_STR * self.level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
         n1 = self.left.exe()

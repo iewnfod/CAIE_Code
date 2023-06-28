@@ -136,6 +136,7 @@ def p_repeat_statement(p):
 
 def p_while_statement(p):
     """statement : WHILE expression statements ENDWHILE"""
+    p[0] = AST.While(p[2], p[3])
 
 def p_expression_statement(p):
     """statement : expression"""

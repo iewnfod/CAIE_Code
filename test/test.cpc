@@ -1,11 +1,11 @@
 DECLARE a : INTEGER
 a <- 0
 
-REPEAT
+WHILE a <= 20
     a <- a + 1
     CASE OF a
         1 TO 9 : OUTPUT a, " is between 1 and 9";
         10 TO 19 : OUTPUT a, " is between 10 and 19";
         OTHERWISE : OUTPUT a, " is not between 1 and 19";
     ENDCASE
-UNTIL a >= 20
+ENDWHILE

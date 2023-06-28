@@ -9,10 +9,10 @@ class Statements:
         self.statements.append(statement)
 
     def get_tree(self, level=0):
-        result = ''
+        result = []
         for statement in self.statements:
-            result += '\n' + statement.get_tree(level)
-        return result
+            result.append(statement.get_tree(level))
+        return '\n'.join(result)
 
     def exe(self):
         result = []
@@ -57,9 +57,9 @@ class For:
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level
-        result += 'FOR\n' + str(self.id)
+        result += 'FOR ' + str(self.id)
         result += '\n' + self.left.get_tree(level+1) + '\n' + str(self.right.get_tree(level+1))
-        result += 'NEXT\n' + str(self.next_id)
+        result += 'NEXT ' + str(self.next_id)
 
     def exe(self):
         left = self.left.exe()
@@ -87,7 +87,7 @@ class Case:
         self.cases = cases
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + str(self.id) + '\n' + self.cases.get_tree
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.cases.get_tree(level+1)
 
     def exe(self):
         value = stack.get_variable(self.id)
@@ -175,3 +175,16 @@ class Repeat:
             self.true_statement.exe()
             if self.condition.exe()[0]:
                 break
+
+class While:
+    def __init__(self, condition, true_statement):
+        self.type = 'WHILE'
+        self.condition = condition
+        self.true_statement = true_statement
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.condition.get_tree(level+1) + '\n' + self.true_statement.get_tree(level+1)
+
+    def exe(self):
+        while self.condition.exe()[0]:
+            self.true_statement.exe()[0]
