@@ -1,0 +1,50 @@
+DECLARE n : INTEGER
+DECLARE s : ARRAY [0:11] OF INTEGER
+DECLARE b : ARRAY [0:11] OF INTEGER
+DECLARE diff : INTEGER
+DECLARE sour : INTEGER
+DECLARE bitter : INTEGER
+
+n <- 0
+sour <- 1
+bitter <- 0
+diff <- 1000000000000
+
+PROCEDURE dfs(x : INTEGER, use : INTEGER)
+    IF x > n THEN
+        IF use THEN
+            DECLARE d : INTEGER
+            d <- sour - bitter
+            IF d < 0 THEN d <- 0 - d ENDIF
+            IF d < diff THEN diff <- d ENDIF
+        ENDIF
+    ELSE
+        // 不选，直接下一层
+        CALL dfs(x+1, use)
+        // 加上并选
+        sour <- INT(sour * s[x])
+        bitter <- bitter + b[x]
+        CALL dfs(x+1, use+1)
+        // 还原
+        sour <- INT(sour / s[x])
+        bitter <- bitter - b[x]
+    ENDIF
+ENDPROCEDURE
+
+
+DECLARE str : STRING
+
+INPUT str
+n <- INT(str)
+
+FOR i <- 1 TO n
+    INPUT str
+    DECLARE l : ARRAY[1:1] OF STRING
+    l <- Split(str, " ")
+    s[i] <- INT(l[1])
+    b[i] <- INT(l[2])
+NEXT i
+
+CALL dfs(1, 0)
+
+OUTPUT diff

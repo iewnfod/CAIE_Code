@@ -28,7 +28,7 @@ class Char:
         self.value = format(value)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.value)
+        return LEVEL_STR * level + self.type + ' ' + "'" + str(self.value) + "'"
 
     def exe(self):
         return (self.value, self.type)
@@ -39,7 +39,7 @@ class String:
         self.value = value
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.value)
+        return LEVEL_STR * level + self.type + ' ' + '"' + str(self.value) + '"'
 
     def exe(self):
         return (self.value, self.type)

@@ -11,7 +11,7 @@ class Statements:
     def get_tree(self, level=0):
         result = []
         for statement in self.statements:
-            result.append(statement.get_tree(level))
+            result.append(str(statement.get_tree(level)))
         return '\n'.join(result)
 
     def exe(self):
@@ -40,7 +40,7 @@ class If:
         result = LEVEL_STR * level
         result += 'IF\n' + self.condition.get_tree(level+1)
         result += '\n' + self.true_statement.get_tree(level+1)
-        result += ( 'ELSE\n' + self.false_statement.get_tree(level+1) ) if self.false_statement else ''
+        result += ( '\n' + LEVEL_STR * level + 'ELSE\n' + self.false_statement.get_tree(level+1) ) if self.false_statement else ''
 
         return result
 
@@ -64,7 +64,10 @@ class For:
         result = LEVEL_STR * level
         result += 'FOR ' + str(self.id)
         result += '\n' + self.left.get_tree(level+1) + '\n' + str(self.right.get_tree(level+1))
-        result += 'NEXT ' + str(self.next_id)
+        result += '\n' + self.body_statement.get_tree(level+1)
+        result += '\n' + LEVEL_STR * level + 'NEXT ' + str(self.next_id)
+
+        return result
 
     def exe(self):
         left = self.left.exe()

@@ -70,7 +70,7 @@ class Declare_parameter:
         self.var_type = type
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + str(self.var_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
 
     def exe(self):
         return (self.id, self.var_type)
@@ -81,7 +81,7 @@ class Declare_parameters:
         self.parameters = []
 
     def get_tree(self, level=0):
-        result = LEVEL_STR * level
+        result = LEVEL_STR * level + self.type + '\n'
         for i in self.parameters:
             result += i.get_tree(level+1) + '\n'
         return result[:-1]
@@ -101,7 +101,7 @@ class Parameters:
         self.parameters = []
 
     def get_tree(self, level=0):
-        result = LEVEL_STR * level
+        result = LEVEL_STR * level + self.type + '\n'
         for i in self.parameters:
             result += i.get_tree(level+1) + '\n'
         return result[:-1]

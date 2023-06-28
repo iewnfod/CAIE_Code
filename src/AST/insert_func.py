@@ -150,10 +150,10 @@ class Length:
             return
 
         s = parameters[0]
-        if s[1] == 'STRING':
+        if s[1] == 'STRING' or s[1] == 'ARRAY':
             return (len(s[0]), 'INTEGER')
         else:
-            print(f'Function `{self.type}` expect `STRING`, but found `{s[1]}')
+            print(f'Function `{self.type}` expect `STRING` or `ARRAY`, but found `{s[1]}')
 
 class Mid:
     def __init__(self, parameters):

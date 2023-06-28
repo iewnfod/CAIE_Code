@@ -277,7 +277,9 @@ def p_call_procedure_statement(p):
 
 def p_function_statement(p):
     """statement : FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
-            | FUNCTION ID RETURNS ID statements ENDFUNCTION"""
+            | FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
+            | FUNCTION ID RETURNS ID statements ENDFUNCTION
+            | FUNCTION ID RETURNS ARRAY statements ENDFUNCTION"""
     if len(p) == 7:
         p[0] = AST.Function(p[2], None, p[5], p[4])
     else:

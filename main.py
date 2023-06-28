@@ -54,10 +54,13 @@ def with_file(path):
 def preload_scripts():
     for p, dir_list, file_list in os.walk('scripts'):
         for i in file_list:
-            with open(os.path.join(p, i), 'r') as f:
-                text = remove_comment(f.read())
-            ast = parser.parse(text)
-            ast.exe()
+            path = os.path.join(p, i)
+            _, n = os.path.splitext(path)
+            if n == '.cpc':
+                with open(path, 'r') as f:
+                    text = remove_comment(f.read())
+                ast = parser.parse(text)
+                ast.exe()
 
 def help():
     standard_output()

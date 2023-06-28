@@ -1,0 +1,22 @@
+FUNCTION Split(s : STRING, sep : STRING) RETURNS ARRAY
+    DECLARE result : ARRAY[1:LENGTH(s)] OF STRING
+
+    DECLARE from : INTEGER
+    DECLARE item : INTEGER
+
+    from <- 1
+    item <- 1
+
+    FOR i <- 1 TO LENGTH(s)
+        IF MID(s, i, LENGTH(sep)) = sep THEN
+            result[item] <- MID(s, from, i-from)
+            item <- item + 1
+            from <- i + 1
+        ENDIF
+    NEXT i
+
+    result[item] <- MID(s, from, LENGTH(s)-from+1)
+
+    RETURN result
+
+ENDFUNCTION

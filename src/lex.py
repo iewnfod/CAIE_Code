@@ -146,7 +146,7 @@ def t_error(t):
     print(f"Keyword not fount: `{t.value[0]}` at line {t.lineno}")
     t.lexer.skip(1)
 
-def t_new_line(t):
+def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count('\n')
 
