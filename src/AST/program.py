@@ -52,18 +52,20 @@ class If:
                 self.false_statement.exe()
 
 class For:
-    def __init__(self, id, left, right, body_statement, next_id):
+    def __init__(self, id, left, right, step, body_statement, next_id):
         self.type = 'FOR'
         self.id = id
         self.left = left
         self.right = right
+        self.step = step
         self.body_statement = body_statement
         self.next_id = next_id
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level
         result += 'FOR ' + str(self.id)
-        result += '\n' + self.left.get_tree(level+1) + '\n' + str(self.right.get_tree(level+1))
+        result += '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        result += '\n' + self.step.get_tree(level+1)
         result += '\n' + self.body_statement.get_tree(level+1)
         result += '\n' + LEVEL_STR * level + 'NEXT ' + str(self.next_id)
 
@@ -72,8 +74,9 @@ class For:
     def exe(self):
         left = self.left.exe()
         right = self.right.exe()
-        if left[1] == 'INTEGER' and right[1] == 'INTEGER':
-            for i in range(left[0], right[0]+1):
+        step = self.step.exe()
+        if left[1] == 'INTEGER' and right[1] == 'INTEGER' and step[1] == 'INTEGER':
+            for i in range(left[0], right[0]+1, step[0]):
                 # 给 index 赋值
                 stack.new_variable(self.id, 'INTEGER')
                 stack.set_variable(self.id, i, 'INTEGER')
@@ -86,7 +89,7 @@ class For:
                     print(f'Expect `{self.id}` for next id, but found `{self.next_id}`')
                     break
         else:
-            print(f'Expect `INTEGER` for index, but found `{left[1]}` and `{right[1]}`. ')
+            print(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`. ')
 
 class Case:
     def __init__(self, id, cases):

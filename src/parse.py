@@ -147,8 +147,12 @@ def p_otherwise_statement(p):
     p[0] = AST.A_case(None, p[3], True)
 
 def p_for_statement(p):
-    """statement : FOR ID ASSIGN expression TO expression statements NEXT ID"""
-    p[0] = AST.For(p[2], p[4], p[6], p[7], p[9])
+    """statement : FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
+            | FOR ID ASSIGN expression TO expression statements NEXT ID"""
+    if len(p) == 10:
+        p[0] = AST.For(p[2], p[4], p[6], AST.Integer(1), p[7], p[9])
+    else:
+        p[0] = AST.For(p[2], p[4], p[6], p[8], p[9], p[11])
 
 def p_repeat_statement(p):
     """statement : REPEAT statements UNTIL expression"""

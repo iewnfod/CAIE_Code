@@ -5,6 +5,7 @@ reserved = {
     "DECLARE",
     "FOR",
     "TO",
+    "STEP",
     "NEXT",
     "TYPE",
     "ENDTYPE",
