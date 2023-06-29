@@ -3,10 +3,13 @@ CAIE Pseudocode Interpreter
 
 ## 安装与使用
 1. 安装 `Python3` 环境
-2. 克隆此项目 `git clone https://github.com/iewnfod/CAIE_Code.git`
-3. 进入项目 `cd CAIE_Code`
-4. 安装依赖 `pip install -r requirements.txt`
-4. 若是`MacOS`或`Linux`，使用指令`./cpc`，或直接双击目录内`cpc`文件即可运行
+2. 克隆此项目
+    ```git clone https://github.com/iewnfod/CAIE_Code.git```
+3. 进入项目
+    ```cd CAIE_Code```
+4. 安装依赖
+    ```pip install -r requirements.txt```
+4. 若是`MacOS`或`Linux`，使用指令`./cpc`运行，`MacOS`甚至可以直接双击目录内`cpc`文件启动终端模式运行
 5. 若是`Windows`，请使用`python main.py`运行
 
 ## 标准
@@ -24,11 +27,199 @@ CAIE Pseudocode Interpreter
 * 单独书写某个变量会对其进行输出，打印其值以及类型
 * 使用保留字以实现子空间 ~~（虽然官方文档要求有缩进，但是在此不做强制要求）~~
 * 由于没有进行缩进的识别，`CASE`中的每一项末尾都需要添加`;`表达这一项结束了
+* `INTEGER`与`REAL`在计算时并不会进行过多区分，只有在赋值给某个变量时才会最终确定其类型，因此在计算或函数返回与预期类型不同时，请勿慌张
 
 ### 基础数据类型
-* **INTEGER** 整型
-* **REAL** 浮点数
-* **CHAR** 单个字符
-* **STRING** 字符串
-* **BOOLEAN** 布尔值
-* **DATE** 任何合法的日期 (此类型暂时不会实现)
+* `INTEGER` 整型
+    ```
+    1
+    2
+    123
+    -123
+    ```
+* `REAL` 浮点型
+    ```
+    1.1
+    0.1
+    -12.1233
+    ```
+* `CHAR` 单个字符
+    ```
+    '1'
+    '!'
+    'd'
+    ```
+* `STRING` 字符串
+    ```
+    "Hello"
+    "World"
+    "!"
+    ```
+* `BOOLEAN` 布尔值
+    ```
+    TRUE
+    FALSE
+    ```
+* `DATE` 任何合法的日期 (此类型暂时不会实现)
+
+### 语法定义
+
+1. 变量与常量
+    * 变量声明
+        ```
+        DECLARE <identifier> : <data type>
+        DECLARE <identifier> : ARRAY [<lower>:<upper>, ...] OF <data type>
+        ```
+    * 常量声明
+        ```
+        CONSTANT <identifier> = <value>
+        ```
+    * 赋值
+        ```
+        <identifier> <- <value>
+        <identifier>[<index>, ...] <- <value>
+        ```
+2. 输入与输出
+    * 输入
+        ```
+        INPUT <identifier>
+        ```
+    * 输出
+        ```
+        OUTPUT <value>, ...
+        ```
+3. 操作符
+    * `+` 加法
+    * `-` 减法
+    * `*` 乘法
+    * `/` 除法
+    * `>` 大于
+    * `>=` 大于等于
+    * `<` 小于
+    * `<=` 小于等于
+    * `=` 等于
+    * `<>` 不等于
+    * `&` 字符串拼接
+4. 逻辑运算
+    * `AND` 与
+    * `OR` 或
+    * `NOT` 否
+5. 条件语句
+    * IF 语句
+        ```
+        IF <condition> THEN
+            <statements>
+        ENDIF
+
+        IF <condition> THEN
+            <statements>
+        ELSE
+            <statements>
+        ENDIF
+        ```
+    * CASE 语句
+        此处官方语法中并没有分号`;`
+        ```
+        CASE <identifier>
+            <value> : <statements>;
+            <value> : <statements>;
+            ...
+        ENDCASE
+
+        CASE <identifier>
+            <value> : <statements>;
+            <value> : <statements>;
+            ...
+            OTHERWISE : <statements>;
+        ENDCASE
+        ```
+6. 循环语句
+    * FOR 循环
+        ```
+        FOR <identifier> <- <value> TO <value>
+            <statements>
+        NEXT <identifier>
+        ```
+    * REPEAT 循环
+        ```
+        REPEAT
+            <statements>
+        UNTIL <condition>
+        ```
+    * WHILE 循环
+        ```
+        WHILE <condition>
+            <statements>
+        ENDWHILE
+7. 函数
+    * 无返回值函数定义
+        ```
+        PROCEDURE <identifier>
+            <statements>
+        ENDPROCEDURE
+
+        PROCEDURE <identifier> (<param> : <data type>, ...)
+            <statements>
+        ENDPROCEDURE
+        ```
+    * 无返回值函数调用
+        ```
+        CALL <identifier>
+
+        CALL <identifier> (<value>, ...)
+        ```
+    * 有返回值函数定义
+        ```
+        FUNCTION <identifier> RETURNS <data type>
+            <statements>
+            RETURN <value>
+        ENDFUNCTION
+
+        FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
+            <statements>
+            RETURN <value>
+        ENDFUNCTION
+    * 有返回值函数调用
+        ```
+        <identifier> ()
+
+        <identifier> (<value>, ...)
+        ```
+
+### 内置函数
+* `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
+    ```
+    $ RIGHT("ABCDEFGH", 3)
+    "FGH"
+    ```
+* `LENGTH(ThisString : STRING) RETURNS INTEGER`
+    ```
+    $ LENGTH("Happy Days")
+    10
+    ```
+* `MID(ThisString : STRING, x : INTEGER, y : INTEGER) RETURNS STRING`
+    ```
+    $ MID("ABCDEFGH", 2, 3)
+    "BCD"
+    ```
+* `LCASE(ThisChar : CHAR) RETURNS CHAR`
+    ```
+    $ LCASE('W')
+    'w'
+    ```
+* `UCASE(ThisChar : CHAR) RETURNS CHAR`
+    ```
+    $ UCASE('h')
+    'H'
+    ```
+* `INT(x : REAL) RETURNS INTEGER`
+    ```
+    $ INT(27.5415)
+    27
+    ```
+* `RAND(x : INTEGER) RETURNS REAL`
+    ```
+    $ RAND(87)
+    35.43
+    ```
+* 更多非官方内置函数，请查阅 [scripts](./scripts/)
