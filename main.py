@@ -7,6 +7,7 @@ from ply import lex
 import sys
 import signal
 import os
+import chardet
 
 preline = '$'
 
@@ -48,8 +49,11 @@ def with_line():
 def with_file(path, preload=False):
     # 恢复行数，也就是不计算预加载文件的行数
     lexer.lineno = 1
+    # 读取文件编码
+    with open(path, 'rb') as f:
+        encode = chardet.detect(f.read())['encoding']
     # 读取文件
-    with open(path, 'r') as f:
+    with open(path, 'r', encoding=encode) as f:
         text = remove_comment(f.read())
     if not text:
         return
