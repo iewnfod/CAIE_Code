@@ -44,12 +44,20 @@ def with_line():
             print('Error:', e)
 
 def with_file(path):
+    # 恢复行数，也就是不计算预加载文件的行数
+    lexer.lineno = 1
+    # 读取文件
     with open(path, 'r') as f:
         text = remove_comment(f.read())
-    ast = parser.parse(text, debug=debug)
-    if show_tree:
-        print(ast.get_tree())
-    ast.exe()
+    # 尝试运行
+    try:
+        ast = parser.parse(text, debug=debug)
+        if show_tree:
+            print(ast.get_tree())
+        ast.exe()
+    except:
+        error_messages.insert(0, f'File `{path}`')
+        print('\n\t'.join(error_messages))
 
 def preload_scripts():
     for p, dir_list, file_list in os.walk('scripts'):
@@ -57,10 +65,7 @@ def preload_scripts():
             path = os.path.join(p, i)
             _, n = os.path.splitext(path)
             if n == '.cpc':
-                with open(path, 'r') as f:
-                    text = remove_comment(f.read())
-                ast = parser.parse(text)
-                ast.exe()
+                with_file(path)
 
 def help():
     standard_output()
@@ -100,6 +105,7 @@ arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述
 def wrong_argument(msg):
     print(f'Wrong arguments: \033[1m{msg}\033[0m\n')
     help()
+
 
 def main():
     # 解析参数

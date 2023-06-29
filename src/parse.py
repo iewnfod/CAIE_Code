@@ -1,13 +1,14 @@
 import src.AST as AST
 from src.AST.insert_func import *
+from src.status import *
 
 start = 'statements'
 
 def p_error(p):
     if p:
-        print(f'Parser Error: `{p.value}` at line {p.lineno}')
+        error_messages.append(f'Parser Error: `{p.value}` at line {p.lineno}')
     else:
-        print(f'Syntax Error: EOF')
+        error_messages.append(f'Syntax Error: EOF')
 
 def p_statements(p):
     """statements : statements statement

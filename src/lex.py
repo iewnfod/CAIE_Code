@@ -1,3 +1,5 @@
+from src.status import *
+
 reserved = {
     "CONSTANT",
     "DECLARE",
@@ -143,7 +145,7 @@ def t_ID(t):
 
 # 意外处理
 def t_error(t):
-    print(f"Keyword not fount: `{t.value[0]}` at line {t.lineno}")
+    error_messages.append(f"Keyword not fount: `{t.value[0]}` at line {t.lineno}")
     t.lexer.skip(1)
 
 def t_newline(t):
