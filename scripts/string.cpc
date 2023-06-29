@@ -19,3 +19,25 @@ FUNCTION Split(s : STRING, sep : STRING) RETURNS ARRAY
 
     RETURN result
 ENDFUNCTION
+
+FUNCTION Lcase(s : STRING) RETURNS STRING
+    DECLARE result : STRING
+    result <- ""
+
+    FOR i <- 1 TO LENGTH(s)
+        result <- result & LCASE(CHAR(MID(s, i, 1)))
+    NEXT i
+
+    RETURN result
+ENDFUNCTION
+
+FUNCTION Ucase(s : STRING) RETURNS STRING
+    DECLARE result : STRING
+    result <- ""
+
+    FOR i <- 1 TO LENGTH(s)
+        result <- result & UCASE(CHAR(MID(s, i, 1)))
+    NEXT i
+
+    RETURN result
+ENDFUNCTION
