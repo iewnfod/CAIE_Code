@@ -9,8 +9,9 @@ CAIE Pseudocode Interpreter
     ```cd CAIE_Code```
 4. 安装依赖
     ```pip install -r requirements.txt```
-4. 若是`MacOS`或`Linux`，使用指令`./cpc`运行，`MacOS`甚至可以直接双击目录内`cpc`文件启动终端模式运行
-5. 若是`Windows`，请使用`python main.py`运行
+5. 若是`MacOS`或`Linux`，使用指令`./cpc`运行，`MacOS`甚至可以直接双击目录内`cpc`文件启动终端模式运行
+6. 若是`Windows`，请使用`python main.py`运行
+7. 使用指令`./cpc -h`或`python main.py -h`获取更多帮助
 
 ## 标准
 ### 基本标准
