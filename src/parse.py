@@ -5,16 +5,17 @@ from src.status import *
 start = 'statements'
 
 # 符号优先级
+# 越往下优先级越高
 precedence = (
-    # 加减乘除
-    ("left", "PLUS", "MINUS"),
-    ("left", "MUL", "DIV"),
-    # 比较运算
-    ("left", "LESS", "GREATER", "LESS_EQUAL", "GREATER_EQUAL", "EQUAL", "NOT_EQUAL"),
     # 逻辑运算
     ("left", "AND"),
     ("left", "OR"),
     ("left", "NOT"),
+    # 比较运算
+    ("left", "LESS", "GREATER", "LESS_EQUAL", "GREATER_EQUAL", "EQUAL", "NOT_EQUAL"),
+    # 加减乘除
+    ("left", "PLUS", "MINUS"),
+    ("left", "MUL", "DIV"),
     # 右结合操作符
     ("right", "UMINUS"),
     ("right", "UPLUS"),

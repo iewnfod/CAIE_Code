@@ -2734,16 +2734,6 @@ state 60
 
     OR              reduce using rule 36 (expression -> NOT expression .)
     AND             reduce using rule 36 (expression -> NOT expression .)
-    EQUAL           reduce using rule 36 (expression -> NOT expression .)
-    NOT_EQUAL       reduce using rule 36 (expression -> NOT expression .)
-    LESS            reduce using rule 36 (expression -> NOT expression .)
-    GREATER         reduce using rule 36 (expression -> NOT expression .)
-    LESS_EQUAL      reduce using rule 36 (expression -> NOT expression .)
-    GREATER_EQUAL   reduce using rule 36 (expression -> NOT expression .)
-    MUL             reduce using rule 36 (expression -> NOT expression .)
-    DIV             reduce using rule 36 (expression -> NOT expression .)
-    PLUS            reduce using rule 36 (expression -> NOT expression .)
-    MINUS           reduce using rule 36 (expression -> NOT expression .)
     CONNECT         reduce using rule 36 (expression -> NOT expression .)
     DECLARE         reduce using rule 36 (expression -> NOT expression .)
     CONSTANT        reduce using rule 36 (expression -> NOT expression .)
@@ -2781,19 +2771,29 @@ state 60
     RIGHT_SQUARE    reduce using rule 36 (expression -> NOT expression .)
     TO              reduce using rule 36 (expression -> NOT expression .)
     COLON           reduce using rule 36 (expression -> NOT expression .)
+    EQUAL           shift and go to state 35
+    NOT_EQUAL       shift and go to state 36
+    LESS            shift and go to state 37
+    GREATER         shift and go to state 38
+    LESS_EQUAL      shift and go to state 39
+    GREATER_EQUAL   shift and go to state 40
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
+  ! EQUAL           [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! NOT_EQUAL       [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! LESS            [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! GREATER         [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! MUL             [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! DIV             [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! PLUS            [ reduce using rule 36 (expression -> NOT expression .) ]
+  ! MINUS           [ reduce using rule 36 (expression -> NOT expression .) ]
   ! OR              [ shift and go to state 33 ]
   ! AND             [ shift and go to state 34 ]
-  ! EQUAL           [ shift and go to state 35 ]
-  ! NOT_EQUAL       [ shift and go to state 36 ]
-  ! LESS            [ shift and go to state 37 ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS_EQUAL      [ shift and go to state 39 ]
-  ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3241,16 +3241,6 @@ state 71
 
     OR              reduce using rule 34 (expression -> expression OR expression .)
     AND             reduce using rule 34 (expression -> expression OR expression .)
-    EQUAL           reduce using rule 34 (expression -> expression OR expression .)
-    NOT_EQUAL       reduce using rule 34 (expression -> expression OR expression .)
-    LESS            reduce using rule 34 (expression -> expression OR expression .)
-    GREATER         reduce using rule 34 (expression -> expression OR expression .)
-    LESS_EQUAL      reduce using rule 34 (expression -> expression OR expression .)
-    GREATER_EQUAL   reduce using rule 34 (expression -> expression OR expression .)
-    MUL             reduce using rule 34 (expression -> expression OR expression .)
-    DIV             reduce using rule 34 (expression -> expression OR expression .)
-    PLUS            reduce using rule 34 (expression -> expression OR expression .)
-    MINUS           reduce using rule 34 (expression -> expression OR expression .)
     CONNECT         reduce using rule 34 (expression -> expression OR expression .)
     DECLARE         reduce using rule 34 (expression -> expression OR expression .)
     CONSTANT        reduce using rule 34 (expression -> expression OR expression .)
@@ -3288,19 +3278,29 @@ state 71
     RIGHT_SQUARE    reduce using rule 34 (expression -> expression OR expression .)
     TO              reduce using rule 34 (expression -> expression OR expression .)
     COLON           reduce using rule 34 (expression -> expression OR expression .)
+    EQUAL           shift and go to state 35
+    NOT_EQUAL       shift and go to state 36
+    LESS            shift and go to state 37
+    GREATER         shift and go to state 38
+    LESS_EQUAL      shift and go to state 39
+    GREATER_EQUAL   shift and go to state 40
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
+  ! EQUAL           [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! NOT_EQUAL       [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! LESS            [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! GREATER         [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! MUL             [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! DIV             [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! PLUS            [ reduce using rule 34 (expression -> expression OR expression .) ]
+  ! MINUS           [ reduce using rule 34 (expression -> expression OR expression .) ]
   ! OR              [ shift and go to state 33 ]
   ! AND             [ shift and go to state 34 ]
-  ! EQUAL           [ shift and go to state 35 ]
-  ! NOT_EQUAL       [ shift and go to state 36 ]
-  ! LESS            [ shift and go to state 37 ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS_EQUAL      [ shift and go to state 39 ]
-  ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3322,16 +3322,6 @@ state 72
     (49) expression -> expression . CONNECT expression
 
     AND             reduce using rule 35 (expression -> expression AND expression .)
-    EQUAL           reduce using rule 35 (expression -> expression AND expression .)
-    NOT_EQUAL       reduce using rule 35 (expression -> expression AND expression .)
-    LESS            reduce using rule 35 (expression -> expression AND expression .)
-    GREATER         reduce using rule 35 (expression -> expression AND expression .)
-    LESS_EQUAL      reduce using rule 35 (expression -> expression AND expression .)
-    GREATER_EQUAL   reduce using rule 35 (expression -> expression AND expression .)
-    MUL             reduce using rule 35 (expression -> expression AND expression .)
-    DIV             reduce using rule 35 (expression -> expression AND expression .)
-    PLUS            reduce using rule 35 (expression -> expression AND expression .)
-    MINUS           reduce using rule 35 (expression -> expression AND expression .)
     CONNECT         reduce using rule 35 (expression -> expression AND expression .)
     DECLARE         reduce using rule 35 (expression -> expression AND expression .)
     CONSTANT        reduce using rule 35 (expression -> expression AND expression .)
@@ -3370,19 +3360,29 @@ state 72
     TO              reduce using rule 35 (expression -> expression AND expression .)
     COLON           reduce using rule 35 (expression -> expression AND expression .)
     OR              shift and go to state 33
+    EQUAL           shift and go to state 35
+    NOT_EQUAL       shift and go to state 36
+    LESS            shift and go to state 37
+    GREATER         shift and go to state 38
+    LESS_EQUAL      shift and go to state 39
+    GREATER_EQUAL   shift and go to state 40
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
   ! OR              [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! EQUAL           [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! NOT_EQUAL       [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! LESS            [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! GREATER         [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! LESS_EQUAL      [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! GREATER_EQUAL   [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! MUL             [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! DIV             [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! PLUS            [ reduce using rule 35 (expression -> expression AND expression .) ]
+  ! MINUS           [ reduce using rule 35 (expression -> expression AND expression .) ]
   ! AND             [ shift and go to state 34 ]
-  ! EQUAL           [ shift and go to state 35 ]
-  ! NOT_EQUAL       [ shift and go to state 36 ]
-  ! LESS            [ shift and go to state 37 ]
-  ! GREATER         [ shift and go to state 38 ]
-  ! LESS_EQUAL      [ shift and go to state 39 ]
-  ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3403,16 +3403,14 @@ state 73
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 37 (expression -> expression EQUAL expression .)
+    AND             reduce using rule 37 (expression -> expression EQUAL expression .)
     EQUAL           reduce using rule 37 (expression -> expression EQUAL expression .)
     NOT_EQUAL       reduce using rule 37 (expression -> expression EQUAL expression .)
     LESS            reduce using rule 37 (expression -> expression EQUAL expression .)
     GREATER         reduce using rule 37 (expression -> expression EQUAL expression .)
     LESS_EQUAL      reduce using rule 37 (expression -> expression EQUAL expression .)
     GREATER_EQUAL   reduce using rule 37 (expression -> expression EQUAL expression .)
-    MUL             reduce using rule 37 (expression -> expression EQUAL expression .)
-    DIV             reduce using rule 37 (expression -> expression EQUAL expression .)
-    PLUS            reduce using rule 37 (expression -> expression EQUAL expression .)
-    MINUS           reduce using rule 37 (expression -> expression EQUAL expression .)
     CONNECT         reduce using rule 37 (expression -> expression EQUAL expression .)
     DECLARE         reduce using rule 37 (expression -> expression EQUAL expression .)
     CONSTANT        reduce using rule 37 (expression -> expression EQUAL expression .)
@@ -3450,21 +3448,23 @@ state 73
     RIGHT_SQUARE    reduce using rule 37 (expression -> expression EQUAL expression .)
     TO              reduce using rule 37 (expression -> expression EQUAL expression .)
     COLON           reduce using rule 37 (expression -> expression EQUAL expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
-  ! OR              [ reduce using rule 37 (expression -> expression EQUAL expression .) ]
-  ! AND             [ reduce using rule 37 (expression -> expression EQUAL expression .) ]
+  ! MUL             [ reduce using rule 37 (expression -> expression EQUAL expression .) ]
+  ! DIV             [ reduce using rule 37 (expression -> expression EQUAL expression .) ]
+  ! PLUS            [ reduce using rule 37 (expression -> expression EQUAL expression .) ]
+  ! MINUS           [ reduce using rule 37 (expression -> expression EQUAL expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
   ! EQUAL           [ shift and go to state 35 ]
   ! NOT_EQUAL       [ shift and go to state 36 ]
   ! LESS            [ shift and go to state 37 ]
   ! GREATER         [ shift and go to state 38 ]
   ! LESS_EQUAL      [ shift and go to state 39 ]
   ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3485,16 +3485,14 @@ state 74
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
+    AND             reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     EQUAL           reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     NOT_EQUAL       reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     LESS            reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     GREATER         reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     LESS_EQUAL      reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     GREATER_EQUAL   reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
-    MUL             reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
-    DIV             reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
-    PLUS            reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
-    MINUS           reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     CONNECT         reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     DECLARE         reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     CONSTANT        reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
@@ -3532,21 +3530,23 @@ state 74
     RIGHT_SQUARE    reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     TO              reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
     COLON           reduce using rule 38 (expression -> expression NOT_EQUAL expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
-  ! OR              [ reduce using rule 38 (expression -> expression NOT_EQUAL expression .) ]
-  ! AND             [ reduce using rule 38 (expression -> expression NOT_EQUAL expression .) ]
+  ! MUL             [ reduce using rule 38 (expression -> expression NOT_EQUAL expression .) ]
+  ! DIV             [ reduce using rule 38 (expression -> expression NOT_EQUAL expression .) ]
+  ! PLUS            [ reduce using rule 38 (expression -> expression NOT_EQUAL expression .) ]
+  ! MINUS           [ reduce using rule 38 (expression -> expression NOT_EQUAL expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
   ! EQUAL           [ shift and go to state 35 ]
   ! NOT_EQUAL       [ shift and go to state 36 ]
   ! LESS            [ shift and go to state 37 ]
   ! GREATER         [ shift and go to state 38 ]
   ! LESS_EQUAL      [ shift and go to state 39 ]
   ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3567,16 +3567,14 @@ state 75
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 39 (expression -> expression LESS expression .)
+    AND             reduce using rule 39 (expression -> expression LESS expression .)
     EQUAL           reduce using rule 39 (expression -> expression LESS expression .)
     NOT_EQUAL       reduce using rule 39 (expression -> expression LESS expression .)
     LESS            reduce using rule 39 (expression -> expression LESS expression .)
     GREATER         reduce using rule 39 (expression -> expression LESS expression .)
     LESS_EQUAL      reduce using rule 39 (expression -> expression LESS expression .)
     GREATER_EQUAL   reduce using rule 39 (expression -> expression LESS expression .)
-    MUL             reduce using rule 39 (expression -> expression LESS expression .)
-    DIV             reduce using rule 39 (expression -> expression LESS expression .)
-    PLUS            reduce using rule 39 (expression -> expression LESS expression .)
-    MINUS           reduce using rule 39 (expression -> expression LESS expression .)
     CONNECT         reduce using rule 39 (expression -> expression LESS expression .)
     DECLARE         reduce using rule 39 (expression -> expression LESS expression .)
     CONSTANT        reduce using rule 39 (expression -> expression LESS expression .)
@@ -3614,21 +3612,23 @@ state 75
     RIGHT_SQUARE    reduce using rule 39 (expression -> expression LESS expression .)
     TO              reduce using rule 39 (expression -> expression LESS expression .)
     COLON           reduce using rule 39 (expression -> expression LESS expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
-  ! OR              [ reduce using rule 39 (expression -> expression LESS expression .) ]
-  ! AND             [ reduce using rule 39 (expression -> expression LESS expression .) ]
+  ! MUL             [ reduce using rule 39 (expression -> expression LESS expression .) ]
+  ! DIV             [ reduce using rule 39 (expression -> expression LESS expression .) ]
+  ! PLUS            [ reduce using rule 39 (expression -> expression LESS expression .) ]
+  ! MINUS           [ reduce using rule 39 (expression -> expression LESS expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
   ! EQUAL           [ shift and go to state 35 ]
   ! NOT_EQUAL       [ shift and go to state 36 ]
   ! LESS            [ shift and go to state 37 ]
   ! GREATER         [ shift and go to state 38 ]
   ! LESS_EQUAL      [ shift and go to state 39 ]
   ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3649,16 +3649,14 @@ state 76
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 40 (expression -> expression GREATER expression .)
+    AND             reduce using rule 40 (expression -> expression GREATER expression .)
     EQUAL           reduce using rule 40 (expression -> expression GREATER expression .)
     NOT_EQUAL       reduce using rule 40 (expression -> expression GREATER expression .)
     LESS            reduce using rule 40 (expression -> expression GREATER expression .)
     GREATER         reduce using rule 40 (expression -> expression GREATER expression .)
     LESS_EQUAL      reduce using rule 40 (expression -> expression GREATER expression .)
     GREATER_EQUAL   reduce using rule 40 (expression -> expression GREATER expression .)
-    MUL             reduce using rule 40 (expression -> expression GREATER expression .)
-    DIV             reduce using rule 40 (expression -> expression GREATER expression .)
-    PLUS            reduce using rule 40 (expression -> expression GREATER expression .)
-    MINUS           reduce using rule 40 (expression -> expression GREATER expression .)
     CONNECT         reduce using rule 40 (expression -> expression GREATER expression .)
     DECLARE         reduce using rule 40 (expression -> expression GREATER expression .)
     CONSTANT        reduce using rule 40 (expression -> expression GREATER expression .)
@@ -3696,21 +3694,23 @@ state 76
     RIGHT_SQUARE    reduce using rule 40 (expression -> expression GREATER expression .)
     TO              reduce using rule 40 (expression -> expression GREATER expression .)
     COLON           reduce using rule 40 (expression -> expression GREATER expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
-  ! OR              [ reduce using rule 40 (expression -> expression GREATER expression .) ]
-  ! AND             [ reduce using rule 40 (expression -> expression GREATER expression .) ]
+  ! MUL             [ reduce using rule 40 (expression -> expression GREATER expression .) ]
+  ! DIV             [ reduce using rule 40 (expression -> expression GREATER expression .) ]
+  ! PLUS            [ reduce using rule 40 (expression -> expression GREATER expression .) ]
+  ! MINUS           [ reduce using rule 40 (expression -> expression GREATER expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
   ! EQUAL           [ shift and go to state 35 ]
   ! NOT_EQUAL       [ shift and go to state 36 ]
   ! LESS            [ shift and go to state 37 ]
   ! GREATER         [ shift and go to state 38 ]
   ! LESS_EQUAL      [ shift and go to state 39 ]
   ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3731,16 +3731,14 @@ state 77
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
+    AND             reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     EQUAL           reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     NOT_EQUAL       reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     LESS            reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     GREATER         reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     LESS_EQUAL      reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     GREATER_EQUAL   reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
-    MUL             reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
-    DIV             reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
-    PLUS            reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
-    MINUS           reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     CONNECT         reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     DECLARE         reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     CONSTANT        reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
@@ -3778,21 +3776,23 @@ state 77
     RIGHT_SQUARE    reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     TO              reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
     COLON           reduce using rule 41 (expression -> expression LESS_EQUAL expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
-  ! OR              [ reduce using rule 41 (expression -> expression LESS_EQUAL expression .) ]
-  ! AND             [ reduce using rule 41 (expression -> expression LESS_EQUAL expression .) ]
+  ! MUL             [ reduce using rule 41 (expression -> expression LESS_EQUAL expression .) ]
+  ! DIV             [ reduce using rule 41 (expression -> expression LESS_EQUAL expression .) ]
+  ! PLUS            [ reduce using rule 41 (expression -> expression LESS_EQUAL expression .) ]
+  ! MINUS           [ reduce using rule 41 (expression -> expression LESS_EQUAL expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
   ! EQUAL           [ shift and go to state 35 ]
   ! NOT_EQUAL       [ shift and go to state 36 ]
   ! LESS            [ shift and go to state 37 ]
   ! GREATER         [ shift and go to state 38 ]
   ! LESS_EQUAL      [ shift and go to state 39 ]
   ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3813,16 +3813,14 @@ state 78
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
+    AND             reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     EQUAL           reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     NOT_EQUAL       reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     LESS            reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     GREATER         reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     LESS_EQUAL      reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     GREATER_EQUAL   reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
-    MUL             reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
-    DIV             reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
-    PLUS            reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
-    MINUS           reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     CONNECT         reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     DECLARE         reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     CONSTANT        reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
@@ -3860,21 +3858,23 @@ state 78
     RIGHT_SQUARE    reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     TO              reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
     COLON           reduce using rule 42 (expression -> expression GREATER_EQUAL expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
+    MUL             shift and go to state 41
+    DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
 
-  ! OR              [ reduce using rule 42 (expression -> expression GREATER_EQUAL expression .) ]
-  ! AND             [ reduce using rule 42 (expression -> expression GREATER_EQUAL expression .) ]
+  ! MUL             [ reduce using rule 42 (expression -> expression GREATER_EQUAL expression .) ]
+  ! DIV             [ reduce using rule 42 (expression -> expression GREATER_EQUAL expression .) ]
+  ! PLUS            [ reduce using rule 42 (expression -> expression GREATER_EQUAL expression .) ]
+  ! MINUS           [ reduce using rule 42 (expression -> expression GREATER_EQUAL expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
   ! EQUAL           [ shift and go to state 35 ]
   ! NOT_EQUAL       [ shift and go to state 36 ]
   ! LESS            [ shift and go to state 37 ]
   ! GREATER         [ shift and go to state 38 ]
   ! LESS_EQUAL      [ shift and go to state 39 ]
   ! GREATER_EQUAL   [ shift and go to state 40 ]
-  ! MUL             [ shift and go to state 41 ]
-  ! DIV             [ shift and go to state 42 ]
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
 
 
@@ -3895,6 +3895,14 @@ state 79
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 43 (expression -> expression MUL expression .)
+    AND             reduce using rule 43 (expression -> expression MUL expression .)
+    EQUAL           reduce using rule 43 (expression -> expression MUL expression .)
+    NOT_EQUAL       reduce using rule 43 (expression -> expression MUL expression .)
+    LESS            reduce using rule 43 (expression -> expression MUL expression .)
+    GREATER         reduce using rule 43 (expression -> expression MUL expression .)
+    LESS_EQUAL      reduce using rule 43 (expression -> expression MUL expression .)
+    GREATER_EQUAL   reduce using rule 43 (expression -> expression MUL expression .)
     MUL             reduce using rule 43 (expression -> expression MUL expression .)
     DIV             reduce using rule 43 (expression -> expression MUL expression .)
     PLUS            reduce using rule 43 (expression -> expression MUL expression .)
@@ -3936,23 +3944,15 @@ state 79
     RIGHT_SQUARE    reduce using rule 43 (expression -> expression MUL expression .)
     TO              reduce using rule 43 (expression -> expression MUL expression .)
     COLON           reduce using rule 43 (expression -> expression MUL expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
-    EQUAL           shift and go to state 35
-    NOT_EQUAL       shift and go to state 36
-    LESS            shift and go to state 37
-    GREATER         shift and go to state 38
-    LESS_EQUAL      shift and go to state 39
-    GREATER_EQUAL   shift and go to state 40
 
-  ! OR              [ reduce using rule 43 (expression -> expression MUL expression .) ]
-  ! AND             [ reduce using rule 43 (expression -> expression MUL expression .) ]
-  ! EQUAL           [ reduce using rule 43 (expression -> expression MUL expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 43 (expression -> expression MUL expression .) ]
-  ! LESS            [ reduce using rule 43 (expression -> expression MUL expression .) ]
-  ! GREATER         [ reduce using rule 43 (expression -> expression MUL expression .) ]
-  ! LESS_EQUAL      [ reduce using rule 43 (expression -> expression MUL expression .) ]
-  ! GREATER_EQUAL   [ reduce using rule 43 (expression -> expression MUL expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
+  ! EQUAL           [ shift and go to state 35 ]
+  ! NOT_EQUAL       [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 37 ]
+  ! GREATER         [ shift and go to state 38 ]
+  ! LESS_EQUAL      [ shift and go to state 39 ]
+  ! GREATER_EQUAL   [ shift and go to state 40 ]
   ! MUL             [ shift and go to state 41 ]
   ! DIV             [ shift and go to state 42 ]
   ! PLUS            [ shift and go to state 43 ]
@@ -3977,6 +3977,14 @@ state 80
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 44 (expression -> expression DIV expression .)
+    AND             reduce using rule 44 (expression -> expression DIV expression .)
+    EQUAL           reduce using rule 44 (expression -> expression DIV expression .)
+    NOT_EQUAL       reduce using rule 44 (expression -> expression DIV expression .)
+    LESS            reduce using rule 44 (expression -> expression DIV expression .)
+    GREATER         reduce using rule 44 (expression -> expression DIV expression .)
+    LESS_EQUAL      reduce using rule 44 (expression -> expression DIV expression .)
+    GREATER_EQUAL   reduce using rule 44 (expression -> expression DIV expression .)
     MUL             reduce using rule 44 (expression -> expression DIV expression .)
     DIV             reduce using rule 44 (expression -> expression DIV expression .)
     PLUS            reduce using rule 44 (expression -> expression DIV expression .)
@@ -4018,23 +4026,15 @@ state 80
     RIGHT_SQUARE    reduce using rule 44 (expression -> expression DIV expression .)
     TO              reduce using rule 44 (expression -> expression DIV expression .)
     COLON           reduce using rule 44 (expression -> expression DIV expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
-    EQUAL           shift and go to state 35
-    NOT_EQUAL       shift and go to state 36
-    LESS            shift and go to state 37
-    GREATER         shift and go to state 38
-    LESS_EQUAL      shift and go to state 39
-    GREATER_EQUAL   shift and go to state 40
 
-  ! OR              [ reduce using rule 44 (expression -> expression DIV expression .) ]
-  ! AND             [ reduce using rule 44 (expression -> expression DIV expression .) ]
-  ! EQUAL           [ reduce using rule 44 (expression -> expression DIV expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 44 (expression -> expression DIV expression .) ]
-  ! LESS            [ reduce using rule 44 (expression -> expression DIV expression .) ]
-  ! GREATER         [ reduce using rule 44 (expression -> expression DIV expression .) ]
-  ! LESS_EQUAL      [ reduce using rule 44 (expression -> expression DIV expression .) ]
-  ! GREATER_EQUAL   [ reduce using rule 44 (expression -> expression DIV expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
+  ! EQUAL           [ shift and go to state 35 ]
+  ! NOT_EQUAL       [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 37 ]
+  ! GREATER         [ shift and go to state 38 ]
+  ! LESS_EQUAL      [ shift and go to state 39 ]
+  ! GREATER_EQUAL   [ shift and go to state 40 ]
   ! MUL             [ shift and go to state 41 ]
   ! DIV             [ shift and go to state 42 ]
   ! PLUS            [ shift and go to state 43 ]
@@ -4059,6 +4059,14 @@ state 81
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 47 (expression -> expression PLUS expression .)
+    AND             reduce using rule 47 (expression -> expression PLUS expression .)
+    EQUAL           reduce using rule 47 (expression -> expression PLUS expression .)
+    NOT_EQUAL       reduce using rule 47 (expression -> expression PLUS expression .)
+    LESS            reduce using rule 47 (expression -> expression PLUS expression .)
+    GREATER         reduce using rule 47 (expression -> expression PLUS expression .)
+    LESS_EQUAL      reduce using rule 47 (expression -> expression PLUS expression .)
+    GREATER_EQUAL   reduce using rule 47 (expression -> expression PLUS expression .)
     PLUS            reduce using rule 47 (expression -> expression PLUS expression .)
     MINUS           reduce using rule 47 (expression -> expression PLUS expression .)
     CONNECT         reduce using rule 47 (expression -> expression PLUS expression .)
@@ -4098,27 +4106,19 @@ state 81
     RIGHT_SQUARE    reduce using rule 47 (expression -> expression PLUS expression .)
     TO              reduce using rule 47 (expression -> expression PLUS expression .)
     COLON           reduce using rule 47 (expression -> expression PLUS expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
-    EQUAL           shift and go to state 35
-    NOT_EQUAL       shift and go to state 36
-    LESS            shift and go to state 37
-    GREATER         shift and go to state 38
-    LESS_EQUAL      shift and go to state 39
-    GREATER_EQUAL   shift and go to state 40
     MUL             shift and go to state 41
     DIV             shift and go to state 42
 
-  ! OR              [ reduce using rule 47 (expression -> expression PLUS expression .) ]
-  ! AND             [ reduce using rule 47 (expression -> expression PLUS expression .) ]
-  ! EQUAL           [ reduce using rule 47 (expression -> expression PLUS expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 47 (expression -> expression PLUS expression .) ]
-  ! LESS            [ reduce using rule 47 (expression -> expression PLUS expression .) ]
-  ! GREATER         [ reduce using rule 47 (expression -> expression PLUS expression .) ]
-  ! LESS_EQUAL      [ reduce using rule 47 (expression -> expression PLUS expression .) ]
-  ! GREATER_EQUAL   [ reduce using rule 47 (expression -> expression PLUS expression .) ]
   ! MUL             [ reduce using rule 47 (expression -> expression PLUS expression .) ]
   ! DIV             [ reduce using rule 47 (expression -> expression PLUS expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
+  ! EQUAL           [ shift and go to state 35 ]
+  ! NOT_EQUAL       [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 37 ]
+  ! GREATER         [ shift and go to state 38 ]
+  ! LESS_EQUAL      [ shift and go to state 39 ]
+  ! GREATER_EQUAL   [ shift and go to state 40 ]
   ! PLUS            [ shift and go to state 43 ]
   ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
@@ -4141,6 +4141,14 @@ state 82
     (48) expression -> expression . MINUS expression
     (49) expression -> expression . CONNECT expression
 
+    OR              reduce using rule 48 (expression -> expression MINUS expression .)
+    AND             reduce using rule 48 (expression -> expression MINUS expression .)
+    EQUAL           reduce using rule 48 (expression -> expression MINUS expression .)
+    NOT_EQUAL       reduce using rule 48 (expression -> expression MINUS expression .)
+    LESS            reduce using rule 48 (expression -> expression MINUS expression .)
+    GREATER         reduce using rule 48 (expression -> expression MINUS expression .)
+    LESS_EQUAL      reduce using rule 48 (expression -> expression MINUS expression .)
+    GREATER_EQUAL   reduce using rule 48 (expression -> expression MINUS expression .)
     PLUS            reduce using rule 48 (expression -> expression MINUS expression .)
     MINUS           reduce using rule 48 (expression -> expression MINUS expression .)
     CONNECT         reduce using rule 48 (expression -> expression MINUS expression .)
@@ -4180,27 +4188,19 @@ state 82
     RIGHT_SQUARE    reduce using rule 48 (expression -> expression MINUS expression .)
     TO              reduce using rule 48 (expression -> expression MINUS expression .)
     COLON           reduce using rule 48 (expression -> expression MINUS expression .)
-    OR              shift and go to state 33
-    AND             shift and go to state 34
-    EQUAL           shift and go to state 35
-    NOT_EQUAL       shift and go to state 36
-    LESS            shift and go to state 37
-    GREATER         shift and go to state 38
-    LESS_EQUAL      shift and go to state 39
-    GREATER_EQUAL   shift and go to state 40
     MUL             shift and go to state 41
     DIV             shift and go to state 42
 
-  ! OR              [ reduce using rule 48 (expression -> expression MINUS expression .) ]
-  ! AND             [ reduce using rule 48 (expression -> expression MINUS expression .) ]
-  ! EQUAL           [ reduce using rule 48 (expression -> expression MINUS expression .) ]
-  ! NOT_EQUAL       [ reduce using rule 48 (expression -> expression MINUS expression .) ]
-  ! LESS            [ reduce using rule 48 (expression -> expression MINUS expression .) ]
-  ! GREATER         [ reduce using rule 48 (expression -> expression MINUS expression .) ]
-  ! LESS_EQUAL      [ reduce using rule 48 (expression -> expression MINUS expression .) ]
-  ! GREATER_EQUAL   [ reduce using rule 48 (expression -> expression MINUS expression .) ]
   ! MUL             [ reduce using rule 48 (expression -> expression MINUS expression .) ]
   ! DIV             [ reduce using rule 48 (expression -> expression MINUS expression .) ]
+  ! OR              [ shift and go to state 33 ]
+  ! AND             [ shift and go to state 34 ]
+  ! EQUAL           [ shift and go to state 35 ]
+  ! NOT_EQUAL       [ shift and go to state 36 ]
+  ! LESS            [ shift and go to state 37 ]
+  ! GREATER         [ shift and go to state 38 ]
+  ! LESS_EQUAL      [ shift and go to state 39 ]
+  ! GREATER_EQUAL   [ shift and go to state 40 ]
   ! PLUS            [ shift and go to state 43 ]
   ! MINUS           [ shift and go to state 44 ]
   ! CONNECT         [ shift and go to state 45 ]
@@ -5357,8 +5357,6 @@ state 106
     FUNCTION        reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
     RETURN          reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
     NOT             reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
-    MINUS           reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
-    PLUS            reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
     LEFT_PAREN      reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
     BOOLEAN         reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
     CHAR            reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .)
@@ -5384,10 +5382,12 @@ state 106
     GREATER_EQUAL   shift and go to state 40
     MUL             shift and go to state 41
     DIV             shift and go to state 42
+    PLUS            shift and go to state 43
+    MINUS           shift and go to state 44
     CONNECT         shift and go to state 45
 
-  ! PLUS            [ shift and go to state 43 ]
-  ! MINUS           [ shift and go to state 44 ]
+  ! MINUS           [ reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .) ]
+  ! PLUS            [ reduce using rule 4 (statement -> CONSTANT ID EQUAL expression .) ]
 
 
 state 107
