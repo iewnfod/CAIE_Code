@@ -4,6 +4,20 @@ from src.status import *
 
 start = 'statements'
 
+# 符号优先级
+precedence = (
+    # 加减乘除
+    ("left", "PLUS", "MINUS"),
+    ("left", "MUL", "DIV"),
+    # 比较运算
+    ("left", "LESS", "GREATER", "LESS_EQUAL", "GREATER_EQUAL", "EQUAL", "NOT_EQUAL"),
+    # 逻辑运算
+    ("left", "AND"),
+    ("left", "OR"),
+    ("left", "NOT"),
+)
+
+
 def p_error(p):
     if p:
         error_messages.append(f'Parser Error: `{p.value}` at line {p.lineno}')
@@ -203,6 +217,10 @@ def p_plus_expression(p):
 def p_minus_expression(p):
     """expression : expression MINUS expression"""
     p[0] = AST.Op_minus(p[1], p[3])
+
+def p_uminus_expression(p):
+    """expression : MINUS expression"""
+    p[0] = AST.Op_mul(AST.Integer(-1), p[2])
 
 def p_connect_expression(p):
     """expression : expression CONNECT expression"""

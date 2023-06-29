@@ -34,7 +34,7 @@ class Call_function:
 
             # 核对并传参
             for i in range(len(target_parameters)):
-                if target_parameters[i][1] == parameters[i][1]:
+                if check_type_equal(target_parameters[i][1], parameters[i][1]):
                     new_dict[target_parameters[i][0]] = (parameters[i][0], parameters[i][1], False)
                 else:
                     print(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`')
@@ -56,7 +56,7 @@ class Call_function:
         # 核查返回值，并返回
         if function_obj.returns:
             # 查看返回值类型是否相同
-            if returns[1] == function_obj.returns:
+            if check_type_equal(returns[1], function_obj.returns):
                 return returns
             else:
                 print(f'Function {self.id} expect `{function_obj.returns}` to return, but found `{returns[1]}`')
@@ -124,4 +124,6 @@ class Return:
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
 
     def exe(self):
-        stack.set_return_variables(self.expression.exe())
+        value = self.expression.exe()
+        stack.set_return_variables(value)
+        stack.return_request = True

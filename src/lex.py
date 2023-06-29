@@ -125,12 +125,12 @@ def t_STRING(t):
     return t
 
 def t_REAL(t):
-    r'-*\d*\.\d+'
+    r'\d*\.\d+'
     t.value = float(t.value)
     return t
 
 def t_INTEGER(t):
-    r'-*\d+'
+    r'\d+'
     t.value = int(t.value)
     return t
 
@@ -151,16 +151,3 @@ def t_error(t):
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count('\n')
-
-# 符号优先级
-precedence = (
-    # 加减乘除
-    ("left", "PLUS", "MINUS"),
-    ("left", "MUL", "DIV"),
-    # 比较运算
-    ("left", "LESS", "GREATER", "LESS_EQUAL", "GREATER_EQUAL", "EQUAL", "NOT_EQUAL"),
-    # 逻辑运算
-    ("left", "AND"),
-    ("left", "OR"),
-    ("left", "NOT"),
-)

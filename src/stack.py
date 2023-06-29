@@ -31,6 +31,11 @@ class Stack:
                     if self.spaces[i][1][id][1] == type:
                     # 如果存在这个量，并且是变量，并且类型相同
                         self.spaces[i][1][id] = (value, type, False)
+                    # 对 integer 和 real 进行特殊适配，自动转化
+                    elif self.spaces[i][1][id][1] == 'INTEGER' and type == 'REAL':
+                        self.spaces[i][1][id] = (int(value), 'INTEGER', False)
+                    elif self.spaces[i][1][id][1] == 'REAL' and type == 'INTEGER':
+                        self.spaces[i][1][id][1] = (float(value), 'REAL', False)
                     else:
                         print(f'Cannot assign `{type}` to `{self.spaces[i][1][id][1]}`. ')
                 else:
@@ -49,7 +54,6 @@ class Stack:
 
     def set_return_variables(self, variables):
         self.return_variables = variables
-        self.return_request = True
 
     def get_return_variables(self):
         v = self.return_variables
