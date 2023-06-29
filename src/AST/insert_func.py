@@ -1,4 +1,5 @@
 from src.AST.data import *
+from random import randint
 
 class Int_convert:
     def __init__(self, expression):
@@ -120,7 +121,7 @@ class Right:
         self.parameters = parameters
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.s.get_tree(level+1) + '\n' + self.x.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -141,7 +142,7 @@ class Length:
         self.parameters = parameters
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.s.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -161,7 +162,7 @@ class Mid:
         self.parameters = parameters
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.s.get_tree(level+1) + '\n' + self.x.get_tree(level+1) + '\n' + self.y.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -183,7 +184,7 @@ class Lcase:
         self.parameters = parameters
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.c.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -203,7 +204,7 @@ class Ucase:
         self.parameters = parameters
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.c.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -218,6 +219,28 @@ class Ucase:
             print(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`')
 
 
+class Rand:
+    def __init__(self, parameters):
+        self.type = 'RAND'
+        self.parameters = parameters
+        self.rate = 100
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        parameters = self.parameters.exe()
+        if len(parameters) != 1:
+            print(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`')
+            return
+
+        n = parameters[0]
+        if n[1] == 'INTEGER':
+            return ( randint(0, n[0]*self.rate)/self.rate , "REAL")
+        else:
+            print(f'Function `{self.type}` expect `CHAR`, but found `{n[1]}`')
+
+
 insert_functions = {
     "INT": Int_convert,
     "REAL": Real_convert,
@@ -229,4 +252,5 @@ insert_functions = {
     "MID": Mid,
     "LCASE": Lcase,
     "UCASE": Ucase,
+    "RAND": Rand,
 }
