@@ -224,3 +224,12 @@ CAIE Pseudocode Interpreter
     35.43
     ```
 * 更多非官方内置函数，请查阅 [scripts](./scripts/)
+
+## 目标
+- [x] 基础功能实现
+- [x] 函数实现
+- [ ] 实现 `TYPE`
+- [ ] 实现 `STRUCT`
+- [ ] 实现 `DATE`
+- [ ] 实现文件读写
+- [ ] 提供更多非官方函数
