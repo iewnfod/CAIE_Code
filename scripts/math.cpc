@@ -6,3 +6,21 @@ FUNCTION MOD(n1 : INTEGER, n2 : INTEGER) RETURNS INTEGER
     quotient <- INT(n1 / n2)
     RETURN n1 - INT(quotient * n2)
 ENDFUNCTION
+
+FUNCTION POW(x : INTEGER, n : INTEGER) RETURNS INTEGER
+    // 如果是0，返回1
+    IF n = 0 THEN RETURN 1 ENDIF
+
+    // 如果是1，返回本身
+    IF n = 1 THEN RETURN x ENDIF
+
+    // 如果是奇数
+    IF MOD(n, 2) = 1 THEN
+        RETURN POW(x, n-1) * x
+    // 否则是偶数
+    ELSE
+        DECLARE temp : INTEGER
+        temp <- POW(x, INT(n/2))
+        RETURN temp * temp
+    ENDIF
+ENDFUNCTION
