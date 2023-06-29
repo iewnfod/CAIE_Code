@@ -19,7 +19,7 @@ class Array:
         else:
             d = self.add_variables(dimensions[1:])
             for i in range(dimensions[0][0], dimensions[0][1]+1):
-                result[i] = d.copy()
+                result[i] = (d.copy(), 'ARRAY')
         return result
 
     def exe(self):

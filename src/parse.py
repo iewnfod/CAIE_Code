@@ -273,7 +273,8 @@ def p_declare_parameters(p):
         p[0] = p[1]
 
 def p_declare_parameter(p):
-    """declare_parameter : ID COLON ID"""
+    """declare_parameter : ID COLON ID
+            | ID COLON ARRAY"""
     p[0] = AST.Declare_parameter(p[1], p[3])
 
 def p_parameters(p):
