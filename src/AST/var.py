@@ -7,7 +7,7 @@ class Constant:
         self.value = value
 
     def get_tree(self, level=0):
-        result = LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + str(self.value)
+        result = LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.value.get_tree(level+1)
         return result
 
     def exe(self):

@@ -15,6 +15,9 @@ precedence = (
     ("left", "AND"),
     ("left", "OR"),
     ("left", "NOT"),
+    # 右结合操作符
+    ("right", "UMINUS"),
+    ("right", "UPLUS"),
 )
 
 
@@ -210,6 +213,14 @@ def p_div_expression(p):
     """expression : expression DIV expression"""
     p[0] = AST.Op_div(p[1], p[3])
 
+def p_uminus_expression(p):
+    """expression : MINUS expression %prec UMINUS"""
+    p[0] = AST.Op_minus(AST.Integer(0), p[2])
+
+def p_uplus_expression(p):
+    """expression : PLUS expression %prec UPLUS"""
+    p[0] = AST.Op_plus(AST.Integer(0), p[2])
+
 def p_plus_expression(p):
     """expression : expression PLUS expression"""
     p[0] = AST.Op_plus(p[1], p[3])
@@ -217,10 +228,6 @@ def p_plus_expression(p):
 def p_minus_expression(p):
     """expression : expression MINUS expression"""
     p[0] = AST.Op_minus(p[1], p[3])
-
-def p_uminus_expression(p):
-    """expression : MINUS expression"""
-    p[0] = AST.Op_mul(AST.Integer(-1), p[2])
 
 def p_connect_expression(p):
     """expression : expression CONNECT expression"""

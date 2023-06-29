@@ -67,4 +67,4 @@ class Stack:
         if id in self.functions.keys():
             return self.functions[id]
         else:
-            print(f'No function with id: `{id}`')
+            print(f'No function with id: `{id}`. ')

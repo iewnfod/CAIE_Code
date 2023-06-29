@@ -18,7 +18,7 @@ def remove_comment(text):
     for i in range(len(text)):
         text[i] = text[i].split('//')[0]
 
-    return '\n'.join(text)
+    return '\n'.join(text).strip()
 
 
 def standard_output():
@@ -35,6 +35,8 @@ def with_line():
     # 运行
     while 1:
         text = remove_comment(input(f'{preline} '))
+        if not text:
+            continue
         try:
             ast = parser.parse(text, debug=debug)
             if show_tree:
@@ -43,16 +45,22 @@ def with_line():
         except Exception as e:
             print('Error:', e)
 
-def with_file(path):
+def with_file(path, preload=False):
     # 恢复行数，也就是不计算预加载文件的行数
     lexer.lineno = 1
     # 读取文件
     with open(path, 'r') as f:
         text = remove_comment(f.read())
+    if not text:
+        return
     # 尝试运行
     try:
-        ast = parser.parse(text, debug=debug)
-        if show_tree:
+        if not preload:
+            ast = parser.parse(text, debug=debug)
+        else:
+            ast = parser.parse(text)
+
+        if show_tree and not preload:
             print(ast.get_tree())
         ast.exe()
     except:
@@ -65,7 +73,7 @@ def preload_scripts():
             path = os.path.join(p, i)
             _, n = os.path.splitext(path)
             if n == '.cpc':
-                with_file(path)
+                with_file(path, True)
 
 def help():
     standard_output()
