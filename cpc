@@ -1,5 +1,5 @@
-# 进入当前目录
-cd `dirname $0`
+# 获取文件所在目录
+current_dir=`dirname $0`
 
 # 查看 python3 环境
 if [ python3 ]; then
@@ -13,4 +13,4 @@ else
 fi
 
 # 运行
-py main.py $*
+py "${current_dir}/main.py" $*
