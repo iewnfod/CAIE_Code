@@ -18,5 +18,4 @@ FUNCTION Split(s : STRING, sep : STRING) RETURNS ARRAY
     result[item] <- MID(s, from, LENGTH(s)-from+1)
 
     RETURN result
-
 ENDFUNCTION
