@@ -1,3 +1,5 @@
+from src.status import *
+
 class Stack:
     def __init__(self) -> None:
         self.spaces = [('GLOBAL', {})]  # [(空间名, {变量名: (值, 类型, 是否是常量)})]
@@ -19,7 +21,7 @@ class Stack:
             print(f'No variable or constant have id: `{id}`. ')
 
     def new_variable(self, id, type):
-        self.spaces[0][1][id] = (None, type, False)
+        self.spaces[0][1][id] = (default_value[type], type, False)
 
     def new_constant(self, id, type, value):
         self.spaces[0][1][id] = (value, type, True)

@@ -24,3 +24,19 @@ FUNCTION POW(x : INTEGER, n : INTEGER) RETURNS INTEGER
         RETURN temp * temp
     ENDIF
 ENDFUNCTION
+
+FUNCTION Min(x : REAL, y : REAL) RETURNS REAL
+    IF x < y THEN
+        RETURN x
+    ELSE
+        RETURN y
+    ENDIF
+ENDFUNCTION
+
+FUNCTION Max(x : REAL, y : REAL) RETURNS REAL
+    IF x < y THEN
+        RETURN y
+    ELSE
+        RETURN x
+    ENDIF
+ENDFUNCTION
