@@ -1,0 +1,27 @@
+// 希尔排序
+FUNCTION Sort(arr : ARRAY, left : INTEGER, right : INTEGER) RETURNS ARRAY
+    DECLARE gap : INTEGER
+    gap <- 1
+    DECLARE len : INTEGER
+    len <- LENGTH(arr)
+
+    WHILE gap < len / 3
+        gap <- gap * 3 + 1
+    ENDWHILE
+
+    WHILE gap > 0
+        FOR i <- gap TO len
+            CONSTANT temp = arr[i]
+            DECLARE j : INTEGER
+            j <- i - gap
+            WHILE j >= left AND arr[j] > temp
+                arr[j+gap] <- arr[j]
+                j <- j - gap
+            ENDWHILE
+            arr[j+gap] <- temp
+        NEXT i
+        gap <- gap / 3
+    ENDWHILE
+
+    RETURN arr
+ENDFUNCTION
