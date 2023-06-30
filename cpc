@@ -1,21 +1,21 @@
 # 获取文件所在目录
 current_dir=`dirname $0`
-cd $current_dir
 
 # 查看 python3 环境
-if [ pypy3 ]; then
+if command -v pypy3 >/dev/null 2>&1 ; then
     alias py='pypy3'
-elif [ pypy ]; then
+elif command -v pypy >/dev/null 2>&1 ; then
     alias py='pypy'
-elif [ python3 ]; then
+elif command -v python3 >/dev/null 2>&1 ; then
     alias py='python3'
-elif [ python ]; then
+elif command -v python >/dev/null 2>&1; then
     alias py='python'
 else
-    echo "Please install Python3 to run this script correctly. "
+    echo "Please install Pypy3.x / CPython3.x before running this script. "
+    echo "If you have Python3 in your computer, please check if it is in the PATH"
     open "https://www.pypy.org/"
     open "https://python.org"
-    exit 0
+    exit 1
 fi
 
 # 运行
