@@ -1,2 +1,4 @@
+# 自动生成 requirements.txt
+# pipreqs . --force
+chardet==5.1.0
 ply==3.11
-chardet
