@@ -2,12 +2,17 @@
 current_dir=`dirname $0`
 
 # 查看 python3 环境
-if [ python3 ]; then
+if [ pypy3 ]; then
+    alias py='pypy3'
+elif [ pypy ]; then
+    alias py='pypy'
+elif [ python3 ]; then
     alias py='python3'
 elif [ python ]; then
     alias py='python'
 else
     echo "Please install Python3 to run this script correctly. "
+    open "https://www.pypy.org/"
     open "https://python.org"
     exit 0
 fi
