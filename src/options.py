@@ -4,6 +4,10 @@ import sys
 VERSION = 'v0.1.0'
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
+show_tree = False
+debug = False
+show_time = False
+
 def standard_output():
     print(f'CAIE Pseudocode Interpreter {VERSION}')
     print(f'Base on {PLATFORM}')
@@ -39,10 +43,14 @@ def get_tree():
     global show_tree
     show_tree = True
 
+def get_time():
+    global show_time
+    show_time = True
 
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),
     ('-v', '--version', version, 'To show the version of this interpreter'),
     ('-h', '--help', help, 'To show this help page'),
     ('-d', '--debug', open_debug, 'To show debug information during running'),
+    ('-t', '--time', get_time, 'To show the time for the script to run'),
 ]

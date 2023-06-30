@@ -1,13 +1,14 @@
 from src.lex import *
 from src.parse import *
 from src.status import *
-from src.options import *
+import src.options as options
 from ply import yacc
 from ply import lex
 import sys
 import signal
 import os
 import chardet
+import time
 
 preline = '$'
 
@@ -31,17 +32,26 @@ def preload_scripts():
 # 终端模式，逐行输入并解析运行
 def with_line():
     # 基准输出
-    standard_output()
+    options.standard_output()
     # 运行
     while 1:
         text = remove_comment(input(f'{preline} '))
         if not text:
             continue
         try:
-            ast = parser.parse(text, debug=debug)
-            if show_tree:
+            ast = parser.parse(text, debug=options.debug)
+            if options.show_tree:
                 print(ast.get_tree())
+
+            if options.show_time:
+                t = time.time()
+
             ast.exe()
+
+            if options.show_time:
+                t = time.time() - t
+                print(f'\033[4mDuration: {t}s\033[0m')
+
         except Exception as e:
             print('Error:', e)
 
@@ -57,16 +67,27 @@ def with_file(path, preload=False):
         text = remove_comment(f.read())
     if not text:
         return
+
     # 尝试运行
     try:
         if not preload:
-            ast = parser.parse(text, debug=debug)
+            ast = parser.parse(text, debug=options.debug)
         else:
             ast = parser.parse(text)
 
-        if show_tree and not preload:
+        if options.show_tree and not preload:
             print(ast.get_tree())
+
+
+        if options.show_time and not preload:
+            t = time.time()
+
         ast.exe()
+
+        if options.show_time and not preload:
+            t = time.time() - t
+            print(f'\033[4mDuration: {t}s\033[0m')
+
     except:
         error_messages.insert(0, f'File `{path}`')
         print('\n\t'.join(error_messages))
@@ -81,7 +102,7 @@ def main():
     # 解析参数
     file_path = ''
     for arg in sys.argv[1:]:
-        for i in arguments:
+        for i in options.arguments:
             if arg == i[0] or arg == i[1]:
                 i[2]()
                 break
