@@ -4,6 +4,4 @@ FOR i <- 1 TO 100000
     arr[i] <- RAND(1000)
 NEXT i
 
-OUTPUT "Finish generating values"
-
 OUTPUT Sort(arr, 1, 100000)
