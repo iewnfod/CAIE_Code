@@ -129,7 +129,7 @@ def main():
 
 # 捕获 Keyboard Interrupt
 def ctrl_c_handle(signal, frame):
-    print(f'\nKeyboard Interrupt\n{preline} ', end='')
+    print(f'Keyboard Interrupt')
 
 # 程序入口
 if __name__ == '__main__':
