@@ -1,4 +1,5 @@
 import platform
+import sys
 
 VERSION = 'v0.1.0'
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
@@ -16,7 +17,7 @@ def open_debug():
 
 def version():
     print('Version:', VERSION)
-    exit(0)
+    sys.exit(0)
 
 def help():
     standard_output()
@@ -32,7 +33,7 @@ def help():
     for i in arguments:
         print('\t', i[0], '\t', i[1], '\t', i[3])
 
-    exit(0)
+    sys.exit(0)
 
 def get_tree():
     global show_tree

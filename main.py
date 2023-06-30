@@ -118,4 +118,4 @@ if __name__ == '__main__':
         main()
     except EOFError:
         print("\nEXIT")
-        exit(0)
+        sys.exit(0)
