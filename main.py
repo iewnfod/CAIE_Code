@@ -22,7 +22,8 @@ def remove_comment(text):
 
 # 预加载文件
 def preload_scripts():
-    for p, dir_list, file_list in os.walk('scripts'):
+    scripts_path = os.path.join(os.path.dirname(__file__), 'scripts')
+    for p, dir_list, file_list in os.walk(scripts_path):
         for i in file_list:
             path = os.path.join(p, i)
             _, n = os.path.splitext(path)
