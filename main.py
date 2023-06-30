@@ -9,6 +9,8 @@ import signal
 import os
 import chardet
 import time
+import readline
+readline.clear_history()
 
 preline = '$'
 
