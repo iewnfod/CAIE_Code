@@ -1,5 +1,6 @@
 # 获取文件所在目录
 current_dir=`dirname $0`
+cd $current_dir
 
 # 查看 python3 环境
 if [ pypy3 ]; then
