@@ -25,14 +25,29 @@ class Output_expression:
     def add_expression(self, expression):
         self.expressions.append(expression)
 
+    def get_str(self, value):
+        if value[1] == 'BOOLEAN':
+            return str({True: 'TRUE', False: 'FALSE', None: 'None'}[value[0]])
+        else:
+            return str(value[0])
+
+    def get_array_str(self, value):
+        result = []
+        for i in value[0].values():
+            if i[1] == 'ARRAY':
+                result.append(str(self.get_array_str(i)))
+            else:
+                result.append(self.get_str(i))
+        return '[' + ', '.join(result) + ']'
+
     def exe(self):
         result = ''
         for i in self.expressions:
             t = i.exe()
-            if t[1] == 'BOOLEAN':
-                result += str({True: 'TRUE', False: 'FALSE', None: 'None'}[t[0]])
+            if t[1] == 'ARRAY':
+                result += self.get_array_str(t)
             else:
-                result += str(t[0])
+                result += self.get_str(t)
         return result
 
 class Input:
