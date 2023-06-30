@@ -7,5 +7,6 @@ default_value = {
     'REAL' : 0.0,
     'CHAR' : '',
     'STRING' : "",
-    'BOOLEAN' : True
+    'BOOLEAN' : True,
+    'ARRAY': {},
 }
