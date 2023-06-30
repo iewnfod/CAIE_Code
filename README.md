@@ -9,9 +9,21 @@ CAIE Pseudocode Interpreter
     ```cd CAIE_Code```
 4. 安装依赖
     ```pip install -r requirements.txt```
-5. 若是`MacOS`或`Linux`，使用指令`./cpc`运行，`MacOS`甚至可以直接双击目录内`cpc`文件启动终端模式运行
-6. 若是`Windows`，请使用`python main.py`运行
-7. 使用指令`./cpc -h`或`python main.py -h`获取更多帮助
+5. 运行
+    * 若是`MacOS`或`Linux`，使用指令`./cpc`运行，`MacOS`甚至可以直接双击目录内`cpc`文件启动终端模式运行
+    * 若是`Windows`，请使用`python main.py`运行
+6. 使用指令`./cpc -h`或`python main.py -h`获取更多帮助
+
+### 常见问题
+* 成功执行了第四部的依赖安装但还是无法正常运行
+
+`cpc`文件会优先选择 `pypy3` 运行，因此，在安装依赖时，请确保安装在了正确版本的 `Python3` 上
+
+* 在安装依赖时，`readline`无法正常安装
+
+请将 `requirements.txt` 中的 `readline` 改为 `gnureadline`，再重新尝试安装依赖
+
+*若依旧无法解决问题，请提交issue*
 
 ## 标准
 ### 基本标准

@@ -1,3 +1,4 @@
 chardet==5.1.0
 ply==3.11
-gnureadline
+# gnureadline
+readline
