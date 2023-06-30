@@ -222,7 +222,7 @@ CAIE Pseudocode Interpreter
     $ RAND(87)
     35.43
     ```
-* 更多非官方内置函数，请查阅 [scripts](./scripts/)
+* 更多非官方内置函数，请查阅 [scripts](./scripts/README.md)
 
 ## 目标
 - [x] 基础功能实现
