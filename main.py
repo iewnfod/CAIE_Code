@@ -16,7 +16,7 @@ try:
 except:
     pass
 
-preline = '$'
+preline = '|'
 
 # 清除注释以及多余字符
 def remove_comment(text):
@@ -53,8 +53,10 @@ def with_line():
     # 基准输出
     options.standard_output()
     # 运行
+    line = 0
     while 1:
-        text = remove_comment(input(f'{preline} '))
+        line += 1
+        text = remove_comment(input(f'{line}{preline} '))
         if not text:
             continue
         try:
