@@ -1,7 +1,11 @@
-DECLARE arr : ARRAY[1:100000] OF REAL
+DECLARE n : INTEGER
+n <- 1000000
+DECLARE arr : ARRAY[1:n] OF REAL
 
-FOR i <- 1 TO 100000
-    arr[i] <- RAND(1000)
+FOR i <- 1 TO n
+    arr[i] <- RAND(n)
 NEXT i
 
-OUTPUT Sort(arr, 1, 100000)
+OUTPUT "FINISH GENERATING ARRAY"
+
+OUTPUT Sort(arr, 1, n)

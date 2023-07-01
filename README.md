@@ -2,7 +2,9 @@
 CAIE Pseudocode Interpreter
 
 ## 安装与使用
-1. 安装 `Python3` 环境 (**强烈推荐 `pypy` 而不是 `CPython` 以获得一个可观的速度**)
+1. 安装 `Python3` 环境
+    (**强烈推荐 `pypy` 而不是 `CPython` 以获得一个可观的速度**)
+    (使用 [sort_test](test/sort_test.cpc) 测试，`pypy3.9`运行了`55秒`，而`CPython3.11`则花费了`550秒`)
 2. 克隆此项目
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
 3. 进入项目
