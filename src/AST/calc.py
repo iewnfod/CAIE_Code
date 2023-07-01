@@ -1,7 +1,6 @@
 from src.AST.data import *
 from src.AST_Base import *
-from src.error import *
-from src.status import *
+from src.global_var import *
 
 class Op_minus(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -21,7 +20,7 @@ class Op_minus(AST_Node):
         elif n1[1] == 'INTEGER' and n2[1] == 'REAL' or n1[1] == 'REAL' and n2[1] == 'INTEGER':
             return (n1[0] - n2[0], 'REAL')
         else:
-            error_messages.append(Error(f'Cannot minus `{n1[1]}` with `{n2[1]}`. ', self))
+            add_error_message(f'Cannot minus `{n1[1]}` with `{n2[1]}`. ', self)
 
 class Op_plus(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -41,7 +40,7 @@ class Op_plus(AST_Node):
         elif n1[1] == 'INTEGER' and n2[1] == 'REAL' or n1[1] == 'REAL' and n2[1] == 'INTEGER':
             return (n1[0] + n2[0], 'REAL')
         else:
-            error_messages.append(Error(f'Cannot plus `{n1[1]}` with `{n2[1]}`. ', self))
+            add_error_message(f'Cannot plus `{n1[1]}` with `{n2[1]}`. ', self)
 
 class Op_mul(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -61,7 +60,7 @@ class Op_mul(AST_Node):
         elif n1[1] == 'INTEGER' and n2[1] == 'REAL' or n1[1] == 'REAL' and n2[1] == 'INTEGER':
             return (n1[0] * n2[0], 'REAL')
         else:
-            error_messages.append(Error(f'Cannot multiply `{n1[1]}` with `{n2[1]}`. ', self))
+            add_error_message(f'Cannot multiply `{n1[1]}` with `{n2[1]}`. ', self)
 
 class Op_div(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -81,7 +80,7 @@ class Op_div(AST_Node):
         elif n1[1] == 'INTEGER' and n2[1] == 'REAL' or n1[1] == 'REAL' and n2[1] == 'INTEGER':
             return (n1[0] / n2[0], 'REAL')
         else:
-            error_messages.append(Error(f'Cannot divide `{n1[1]}` with `{n2[1]}`. ', self))
+            add_error_message(f'Cannot divide `{n1[1]}` with `{n2[1]}`. ', self)
 
 class Op_connect(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -99,4 +98,4 @@ class Op_connect(AST_Node):
         if (s1[1] == 'STRING' or s1[1] == 'CHAR') and (s2[1] == 'STRING' or s2[1] == 'CHAR'):
             return (s1[0] + s2[0], 'STRING')
         else:
-            error_messages.append(Error(f'Cannot connect `{s1[1]}` with `{s2[1]}`. ', self))
+            add_error_message(f'Cannot connect `{s1[1]}` with `{s2[1]}`. ', self)

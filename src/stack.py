@@ -1,4 +1,4 @@
-from src.status import *
+from src.global_var import *
 
 class Stack:
     def __init__(self) -> None:

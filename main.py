@@ -1,7 +1,7 @@
 from src.lex import *
 from src.parse import *
-import src.status as status
 import src.options as options
+import src.global_var as global_var
 from ply import yacc
 from ply import lex
 import sys
@@ -16,7 +16,7 @@ try:
 except:
     pass
 
-preline = '|'
+preline = '$'
 
 # 清除注释以及多余字符
 def remove_comment(text):
@@ -38,25 +38,23 @@ def preload_scripts():
 
 # 输出错误信息
 def output_error(p=''):
-    if status.error_messages:
+    if global_var.get_error_messages():
         # 输出文件路径
         if p:
             print(f'File `{p}`: ')
         # 输出错误信息
-        for i in status.error_messages:
+        for i in global_var.get_error_messages():
             i.raise_err()
         # 清空错误数组
-        status.error_messages = []
+        global_var.clear_error_messages()
 
 # 终端模式，逐行输入并解析运行
 def with_line():
     # 基准输出
     options.standard_output()
     # 运行
-    line = 0
     while 1:
-        line += 1
-        text = remove_comment(input(f'{line}{preline} '))
+        text = remove_comment(input(f'{preline} '))
         if not text:
             continue
         try:
@@ -156,6 +154,7 @@ def ctrl_c_handle(signal, frame):
 # 程序入口
 if __name__ == '__main__':
     signal.signal(signal.SIGINT, ctrl_c_handle)
+    global_var.__init__()
 
     lexer = lex.lex()
     parser = yacc.yacc()

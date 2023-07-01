@@ -1,7 +1,7 @@
 from src.AST.data import *
 from src.AST_Base import *
 from src.error import *
-from src.status import *
+from src.global_var import *
 
 class Array(AST_Node):
     def __init__(self, id, dimensions, type, *args, **kwargs):
@@ -68,7 +68,7 @@ class Dimension(AST_Node):
         if left[1] == 'INTEGER' and right[1] == 'INTEGER':
             return (left[0], right[0])
         else:
-            error_messages.append(Error(f'Array dimension should be INTEGER, but found {left[0]} and {right[0]}. ', self))
+            add_error_message(f'Array dimension should be INTEGER, but found {left[0]} and {right[0]}. ', self)
 
 class Array_assign(AST_Node):
     def __init__(self, id, indexes, value, *args, **kwargs):
@@ -88,7 +88,7 @@ class Array_assign(AST_Node):
                 arr[index] = value
                 return
             else:
-                print(f'Cannot assign `{value[1]}` to `{arr[index][1]}`. ')
+                add_error_message(f'Cannot assign `{value[1]}` to `{arr[index][1]}`. ', self)
         else:
             self.set_value(arr[index[0]], index[1:], value)
 

@@ -1,7 +1,6 @@
 from src.AST.data import *
 from src.AST_Base import *
-from src.error import *
-from src.status import *
+from src.global_var import *
 
 class Statements(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -28,7 +27,7 @@ class Statements(AST_Node):
             try:
                 result.append(statement.exe())
             except Exception as e:
-                error_messages.append(Error(str(e), self))
+                add_error_message(str(e), self)
                 break
 
         return result
@@ -180,7 +179,7 @@ class Range(AST_Node):
                 l.append((i, 'INTEGER'))
             return l
         else:
-            error_messages.append(Error(f'Expect `INTEGER` for a range argument, but found `{n1[1]}` and `{n2[1]}`', self))
+            add_error_message(f'Expect `INTEGER` for a range argument, but found `{n1[1]}` and `{n2[1]}`', self)
 
 class Repeat(AST_Node):
     def __init__(self, true_statement, condition, *args, **kwargs):

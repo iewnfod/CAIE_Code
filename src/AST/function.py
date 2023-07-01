@@ -1,7 +1,6 @@
 from src.AST.data import *
 from src.AST_Base import *
-from src.error import *
-from src.status import *
+from src.global_var import *
 
 class Function(AST_Node):
     def __init__(self, id, parameters, statements, returns=None, *args, **kwargs):
@@ -35,17 +34,17 @@ class Call_function(AST_Node):
             target_parameters = function_obj.parameters.exe()  # (id, 类型)
             parameters = self.parameters.exe()  # (值, 类型)
             if len(target_parameters) != len(parameters):
-                error_messages.append(Error(f'Function `{self.id}` has wrong number of parameters. ', self))
+                add_error_message(f'Function `{self.id}` has wrong number of parameters. ', self)
 
             # 核对并传参
             for i in range(len(target_parameters)):
                 if check_type_equal(target_parameters[i][1], parameters[i][1]):
                     new_dict[target_parameters[i][0]] = (parameters[i][0], parameters[i][1], False)
                 else:
-                    error_messages.append(Error(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`. ', self))
+                    add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`. ', self)
         else:
             if self.parameters:
-                error_messages.append(Error(f'Function `{self.id}` does not expect any parameters, but found. ', self))
+                add_error_message(f'Function `{self.id}` does not expect any parameters, but found. ', self)
 
         # 为函数创建新的命名空间
         stack.new_space(self.id, new_dict)
@@ -64,7 +63,7 @@ class Call_function(AST_Node):
             if check_type_equal(returns[1], function_obj.returns):
                 return returns
             else:
-                error_messages.append(Error(f'Function {self.id} expect `{function_obj.returns}` to return, but found `{returns[1]}`. ', self))
+                add_error_message(f'Function {self.id} expect `{function_obj.returns}` to return, but found `{returns[1]}`. ', self)
         else:
             return None
 

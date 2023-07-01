@@ -1,7 +1,6 @@
 from src.AST.data import *
 from src.AST_Base import *
-from src.error import *
-from src.status import *
+from src.global_var import *
 
 class Open_file(AST_Node):
     def __init__(self, file_path, file_mode, *args, **kwargs):

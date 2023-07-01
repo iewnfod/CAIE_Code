@@ -1,7 +1,6 @@
 from src.AST.data import *
 from src.AST_Base import *
-from src.error import *
-from src.status import *
+from src.global_var import *
 
 class Cmp_less(AST_Node):
     def __init__(self, left, right, *args, **kwargs):

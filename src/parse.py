@@ -1,6 +1,6 @@
 import src.AST as AST
 from src.AST.insert_func import *
-from src.status import *
+from src.global_var import *
 from src.error import *
 from src.AST_Base import *
 
