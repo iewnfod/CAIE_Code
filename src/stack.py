@@ -19,7 +19,7 @@ class Stack:
             if id in i[1].keys():
                 return (i[1][id][0], i[1][id][1])
         else:
-            print(f'No variable or constant have id: `{id}`. ')
+            print(f'Stack Error: No variable or constant have id: `{id}`. ')
 
     def new_variable(self, id, type):
         self.spaces[0][1][id] = (default_value[type], type, False)
@@ -40,13 +40,13 @@ class Stack:
                     elif self.spaces[i][1][id][1] == 'REAL' and type == 'INTEGER':
                         self.spaces[i][1][id][1] = (float(value), 'REAL', False)
                     else:
-                        print(f'Cannot assign `{type}` to `{self.spaces[i][1][id][1]}`. ')
+                        print(f'Stack Error: Cannot assign `{type}` to `{self.spaces[i][1][id][1]}`. ')
                 else:
-                    print(f'Cannot assign value of constant `{id}`. ')
+                    print(f'Stack Error: Cannot assign value of constant `{id}`. ')
                 # 如果找到了这个变量存在，不管什么错误，都退出
                 break
         else:
-            print(f'Variable `{id}` has not been declared yet. ')
+            print(f'Stack Error: Variable `{id}` has not been declared yet. ')
 
     def pop_space(self):
         self.spaces.pop(0)
