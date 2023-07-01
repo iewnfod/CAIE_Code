@@ -2,9 +2,9 @@ from src.global_var import *
 
 class Stack:
     def __init__(self) -> None:
-        self.spaces = [('GLOBAL', {})]  # [(空间名, {变量名: (值, 类型, 是否是常量)})]
-        self.functions = {}  # {函数名: 函数AST实例}
+        self.spaces = [('GLOBAL', {}, {})]  # [(空间名, {变量名: (值, 类型, 是否是常量)}, {函数名: 函数AST实例})]
         self.files = {}  # {文件名: 打开的文件实例}
+        self.structs = {}  # {结构名: 结构实例}
         self.return_variables = []
         self.return_request = False
 
@@ -64,10 +64,20 @@ class Stack:
         return v
 
     def add_function(self, function):
-        self.functions[function.id] = function
+        self.current_space()[2][function.id] = function
 
     def get_function(self, id):
-        if id in self.functions.keys():
-            return self.functions[id]
+        for i in range(len(self.spaces)):
+            if id in self.spaces[i][2].keys():
+                return self.spaces[i][2][id]
         else:
-            print(f'No function with id: `{id}`. ')
+            print(f'Stack Error: No function with id: `{id}`. ')
+
+    def add_file(self, path, file_obj):
+        self.files[path] = file_obj
+
+    def get_file(self, path):
+        if path in self.files:
+            return self.files[path]
+        else:
+            print(f'Stack Error: File `{path}` has not opened. ')

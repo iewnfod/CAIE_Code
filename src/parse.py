@@ -335,19 +335,20 @@ def p_return_statement(p):
     p[0] = AST.Return(p[2], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_openfile_statement(p):
-    """statement : OPENFILE expression FOR file_mode"""
-
-def p_file_mode(p):
-    """file_mode : READ
-            | WRITE
-            | APPEND
-            | RANDOM"""
+    """statement : OPENFILE expression FOR READ
+            | OPENFILE expression FOR WRITE
+            | OPENFILE expression FOR APPEND
+            | OPENFILE expression FOR RANDOM"""
+    p[0] = AST.Open_file(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_readfile_statement(p):
     """statement : READFILE expression COMMA ID"""
+    p[0] = AST.Read_file(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_writefile_statement(p):
     """statement : WRITEFILE expression COMMA expression"""
+    p[0] = AST.Write_file(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_closefile_statement(p):
     """statement : CLOSEFILE expression"""
+    p[0] = AST.Close_file(p[2], lineno=p.lineno(1), lexpos=p.lexpos(1))

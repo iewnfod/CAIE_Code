@@ -94,19 +94,18 @@ Rule 70    statement -> FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
 Rule 71    expression -> ID LEFT_PAREN parameters RIGHT_PAREN
 Rule 72    expression -> ID LEFT_PAREN RIGHT_PAREN
 Rule 73    statement -> RETURN expression
-Rule 74    statement -> OPENFILE expression FOR file_mode
-Rule 75    file_mode -> READ
-Rule 76    file_mode -> WRITE
-Rule 77    file_mode -> APPEND
-Rule 78    file_mode -> RANDOM
-Rule 79    statement -> READFILE expression COMMA ID
-Rule 80    statement -> WRITEFILE expression COMMA expression
-Rule 81    statement -> CLOSEFILE expression
+Rule 74    statement -> OPENFILE expression FOR READ
+Rule 75    statement -> OPENFILE expression FOR WRITE
+Rule 76    statement -> OPENFILE expression FOR APPEND
+Rule 77    statement -> OPENFILE expression FOR RANDOM
+Rule 78    statement -> READFILE expression COMMA ID
+Rule 79    statement -> WRITEFILE expression COMMA expression
+Rule 80    statement -> CLOSEFILE expression
 
 Terminals, with rules where they appear
 
 AND                  : 36
-APPEND               : 77
+APPEND               : 76
 ARRAY                : 5 60 68 70
 ASSIGN               : 9 10 28 29
 BOOLEAN              : 52
@@ -114,9 +113,9 @@ CALL                 : 65 66
 CASE                 : 20
 CHAR                 : 53
 CLASS                : 
-CLOSEFILE            : 81
+CLOSEFILE            : 80
 COLON                : 3 5 8 23 27 59 60
-COMMA                : 6 11 16 57 61 79 80
+COMMA                : 6 11 16 57 61 78 79
 CONNECT              : 50
 CONSTANT             : 4
 DECLARE              : 3 5
@@ -131,12 +130,12 @@ ENDTYPE              :
 ENDWHILE             : 31
 EOF                  : 
 EQUAL                : 4 38
-FOR                  : 28 29 74
+FOR                  : 28 29 74 75 76 77
 FUNCTION             : 67 68 69 70
 GETRECORD            : 
 GREATER              : 41
 GREATER_EQUAL        : 43
-ID                   : 3 3 4 5 5 9 10 13 14 20 28 28 29 29 33 34 59 59 60 63 64 65 66 67 67 68 69 69 70 71 72 79
+ID                   : 3 3 4 5 5 9 10 13 14 20 28 28 29 29 33 34 59 59 60 63 64 65 66 67 67 68 69 69 70 71 72 78
 IF                   : 18 19
 INHERITS             : 
 INPUT                : 13 14
@@ -153,7 +152,7 @@ NEXT                 : 28 29
 NOT                  : 37
 NOT_EQUAL            : 39
 OF                   : 5 20
-OPENFILE             : 74
+OPENFILE             : 74 75 76 77
 OR                   : 35
 OTHERWISE            : 27
 OUTPUT               : 15
@@ -163,9 +162,9 @@ PRIVATE              :
 PROCEDURE            : 63 64
 PUBLIC               : 
 PUTRECORD            : 
-RANDOM               : 78
-READ                 : 75
-READFILE             : 79
+RANDOM               : 77
+READ                 : 74
+READFILE             : 78
 REAL                 : 55
 REPEAT               : 30
 RETURN               : 73
@@ -182,8 +181,8 @@ TO                   : 25 28 29
 TYPE                 : 
 UNTIL                : 30
 WHILE                : 31
-WRITE                : 76
-WRITEFILE            : 80
+WRITE                : 75
+WRITEFILE            : 79
 error                : 
 
 Nonterminals, with rules where they appear
@@ -195,8 +194,7 @@ declare_parameter    : 57 58
 declare_parameters   : 57 63 67 68
 dimension            : 6 7
 dimensions           : 5 6
-expression           : 4 8 8 9 10 11 12 16 17 18 19 25 25 26 28 28 28 29 29 30 31 32 35 35 36 36 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 45 46 47 48 48 49 49 50 50 51 61 62 73 74 79 80 80 81
-file_mode            : 74
+expression           : 4 8 8 9 10 11 12 16 17 18 19 25 25 26 28 28 28 29 29 30 31 32 35 35 36 36 37 38 38 39 39 40 40 41 41 42 42 43 43 44 44 45 45 46 47 48 48 49 49 50 50 51 61 62 73 74 75 76 77 78 79 79 80
 indexes              : 10 11 14 34
 otherwise_statement  : 24
 output_expression    : 15 16
@@ -236,10 +234,13 @@ state 0
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -328,10 +329,13 @@ state 1
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -724,10 +728,13 @@ state 12
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -944,7 +951,10 @@ state 18
 
 state 19
 
-    (74) statement -> OPENFILE . expression FOR file_mode
+    (74) statement -> OPENFILE . expression FOR READ
+    (75) statement -> OPENFILE . expression FOR WRITE
+    (76) statement -> OPENFILE . expression FOR APPEND
+    (77) statement -> OPENFILE . expression FOR RANDOM
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -987,7 +997,7 @@ state 19
 
 state 20
 
-    (79) statement -> READFILE . expression COMMA ID
+    (78) statement -> READFILE . expression COMMA ID
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -1030,7 +1040,7 @@ state 20
 
 state 21
 
-    (80) statement -> WRITEFILE . expression COMMA expression
+    (79) statement -> WRITEFILE . expression COMMA expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -1073,7 +1083,7 @@ state 21
 
 state 22
 
-    (81) statement -> CLOSEFILE . expression
+    (80) statement -> CLOSEFILE . expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -2602,10 +2612,13 @@ state 57
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -2708,10 +2721,13 @@ state 58
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -2813,10 +2829,13 @@ state 59
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -3039,7 +3058,10 @@ state 63
 
 state 64
 
-    (74) statement -> OPENFILE expression . FOR file_mode
+    (74) statement -> OPENFILE expression . FOR READ
+    (75) statement -> OPENFILE expression . FOR WRITE
+    (76) statement -> OPENFILE expression . FOR APPEND
+    (77) statement -> OPENFILE expression . FOR RANDOM
     (35) expression -> expression . OR expression
     (36) expression -> expression . AND expression
     (38) expression -> expression . EQUAL expression
@@ -3072,7 +3094,7 @@ state 64
 
 state 65
 
-    (79) statement -> READFILE expression . COMMA ID
+    (78) statement -> READFILE expression . COMMA ID
     (35) expression -> expression . OR expression
     (36) expression -> expression . AND expression
     (38) expression -> expression . EQUAL expression
@@ -3105,7 +3127,7 @@ state 65
 
 state 66
 
-    (80) statement -> WRITEFILE expression . COMMA expression
+    (79) statement -> WRITEFILE expression . COMMA expression
     (35) expression -> expression . OR expression
     (36) expression -> expression . AND expression
     (38) expression -> expression . EQUAL expression
@@ -3138,7 +3160,7 @@ state 66
 
 state 67
 
-    (81) statement -> CLOSEFILE expression .
+    (80) statement -> CLOSEFILE expression .
     (35) expression -> expression . OR expression
     (36) expression -> expression . AND expression
     (38) expression -> expression . EQUAL expression
@@ -3155,40 +3177,40 @@ state 67
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
-    DECLARE         reduce using rule 81 (statement -> CLOSEFILE expression .)
-    CONSTANT        reduce using rule 81 (statement -> CLOSEFILE expression .)
-    ID              reduce using rule 81 (statement -> CLOSEFILE expression .)
-    INPUT           reduce using rule 81 (statement -> CLOSEFILE expression .)
-    OUTPUT          reduce using rule 81 (statement -> CLOSEFILE expression .)
-    IF              reduce using rule 81 (statement -> CLOSEFILE expression .)
-    CASE            reduce using rule 81 (statement -> CLOSEFILE expression .)
-    FOR             reduce using rule 81 (statement -> CLOSEFILE expression .)
-    REPEAT          reduce using rule 81 (statement -> CLOSEFILE expression .)
-    WHILE           reduce using rule 81 (statement -> CLOSEFILE expression .)
-    PROCEDURE       reduce using rule 81 (statement -> CLOSEFILE expression .)
-    CALL            reduce using rule 81 (statement -> CLOSEFILE expression .)
-    FUNCTION        reduce using rule 81 (statement -> CLOSEFILE expression .)
-    RETURN          reduce using rule 81 (statement -> CLOSEFILE expression .)
-    OPENFILE        reduce using rule 81 (statement -> CLOSEFILE expression .)
-    READFILE        reduce using rule 81 (statement -> CLOSEFILE expression .)
-    WRITEFILE       reduce using rule 81 (statement -> CLOSEFILE expression .)
-    CLOSEFILE       reduce using rule 81 (statement -> CLOSEFILE expression .)
-    NOT             reduce using rule 81 (statement -> CLOSEFILE expression .)
-    LEFT_PAREN      reduce using rule 81 (statement -> CLOSEFILE expression .)
-    BOOLEAN         reduce using rule 81 (statement -> CLOSEFILE expression .)
-    CHAR            reduce using rule 81 (statement -> CLOSEFILE expression .)
-    STRING          reduce using rule 81 (statement -> CLOSEFILE expression .)
-    REAL            reduce using rule 81 (statement -> CLOSEFILE expression .)
-    INTEGER         reduce using rule 81 (statement -> CLOSEFILE expression .)
-    $end            reduce using rule 81 (statement -> CLOSEFILE expression .)
-    UNTIL           reduce using rule 81 (statement -> CLOSEFILE expression .)
-    ENDWHILE        reduce using rule 81 (statement -> CLOSEFILE expression .)
-    ENDPROCEDURE    reduce using rule 81 (statement -> CLOSEFILE expression .)
-    ELSE            reduce using rule 81 (statement -> CLOSEFILE expression .)
-    ENDIF           reduce using rule 81 (statement -> CLOSEFILE expression .)
-    ENDFUNCTION     reduce using rule 81 (statement -> CLOSEFILE expression .)
-    SEMICOLON       reduce using rule 81 (statement -> CLOSEFILE expression .)
-    NEXT            reduce using rule 81 (statement -> CLOSEFILE expression .)
+    DECLARE         reduce using rule 80 (statement -> CLOSEFILE expression .)
+    CONSTANT        reduce using rule 80 (statement -> CLOSEFILE expression .)
+    ID              reduce using rule 80 (statement -> CLOSEFILE expression .)
+    INPUT           reduce using rule 80 (statement -> CLOSEFILE expression .)
+    OUTPUT          reduce using rule 80 (statement -> CLOSEFILE expression .)
+    IF              reduce using rule 80 (statement -> CLOSEFILE expression .)
+    CASE            reduce using rule 80 (statement -> CLOSEFILE expression .)
+    FOR             reduce using rule 80 (statement -> CLOSEFILE expression .)
+    REPEAT          reduce using rule 80 (statement -> CLOSEFILE expression .)
+    WHILE           reduce using rule 80 (statement -> CLOSEFILE expression .)
+    PROCEDURE       reduce using rule 80 (statement -> CLOSEFILE expression .)
+    CALL            reduce using rule 80 (statement -> CLOSEFILE expression .)
+    FUNCTION        reduce using rule 80 (statement -> CLOSEFILE expression .)
+    RETURN          reduce using rule 80 (statement -> CLOSEFILE expression .)
+    OPENFILE        reduce using rule 80 (statement -> CLOSEFILE expression .)
+    READFILE        reduce using rule 80 (statement -> CLOSEFILE expression .)
+    WRITEFILE       reduce using rule 80 (statement -> CLOSEFILE expression .)
+    CLOSEFILE       reduce using rule 80 (statement -> CLOSEFILE expression .)
+    NOT             reduce using rule 80 (statement -> CLOSEFILE expression .)
+    LEFT_PAREN      reduce using rule 80 (statement -> CLOSEFILE expression .)
+    BOOLEAN         reduce using rule 80 (statement -> CLOSEFILE expression .)
+    CHAR            reduce using rule 80 (statement -> CLOSEFILE expression .)
+    STRING          reduce using rule 80 (statement -> CLOSEFILE expression .)
+    REAL            reduce using rule 80 (statement -> CLOSEFILE expression .)
+    INTEGER         reduce using rule 80 (statement -> CLOSEFILE expression .)
+    $end            reduce using rule 80 (statement -> CLOSEFILE expression .)
+    UNTIL           reduce using rule 80 (statement -> CLOSEFILE expression .)
+    ENDWHILE        reduce using rule 80 (statement -> CLOSEFILE expression .)
+    ENDPROCEDURE    reduce using rule 80 (statement -> CLOSEFILE expression .)
+    ELSE            reduce using rule 80 (statement -> CLOSEFILE expression .)
+    ENDIF           reduce using rule 80 (statement -> CLOSEFILE expression .)
+    ENDFUNCTION     reduce using rule 80 (statement -> CLOSEFILE expression .)
+    SEMICOLON       reduce using rule 80 (statement -> CLOSEFILE expression .)
+    NEXT            reduce using rule 80 (statement -> CLOSEFILE expression .)
     OR              shift and go to state 37
     AND             shift and go to state 38
     EQUAL           shift and go to state 39
@@ -3203,8 +3225,8 @@ state 67
     MINUS           shift and go to state 48
     CONNECT         shift and go to state 49
 
-  ! MINUS           [ reduce using rule 81 (statement -> CLOSEFILE expression .) ]
-  ! PLUS            [ reduce using rule 81 (statement -> CLOSEFILE expression .) ]
+  ! MINUS           [ reduce using rule 80 (statement -> CLOSEFILE expression .) ]
+  ! PLUS            [ reduce using rule 80 (statement -> CLOSEFILE expression .) ]
 
 
 state 68
@@ -5048,10 +5070,13 @@ state 95
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -5282,10 +5307,13 @@ state 99
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -5512,10 +5540,13 @@ state 103
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -5706,29 +5737,27 @@ state 107
 
 state 108
 
-    (74) statement -> OPENFILE expression FOR . file_mode
-    (75) file_mode -> . READ
-    (76) file_mode -> . WRITE
-    (77) file_mode -> . APPEND
-    (78) file_mode -> . RANDOM
+    (74) statement -> OPENFILE expression FOR . READ
+    (75) statement -> OPENFILE expression FOR . WRITE
+    (76) statement -> OPENFILE expression FOR . APPEND
+    (77) statement -> OPENFILE expression FOR . RANDOM
 
-    READ            shift and go to state 143
-    WRITE           shift and go to state 144
-    APPEND          shift and go to state 145
-    RANDOM          shift and go to state 146
+    READ            shift and go to state 142
+    WRITE           shift and go to state 143
+    APPEND          shift and go to state 144
+    RANDOM          shift and go to state 145
 
-    file_mode                      shift and go to state 142
 
 state 109
 
-    (79) statement -> READFILE expression COMMA . ID
+    (78) statement -> READFILE expression COMMA . ID
 
-    ID              shift and go to state 147
+    ID              shift and go to state 146
 
 
 state 110
 
-    (80) statement -> WRITEFILE expression COMMA . expression
+    (79) statement -> WRITEFILE expression COMMA . expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -5767,7 +5796,7 @@ state 110
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    expression                     shift and go to state 148
+    expression                     shift and go to state 147
 
 state 111
 
@@ -5815,7 +5844,7 @@ state 112
 
     (5) statement -> DECLARE ID COLON ARRAY . LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
 
-    LEFT_SQUARE     shift and go to state 149
+    LEFT_SQUARE     shift and go to state 148
 
 
 state 113
@@ -5823,7 +5852,7 @@ state 113
     (10) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE . ASSIGN expression
     (34) expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
-    ASSIGN          shift and go to state 150
+    ASSIGN          shift and go to state 149
     OR              reduce using rule 34 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     AND             reduce using rule 34 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     EQUAL           reduce using rule 34 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
@@ -5914,7 +5943,7 @@ state 114
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    expression                     shift and go to state 151
+    expression                     shift and go to state 150
 
 state 115
 
@@ -6017,7 +6046,7 @@ state 116
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    expression                     shift and go to state 152
+    expression                     shift and go to state 151
 
 state 117
 
@@ -6093,7 +6122,7 @@ state 118
     (14) statement -> INPUT ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (11) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 153
+    RIGHT_SQUARE    shift and go to state 152
     COMMA           shift and go to state 114
 
 
@@ -6174,7 +6203,7 @@ state 120
     (34) expression -> ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (11) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 154
+    RIGHT_SQUARE    shift and go to state 153
     COMMA           shift and go to state 114
 
 
@@ -6208,10 +6237,13 @@ state 121
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -6239,8 +6271,8 @@ state 121
     (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
     (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
 
-    ELSE            shift and go to state 155
-    ENDIF           shift and go to state 156
+    ELSE            shift and go to state 154
+    ENDIF           shift and go to state 155
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -6308,7 +6340,7 @@ state 122
     (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
     (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
 
-    ENDCASE         shift and go to state 157
+    ENDCASE         shift and go to state 156
     OTHERWISE       shift and go to state 127
     ID              shift and go to state 53
     NOT             shift and go to state 23
@@ -6321,7 +6353,7 @@ state 122
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    case                           shift and go to state 158
+    case                           shift and go to state 157
     case_expression                shift and go to state 124
     otherwise_statement            shift and go to state 125
     expression                     shift and go to state 126
@@ -6348,14 +6380,14 @@ state 124
 
     (23) case -> case_expression . COLON statements SEMICOLON
 
-    COLON           shift and go to state 159
+    COLON           shift and go to state 158
 
 
 state 125
 
     (24) case -> otherwise_statement . SEMICOLON
 
-    SEMICOLON       shift and go to state 160
+    SEMICOLON       shift and go to state 159
 
 
 state 126
@@ -6376,7 +6408,7 @@ state 126
     (49) expression -> expression . MINUS expression
     (50) expression -> expression . CONNECT expression
 
-    TO              shift and go to state 161
+    TO              shift and go to state 160
     COLON           reduce using rule 26 (case_expression -> expression .)
     OR              shift and go to state 37
     AND             shift and go to state 38
@@ -6397,7 +6429,7 @@ state 127
 
     (27) otherwise_statement -> OTHERWISE . COLON statements
 
-    COLON           shift and go to state 162
+    COLON           shift and go to state 161
 
 
 state 128
@@ -6418,7 +6450,7 @@ state 128
     (49) expression -> expression . MINUS expression
     (50) expression -> expression . CONNECT expression
 
-    TO              shift and go to state 163
+    TO              shift and go to state 162
     OR              shift and go to state 37
     AND             shift and go to state 38
     EQUAL           shift and go to state 39
@@ -6874,7 +6906,7 @@ state 133
     CONNECT         reduce using rule 33 (expression -> ID .)
     LEFT_SQUARE     shift and go to state 94
     LEFT_PAREN      shift and go to state 35
-    COLON           shift and go to state 164
+    COLON           shift and go to state 163
 
 
 state 134
@@ -6882,8 +6914,8 @@ state 134
     (63) statement -> PROCEDURE ID LEFT_PAREN declare_parameters . RIGHT_PAREN statements ENDPROCEDURE
     (57) declare_parameters -> declare_parameters . COMMA declare_parameter
 
-    RIGHT_PAREN     shift and go to state 165
-    COMMA           shift and go to state 166
+    RIGHT_PAREN     shift and go to state 164
+    COMMA           shift and go to state 165
 
 
 state 135
@@ -6941,7 +6973,7 @@ state 137
     (65) statement -> CALL ID LEFT_PAREN parameters . RIGHT_PAREN
     (61) parameters -> parameters . COMMA expression
 
-    RIGHT_PAREN     shift and go to state 167
+    RIGHT_PAREN     shift and go to state 166
     COMMA           shift and go to state 116
 
 
@@ -6950,7 +6982,7 @@ state 138
     (59) declare_parameter -> ID . COLON ID
     (60) declare_parameter -> ID . COLON ARRAY
 
-    COLON           shift and go to state 164
+    COLON           shift and go to state 163
 
 
 state 139
@@ -6959,8 +6991,8 @@ state 139
     (68) statement -> FUNCTION ID LEFT_PAREN declare_parameters . RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
     (57) declare_parameters -> declare_parameters . COMMA declare_parameter
 
-    RIGHT_PAREN     shift and go to state 168
-    COMMA           shift and go to state 166
+    RIGHT_PAREN     shift and go to state 167
+    COMMA           shift and go to state 165
 
 
 state 140
@@ -6993,10 +7025,109 @@ state 140
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
+    (33) expression -> . ID
+    (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (35) expression -> . expression OR expression
+    (36) expression -> . expression AND expression
+    (37) expression -> . NOT expression
+    (38) expression -> . expression EQUAL expression
+    (39) expression -> . expression NOT_EQUAL expression
+    (40) expression -> . expression LESS expression
+    (41) expression -> . expression GREATER expression
+    (42) expression -> . expression LESS_EQUAL expression
+    (43) expression -> . expression GREATER_EQUAL expression
+    (44) expression -> . expression MUL expression
+    (45) expression -> . expression DIV expression
+    (46) expression -> . MINUS expression
+    (47) expression -> . PLUS expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression CONNECT expression
+    (51) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (52) expression -> . BOOLEAN
+    (53) expression -> . CHAR
+    (54) expression -> . STRING
+    (55) expression -> . REAL
+    (56) expression -> . INTEGER
+    (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
+    (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
+
+    DECLARE         shift and go to state 3
+    CONSTANT        shift and go to state 5
+    ID              shift and go to state 4
+    INPUT           shift and go to state 7
+    OUTPUT          shift and go to state 8
+    IF              shift and go to state 9
+    CASE            shift and go to state 10
+    FOR             shift and go to state 11
+    REPEAT          shift and go to state 12
+    WHILE           shift and go to state 13
+    PROCEDURE       shift and go to state 14
+    CALL            shift and go to state 16
+    FUNCTION        shift and go to state 17
+    RETURN          shift and go to state 18
+    OPENFILE        shift and go to state 19
+    READFILE        shift and go to state 20
+    WRITEFILE       shift and go to state 21
+    CLOSEFILE       shift and go to state 22
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 24
+    PLUS            shift and go to state 25
+    LEFT_PAREN      shift and go to state 15
+    BOOLEAN         shift and go to state 26
+    CHAR            shift and go to state 27
+    STRING          shift and go to state 28
+    REAL            shift and go to state 29
+    INTEGER         shift and go to state 30
+
+    statements                     shift and go to state 168
+    statement                      shift and go to state 2
+    expression                     shift and go to state 6
+
+state 141
+
+    (70) statement -> FUNCTION ID RETURNS ARRAY . statements ENDFUNCTION
+    (1) statements -> . statements statement
+    (2) statements -> . statement
+    (3) statement -> . DECLARE ID COLON ID
+    (4) statement -> . CONSTANT ID EQUAL expression
+    (5) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
+    (9) statement -> . ID ASSIGN expression
+    (10) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
+    (13) statement -> . INPUT ID
+    (14) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (15) statement -> . OUTPUT output_expression
+    (18) statement -> . IF expression THEN statements ELSE statements ENDIF
+    (19) statement -> . IF expression THEN statements ENDIF
+    (20) statement -> . CASE OF ID cases ENDCASE
+    (28) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
+    (29) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
+    (30) statement -> . REPEAT statements UNTIL expression
+    (31) statement -> . WHILE expression statements ENDWHILE
+    (32) statement -> . expression
+    (63) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
+    (64) statement -> . PROCEDURE ID statements ENDPROCEDURE
+    (65) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
+    (66) statement -> . CALL ID
+    (67) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+    (68) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
+    (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
+    (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
+    (73) statement -> . RETURN expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -7056,354 +7187,219 @@ state 140
     statement                      shift and go to state 2
     expression                     shift and go to state 6
 
-state 141
-
-    (70) statement -> FUNCTION ID RETURNS ARRAY . statements ENDFUNCTION
-    (1) statements -> . statements statement
-    (2) statements -> . statement
-    (3) statement -> . DECLARE ID COLON ID
-    (4) statement -> . CONSTANT ID EQUAL expression
-    (5) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
-    (9) statement -> . ID ASSIGN expression
-    (10) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
-    (13) statement -> . INPUT ID
-    (14) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (15) statement -> . OUTPUT output_expression
-    (18) statement -> . IF expression THEN statements ELSE statements ENDIF
-    (19) statement -> . IF expression THEN statements ENDIF
-    (20) statement -> . CASE OF ID cases ENDCASE
-    (28) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
-    (29) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
-    (30) statement -> . REPEAT statements UNTIL expression
-    (31) statement -> . WHILE expression statements ENDWHILE
-    (32) statement -> . expression
-    (63) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-    (64) statement -> . PROCEDURE ID statements ENDPROCEDURE
-    (65) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
-    (66) statement -> . CALL ID
-    (67) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
-    (68) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
-    (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
-    (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
-    (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
-    (33) expression -> . ID
-    (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (35) expression -> . expression OR expression
-    (36) expression -> . expression AND expression
-    (37) expression -> . NOT expression
-    (38) expression -> . expression EQUAL expression
-    (39) expression -> . expression NOT_EQUAL expression
-    (40) expression -> . expression LESS expression
-    (41) expression -> . expression GREATER expression
-    (42) expression -> . expression LESS_EQUAL expression
-    (43) expression -> . expression GREATER_EQUAL expression
-    (44) expression -> . expression MUL expression
-    (45) expression -> . expression DIV expression
-    (46) expression -> . MINUS expression
-    (47) expression -> . PLUS expression
-    (48) expression -> . expression PLUS expression
-    (49) expression -> . expression MINUS expression
-    (50) expression -> . expression CONNECT expression
-    (51) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (52) expression -> . BOOLEAN
-    (53) expression -> . CHAR
-    (54) expression -> . STRING
-    (55) expression -> . REAL
-    (56) expression -> . INTEGER
-    (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
-    (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
-
-    DECLARE         shift and go to state 3
-    CONSTANT        shift and go to state 5
-    ID              shift and go to state 4
-    INPUT           shift and go to state 7
-    OUTPUT          shift and go to state 8
-    IF              shift and go to state 9
-    CASE            shift and go to state 10
-    FOR             shift and go to state 11
-    REPEAT          shift and go to state 12
-    WHILE           shift and go to state 13
-    PROCEDURE       shift and go to state 14
-    CALL            shift and go to state 16
-    FUNCTION        shift and go to state 17
-    RETURN          shift and go to state 18
-    OPENFILE        shift and go to state 19
-    READFILE        shift and go to state 20
-    WRITEFILE       shift and go to state 21
-    CLOSEFILE       shift and go to state 22
-    NOT             shift and go to state 23
-    MINUS           shift and go to state 24
-    PLUS            shift and go to state 25
-    LEFT_PAREN      shift and go to state 15
-    BOOLEAN         shift and go to state 26
-    CHAR            shift and go to state 27
-    STRING          shift and go to state 28
-    REAL            shift and go to state 29
-    INTEGER         shift and go to state 30
-
-    statements                     shift and go to state 170
-    statement                      shift and go to state 2
-    expression                     shift and go to state 6
-
 state 142
 
-    (74) statement -> OPENFILE expression FOR file_mode .
+    (74) statement -> OPENFILE expression FOR READ .
 
-    DECLARE         reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    CONSTANT        reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    ID              reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    INPUT           reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    OUTPUT          reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    IF              reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    CASE            reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    FOR             reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    REPEAT          reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    WHILE           reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    PROCEDURE       reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    CALL            reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    FUNCTION        reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    RETURN          reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    OPENFILE        reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    READFILE        reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    WRITEFILE       reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    CLOSEFILE       reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    NOT             reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    MINUS           reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    PLUS            reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    LEFT_PAREN      reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    BOOLEAN         reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    CHAR            reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    STRING          reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    REAL            reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    INTEGER         reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    $end            reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    UNTIL           reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    ENDWHILE        reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    ENDPROCEDURE    reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    ELSE            reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    ENDIF           reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    ENDFUNCTION     reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    SEMICOLON       reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
-    NEXT            reduce using rule 74 (statement -> OPENFILE expression FOR file_mode .)
+    DECLARE         reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    CONSTANT        reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    ID              reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    INPUT           reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    OUTPUT          reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    IF              reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    CASE            reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    FOR             reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    REPEAT          reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    WHILE           reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    PROCEDURE       reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    CALL            reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    FUNCTION        reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    RETURN          reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    OPENFILE        reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    READFILE        reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    WRITEFILE       reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    CLOSEFILE       reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    NOT             reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    MINUS           reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    PLUS            reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    LEFT_PAREN      reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    BOOLEAN         reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    CHAR            reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    STRING          reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    REAL            reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    INTEGER         reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    $end            reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    UNTIL           reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    ENDWHILE        reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    ENDPROCEDURE    reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    ELSE            reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    ENDIF           reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    ENDFUNCTION     reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    SEMICOLON       reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
+    NEXT            reduce using rule 74 (statement -> OPENFILE expression FOR READ .)
 
 
 state 143
 
-    (75) file_mode -> READ .
+    (75) statement -> OPENFILE expression FOR WRITE .
 
-    DECLARE         reduce using rule 75 (file_mode -> READ .)
-    CONSTANT        reduce using rule 75 (file_mode -> READ .)
-    ID              reduce using rule 75 (file_mode -> READ .)
-    INPUT           reduce using rule 75 (file_mode -> READ .)
-    OUTPUT          reduce using rule 75 (file_mode -> READ .)
-    IF              reduce using rule 75 (file_mode -> READ .)
-    CASE            reduce using rule 75 (file_mode -> READ .)
-    FOR             reduce using rule 75 (file_mode -> READ .)
-    REPEAT          reduce using rule 75 (file_mode -> READ .)
-    WHILE           reduce using rule 75 (file_mode -> READ .)
-    PROCEDURE       reduce using rule 75 (file_mode -> READ .)
-    CALL            reduce using rule 75 (file_mode -> READ .)
-    FUNCTION        reduce using rule 75 (file_mode -> READ .)
-    RETURN          reduce using rule 75 (file_mode -> READ .)
-    OPENFILE        reduce using rule 75 (file_mode -> READ .)
-    READFILE        reduce using rule 75 (file_mode -> READ .)
-    WRITEFILE       reduce using rule 75 (file_mode -> READ .)
-    CLOSEFILE       reduce using rule 75 (file_mode -> READ .)
-    NOT             reduce using rule 75 (file_mode -> READ .)
-    MINUS           reduce using rule 75 (file_mode -> READ .)
-    PLUS            reduce using rule 75 (file_mode -> READ .)
-    LEFT_PAREN      reduce using rule 75 (file_mode -> READ .)
-    BOOLEAN         reduce using rule 75 (file_mode -> READ .)
-    CHAR            reduce using rule 75 (file_mode -> READ .)
-    STRING          reduce using rule 75 (file_mode -> READ .)
-    REAL            reduce using rule 75 (file_mode -> READ .)
-    INTEGER         reduce using rule 75 (file_mode -> READ .)
-    $end            reduce using rule 75 (file_mode -> READ .)
-    UNTIL           reduce using rule 75 (file_mode -> READ .)
-    ENDWHILE        reduce using rule 75 (file_mode -> READ .)
-    ENDPROCEDURE    reduce using rule 75 (file_mode -> READ .)
-    ELSE            reduce using rule 75 (file_mode -> READ .)
-    ENDIF           reduce using rule 75 (file_mode -> READ .)
-    ENDFUNCTION     reduce using rule 75 (file_mode -> READ .)
-    SEMICOLON       reduce using rule 75 (file_mode -> READ .)
-    NEXT            reduce using rule 75 (file_mode -> READ .)
+    DECLARE         reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    CONSTANT        reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    ID              reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    INPUT           reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    OUTPUT          reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    IF              reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    CASE            reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    FOR             reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    REPEAT          reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    WHILE           reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    PROCEDURE       reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    CALL            reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    FUNCTION        reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    RETURN          reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    OPENFILE        reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    READFILE        reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    WRITEFILE       reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    CLOSEFILE       reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    NOT             reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    MINUS           reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    PLUS            reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    LEFT_PAREN      reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    BOOLEAN         reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    CHAR            reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    STRING          reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    REAL            reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    INTEGER         reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    $end            reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    UNTIL           reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    ENDWHILE        reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    ENDPROCEDURE    reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    ELSE            reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    ENDIF           reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    ENDFUNCTION     reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    SEMICOLON       reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
+    NEXT            reduce using rule 75 (statement -> OPENFILE expression FOR WRITE .)
 
 
 state 144
 
-    (76) file_mode -> WRITE .
+    (76) statement -> OPENFILE expression FOR APPEND .
 
-    DECLARE         reduce using rule 76 (file_mode -> WRITE .)
-    CONSTANT        reduce using rule 76 (file_mode -> WRITE .)
-    ID              reduce using rule 76 (file_mode -> WRITE .)
-    INPUT           reduce using rule 76 (file_mode -> WRITE .)
-    OUTPUT          reduce using rule 76 (file_mode -> WRITE .)
-    IF              reduce using rule 76 (file_mode -> WRITE .)
-    CASE            reduce using rule 76 (file_mode -> WRITE .)
-    FOR             reduce using rule 76 (file_mode -> WRITE .)
-    REPEAT          reduce using rule 76 (file_mode -> WRITE .)
-    WHILE           reduce using rule 76 (file_mode -> WRITE .)
-    PROCEDURE       reduce using rule 76 (file_mode -> WRITE .)
-    CALL            reduce using rule 76 (file_mode -> WRITE .)
-    FUNCTION        reduce using rule 76 (file_mode -> WRITE .)
-    RETURN          reduce using rule 76 (file_mode -> WRITE .)
-    OPENFILE        reduce using rule 76 (file_mode -> WRITE .)
-    READFILE        reduce using rule 76 (file_mode -> WRITE .)
-    WRITEFILE       reduce using rule 76 (file_mode -> WRITE .)
-    CLOSEFILE       reduce using rule 76 (file_mode -> WRITE .)
-    NOT             reduce using rule 76 (file_mode -> WRITE .)
-    MINUS           reduce using rule 76 (file_mode -> WRITE .)
-    PLUS            reduce using rule 76 (file_mode -> WRITE .)
-    LEFT_PAREN      reduce using rule 76 (file_mode -> WRITE .)
-    BOOLEAN         reduce using rule 76 (file_mode -> WRITE .)
-    CHAR            reduce using rule 76 (file_mode -> WRITE .)
-    STRING          reduce using rule 76 (file_mode -> WRITE .)
-    REAL            reduce using rule 76 (file_mode -> WRITE .)
-    INTEGER         reduce using rule 76 (file_mode -> WRITE .)
-    $end            reduce using rule 76 (file_mode -> WRITE .)
-    UNTIL           reduce using rule 76 (file_mode -> WRITE .)
-    ENDWHILE        reduce using rule 76 (file_mode -> WRITE .)
-    ENDPROCEDURE    reduce using rule 76 (file_mode -> WRITE .)
-    ELSE            reduce using rule 76 (file_mode -> WRITE .)
-    ENDIF           reduce using rule 76 (file_mode -> WRITE .)
-    ENDFUNCTION     reduce using rule 76 (file_mode -> WRITE .)
-    SEMICOLON       reduce using rule 76 (file_mode -> WRITE .)
-    NEXT            reduce using rule 76 (file_mode -> WRITE .)
+    DECLARE         reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    CONSTANT        reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    ID              reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    INPUT           reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    OUTPUT          reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    IF              reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    CASE            reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    FOR             reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    REPEAT          reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    WHILE           reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    PROCEDURE       reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    CALL            reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    FUNCTION        reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    RETURN          reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    OPENFILE        reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    READFILE        reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    WRITEFILE       reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    CLOSEFILE       reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    NOT             reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    MINUS           reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    PLUS            reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    LEFT_PAREN      reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    BOOLEAN         reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    CHAR            reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    STRING          reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    REAL            reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    INTEGER         reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    $end            reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    UNTIL           reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    ENDWHILE        reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    ENDPROCEDURE    reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    ELSE            reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    ENDIF           reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    ENDFUNCTION     reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    SEMICOLON       reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
+    NEXT            reduce using rule 76 (statement -> OPENFILE expression FOR APPEND .)
 
 
 state 145
 
-    (77) file_mode -> APPEND .
+    (77) statement -> OPENFILE expression FOR RANDOM .
 
-    DECLARE         reduce using rule 77 (file_mode -> APPEND .)
-    CONSTANT        reduce using rule 77 (file_mode -> APPEND .)
-    ID              reduce using rule 77 (file_mode -> APPEND .)
-    INPUT           reduce using rule 77 (file_mode -> APPEND .)
-    OUTPUT          reduce using rule 77 (file_mode -> APPEND .)
-    IF              reduce using rule 77 (file_mode -> APPEND .)
-    CASE            reduce using rule 77 (file_mode -> APPEND .)
-    FOR             reduce using rule 77 (file_mode -> APPEND .)
-    REPEAT          reduce using rule 77 (file_mode -> APPEND .)
-    WHILE           reduce using rule 77 (file_mode -> APPEND .)
-    PROCEDURE       reduce using rule 77 (file_mode -> APPEND .)
-    CALL            reduce using rule 77 (file_mode -> APPEND .)
-    FUNCTION        reduce using rule 77 (file_mode -> APPEND .)
-    RETURN          reduce using rule 77 (file_mode -> APPEND .)
-    OPENFILE        reduce using rule 77 (file_mode -> APPEND .)
-    READFILE        reduce using rule 77 (file_mode -> APPEND .)
-    WRITEFILE       reduce using rule 77 (file_mode -> APPEND .)
-    CLOSEFILE       reduce using rule 77 (file_mode -> APPEND .)
-    NOT             reduce using rule 77 (file_mode -> APPEND .)
-    MINUS           reduce using rule 77 (file_mode -> APPEND .)
-    PLUS            reduce using rule 77 (file_mode -> APPEND .)
-    LEFT_PAREN      reduce using rule 77 (file_mode -> APPEND .)
-    BOOLEAN         reduce using rule 77 (file_mode -> APPEND .)
-    CHAR            reduce using rule 77 (file_mode -> APPEND .)
-    STRING          reduce using rule 77 (file_mode -> APPEND .)
-    REAL            reduce using rule 77 (file_mode -> APPEND .)
-    INTEGER         reduce using rule 77 (file_mode -> APPEND .)
-    $end            reduce using rule 77 (file_mode -> APPEND .)
-    UNTIL           reduce using rule 77 (file_mode -> APPEND .)
-    ENDWHILE        reduce using rule 77 (file_mode -> APPEND .)
-    ENDPROCEDURE    reduce using rule 77 (file_mode -> APPEND .)
-    ELSE            reduce using rule 77 (file_mode -> APPEND .)
-    ENDIF           reduce using rule 77 (file_mode -> APPEND .)
-    ENDFUNCTION     reduce using rule 77 (file_mode -> APPEND .)
-    SEMICOLON       reduce using rule 77 (file_mode -> APPEND .)
-    NEXT            reduce using rule 77 (file_mode -> APPEND .)
+    DECLARE         reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    CONSTANT        reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    ID              reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    INPUT           reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    OUTPUT          reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    IF              reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    CASE            reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    FOR             reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    REPEAT          reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    WHILE           reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    PROCEDURE       reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    CALL            reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    FUNCTION        reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    RETURN          reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    OPENFILE        reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    READFILE        reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    WRITEFILE       reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    CLOSEFILE       reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    NOT             reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    MINUS           reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    PLUS            reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    LEFT_PAREN      reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    BOOLEAN         reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    CHAR            reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    STRING          reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    REAL            reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    INTEGER         reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    $end            reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    UNTIL           reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    ENDWHILE        reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    ENDPROCEDURE    reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    ELSE            reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    ENDIF           reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    ENDFUNCTION     reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    SEMICOLON       reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
+    NEXT            reduce using rule 77 (statement -> OPENFILE expression FOR RANDOM .)
 
 
 state 146
 
-    (78) file_mode -> RANDOM .
+    (78) statement -> READFILE expression COMMA ID .
 
-    DECLARE         reduce using rule 78 (file_mode -> RANDOM .)
-    CONSTANT        reduce using rule 78 (file_mode -> RANDOM .)
-    ID              reduce using rule 78 (file_mode -> RANDOM .)
-    INPUT           reduce using rule 78 (file_mode -> RANDOM .)
-    OUTPUT          reduce using rule 78 (file_mode -> RANDOM .)
-    IF              reduce using rule 78 (file_mode -> RANDOM .)
-    CASE            reduce using rule 78 (file_mode -> RANDOM .)
-    FOR             reduce using rule 78 (file_mode -> RANDOM .)
-    REPEAT          reduce using rule 78 (file_mode -> RANDOM .)
-    WHILE           reduce using rule 78 (file_mode -> RANDOM .)
-    PROCEDURE       reduce using rule 78 (file_mode -> RANDOM .)
-    CALL            reduce using rule 78 (file_mode -> RANDOM .)
-    FUNCTION        reduce using rule 78 (file_mode -> RANDOM .)
-    RETURN          reduce using rule 78 (file_mode -> RANDOM .)
-    OPENFILE        reduce using rule 78 (file_mode -> RANDOM .)
-    READFILE        reduce using rule 78 (file_mode -> RANDOM .)
-    WRITEFILE       reduce using rule 78 (file_mode -> RANDOM .)
-    CLOSEFILE       reduce using rule 78 (file_mode -> RANDOM .)
-    NOT             reduce using rule 78 (file_mode -> RANDOM .)
-    MINUS           reduce using rule 78 (file_mode -> RANDOM .)
-    PLUS            reduce using rule 78 (file_mode -> RANDOM .)
-    LEFT_PAREN      reduce using rule 78 (file_mode -> RANDOM .)
-    BOOLEAN         reduce using rule 78 (file_mode -> RANDOM .)
-    CHAR            reduce using rule 78 (file_mode -> RANDOM .)
-    STRING          reduce using rule 78 (file_mode -> RANDOM .)
-    REAL            reduce using rule 78 (file_mode -> RANDOM .)
-    INTEGER         reduce using rule 78 (file_mode -> RANDOM .)
-    $end            reduce using rule 78 (file_mode -> RANDOM .)
-    UNTIL           reduce using rule 78 (file_mode -> RANDOM .)
-    ENDWHILE        reduce using rule 78 (file_mode -> RANDOM .)
-    ENDPROCEDURE    reduce using rule 78 (file_mode -> RANDOM .)
-    ELSE            reduce using rule 78 (file_mode -> RANDOM .)
-    ENDIF           reduce using rule 78 (file_mode -> RANDOM .)
-    ENDFUNCTION     reduce using rule 78 (file_mode -> RANDOM .)
-    SEMICOLON       reduce using rule 78 (file_mode -> RANDOM .)
-    NEXT            reduce using rule 78 (file_mode -> RANDOM .)
+    DECLARE         reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    CONSTANT        reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    ID              reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    INPUT           reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    OUTPUT          reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    IF              reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    CASE            reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    FOR             reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    REPEAT          reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    WHILE           reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    PROCEDURE       reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    CALL            reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    FUNCTION        reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    RETURN          reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    OPENFILE        reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    READFILE        reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    WRITEFILE       reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    CLOSEFILE       reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    NOT             reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    MINUS           reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    PLUS            reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    LEFT_PAREN      reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    BOOLEAN         reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    CHAR            reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    STRING          reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    REAL            reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    INTEGER         reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    $end            reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    UNTIL           reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    ENDWHILE        reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    ENDPROCEDURE    reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    ELSE            reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    ENDIF           reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    ENDFUNCTION     reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    SEMICOLON       reduce using rule 78 (statement -> READFILE expression COMMA ID .)
+    NEXT            reduce using rule 78 (statement -> READFILE expression COMMA ID .)
 
 
 state 147
 
-    (79) statement -> READFILE expression COMMA ID .
-
-    DECLARE         reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    CONSTANT        reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    ID              reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    INPUT           reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    OUTPUT          reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    IF              reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    CASE            reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    FOR             reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    REPEAT          reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    WHILE           reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    PROCEDURE       reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    CALL            reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    FUNCTION        reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    RETURN          reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    OPENFILE        reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    READFILE        reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    WRITEFILE       reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    CLOSEFILE       reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    NOT             reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    MINUS           reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    PLUS            reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    LEFT_PAREN      reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    BOOLEAN         reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    CHAR            reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    STRING          reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    REAL            reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    INTEGER         reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    $end            reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    UNTIL           reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    ENDWHILE        reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    ENDPROCEDURE    reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    ELSE            reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    ENDIF           reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    ENDFUNCTION     reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    SEMICOLON       reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-    NEXT            reduce using rule 79 (statement -> READFILE expression COMMA ID .)
-
-
-state 148
-
-    (80) statement -> WRITEFILE expression COMMA expression .
+    (79) statement -> WRITEFILE expression COMMA expression .
     (35) expression -> expression . OR expression
     (36) expression -> expression . AND expression
     (38) expression -> expression . EQUAL expression
@@ -7420,40 +7416,40 @@ state 148
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
-    DECLARE         reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    CONSTANT        reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    ID              reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    INPUT           reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    OUTPUT          reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    IF              reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    CASE            reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    FOR             reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    REPEAT          reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    WHILE           reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    PROCEDURE       reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    CALL            reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    FUNCTION        reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    RETURN          reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    OPENFILE        reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    READFILE        reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    WRITEFILE       reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    CLOSEFILE       reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    NOT             reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    LEFT_PAREN      reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    BOOLEAN         reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    CHAR            reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    STRING          reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    REAL            reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    INTEGER         reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    $end            reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    UNTIL           reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    ENDWHILE        reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    ENDPROCEDURE    reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    ELSE            reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    ENDIF           reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    ENDFUNCTION     reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    SEMICOLON       reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
-    NEXT            reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .)
+    DECLARE         reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    CONSTANT        reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    ID              reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    INPUT           reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    OUTPUT          reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    IF              reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    CASE            reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    FOR             reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    REPEAT          reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    WHILE           reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    PROCEDURE       reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    CALL            reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    FUNCTION        reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    RETURN          reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    OPENFILE        reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    READFILE        reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    WRITEFILE       reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    CLOSEFILE       reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    NOT             reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    LEFT_PAREN      reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    BOOLEAN         reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    CHAR            reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    STRING          reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    REAL            reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    INTEGER         reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    $end            reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    UNTIL           reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    ENDWHILE        reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    ENDPROCEDURE    reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    ELSE            reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    ENDIF           reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    ENDFUNCTION     reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    SEMICOLON       reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
+    NEXT            reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .)
     OR              shift and go to state 37
     AND             shift and go to state 38
     EQUAL           shift and go to state 39
@@ -7468,11 +7464,11 @@ state 148
     MINUS           shift and go to state 48
     CONNECT         shift and go to state 49
 
-  ! MINUS           [ reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .) ]
-  ! PLUS            [ reduce using rule 80 (statement -> WRITEFILE expression COMMA expression .) ]
+  ! MINUS           [ reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .) ]
+  ! PLUS            [ reduce using rule 79 (statement -> WRITEFILE expression COMMA expression .) ]
 
 
-state 149
+state 148
 
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE . dimensions RIGHT_SQUARE OF ID
     (6) dimensions -> . dimensions COMMA dimension
@@ -7516,11 +7512,11 @@ state 149
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    dimensions                     shift and go to state 171
-    dimension                      shift and go to state 172
-    expression                     shift and go to state 173
+    dimensions                     shift and go to state 170
+    dimension                      shift and go to state 171
+    expression                     shift and go to state 172
 
-state 150
+state 149
 
     (10) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN . expression
     (33) expression -> . ID
@@ -7561,9 +7557,9 @@ state 150
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    expression                     shift and go to state 174
+    expression                     shift and go to state 173
 
-state 151
+state 150
 
     (11) indexes -> indexes COMMA expression .
     (35) expression -> expression . OR expression
@@ -7597,7 +7593,7 @@ state 151
     CONNECT         shift and go to state 49
 
 
-state 152
+state 151
 
     (61) parameters -> parameters COMMA expression .
     (35) expression -> expression . OR expression
@@ -7631,7 +7627,7 @@ state 152
     CONNECT         shift and go to state 49
 
 
-state 153
+state 152
 
     (14) statement -> INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
@@ -7673,7 +7669,7 @@ state 153
     NEXT            reduce using rule 14 (statement -> INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 154
+state 153
 
     (34) expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
@@ -7733,7 +7729,7 @@ state 154
     STEP            reduce using rule 34 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 155
+state 154
 
     (18) statement -> IF expression THEN statements ELSE . statements ENDIF
     (1) statements -> . statements statement
@@ -7763,10 +7759,13 @@ state 155
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -7823,10 +7822,10 @@ state 155
     INTEGER         shift and go to state 30
 
     expression                     shift and go to state 6
-    statements                     shift and go to state 175
+    statements                     shift and go to state 174
     statement                      shift and go to state 2
 
-state 156
+state 155
 
     (19) statement -> IF expression THEN statements ENDIF .
 
@@ -7868,7 +7867,7 @@ state 156
     NEXT            reduce using rule 19 (statement -> IF expression THEN statements ENDIF .)
 
 
-state 157
+state 156
 
     (20) statement -> CASE OF ID cases ENDCASE .
 
@@ -7910,7 +7909,7 @@ state 157
     NEXT            reduce using rule 20 (statement -> CASE OF ID cases ENDCASE .)
 
 
-state 158
+state 157
 
     (21) cases -> cases case .
 
@@ -7928,7 +7927,7 @@ state 158
     INTEGER         reduce using rule 21 (cases -> cases case .)
 
 
-state 159
+state 158
 
     (23) case -> case_expression COLON . statements SEMICOLON
     (1) statements -> . statements statement
@@ -7958,10 +7957,13 @@ state 159
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -8017,11 +8019,11 @@ state 159
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    statements                     shift and go to state 176
+    statements                     shift and go to state 175
     statement                      shift and go to state 2
     expression                     shift and go to state 6
 
-state 160
+state 159
 
     (24) case -> otherwise_statement SEMICOLON .
 
@@ -8039,7 +8041,7 @@ state 160
     INTEGER         reduce using rule 24 (case -> otherwise_statement SEMICOLON .)
 
 
-state 161
+state 160
 
     (25) case_expression -> expression TO . expression
     (33) expression -> . ID
@@ -8080,9 +8082,9 @@ state 161
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    expression                     shift and go to state 177
+    expression                     shift and go to state 176
 
-state 162
+state 161
 
     (27) otherwise_statement -> OTHERWISE COLON . statements
     (1) statements -> . statements statement
@@ -8112,10 +8114,13 @@ state 162
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -8171,11 +8176,11 @@ state 162
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    statements                     shift and go to state 178
+    statements                     shift and go to state 177
     statement                      shift and go to state 2
     expression                     shift and go to state 6
 
-state 163
+state 162
 
     (28) statement -> FOR ID ASSIGN expression TO . expression STEP expression statements NEXT ID
     (29) statement -> FOR ID ASSIGN expression TO . expression statements NEXT ID
@@ -8217,18 +8222,18 @@ state 163
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    expression                     shift and go to state 179
+    expression                     shift and go to state 178
 
-state 164
+state 163
 
     (59) declare_parameter -> ID COLON . ID
     (60) declare_parameter -> ID COLON . ARRAY
 
-    ID              shift and go to state 180
-    ARRAY           shift and go to state 181
+    ID              shift and go to state 179
+    ARRAY           shift and go to state 180
 
 
-state 165
+state 164
 
     (63) statement -> PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN . statements ENDPROCEDURE
     (1) statements -> . statements statement
@@ -8258,10 +8263,13 @@ state 165
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -8317,11 +8325,11 @@ state 165
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    statements                     shift and go to state 182
+    statements                     shift and go to state 181
     statement                      shift and go to state 2
     expression                     shift and go to state 6
 
-state 166
+state 165
 
     (57) declare_parameters -> declare_parameters COMMA . declare_parameter
     (59) declare_parameter -> . ID COLON ID
@@ -8329,9 +8337,9 @@ state 166
 
     ID              shift and go to state 138
 
-    declare_parameter              shift and go to state 183
+    declare_parameter              shift and go to state 182
 
-state 167
+state 166
 
     (65) statement -> CALL ID LEFT_PAREN parameters RIGHT_PAREN .
 
@@ -8373,15 +8381,15 @@ state 167
     NEXT            reduce using rule 65 (statement -> CALL ID LEFT_PAREN parameters RIGHT_PAREN .)
 
 
-state 168
+state 167
 
     (67) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN . RETURNS ID statements ENDFUNCTION
     (68) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN . RETURNS ARRAY statements ENDFUNCTION
 
-    RETURNS         shift and go to state 184
+    RETURNS         shift and go to state 183
 
 
-state 169
+state 168
 
     (69) statement -> FUNCTION ID RETURNS ID statements . ENDFUNCTION
     (1) statements -> statements . statement
@@ -8410,10 +8418,108 @@ state 169
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
+    (33) expression -> . ID
+    (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (35) expression -> . expression OR expression
+    (36) expression -> . expression AND expression
+    (37) expression -> . NOT expression
+    (38) expression -> . expression EQUAL expression
+    (39) expression -> . expression NOT_EQUAL expression
+    (40) expression -> . expression LESS expression
+    (41) expression -> . expression GREATER expression
+    (42) expression -> . expression LESS_EQUAL expression
+    (43) expression -> . expression GREATER_EQUAL expression
+    (44) expression -> . expression MUL expression
+    (45) expression -> . expression DIV expression
+    (46) expression -> . MINUS expression
+    (47) expression -> . PLUS expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression CONNECT expression
+    (51) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (52) expression -> . BOOLEAN
+    (53) expression -> . CHAR
+    (54) expression -> . STRING
+    (55) expression -> . REAL
+    (56) expression -> . INTEGER
+    (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
+    (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
+
+    ENDFUNCTION     shift and go to state 184
+    DECLARE         shift and go to state 3
+    CONSTANT        shift and go to state 5
+    ID              shift and go to state 4
+    INPUT           shift and go to state 7
+    OUTPUT          shift and go to state 8
+    IF              shift and go to state 9
+    CASE            shift and go to state 10
+    FOR             shift and go to state 11
+    REPEAT          shift and go to state 12
+    WHILE           shift and go to state 13
+    PROCEDURE       shift and go to state 14
+    CALL            shift and go to state 16
+    FUNCTION        shift and go to state 17
+    RETURN          shift and go to state 18
+    OPENFILE        shift and go to state 19
+    READFILE        shift and go to state 20
+    WRITEFILE       shift and go to state 21
+    CLOSEFILE       shift and go to state 22
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 24
+    PLUS            shift and go to state 25
+    LEFT_PAREN      shift and go to state 15
+    BOOLEAN         shift and go to state 26
+    CHAR            shift and go to state 27
+    STRING          shift and go to state 28
+    REAL            shift and go to state 29
+    INTEGER         shift and go to state 30
+
+    statement                      shift and go to state 31
+    expression                     shift and go to state 6
+
+state 169
+
+    (70) statement -> FUNCTION ID RETURNS ARRAY statements . ENDFUNCTION
+    (1) statements -> statements . statement
+    (3) statement -> . DECLARE ID COLON ID
+    (4) statement -> . CONSTANT ID EQUAL expression
+    (5) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
+    (9) statement -> . ID ASSIGN expression
+    (10) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
+    (13) statement -> . INPUT ID
+    (14) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (15) statement -> . OUTPUT output_expression
+    (18) statement -> . IF expression THEN statements ELSE statements ENDIF
+    (19) statement -> . IF expression THEN statements ENDIF
+    (20) statement -> . CASE OF ID cases ENDCASE
+    (28) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
+    (29) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
+    (30) statement -> . REPEAT statements UNTIL expression
+    (31) statement -> . WHILE expression statements ENDWHILE
+    (32) statement -> . expression
+    (63) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
+    (64) statement -> . PROCEDURE ID statements ENDPROCEDURE
+    (65) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
+    (66) statement -> . CALL ID
+    (67) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+    (68) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
+    (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
+    (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
+    (73) statement -> . RETURN expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -8475,106 +8581,14 @@ state 169
 
 state 170
 
-    (70) statement -> FUNCTION ID RETURNS ARRAY statements . ENDFUNCTION
-    (1) statements -> statements . statement
-    (3) statement -> . DECLARE ID COLON ID
-    (4) statement -> . CONSTANT ID EQUAL expression
-    (5) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
-    (9) statement -> . ID ASSIGN expression
-    (10) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
-    (13) statement -> . INPUT ID
-    (14) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (15) statement -> . OUTPUT output_expression
-    (18) statement -> . IF expression THEN statements ELSE statements ENDIF
-    (19) statement -> . IF expression THEN statements ENDIF
-    (20) statement -> . CASE OF ID cases ENDCASE
-    (28) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
-    (29) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
-    (30) statement -> . REPEAT statements UNTIL expression
-    (31) statement -> . WHILE expression statements ENDWHILE
-    (32) statement -> . expression
-    (63) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-    (64) statement -> . PROCEDURE ID statements ENDPROCEDURE
-    (65) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
-    (66) statement -> . CALL ID
-    (67) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
-    (68) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
-    (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
-    (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
-    (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
-    (33) expression -> . ID
-    (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (35) expression -> . expression OR expression
-    (36) expression -> . expression AND expression
-    (37) expression -> . NOT expression
-    (38) expression -> . expression EQUAL expression
-    (39) expression -> . expression NOT_EQUAL expression
-    (40) expression -> . expression LESS expression
-    (41) expression -> . expression GREATER expression
-    (42) expression -> . expression LESS_EQUAL expression
-    (43) expression -> . expression GREATER_EQUAL expression
-    (44) expression -> . expression MUL expression
-    (45) expression -> . expression DIV expression
-    (46) expression -> . MINUS expression
-    (47) expression -> . PLUS expression
-    (48) expression -> . expression PLUS expression
-    (49) expression -> . expression MINUS expression
-    (50) expression -> . expression CONNECT expression
-    (51) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (52) expression -> . BOOLEAN
-    (53) expression -> . CHAR
-    (54) expression -> . STRING
-    (55) expression -> . REAL
-    (56) expression -> . INTEGER
-    (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
-    (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
-
-    ENDFUNCTION     shift and go to state 186
-    DECLARE         shift and go to state 3
-    CONSTANT        shift and go to state 5
-    ID              shift and go to state 4
-    INPUT           shift and go to state 7
-    OUTPUT          shift and go to state 8
-    IF              shift and go to state 9
-    CASE            shift and go to state 10
-    FOR             shift and go to state 11
-    REPEAT          shift and go to state 12
-    WHILE           shift and go to state 13
-    PROCEDURE       shift and go to state 14
-    CALL            shift and go to state 16
-    FUNCTION        shift and go to state 17
-    RETURN          shift and go to state 18
-    OPENFILE        shift and go to state 19
-    READFILE        shift and go to state 20
-    WRITEFILE       shift and go to state 21
-    CLOSEFILE       shift and go to state 22
-    NOT             shift and go to state 23
-    MINUS           shift and go to state 24
-    PLUS            shift and go to state 25
-    LEFT_PAREN      shift and go to state 15
-    BOOLEAN         shift and go to state 26
-    CHAR            shift and go to state 27
-    STRING          shift and go to state 28
-    REAL            shift and go to state 29
-    INTEGER         shift and go to state 30
-
-    statement                      shift and go to state 31
-    expression                     shift and go to state 6
-
-state 171
-
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions . RIGHT_SQUARE OF ID
     (6) dimensions -> dimensions . COMMA dimension
 
-    RIGHT_SQUARE    shift and go to state 187
-    COMMA           shift and go to state 188
+    RIGHT_SQUARE    shift and go to state 186
+    COMMA           shift and go to state 187
 
 
-state 172
+state 171
 
     (7) dimensions -> dimension .
 
@@ -8582,7 +8596,7 @@ state 172
     COMMA           reduce using rule 7 (dimensions -> dimension .)
 
 
-state 173
+state 172
 
     (8) dimension -> expression . COLON expression
     (35) expression -> expression . OR expression
@@ -8599,7 +8613,7 @@ state 173
     (49) expression -> expression . MINUS expression
     (50) expression -> expression . CONNECT expression
 
-    COLON           shift and go to state 189
+    COLON           shift and go to state 188
     OR              shift and go to state 37
     AND             shift and go to state 38
     EQUAL           shift and go to state 39
@@ -8615,7 +8629,7 @@ state 173
     CONNECT         shift and go to state 49
 
 
-state 174
+state 173
 
     (10) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression .
     (35) expression -> expression . OR expression
@@ -8686,7 +8700,7 @@ state 174
   ! PLUS            [ reduce using rule 10 (statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression .) ]
 
 
-state 175
+state 174
 
     (18) statement -> IF expression THEN statements ELSE statements . ENDIF
     (1) statements -> statements . statement
@@ -8715,10 +8729,13 @@ state 175
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -8746,7 +8763,7 @@ state 175
     (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
     (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
 
-    ENDIF           shift and go to state 190
+    ENDIF           shift and go to state 189
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -8778,7 +8795,7 @@ state 175
     expression                     shift and go to state 6
     statement                      shift and go to state 31
 
-state 176
+state 175
 
     (23) case -> case_expression COLON statements . SEMICOLON
     (1) statements -> statements . statement
@@ -8807,10 +8824,13 @@ state 176
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -8838,7 +8858,7 @@ state 176
     (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
     (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
 
-    SEMICOLON       shift and go to state 191
+    SEMICOLON       shift and go to state 190
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -8870,7 +8890,7 @@ state 176
     statement                      shift and go to state 31
     expression                     shift and go to state 6
 
-state 177
+state 176
 
     (25) case_expression -> expression TO expression .
     (35) expression -> expression . OR expression
@@ -8903,7 +8923,7 @@ state 177
     CONNECT         shift and go to state 49
 
 
-state 178
+state 177
 
     (27) otherwise_statement -> OTHERWISE COLON statements .
     (1) statements -> statements . statement
@@ -8932,10 +8952,13 @@ state 178
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -8995,7 +9018,7 @@ state 178
     statement                      shift and go to state 31
     expression                     shift and go to state 6
 
-state 179
+state 178
 
     (28) statement -> FOR ID ASSIGN expression TO expression . STEP expression statements NEXT ID
     (29) statement -> FOR ID ASSIGN expression TO expression . statements NEXT ID
@@ -9039,10 +9062,13 @@ state 179
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -9070,7 +9096,7 @@ state 179
     (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
     (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
 
-    STEP            shift and go to state 192
+    STEP            shift and go to state 191
     OR              shift and go to state 37
     AND             shift and go to state 38
     EQUAL           shift and go to state 39
@@ -9111,10 +9137,10 @@ state 179
     INTEGER         shift and go to state 30
 
     expression                     shift and go to state 6
-    statements                     shift and go to state 193
+    statements                     shift and go to state 192
     statement                      shift and go to state 2
 
-state 180
+state 179
 
     (59) declare_parameter -> ID COLON ID .
 
@@ -9122,7 +9148,7 @@ state 180
     COMMA           reduce using rule 59 (declare_parameter -> ID COLON ID .)
 
 
-state 181
+state 180
 
     (60) declare_parameter -> ID COLON ARRAY .
 
@@ -9130,7 +9156,7 @@ state 181
     COMMA           reduce using rule 60 (declare_parameter -> ID COLON ARRAY .)
 
 
-state 182
+state 181
 
     (63) statement -> PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements . ENDPROCEDURE
     (1) statements -> statements . statement
@@ -9159,10 +9185,13 @@ state 182
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -9190,7 +9219,7 @@ state 182
     (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
     (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
 
-    ENDPROCEDURE    shift and go to state 194
+    ENDPROCEDURE    shift and go to state 193
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -9222,7 +9251,7 @@ state 182
     statement                      shift and go to state 31
     expression                     shift and go to state 6
 
-state 183
+state 182
 
     (57) declare_parameters -> declare_parameters COMMA declare_parameter .
 
@@ -9230,16 +9259,16 @@ state 183
     COMMA           reduce using rule 57 (declare_parameters -> declare_parameters COMMA declare_parameter .)
 
 
-state 184
+state 183
 
     (67) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS . ID statements ENDFUNCTION
     (68) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS . ARRAY statements ENDFUNCTION
 
-    ID              shift and go to state 195
-    ARRAY           shift and go to state 196
+    ID              shift and go to state 194
+    ARRAY           shift and go to state 195
 
 
-state 185
+state 184
 
     (69) statement -> FUNCTION ID RETURNS ID statements ENDFUNCTION .
 
@@ -9281,7 +9310,7 @@ state 185
     NEXT            reduce using rule 69 (statement -> FUNCTION ID RETURNS ID statements ENDFUNCTION .)
 
 
-state 186
+state 185
 
     (70) statement -> FUNCTION ID RETURNS ARRAY statements ENDFUNCTION .
 
@@ -9323,14 +9352,14 @@ state 186
     NEXT            reduce using rule 70 (statement -> FUNCTION ID RETURNS ARRAY statements ENDFUNCTION .)
 
 
-state 187
+state 186
 
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE . OF ID
 
-    OF              shift and go to state 197
+    OF              shift and go to state 196
 
 
-state 188
+state 187
 
     (6) dimensions -> dimensions COMMA . dimension
     (8) dimension -> . expression COLON expression
@@ -9372,10 +9401,10 @@ state 188
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    dimension                      shift and go to state 198
-    expression                     shift and go to state 173
+    dimension                      shift and go to state 197
+    expression                     shift and go to state 172
 
-state 189
+state 188
 
     (8) dimension -> expression COLON . expression
     (33) expression -> . ID
@@ -9416,9 +9445,9 @@ state 189
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    expression                     shift and go to state 199
+    expression                     shift and go to state 198
 
-state 190
+state 189
 
     (18) statement -> IF expression THEN statements ELSE statements ENDIF .
 
@@ -9460,7 +9489,7 @@ state 190
     NEXT            reduce using rule 18 (statement -> IF expression THEN statements ELSE statements ENDIF .)
 
 
-state 191
+state 190
 
     (23) case -> case_expression COLON statements SEMICOLON .
 
@@ -9478,7 +9507,7 @@ state 191
     INTEGER         reduce using rule 23 (case -> case_expression COLON statements SEMICOLON .)
 
 
-state 192
+state 191
 
     (28) statement -> FOR ID ASSIGN expression TO expression STEP . expression statements NEXT ID
     (33) expression -> . ID
@@ -9519,9 +9548,9 @@ state 192
     REAL            shift and go to state 29
     INTEGER         shift and go to state 30
 
-    expression                     shift and go to state 200
+    expression                     shift and go to state 199
 
-state 193
+state 192
 
     (29) statement -> FOR ID ASSIGN expression TO expression statements . NEXT ID
     (1) statements -> statements . statement
@@ -9550,10 +9579,13 @@ state 193
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -9581,7 +9613,7 @@ state 193
     (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
     (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
 
-    NEXT            shift and go to state 201
+    NEXT            shift and go to state 200
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -9613,7 +9645,7 @@ state 193
     expression                     shift and go to state 6
     statement                      shift and go to state 31
 
-state 194
+state 193
 
     (63) statement -> PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE .
 
@@ -9655,7 +9687,7 @@ state 194
     NEXT            reduce using rule 63 (statement -> PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE .)
 
 
-state 195
+state 194
 
     (67) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID . statements ENDFUNCTION
     (1) statements -> . statements statement
@@ -9685,10 +9717,109 @@ state 195
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
+    (33) expression -> . ID
+    (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (35) expression -> . expression OR expression
+    (36) expression -> . expression AND expression
+    (37) expression -> . NOT expression
+    (38) expression -> . expression EQUAL expression
+    (39) expression -> . expression NOT_EQUAL expression
+    (40) expression -> . expression LESS expression
+    (41) expression -> . expression GREATER expression
+    (42) expression -> . expression LESS_EQUAL expression
+    (43) expression -> . expression GREATER_EQUAL expression
+    (44) expression -> . expression MUL expression
+    (45) expression -> . expression DIV expression
+    (46) expression -> . MINUS expression
+    (47) expression -> . PLUS expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression CONNECT expression
+    (51) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (52) expression -> . BOOLEAN
+    (53) expression -> . CHAR
+    (54) expression -> . STRING
+    (55) expression -> . REAL
+    (56) expression -> . INTEGER
+    (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
+    (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
+
+    DECLARE         shift and go to state 3
+    CONSTANT        shift and go to state 5
+    ID              shift and go to state 4
+    INPUT           shift and go to state 7
+    OUTPUT          shift and go to state 8
+    IF              shift and go to state 9
+    CASE            shift and go to state 10
+    FOR             shift and go to state 11
+    REPEAT          shift and go to state 12
+    WHILE           shift and go to state 13
+    PROCEDURE       shift and go to state 14
+    CALL            shift and go to state 16
+    FUNCTION        shift and go to state 17
+    RETURN          shift and go to state 18
+    OPENFILE        shift and go to state 19
+    READFILE        shift and go to state 20
+    WRITEFILE       shift and go to state 21
+    CLOSEFILE       shift and go to state 22
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 24
+    PLUS            shift and go to state 25
+    LEFT_PAREN      shift and go to state 15
+    BOOLEAN         shift and go to state 26
+    CHAR            shift and go to state 27
+    STRING          shift and go to state 28
+    REAL            shift and go to state 29
+    INTEGER         shift and go to state 30
+
+    statements                     shift and go to state 201
+    statement                      shift and go to state 2
+    expression                     shift and go to state 6
+
+state 195
+
+    (68) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY . statements ENDFUNCTION
+    (1) statements -> . statements statement
+    (2) statements -> . statement
+    (3) statement -> . DECLARE ID COLON ID
+    (4) statement -> . CONSTANT ID EQUAL expression
+    (5) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
+    (9) statement -> . ID ASSIGN expression
+    (10) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
+    (13) statement -> . INPUT ID
+    (14) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (15) statement -> . OUTPUT output_expression
+    (18) statement -> . IF expression THEN statements ELSE statements ENDIF
+    (19) statement -> . IF expression THEN statements ENDIF
+    (20) statement -> . CASE OF ID cases ENDCASE
+    (28) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
+    (29) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
+    (30) statement -> . REPEAT statements UNTIL expression
+    (31) statement -> . WHILE expression statements ENDWHILE
+    (32) statement -> . expression
+    (63) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
+    (64) statement -> . PROCEDURE ID statements ENDPROCEDURE
+    (65) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
+    (66) statement -> . CALL ID
+    (67) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+    (68) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
+    (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
+    (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
+    (73) statement -> . RETURN expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -9750,105 +9881,12 @@ state 195
 
 state 196
 
-    (68) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY . statements ENDFUNCTION
-    (1) statements -> . statements statement
-    (2) statements -> . statement
-    (3) statement -> . DECLARE ID COLON ID
-    (4) statement -> . CONSTANT ID EQUAL expression
-    (5) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
-    (9) statement -> . ID ASSIGN expression
-    (10) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
-    (13) statement -> . INPUT ID
-    (14) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (15) statement -> . OUTPUT output_expression
-    (18) statement -> . IF expression THEN statements ELSE statements ENDIF
-    (19) statement -> . IF expression THEN statements ENDIF
-    (20) statement -> . CASE OF ID cases ENDCASE
-    (28) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
-    (29) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
-    (30) statement -> . REPEAT statements UNTIL expression
-    (31) statement -> . WHILE expression statements ENDWHILE
-    (32) statement -> . expression
-    (63) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-    (64) statement -> . PROCEDURE ID statements ENDPROCEDURE
-    (65) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
-    (66) statement -> . CALL ID
-    (67) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
-    (68) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
-    (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
-    (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
-    (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
-    (33) expression -> . ID
-    (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (35) expression -> . expression OR expression
-    (36) expression -> . expression AND expression
-    (37) expression -> . NOT expression
-    (38) expression -> . expression EQUAL expression
-    (39) expression -> . expression NOT_EQUAL expression
-    (40) expression -> . expression LESS expression
-    (41) expression -> . expression GREATER expression
-    (42) expression -> . expression LESS_EQUAL expression
-    (43) expression -> . expression GREATER_EQUAL expression
-    (44) expression -> . expression MUL expression
-    (45) expression -> . expression DIV expression
-    (46) expression -> . MINUS expression
-    (47) expression -> . PLUS expression
-    (48) expression -> . expression PLUS expression
-    (49) expression -> . expression MINUS expression
-    (50) expression -> . expression CONNECT expression
-    (51) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (52) expression -> . BOOLEAN
-    (53) expression -> . CHAR
-    (54) expression -> . STRING
-    (55) expression -> . REAL
-    (56) expression -> . INTEGER
-    (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
-    (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
-
-    DECLARE         shift and go to state 3
-    CONSTANT        shift and go to state 5
-    ID              shift and go to state 4
-    INPUT           shift and go to state 7
-    OUTPUT          shift and go to state 8
-    IF              shift and go to state 9
-    CASE            shift and go to state 10
-    FOR             shift and go to state 11
-    REPEAT          shift and go to state 12
-    WHILE           shift and go to state 13
-    PROCEDURE       shift and go to state 14
-    CALL            shift and go to state 16
-    FUNCTION        shift and go to state 17
-    RETURN          shift and go to state 18
-    OPENFILE        shift and go to state 19
-    READFILE        shift and go to state 20
-    WRITEFILE       shift and go to state 21
-    CLOSEFILE       shift and go to state 22
-    NOT             shift and go to state 23
-    MINUS           shift and go to state 24
-    PLUS            shift and go to state 25
-    LEFT_PAREN      shift and go to state 15
-    BOOLEAN         shift and go to state 26
-    CHAR            shift and go to state 27
-    STRING          shift and go to state 28
-    REAL            shift and go to state 29
-    INTEGER         shift and go to state 30
-
-    statements                     shift and go to state 203
-    statement                      shift and go to state 2
-    expression                     shift and go to state 6
-
-state 197
-
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF . ID
 
-    ID              shift and go to state 204
+    ID              shift and go to state 203
 
 
-state 198
+state 197
 
     (6) dimensions -> dimensions COMMA dimension .
 
@@ -9856,7 +9894,7 @@ state 198
     COMMA           reduce using rule 6 (dimensions -> dimensions COMMA dimension .)
 
 
-state 199
+state 198
 
     (8) dimension -> expression COLON expression .
     (35) expression -> expression . OR expression
@@ -9890,7 +9928,7 @@ state 199
     CONNECT         shift and go to state 49
 
 
-state 200
+state 199
 
     (28) statement -> FOR ID ASSIGN expression TO expression STEP expression . statements NEXT ID
     (35) expression -> expression . OR expression
@@ -9933,10 +9971,13 @@ state 200
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -10004,17 +10045,17 @@ state 200
     INTEGER         shift and go to state 30
 
     expression                     shift and go to state 6
-    statements                     shift and go to state 205
+    statements                     shift and go to state 204
     statement                      shift and go to state 2
 
-state 201
+state 200
 
     (29) statement -> FOR ID ASSIGN expression TO expression statements NEXT . ID
 
-    ID              shift and go to state 206
+    ID              shift and go to state 205
 
 
-state 202
+state 201
 
     (67) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements . ENDFUNCTION
     (1) statements -> statements . statement
@@ -10043,10 +10084,108 @@ state 202
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
+    (33) expression -> . ID
+    (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (35) expression -> . expression OR expression
+    (36) expression -> . expression AND expression
+    (37) expression -> . NOT expression
+    (38) expression -> . expression EQUAL expression
+    (39) expression -> . expression NOT_EQUAL expression
+    (40) expression -> . expression LESS expression
+    (41) expression -> . expression GREATER expression
+    (42) expression -> . expression LESS_EQUAL expression
+    (43) expression -> . expression GREATER_EQUAL expression
+    (44) expression -> . expression MUL expression
+    (45) expression -> . expression DIV expression
+    (46) expression -> . MINUS expression
+    (47) expression -> . PLUS expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression CONNECT expression
+    (51) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (52) expression -> . BOOLEAN
+    (53) expression -> . CHAR
+    (54) expression -> . STRING
+    (55) expression -> . REAL
+    (56) expression -> . INTEGER
+    (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
+    (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
+
+    ENDFUNCTION     shift and go to state 206
+    DECLARE         shift and go to state 3
+    CONSTANT        shift and go to state 5
+    ID              shift and go to state 4
+    INPUT           shift and go to state 7
+    OUTPUT          shift and go to state 8
+    IF              shift and go to state 9
+    CASE            shift and go to state 10
+    FOR             shift and go to state 11
+    REPEAT          shift and go to state 12
+    WHILE           shift and go to state 13
+    PROCEDURE       shift and go to state 14
+    CALL            shift and go to state 16
+    FUNCTION        shift and go to state 17
+    RETURN          shift and go to state 18
+    OPENFILE        shift and go to state 19
+    READFILE        shift and go to state 20
+    WRITEFILE       shift and go to state 21
+    CLOSEFILE       shift and go to state 22
+    NOT             shift and go to state 23
+    MINUS           shift and go to state 24
+    PLUS            shift and go to state 25
+    LEFT_PAREN      shift and go to state 15
+    BOOLEAN         shift and go to state 26
+    CHAR            shift and go to state 27
+    STRING          shift and go to state 28
+    REAL            shift and go to state 29
+    INTEGER         shift and go to state 30
+
+    statement                      shift and go to state 31
+    expression                     shift and go to state 6
+
+state 202
+
+    (68) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements . ENDFUNCTION
+    (1) statements -> statements . statement
+    (3) statement -> . DECLARE ID COLON ID
+    (4) statement -> . CONSTANT ID EQUAL expression
+    (5) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
+    (9) statement -> . ID ASSIGN expression
+    (10) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
+    (13) statement -> . INPUT ID
+    (14) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (15) statement -> . OUTPUT output_expression
+    (18) statement -> . IF expression THEN statements ELSE statements ENDIF
+    (19) statement -> . IF expression THEN statements ENDIF
+    (20) statement -> . CASE OF ID cases ENDCASE
+    (28) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
+    (29) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
+    (30) statement -> . REPEAT statements UNTIL expression
+    (31) statement -> . WHILE expression statements ENDWHILE
+    (32) statement -> . expression
+    (63) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
+    (64) statement -> . PROCEDURE ID statements ENDPROCEDURE
+    (65) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
+    (66) statement -> . CALL ID
+    (67) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+    (68) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
+    (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
+    (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
+    (73) statement -> . RETURN expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -10108,98 +10247,6 @@ state 202
 
 state 203
 
-    (68) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements . ENDFUNCTION
-    (1) statements -> statements . statement
-    (3) statement -> . DECLARE ID COLON ID
-    (4) statement -> . CONSTANT ID EQUAL expression
-    (5) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
-    (9) statement -> . ID ASSIGN expression
-    (10) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
-    (13) statement -> . INPUT ID
-    (14) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (15) statement -> . OUTPUT output_expression
-    (18) statement -> . IF expression THEN statements ELSE statements ENDIF
-    (19) statement -> . IF expression THEN statements ENDIF
-    (20) statement -> . CASE OF ID cases ENDCASE
-    (28) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
-    (29) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
-    (30) statement -> . REPEAT statements UNTIL expression
-    (31) statement -> . WHILE expression statements ENDWHILE
-    (32) statement -> . expression
-    (63) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-    (64) statement -> . PROCEDURE ID statements ENDPROCEDURE
-    (65) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
-    (66) statement -> . CALL ID
-    (67) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
-    (68) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
-    (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
-    (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
-    (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
-    (33) expression -> . ID
-    (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (35) expression -> . expression OR expression
-    (36) expression -> . expression AND expression
-    (37) expression -> . NOT expression
-    (38) expression -> . expression EQUAL expression
-    (39) expression -> . expression NOT_EQUAL expression
-    (40) expression -> . expression LESS expression
-    (41) expression -> . expression GREATER expression
-    (42) expression -> . expression LESS_EQUAL expression
-    (43) expression -> . expression GREATER_EQUAL expression
-    (44) expression -> . expression MUL expression
-    (45) expression -> . expression DIV expression
-    (46) expression -> . MINUS expression
-    (47) expression -> . PLUS expression
-    (48) expression -> . expression PLUS expression
-    (49) expression -> . expression MINUS expression
-    (50) expression -> . expression CONNECT expression
-    (51) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (52) expression -> . BOOLEAN
-    (53) expression -> . CHAR
-    (54) expression -> . STRING
-    (55) expression -> . REAL
-    (56) expression -> . INTEGER
-    (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
-    (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
-
-    ENDFUNCTION     shift and go to state 208
-    DECLARE         shift and go to state 3
-    CONSTANT        shift and go to state 5
-    ID              shift and go to state 4
-    INPUT           shift and go to state 7
-    OUTPUT          shift and go to state 8
-    IF              shift and go to state 9
-    CASE            shift and go to state 10
-    FOR             shift and go to state 11
-    REPEAT          shift and go to state 12
-    WHILE           shift and go to state 13
-    PROCEDURE       shift and go to state 14
-    CALL            shift and go to state 16
-    FUNCTION        shift and go to state 17
-    RETURN          shift and go to state 18
-    OPENFILE        shift and go to state 19
-    READFILE        shift and go to state 20
-    WRITEFILE       shift and go to state 21
-    CLOSEFILE       shift and go to state 22
-    NOT             shift and go to state 23
-    MINUS           shift and go to state 24
-    PLUS            shift and go to state 25
-    LEFT_PAREN      shift and go to state 15
-    BOOLEAN         shift and go to state 26
-    CHAR            shift and go to state 27
-    STRING          shift and go to state 28
-    REAL            shift and go to state 29
-    INTEGER         shift and go to state 30
-
-    statement                      shift and go to state 31
-    expression                     shift and go to state 6
-
-state 204
-
     (5) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID .
 
     DECLARE         reduce using rule 5 (statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID .)
@@ -10240,7 +10287,7 @@ state 204
     NEXT            reduce using rule 5 (statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID .)
 
 
-state 205
+state 204
 
     (28) statement -> FOR ID ASSIGN expression TO expression STEP expression statements . NEXT ID
     (1) statements -> statements . statement
@@ -10269,10 +10316,13 @@ state 205
     (69) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
     (70) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
     (73) statement -> . RETURN expression
-    (74) statement -> . OPENFILE expression FOR file_mode
-    (79) statement -> . READFILE expression COMMA ID
-    (80) statement -> . WRITEFILE expression COMMA expression
-    (81) statement -> . CLOSEFILE expression
+    (74) statement -> . OPENFILE expression FOR READ
+    (75) statement -> . OPENFILE expression FOR WRITE
+    (76) statement -> . OPENFILE expression FOR APPEND
+    (77) statement -> . OPENFILE expression FOR RANDOM
+    (78) statement -> . READFILE expression COMMA ID
+    (79) statement -> . WRITEFILE expression COMMA expression
+    (80) statement -> . CLOSEFILE expression
     (33) expression -> . ID
     (34) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (35) expression -> . expression OR expression
@@ -10300,7 +10350,7 @@ state 205
     (71) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
     (72) expression -> . ID LEFT_PAREN RIGHT_PAREN
 
-    NEXT            shift and go to state 209
+    NEXT            shift and go to state 208
     DECLARE         shift and go to state 3
     CONSTANT        shift and go to state 5
     ID              shift and go to state 4
@@ -10332,7 +10382,7 @@ state 205
     expression                     shift and go to state 6
     statement                      shift and go to state 31
 
-state 206
+state 205
 
     (29) statement -> FOR ID ASSIGN expression TO expression statements NEXT ID .
 
@@ -10374,7 +10424,7 @@ state 206
     NEXT            reduce using rule 29 (statement -> FOR ID ASSIGN expression TO expression statements NEXT ID .)
 
 
-state 207
+state 206
 
     (67) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION .
 
@@ -10416,7 +10466,7 @@ state 207
     NEXT            reduce using rule 67 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION .)
 
 
-state 208
+state 207
 
     (68) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION .
 
@@ -10458,14 +10508,14 @@ state 208
     NEXT            reduce using rule 68 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION .)
 
 
-state 209
+state 208
 
     (28) statement -> FOR ID ASSIGN expression TO expression STEP expression statements NEXT . ID
 
-    ID              shift and go to state 210
+    ID              shift and go to state 209
 
 
-state 210
+state 209
 
     (28) statement -> FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID .
 
@@ -10539,10 +10589,10 @@ WARNING: shift/reduce conflict for PLUS in state 119 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 119 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 129 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 129 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 148 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 148 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 174 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 174 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 147 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 147 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 173 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 173 resolved as shift
 WARNING: reduce/reduce conflict in state 131 resolved using rule (expression -> PLUS expression)
 WARNING: rejected rule (expression -> expression PLUS expression) in state 131
 WARNING: reduce/reduce conflict in state 132 resolved using rule (expression -> MINUS expression)
