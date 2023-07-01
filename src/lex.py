@@ -38,7 +38,19 @@ reserved = {
     "INHERITS",
     "ARRAY",
     "RETURNS",
-    "RETURN"
+    "RETURN",
+    "OPENFILE",
+    "READ",
+    "WRITE",
+    "APPEND",
+    "READFILE",
+    "EOF",
+    "WRITEFILE",
+    "CLOSEFILE",
+    "SEEK",
+    "GETRECORD",
+    "PUTRECORD",
+    "RANDOM"
 }
 
 tokens = (

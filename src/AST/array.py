@@ -1,17 +1,19 @@
 from src.AST.data import *
+from src.AST_Base import *
+from src.error import *
 from src.status import *
 
-class Array:
-    def __init__(self, id, dimensions, type):
+class Array(AST_Node):
+    def __init__(self, id, dimensions, type, *args, **kwargs):
         self.type = 'ARRAY'
         self.id = id
         self.var_type = type
         self.dimensions = dimensions
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
 
-    # 通过.来表达从属关系，然后推入stack
     def add_variables(self, dimensions):
         result = {}
         if len(dimensions) == 1:
@@ -29,10 +31,11 @@ class Array:
         stack.new_variable(self.id, 'ARRAY')
         stack.set_variable(self.id, result, 'ARRAY')
 
-class Dimensions:
-    def __init__(self):
+class Dimensions(AST_Node):
+    def __init__(self, *args, **kwargs):
         self.type = 'DIMENSIONS'
         self.dimensions = []
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         r = LEVEL_STR * level + self.type
@@ -49,11 +52,12 @@ class Dimensions:
             result.append(dimension.exe())
         return result
 
-class Dimension:
-    def __init__(self, left, right):
+class Dimension(AST_Node):
+    def __init__(self, left, right, *args, **kwargs):
         self.type = 'DIMENSION'
         self.left = left
         self.right = right
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
@@ -64,14 +68,15 @@ class Dimension:
         if left[1] == 'INTEGER' and right[1] == 'INTEGER':
             return (left[0], right[0])
         else:
-            print('Array dimension should be INTEGER. ')
+            error_messages.append(Error(f'Array dimension should be INTEGER, but found {left[0]} and {right[0]}. ', self))
 
-class Array_assign:
-    def __init__(self, id, indexes, value):
+class Array_assign(AST_Node):
+    def __init__(self, id, indexes, value, *args, **kwargs):
         self.type = 'ARRAY_ASSIGN'
         self.id = id
         self.indexes = indexes
         self.value = value
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.value.get_tree(level+1)
@@ -95,10 +100,11 @@ class Array_assign:
 
         stack.set_variable(self.id, arr, 'ARRAY')
 
-class Indexes:
-    def __init__(self):
+class Indexes(AST_Node):
+    def __init__(self, *args, **kwargs):
         self.type = 'INDEXES'
         self.indexes = []
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type
@@ -117,11 +123,12 @@ class Indexes:
                 index_list.append(r[0])
         return index_list
 
-class Array_get:
-    def __init__(self, id, indexes):
+class Array_get(AST_Node):
+    def __init__(self, id, indexes, *args, **kwargs):
         self.type = 'ARRAY_GET'
         self.id = id
         self.indexes = indexes
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)

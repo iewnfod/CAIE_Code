@@ -1,9 +1,13 @@
 from src.AST.data import *
+from src.AST_Base import *
+from src.error import *
+from src.status import *
 
-class Output:
-    def __init__(self, value):
+class Output(AST_Node):
+    def __init__(self, value, *args, **kwargs):
         self.type = 'OUTPUT'
         self.value = value
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.value.get_tree(level+1)
@@ -11,10 +15,11 @@ class Output:
     def exe(self):
         print(self.value.exe())
 
-class Output_expression:
-    def __init__(self):
+class Output_expression(AST_Node):
+    def __init__(self, *args, **kwargs):
         self.type = 'OUTPUT_EXPRESSION'
         self.expressions = []
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         r = LEVEL_STR * level + self.type
@@ -50,10 +55,11 @@ class Output_expression:
                 result += self.get_str(t)
         return result
 
-class Input:
-    def __init__(self, id):
+class Input(AST_Node):
+    def __init__(self, id, *args, **kwargs):
         self.type = 'INPUT'
         self.id = id
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id)
@@ -61,11 +67,12 @@ class Input:
     def exe(self):
         stack.set_variable(self.id, str(input()), 'STRING')
 
-class Array_input:
-    def __init__(self, id, indexes):
+class Array_input(AST_Node):
+    def __init__(self, id, indexes, *args, **kwargs):
         self.type = 'ARRAY_INPUT'
         self.id = id
         self.indexes = indexes
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)

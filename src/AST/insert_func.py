@@ -1,10 +1,14 @@
 from src.AST.data import *
 from random import randint
+from src.AST_Base import *
+from src.error import *
+from src.status import *
 
-class Int_convert:
-    def __init__(self, expression):
+class Int_convert(AST_Node):
+    def __init__(self, expression, *args, **kwargs):
         self.type = 'INTEGER_CONVERT'
         self.expression = expression
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -12,7 +16,7 @@ class Int_convert:
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            print(f'`{self.type}` could only convert one parameter.')
+            error_messages.append(Error(f'`{self.type}` could only convert one parameter.', self))
             return
         else:
             result = result[0]
@@ -20,12 +24,13 @@ class Int_convert:
             result = int(result[0])
             return (result, 'INTEGER')
         except:
-            print(f'Cannot convert `{result[0]}` into `INTEGER`')
+            error_messages.append(Error(f'Cannot convert `{result[0]}` into `INTEGER`', self))
 
-class Str_convert:
-    def __init__(self, expression):
+class Str_convert(AST_Node):
+    def __init__(self, expression, *args, **kwargs):
         self.type = 'STRING_CONVERT'
         self.expression = expression
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -33,7 +38,7 @@ class Str_convert:
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            print(f'`{self.type}` could only convert one parameter.')
+            error_messages.append(Error(f'`{self.type}` could only convert one parameter.', self))
             return
         else:
             result = result[0]
@@ -41,12 +46,13 @@ class Str_convert:
             result = str(result[0])
             return (result, 'STRING')
         except:
-            print(f'Cannot convert `{result[0]}` into `STRING`')
+            error_messages.append(Error(f'Cannot convert `{result[0]}` into `STRING`', self))
 
-class Char_convert:
-    def __init__(self, expression):
+class Char_convert(AST_Node):
+    def __init__(self, expression, *args, **kwargs):
         self.type = 'CHAR_CONVERT'
         self.expression = expression
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -54,7 +60,7 @@ class Char_convert:
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            print(f'`{self.type}` could only convert one parameter.')
+            error_messages.append(Error(f'`{self.type}` could only convert one parameter. ', self))
             return
         else:
             result = result[0]
@@ -63,19 +69,20 @@ class Char_convert:
         try:
             result = str(result[0])
         except:
-            print(f'Cannot convert `{result[0]}` into `CHAR`')
+            error_messages.append(Error(f'Cannot convert `{result[0]}` into `CHAR`. ', self))
             return
 
         # 判断长度，如果不是1，都不可以
         if len(result) != 1:
-            print(f'Cannot convert `{result}` into `CHAR`')
+            error_messages.append(Error(f'Cannot convert `{result}` into `CHAR`. ', self))
         else:
             return (result, 'CHAR')
 
-class Real_convert:
-    def __init__(self, expression):
+class Real_convert(AST_Node):
+    def __init__(self, expression, *args, **kwargs):
         self.type = 'REAL_CONVERT'
         self.expression = expression
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -83,7 +90,7 @@ class Real_convert:
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            print(f'`{self.type}` could only convert one parameter.')
+            error_messages.append(Error(f'`{self.type}` could only convert one parameter. ', self))
             return
         else:
             result = result[0]
@@ -91,12 +98,13 @@ class Real_convert:
             result = float(result[0])
             return (result, 'REAL')
         except:
-            print(f'Cannot convert `{result[0]}` into `REAL`')
+            error_messages.append(Error(f'Cannot convert `{result[0]}` into `REAL`. ', self))
 
-class Bool_convert:
-    def __init__(self, expression):
+class Bool_convert(AST_Node):
+    def __init__(self, expression, *args, **kwargs):
         self.type = 'BOOLEAN_CONVERT'
         self.expression = expression
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -104,7 +112,7 @@ class Bool_convert:
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            print(f'`{self.type}` could only convert one parameter.')
+            error_messages.append(Error(f'`{self.type}` could only convert one parameter. ', self))
             return
         else:
             result = result[0]
@@ -112,13 +120,14 @@ class Bool_convert:
             result = bool(result[0])
             return (result, 'BOOLEAN')
         except:
-            print(f'Cannot convert `{result[0]}` into `BOOLEAN`')
+            error_messages.append(Error(f'Cannot convert `{result[0]}` into `BOOLEAN`. ', self))
 
 
-class Right:
-    def __init__(self, parameters):
+class Right(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
         self.type = 'RIGHT'
         self.parameters = parameters
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -126,7 +135,7 @@ class Right:
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 2:
-            print(f'Function `{self.type}` expect 2 parameters, but found `{len(parameters)}`')
+            error_messages.append(Error(f'Function `{self.type}` expect 2 parameters, but found `{len(parameters)}`. ', self))
             return
 
         s = parameters[0]
@@ -134,12 +143,13 @@ class Right:
         if s[1] == 'STRING' and x[1] == 'INTEGER':
             return (s[0][len(s[0])-x[0]:], 'STRING')
         else:
-            print(f'Function `{self.type}` expect `STRING` and `INTEGER`, but found `{s[1]}` and `{x[1]}`')
+            error_messages.append(Error(f'Function `{self.type}` expect `STRING` and `INTEGER`, but found `{s[1]}` and `{x[1]}`. ', self))
 
-class Length:
-    def __init__(self, parameters):
+class Length(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
         self.type = 'LENGTH'
         self.parameters = parameters
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -147,19 +157,20 @@ class Length:
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 1:
-            print(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`')
+            error_messages.append(Error(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`. ', self))
             return
 
         s = parameters[0]
         if s[1] == 'STRING' or s[1] == 'ARRAY':
             return (len(s[0]), 'INTEGER')
         else:
-            print(f'Function `{self.type}` expect `STRING` or `ARRAY`, but found `{s[1]}')
+            error_messages.append(Error(f'Function `{self.type}` expect `STRING` or `ARRAY`, but found `{s[1]}`. ', self))
 
-class Mid:
-    def __init__(self, parameters):
+class Mid(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
         self.type = 'MID'
         self.parameters = parameters
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -167,7 +178,7 @@ class Mid:
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 3:
-            print(f'Function `{self.type}` expect 3 parameters, but found `{len(parameters)}`')
+            error_messages.append(Error(f'Function `{self.type}` expect 3 parameters, but found `{len(parameters)}`. ', self))
             return
 
         s = parameters[0]
@@ -176,12 +187,13 @@ class Mid:
         if s[1] == 'STRING' and x[1] == 'INTEGER' and y[1] == 'INTEGER':
             return (s[0][x[0]-1:x[0]+y[0]-1], 'STRING')
         else:
-            print(f'Function `{self.type}` expect `STRING` and `INTEGER` and `INTEGER`, but found `{self.s[1]}` and `{self.x[1]}` and `{self.y[1]}`')
+            error_messages.append(Error(f'Function `{self.type}` expect `STRING` and `INTEGER` and `INTEGER`, but found `{self.s[1]}` and `{self.x[1]}` and `{self.y[1]}`. ', self))
 
-class Lcase:
-    def __init__(self, parameters):
+class Lcase(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
         self.type = 'LCASE'
         self.parameters = parameters
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -189,19 +201,20 @@ class Lcase:
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 1:
-            print(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`')
+            error_messages.append(Error(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`. ', self))
             return
 
         c = parameters[0]
         if c[1] == 'CHAR':
             return (c[0].lower(), 'CHAR')
         else:
-            print(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`')
+            error_messages.append(Error(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`. ', self))
 
-class Ucase:
-    def __init__(self, parameters):
+class Ucase(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
         self.type = 'UCASE'
         self.parameters = parameters
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -209,21 +222,22 @@ class Ucase:
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 1:
-            print(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`')
+            error_messages.append(Error(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`. ', self))
             return
 
         c = parameters[0]
         if c[1] == 'CHAR':
             return (c[0].upper(), 'CHAR')
         else:
-            print(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`')
+            error_messages.append(Error(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`. ', self))
 
 
-class Rand:
-    def __init__(self, parameters):
+class Rand(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
         self.type = 'RAND'
         self.parameters = parameters
         self.rate = 100
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -231,14 +245,14 @@ class Rand:
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 1:
-            print(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`')
+            error_messages.append(Error(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`. ', self))
             return
 
         n = parameters[0]
         if n[1] == 'INTEGER':
             return ( randint(0, n[0]*self.rate)/self.rate , "REAL")
         else:
-            print(f'Function `{self.type}` expect `CHAR`, but found `{n[1]}`')
+            error_messages.append(Error(f'Function `{self.type}` expect `CHAR`, but found `{n[1]}`. ', self))
 
 
 insert_functions = {

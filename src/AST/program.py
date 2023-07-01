@@ -1,9 +1,13 @@
 from src.AST.data import *
+from src.AST_Base import *
+from src.error import *
+from src.status import *
 
-class Statements:
-    def __init__(self):
+class Statements(AST_Node):
+    def __init__(self, *args, **kwargs):
         self.type = 'STATEMENTS'
         self.statements = []
+        super().__init__(*args, **kwargs)
 
     def add_statement(self, statement):
         self.statements.append(statement)
@@ -24,17 +28,18 @@ class Statements:
             try:
                 result.append(statement.exe())
             except Exception as e:
-                print(e)
+                error_messages.append(Error(str(e), self))
                 break
 
         return result
 
-class If:
-    def __init__(self, condition, true_statement, false_statement=None):
+class If(AST_Node):
+    def __init__(self, condition, true_statement, false_statement=None, *args, **kwargs):
         self.type = 'IF'
         self.condition = condition
         self.true_statement = true_statement
         self.false_statement = false_statement
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level
@@ -51,8 +56,8 @@ class If:
             if self.false_statement:
                 self.false_statement.exe()
 
-class For:
-    def __init__(self, id, left, right, step, body_statement, next_id):
+class For(AST_Node):
+    def __init__(self, id, left, right, step, body_statement, next_id, *args, **kwargs):
         self.type = 'FOR'
         self.id = id
         self.left = left
@@ -60,6 +65,7 @@ class For:
         self.step = step
         self.body_statement = body_statement
         self.next_id = next_id
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level
@@ -91,11 +97,12 @@ class For:
         else:
             print(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`. ')
 
-class Case:
-    def __init__(self, id, cases):
+class Case(AST_Node):
+    def __init__(self, id, cases, *args, **kwargs):
         self.type = 'CASE'
         self.id = id
         self.cases = cases
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.cases.get_tree(level+1)
@@ -104,11 +111,12 @@ class Case:
         value = stack.get_variable(self.id)
         self.cases.exe(value)
 
-class Cases:
-    def __init__(self):
+class Cases(AST_Node):
+    def __init__(self, *args, **kwargs):
         self.type = 'CASES'
         self.cases = []
         self.otherwise = None
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type
@@ -131,12 +139,13 @@ class Cases:
             if self.otherwise:
                 self.otherwise.exe()
 
-class A_case:
-    def __init__(self, condition, true_statement, is_otherwise=False):
+class A_case(AST_Node):
+    def __init__(self, condition, true_statement, is_otherwise=False, *args, **kwargs):
         self.type = 'A_CASE'
         self.condition = condition
         self.true_statement = true_statement
         self.is_otherwise = is_otherwise
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.condition.get_tree(level+1) + '\n' + self.true_statement.get_tree(level+1)
@@ -152,11 +161,12 @@ class A_case:
     def exe(self):
         self.true_statement.exe()
 
-class Range:
-    def __init__(self, start, end):
+class Range(AST_Node):
+    def __init__(self, start, end, *args, **kwargs):
         self.type = 'RANGE'
         self.start = start
         self.end = end
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.start.get_tree(level+1) + '\n' + self.end.get_tree(level+1)
@@ -170,13 +180,14 @@ class Range:
                 l.append((i, 'INTEGER'))
             return l
         else:
-            print(f'Expect `INTEGER` for a range argument, but found `{n1[1]}` and `{n2[1]}`')
+            error_messages.append(Error(f'Expect `INTEGER` for a range argument, but found `{n1[1]}` and `{n2[1]}`', self))
 
-class Repeat:
-    def __init__(self, true_statement, condition):
+class Repeat(AST_Node):
+    def __init__(self, true_statement, condition, *args, **kwargs):
         self.type = 'REPEAT'
         self.true_statement = true_statement
         self.condition = condition
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.true_statement.get_tree(level+1) + '\n' + self.condition.get_tree(level+1)
@@ -187,11 +198,12 @@ class Repeat:
             if self.condition.exe()[0]:
                 break
 
-class While:
-    def __init__(self, condition, true_statement):
+class While(AST_Node):
+    def __init__(self, condition, true_statement, *args, **kwargs):
         self.type = 'WHILE'
         self.condition = condition
         self.true_statement = true_statement
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.condition.get_tree(level+1) + '\n' + self.true_statement.get_tree(level+1)

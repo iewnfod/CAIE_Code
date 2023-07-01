@@ -4,6 +4,7 @@ class Stack:
     def __init__(self) -> None:
         self.spaces = [('GLOBAL', {})]  # [(空间名, {变量名: (值, 类型, 是否是常量)})]
         self.functions = {}  # {函数名: 函数AST实例}
+        self.files = {}  # {文件名: 打开的文件实例}
         self.return_variables = []
         self.return_request = False
 

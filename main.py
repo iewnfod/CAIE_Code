@@ -1,6 +1,6 @@
 from src.lex import *
 from src.parse import *
-from src.status import *
+import src.status as status
 import src.options as options
 from ply import yacc
 from ply import lex
@@ -9,8 +9,12 @@ import signal
 import os
 import chardet
 import time
-import readline
-readline.clear_history()
+# 尝试导入 readline，无法导入也不会导致核心功能受损
+try:
+    import readline
+    readline.clear_history()
+except:
+    pass
 
 preline = '$'
 
@@ -31,6 +35,18 @@ def preload_scripts():
             _, n = os.path.splitext(path)
             if n == '.cpc':
                 with_file(path, True)
+
+# 输出错误信息
+def output_error(p=''):
+    if status.error_messages:
+        # 输出文件路径
+        if p:
+            print(f'File `{p}`: ')
+        # 输出错误信息
+        for i in status.error_messages:
+            i.raise_err()
+        # 清空错误数组
+        status.error_messages = []
 
 # 终端模式，逐行输入并解析运行
 def with_line():
@@ -55,8 +71,10 @@ def with_line():
                 t = time.time() - t
                 print(f'\033[4mDuration: {t}s\033[0m')
 
-        except Exception as e:
-            print('Error:', e)
+        except:
+            pass
+
+        output_error()
 
 # 文件模式，读取文件并解析运行
 def with_file(path, preload=False):
@@ -92,8 +110,9 @@ def with_file(path, preload=False):
             print(f'\033[4mDuration: {t}s\033[0m')
 
     except:
-        error_messages.insert(0, f'File `{path}`')
-        print('\n\t'.join(error_messages))
+        pass
+
+    output_error(path)
 
 # 错误的argument
 def wrong_argument(msg):
@@ -115,6 +134,7 @@ def main():
     # 预加载文件
     preload_scripts()
 
+    lexer.lineno = 1
     # 选择模式运行
     if not file_path:
         with_line()

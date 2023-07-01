@@ -1,9 +1,13 @@
 from src.AST.data import *
+from src.AST_Base import *
+from src.error import *
+from src.status import *
 
-class Integer:
-    def __init__(self, value):
+class Integer(AST_Node):
+    def __init__(self, value, *args, **kwargs):
         self.type = 'INTEGER'
         self.value = value
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.value)
@@ -11,10 +15,11 @@ class Integer:
     def exe(self):
         return (self.value, self.type)
 
-class Real:
-    def __init__(self, value):
+class Real(AST_Node):
+    def __init__(self, value, *args, **kwargs):
         self.type = 'REAL'
         self.value = value
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.value)
@@ -22,10 +27,11 @@ class Real:
     def exe(self):
         return (self.value, self.type)
 
-class Char:
-    def __init__(self, value):
+class Char(AST_Node):
+    def __init__(self, value, *args, **kwargs):
         self.type = 'CHAR'
         self.value = format(value)
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + "'" + str(self.value) + "'"
@@ -33,10 +39,11 @@ class Char:
     def exe(self):
         return (self.value, self.type)
 
-class String:
-    def __init__(self, value):
+class String(AST_Node):
+    def __init__(self, value, *args, **kwargs):
         self.type = 'STRING'
         self.value = value
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + '"' + str(self.value) + '"'
@@ -44,10 +51,11 @@ class String:
     def exe(self):
         return (self.value, self.type)
 
-class Boolean:
-    def __init__(self, value):
+class Boolean(AST_Node):
+    def __init__(self, value, *args, **kwargs):
         self.type = 'BOOLEAN'
         self.value = value
+        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.value)

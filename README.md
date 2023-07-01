@@ -19,8 +19,9 @@ CAIE Pseudocode Interpreter
 `cpc`文件会优先选择 `pypy3` 运行
 因此，在安装依赖时，请确保安装在了正确版本的 `Python3` 上
 
-#### 在安装依赖时，`readline` 库无法正常安装
-请将 `requirements.txt` 中的 `readline` 改为 `gnureadline`，再重新尝试安装依赖
+#### Playground 模式下，上下左右键无法正常使用
+使用 `pip install readline` 安装依赖并尝试运行
+若 `readline` 无法正常安装，请安装 `gnureadline`，即 `pip install gnureadline`，再尝试运行
 
 *若依旧无法解决问题，请提交issue*
 
