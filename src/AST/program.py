@@ -1,6 +1,7 @@
 from src.AST.data import *
 from src.AST_Base import *
 from src.global_var import *
+from src.AST.array import *
 
 class Statements(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -112,6 +113,21 @@ class Case(AST_Node):
 
     def exe(self):
         value = stack.get_variable(self.id)
+        self.cases.exe(value)
+
+class Case_array(AST_Node):
+    def __init__(self, id, indexes, cases, *args, **kwargs):
+        self.type = 'CASE_ARRAY'
+        self.id = id
+        self.indexes = indexes
+        self.cases = cases
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.cases.get_tree(level+1)
+
+    def exe(self):
+        value = Array_get(self.id, self.indexes, lineno=self.lineno, lexpos=self.lexpos)
         self.cases.exe(value)
 
 class Cases(AST_Node):

@@ -87,6 +87,12 @@ class Array_assign(AST_Node):
             if arr[index][1] == value[1]:
                 arr[index] = value
                 return
+            elif arr[index][1] == 'INTEGER' and value[1] == 'REAL':
+                arr[index] = (int(value[0]), 'INTEGER')
+                return
+            elif arr[index][1] == 'REAL' and value[1] == 'INTEGER':
+                arr[index] = (float(value[0]), 'REAL')
+                return
             else:
                 add_error_message(f'Cannot assign `{value[1]}` to `{arr[index][1]}`. ', self)
         else:

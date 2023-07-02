@@ -34,6 +34,10 @@ class Output_expression(AST_Node):
     def get_str(self, value):
         if value[1] == 'BOOLEAN':
             return str({True: 'TRUE', False: 'FALSE', None: 'None'}[value[0]])
+        elif value[1] == 'STRING' and value[0] == '':
+            return '""'
+        elif value[1] == 'CHAR' and value[0] == '':
+            return "''"
         else:
             return str(value[0])
 
