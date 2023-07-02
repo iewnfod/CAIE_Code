@@ -254,6 +254,33 @@ class Rand(AST_Node):
             add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{n[1]}`. ', self)
 
 
+class Eof(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        self.type = 'EOF'
+        self.parameters = parameters
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        parameters = self.parameters.exe()
+        if len(parameters) != 1:
+            add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`. ', self)
+            return
+
+        fp = parameters[0]
+        if fp[1] == 'STRING':
+            f = stack.get_file(fp[0])
+            eof = stack.get_eof(fp[0])
+            if f.tell() >= eof:
+                return (True, 'BOOLEAN')
+            else:
+                return (False, 'BOOLEAN')
+        else:
+            add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`. ', self)
+
+
 insert_functions = {
     "INT": Int_convert,
     "REAL": Real_convert,
@@ -266,4 +293,5 @@ insert_functions = {
     "LCASE": Lcase,
     "UCASE": Ucase,
     "RAND": Rand,
+    "EOF": Eof
 }

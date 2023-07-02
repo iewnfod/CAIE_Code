@@ -1,1 +1,13 @@
-Write file test!
+DECLARE a : ARRAY[1:10] OF INTEGER
+FOR i <- 1 TO 10
+    a[i] <- RAND(4)
+NEXT i
+OUTPUT a
+
+FOR i <- 1 TO 10
+    CASE OF a[i]
+        1 : OUTPUT 1;
+        2 : OUTPUT 2;
+        OTHERWISE : OUTPUT "a is ", a[i];
+    ENDCASE
+NEXT i

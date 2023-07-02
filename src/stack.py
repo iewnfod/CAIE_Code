@@ -74,10 +74,22 @@ class Stack:
             print(f'Stack Error: No function with id: `{id}`. ')
 
     def add_file(self, path, file_obj):
-        self.files[path] = file_obj
+        try:
+            file_obj.seek(0, 2)
+            eof = file_obj.tell()
+        except:
+            eof = ''
+        file_obj.seek(0)
+        self.files[path] = (file_obj, eof)
 
     def get_file(self, path):
         if path in self.files:
-            return self.files[path]
+            return self.files[path][0]
+        else:
+            print(f'Stack Error: File `{path}` has not opened. ')
+
+    def get_eof(self, path):
+        if path in self.files:
+            return self.files[path][1]
         else:
             print(f'Stack Error: File `{path}` has not opened. ')

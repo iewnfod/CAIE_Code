@@ -26,9 +26,9 @@ precedence = (
 
 def p_error(p):
     if p:
-        error_messages.append(Error('Parse Error', AST_Node(p.lineno, p.lexpos)))
+        add_error_message('Parse Error', AST_Node(p.lineno, p.lexpos))
     else:
-        error_messages.append(Error('EOF Error', AST_Node()))
+        add_error_message('EOF Error', AST_Node())
 
 def p_statements(p):
     """statements : statements statement
@@ -117,6 +117,10 @@ def p_if_statement(p):
 def p_case_statement(p):
     """statement : CASE OF ID cases ENDCASE"""
     p[0] = AST.Case(p[3], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_case_array_statement(p):
+    """statement : CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE"""
+    p[0] = AST.Case_array(p[3], p[5], p[7], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_cases(p):
     """cases : cases case
@@ -341,6 +345,10 @@ def p_openfile_statement(p):
             | OPENFILE expression FOR RANDOM"""
     p[0] = AST.Open_file(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
+def p_readfile_array_statement(p):
+    """statement : READFILE expression COMMA ID LEFT_SQUARE indexes RIGHT_SQUARE"""
+    p[0] = AST.Read_file_array(p[2], p[4], p[6])
+
 def p_readfile_statement(p):
     """statement : READFILE expression COMMA ID"""
     p[0] = AST.Read_file(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
@@ -352,3 +360,7 @@ def p_writefile_statement(p):
 def p_closefile_statement(p):
     """statement : CLOSEFILE expression"""
     p[0] = AST.Close_file(p[2], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_seek_statement(p):
+    """statement : SEEK expression COMMA expression"""
+    p[0] = AST.Seek(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))

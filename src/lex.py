@@ -44,7 +44,6 @@ reserved = {
     "WRITE",
     "APPEND",
     "READFILE",
-    "EOF",
     "WRITEFILE",
     "CLOSEFILE",
     "SEEK",
