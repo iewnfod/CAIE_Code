@@ -81,7 +81,11 @@ class For(AST_Node):
         right = self.right.exe()
         step = self.step.exe()
         if left[1] == 'INTEGER' and right[1] == 'INTEGER' and step[1] == 'INTEGER':
-            for i in range(left[0], right[0]+1, step[0]):
+            if step[0] < 0:
+                diff = -1
+            else:
+                diff = 1
+            for i in range(left[0], right[0]+diff, step[0]):
                 # 给 index 赋值
                 stack.new_variable(self.id, 'INTEGER')
                 stack.set_variable(self.id, i, 'INTEGER')
