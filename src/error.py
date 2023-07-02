@@ -4,4 +4,4 @@ class Error:
         self.ast_obj = ast_obj
 
     def raise_err(self):
-        print(f'Error: {self.message} at {self.ast_obj.get_pos()}')
+        print(f'Error: {self.message} {self.ast_obj.get_pos()}')

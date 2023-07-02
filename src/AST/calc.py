@@ -15,11 +15,13 @@ class Op_minus(AST_Node):
     def exe(self):
         n1 = self.left.exe()
         n2 = self.right.exe()
-        if n1[1] == n2[1]:
-            return (n1[0] - n2[0], n1[1])
-        elif n1[1] == 'INTEGER' and n2[1] == 'REAL' or n1[1] == 'REAL' and n2[1] == 'INTEGER':
-            return (n1[0] - n2[0], 'REAL')
-        else:
+        try:
+            v = n1[0] - n2[0]
+            if int(v) == v:
+                return (int(v), 'INTEGER')
+            else:
+                return (v, 'REAL')
+        except:
             add_error_message(f'Cannot minus `{n1[1]}` with `{n2[1]}`. ', self)
 
 class Op_plus(AST_Node):
@@ -35,11 +37,13 @@ class Op_plus(AST_Node):
     def exe(self):
         n1 = self.left.exe()
         n2 = self.right.exe()
-        if n1[1] == n2[1]:
-            return (n1[0] + n2[0], n1[1])
-        elif n1[1] == 'INTEGER' and n2[1] == 'REAL' or n1[1] == 'REAL' and n2[1] == 'INTEGER':
-            return (n1[0] + n2[0], 'REAL')
-        else:
+        try:
+            v = n1[0] + n2[0]
+            if int(v) == v:
+                return (int(v), 'INTEGER')
+            else:
+                return (v, 'REAL')
+        except:
             add_error_message(f'Cannot plus `{n1[1]}` with `{n2[1]}`. ', self)
 
 class Op_mul(AST_Node):
@@ -55,11 +59,13 @@ class Op_mul(AST_Node):
     def exe(self):
         n1 = self.left.exe()
         n2 = self.right.exe()
-        if n1[1] == n2[1]:
-            return (n1[0] * n2[0], 'REAL')
-        elif n1[1] == 'INTEGER' and n2[1] == 'REAL' or n1[1] == 'REAL' and n2[1] == 'INTEGER':
-            return (n1[0] * n2[0], 'REAL')
-        else:
+        try:
+            v = n1[0] * n2[0]
+            if int(v) == v:
+                return (int(v), 'INTEGER')
+            else:
+                return (v, 'REAL')
+        except:
             add_error_message(f'Cannot multiply `{n1[1]}` with `{n2[1]}`. ', self)
 
 class Op_div(AST_Node):
@@ -75,11 +81,13 @@ class Op_div(AST_Node):
     def exe(self):
         n1 = self.left.exe()
         n2 = self.right.exe()
-        if n1[1] == n2[1]:
-            return (n1[0] / n2[0], 'REAL')
-        elif n1[1] == 'INTEGER' and n2[1] == 'REAL' or n1[1] == 'REAL' and n2[1] == 'INTEGER':
-            return (n1[0] / n2[0], 'REAL')
-        else:
+        try:
+            v = n1[0] / n2[0]
+            if int(v) == v:
+                return (int(v), 'INTEGER')
+            else:
+                return (v, 'REAL')
+        except:
             add_error_message(f'Cannot divide `{n1[1]}` with `{n2[1]}`. ', self)
 
 class Op_connect(AST_Node):
@@ -95,7 +103,7 @@ class Op_connect(AST_Node):
     def exe(self):
         s1 = self.left.exe()
         s2 = self.right.exe()
-        if (s1[1] == 'STRING' or s1[1] == 'CHAR') and (s2[1] == 'STRING' or s2[1] == 'CHAR'):
+        try:
             return (s1[0] + s2[0], 'STRING')
-        else:
+        except:
             add_error_message(f'Cannot connect `{s1[1]}` with `{s2[1]}`. ', self)

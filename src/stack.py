@@ -1,10 +1,18 @@
 from src.global_var import *
+from src.data_types import *
 
 class Stack:
     def __init__(self) -> None:
-        self.spaces = [('GLOBAL', {}, {})]  # [(空间名, {变量名: (值, 类型, 是否是常量)}, {函数名: 函数AST实例})]
+        self.spaces = [('GLOBAL', {}, {})]  # [(空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例})]
         self.files = {}  # {文件名: 打开的文件实例}
-        self.structs = {}  # {结构名: 结构实例}
+        self.structs = {
+            'INTEGER' : INTEGER,
+            'REAL' : REAL,
+            'STRING' : STRING,
+            'CHAR' : CHAR,
+            'BOOLEAN' : BOOLEAN,
+            'ARRAY' : ARRAY,
+        }  # {结构名: 结构实例}
         self.return_variables = []
         self.return_request = False
 
@@ -17,30 +25,26 @@ class Stack:
     def get_variable(self, id):
         for i in self.spaces:
             if id in i[1].keys():
-                return (i[1][id][0], i[1][id][1])
+                v = i[1][id]
+                return v[0]
         else:
             print(f'Stack Error: No variable or constant have id: `{id}`. ')
 
     def new_variable(self, id, type):
-        self.spaces[0][1][id] = (default_value[type], type, False)
+        self.spaces[0][1][id] = (self.structs[type](), False)
 
     def new_constant(self, id, type, value):
-        self.spaces[0][1][id] = (value, type, True)
+        self.spaces[0][1][id] = (self.structs[type](value), True)
 
     def set_variable(self, id, value, type):
         for i in range(len(self.spaces)):
             if id in self.spaces[i][1]:
-                if self.spaces[i][1][id][2] == False:
-                    if self.spaces[i][1][id][1] == type:
-                    # 如果存在这个量，并且是变量，并且类型相同
-                        self.spaces[i][1][id] = (value, type, False)
-                    # 对 integer 和 real 进行特殊适配，自动转化
-                    elif self.spaces[i][1][id][1] == 'INTEGER' and type == 'REAL':
-                        self.spaces[i][1][id] = (int(value), 'INTEGER', False)
-                    elif self.spaces[i][1][id][1] == 'REAL' and type == 'INTEGER':
-                        self.spaces[i][1][id][1] = (float(value), 'REAL', False)
-                    else:
-                        print(f'Stack Error: Cannot assign `{type}` to `{self.spaces[i][1][id][1]}`. ')
+                if self.spaces[i][1][id][1] == False:
+                    try:
+                        t = self.spaces[i][1][id][0][1]
+                        self.spaces[i][1][id] = (self.structs[t](value), False)
+                    except:
+                        print(f'Stack Error: Cannot assign `{type}` to `{self.spaces[i][1][id][0].type}`. ')
                 else:
                     print(f'Stack Error: Cannot assign value of constant `{id}`. ')
                 # 如果找到了这个变量存在，不管什么错误，都退出

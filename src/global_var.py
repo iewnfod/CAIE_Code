@@ -1,13 +1,4 @@
 from src.error import Error
-# 常量
-default_value = {
-    'INTEGER' : 0,
-    'REAL' : 0.0,
-    'CHAR' : '',
-    'STRING' : "",
-    'BOOLEAN' : True,
-    'ARRAY': {},
-}
 
 # 变量
 def __init__():

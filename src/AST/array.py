@@ -18,7 +18,7 @@ class Array(AST_Node):
         result = {}
         if len(dimensions) == 1:
             for i in range(dimensions[0][0], dimensions[0][1]+1):
-                result[i] = (default_value[self.var_type], self.var_type)
+                result[i] = (stack.structs[self.var_type](), self.var_type)
         else:
             d = self.add_variables(dimensions[1:])
             for i in range(dimensions[0][0], dimensions[0][1]+1):

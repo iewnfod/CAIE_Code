@@ -38,9 +38,9 @@ class Call_function(AST_Node):
 
             # 核对并传参
             for i in range(len(target_parameters)):
-                if check_type_equal(target_parameters[i][1], parameters[i][1]):
-                    new_dict[target_parameters[i][0]] = (parameters[i][0], parameters[i][1], False)
-                else:
+                try:
+                    new_dict[target_parameters[i][0]] = (stack.structs[target_parameters[i][1]](parameters[i][0]), False)
+                except:
                     add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`. ', self)
         else:
             if self.parameters:
@@ -60,9 +60,9 @@ class Call_function(AST_Node):
         # 核查返回值，并返回
         if function_obj.returns:
             # 查看返回值类型是否相同
-            if check_type_equal(returns[1], function_obj.returns):
-                return returns
-            else:
+            try:
+                return stack.structs[function_obj.returns](returns[0])
+            except:
                 add_error_message(f'Function {self.id} expect `{function_obj.returns}` to return, but found `{returns[1]}`. ', self)
         else:
             return None

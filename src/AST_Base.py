@@ -4,4 +4,7 @@ class AST_Node:
         self.lexpos = lexpos
 
     def get_pos(self):
-        return f'line {self.lineno}'
+        if self.lineno:
+            return f'at line {self.lineno}'
+        else:
+            return ''

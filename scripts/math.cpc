@@ -3,8 +3,8 @@ FUNCTION MOD(n1 : INTEGER, n2 : INTEGER) RETURNS INTEGER
         RETURN 0
     ENDIF
     DECLARE quotient : INTEGER
-    quotient <- INT(n1 / n2)
-    RETURN n1 - INT(quotient * n2)
+    quotient <- n1 / n2
+    RETURN n1 - quotient * n2
 ENDFUNCTION
 
 FUNCTION POW(x : INTEGER, n : INTEGER) RETURNS INTEGER
@@ -20,7 +20,7 @@ FUNCTION POW(x : INTEGER, n : INTEGER) RETURNS INTEGER
     // 否则是偶数
     ELSE
         DECLARE temp : INTEGER
-        temp <- POW(x, INT(n/2))
+        temp <- POW(x, n/2)
         RETURN temp * temp
     ENDIF
 ENDFUNCTION
