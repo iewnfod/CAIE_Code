@@ -1,6 +1,8 @@
 from src.AST.data import *
 from src.AST_Base import *
 from src.global_var import *
+from src.AST.array import *
+from src.AST.data_types import *
 
 class Output(AST_Node):
     def __init__(self, value, *args, **kwargs):
@@ -77,8 +79,11 @@ class Array_input(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)
 
     def exe(self):
-        indexes = self.indexes.exe()
-        target_id = self.id
-        for index in indexes:
-            target_id += '.' + str(index)
-        stack.set_variable(target_id, str(input()), 'STRING')
+        inp = input()
+        Array_assign(
+            self.id,
+            self.indexes,
+            String(inp, lineno=self.lineno, lexpos=self.lexpos),
+            lineno=self.lineno,
+            lexpos=self.lexpos
+        ).exe()
