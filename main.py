@@ -38,12 +38,13 @@ def preload_scripts():
 
 # 输出错误信息
 def output_error(p=''):
-    if global_var.get_error_messages():
+    l = global_var.get_error_messages()
+    if l:
         # 输出文件路径
         if p:
             print(f'File `{p}`: ')
         # 输出错误信息
-        for i in global_var.get_error_messages():
+        for i in l:
             i.raise_err()
         # 清空错误数组
         global_var.clear_error_messages()
