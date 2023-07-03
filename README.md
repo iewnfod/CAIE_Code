@@ -199,6 +199,9 @@ CAIE Pseudocode Interpreter
 
         <identifier> (<value>, ...)
         ```
+    * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明调用方式，会向上一个靠齐。若全部参数都没有声明，默认的传入方式为 `BYVAL`。
+        * `BYREF` : 引用变量，在函数内修改后，函数外变量的本体的值也会修改
+        * `BYVAL` : 复制变量的值，在函数内做出的任何修改都不会影响到传入的变量本体
 
 ### 内置函数
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
@@ -241,6 +244,6 @@ CAIE Pseudocode Interpreter
 ## 目标
 - [x] 基础功能实现
 - [x] 函数实现
-- [ ] 实现 `TYPE`，`STRUCT`（近期不会实现，由于设计时就没有考虑他们）
-- [ ] 实现文件读写（*DOING*）
-- [ ] 提供更多[非官方函数](./scripts/README.md)（*DOING*）
+- [ ] 实现 `TYPE`，`STRUCT`（准备实现）
+- [x] 实现文件读写（还剩 `GETRECORD` 和 `PUTRECORD`，这需要等自定义类型实现后才能实现）
+- [ ] 提供更多[非官方函数](./scripts/README.md)
