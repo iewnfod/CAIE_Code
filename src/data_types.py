@@ -40,6 +40,12 @@ class STRING(base):
     def set_value(self, new_value):
         self.value = str(new_value)
 
+    def __str__(self):
+        if self.value:
+            return str(self.value)
+        else:
+            return '""'
+
 class CHAR(base):
     def __init__(self, value=''):
         self.value = str(value)[0]
@@ -48,6 +54,12 @@ class CHAR(base):
 
     def set_value(self, new_value):
         self.value = str(new_value)[0]
+
+    def __str__(self):
+        if self.value:
+            return str(self.value)
+        else:
+            return "''"
 
 class BOOLEAN(base):
     def __init__(self, value=True):
@@ -67,10 +79,19 @@ class ARRAY(base):
         self.type = 'ARRAY'
         super().__init__()
 
+    def get_str(self, v):
+        if v[1] == 'ARRAY':
+            l = []
+            for i in v[0].values():
+                l.append(self.get_str(i))
+            return '[' + ', '.join(l) + ']'
+        else:
+            return str(v[0])
+
     def __str__(self) -> str:
         l = []
         for i in self.value.values():
-            l.append(str(i[0]))
+            l.append(self.get_str(i))
         return '[' + ', '.join(l) + ']'
 
     def set_value(self, value):
