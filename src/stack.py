@@ -25,8 +25,7 @@ class Stack:
     def get_variable(self, id):
         for i in self.spaces:
             if id in i[1].keys():
-                v = i[1][id]
-                return v[0]
+                return i[1][id][0]
         else:
             print(f'Stack Error: No variable or constant have id: `{id}`. ')
 
@@ -41,8 +40,7 @@ class Stack:
             if id in self.spaces[i][1]:
                 if self.spaces[i][1][id][1] == False:
                     try:
-                        t = self.spaces[i][1][id][0][1]
-                        self.spaces[i][1][id] = (self.structs[t](value), False)
+                        self.spaces[i][1][id][0].set_value(value)
                     except:
                         print(f'Stack Error: Cannot assign `{type}` to `{self.spaces[i][1][id][0].type}`. ')
                 else:
@@ -56,8 +54,8 @@ class Stack:
         self.spaces.pop(0)
         self.return_request = False
 
-    def new_space(self, space_name, var_dict):
-        self.spaces.insert(0, (space_name, var_dict))
+    def new_space(self, space_name, var_dict, func_dict):
+        self.spaces.insert(0, (space_name, var_dict, func_dict))
 
     def set_return_variables(self, variables):
         self.return_variables = variables

@@ -39,15 +39,21 @@ class Call_function(AST_Node):
             # 核对并传参
             for i in range(len(target_parameters)):
                 try:
-                    new_dict[target_parameters[i][0]] = (stack.structs[target_parameters[i][1]](parameters[i][0]), False)
+                    if target_parameters[i][2]:
+                        if target_parameters[i][1] == parameters[i][1]:
+                            new_dict[target_parameters[i][0]] = (parameters[i], False)
+                        else:
+                            add_error_message(f'Cannot reference `{parameters[i][1]}` to `{target_parameters[i][1]}`', self)
+                    else:
+                        new_dict[target_parameters[i][0]] = (stack.structs[target_parameters[i][1]](parameters[i][0]), False)
                 except:
-                    add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`. ', self)
+                    add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`', self)
         else:
             if self.parameters:
-                add_error_message(f'Function `{self.id}` does not expect any parameters, but found. ', self)
+                add_error_message(f'Function `{self.id}` does not expect any parameters, but found', self)
 
         # 为函数创建新的命名空间
-        stack.new_space(self.id, new_dict)
+        stack.new_space(self.id, new_dict, {})
 
         # 运行函数
         function_obj.statements.exe()
@@ -68,17 +74,18 @@ class Call_function(AST_Node):
             return None
 
 class Declare_parameter(AST_Node):
-    def __init__(self, id, type, *args, **kwargs):
+    def __init__(self, id, type, by_ref=None, *args, **kwargs):
         self.type = 'DECLARE_PARAMETER'
         self.id = id
         self.var_type = type
+        self.by_ref = by_ref
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
 
     def exe(self):
-        return (self.id, self.var_type)
+        return (self.id, self.var_type, self.by_ref)
 
 class Declare_parameters(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -98,7 +105,13 @@ class Declare_parameters(AST_Node):
     def exe(self):
         result = []
         for i in self.parameters:
-            result.append(i.exe())
+            v = i.exe()
+            if v[2] == None:
+                if len(result):
+                    v = (v[0], v[1], result[-1][2])
+                else:
+                    v = (v[0], v[1], False)
+            result.append(v)
         return result
 
 class Parameters(AST_Node):
@@ -132,6 +145,5 @@ class Return(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
 
     def exe(self):
-        value = self.expression.exe()
-        stack.set_return_variables(value)
+        stack.set_return_variables(self.expression.exe())
         stack.return_request = True

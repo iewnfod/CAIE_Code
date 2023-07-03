@@ -284,8 +284,18 @@ def p_declare_parameters(p):
 
 def p_declare_parameter(p):
     """declare_parameter : ID COLON ID
-            | ID COLON ARRAY"""
-    p[0] = AST.Declare_parameter(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
+            | ID COLON ARRAY
+            | BYREF ID COLON ID
+            | BYREF ID COLON ARRAY
+            | BYVAL ID COLON ID
+            | BYVAL ID COLON ARRAY"""
+    if len(p) == 4:
+        p[0] = AST.Declare_parameter(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
+    else:
+        if p[1] == 'BYREF':
+            p[0] = AST.Declare_parameter(p[2], p[4], True, lineno=p.lineno(1), lexpos=p.lexpos(1))
+        elif p[1] == 'BYVAL':
+            p[0] = AST.Declare_parameter(p[2], p[4], False, lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_parameters(p):
     """parameters : parameters COMMA expression

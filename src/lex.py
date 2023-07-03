@@ -49,7 +49,9 @@ reserved = {
     "SEEK",
     "GETRECORD",
     "PUTRECORD",
-    "RANDOM"
+    "RANDOM",
+    "BYREF",
+    "BYVAL"
 }
 
 tokens = (
