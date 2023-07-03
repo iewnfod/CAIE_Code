@@ -3,8 +3,8 @@ CAIE Pseudocode Interpreter
 
 ## 安装与使用
 1. 安装 `Python3` 环境
-    (**强烈推荐 `pypy` 而不是 `CPython` 以获得一个可观的速度**)
-    (使用 [sort_test](test/sort_test.cpc) 测试，`pypy3.9`运行了`55秒`，而`CPython3.11`则花费了`550秒`)
+(**强烈推荐 `pypy` 而不是 `CPython` 以获得一个可观的速度**)
+(使用 [sort_test](test/sort_test.cpc) 测试，`PyPy3.9`运行了**3秒不到**，而同平台下`CPython3.10`则花费了**将近30秒**，`CPython3.11`也需**大约20秒**)
 2. 克隆此项目
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
 3. 进入项目
@@ -18,8 +18,9 @@ CAIE Pseudocode Interpreter
 
 ### 常见问题
 #### 成功执行了第四步的依赖安装但还是无法正常运行
-`cpc`文件会优先选择 `pypy3` 运行
+`cpc`文件会优先选择 `PyPy3` 运行
 因此，在安装依赖时，请确保安装在了正确版本的 `Python3` 上
+可以使用 `<指定Python版本> -m pip install -r requirements.txt` 进行安装
 
 #### Playground 模式下，上下左右键无法正常使用
 使用 `pip install readline` 安装依赖并尝试运行
