@@ -11,10 +11,9 @@ elif command -v python3 >/dev/null 2>&1 ; then
 elif command -v python >/dev/null 2>&1; then
     alias py='python'
 else
-    echo "Please install Pypy3.x / CPython3.x before running this script. "
-    echo "If you have Python3 in your computer, please check if it is in the PATH"
+    echo "Please install PyPy3.x before running this script. "
+    echo "If you have Python3 in your computer, please check if it is in the PATH. "
     open "https://www.pypy.org/"
-    open "https://python.org"
     exit 1
 fi
 
