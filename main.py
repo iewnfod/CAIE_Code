@@ -5,7 +5,6 @@ import src.global_var as global_var
 from ply import yacc
 from ply import lex
 import sys
-import signal
 import os
 import chardet
 import time
@@ -148,13 +147,9 @@ def main():
         else:
             wrong_argument(f'`{file_path}` does not exist')
 
-# 捕获 Keyboard Interrupt
-def ctrl_c_handle(signal, frame):
-    print(f'Keyboard Interrupt')
 
 # 程序入口
 if __name__ == '__main__':
-    signal.signal(signal.SIGINT, ctrl_c_handle)
     global_var.__init__()
 
     lexer = lex.lex()
@@ -164,4 +159,7 @@ if __name__ == '__main__':
         main()
     except EOFError:
         print("\nEXIT")
+        sys.exit(0)
+    except KeyboardInterrupt:
+        print('\nKeyboard Interrupt')
         sys.exit(0)
