@@ -21,7 +21,7 @@
 ## Sort
 * Sort 排序（希尔排序）
     ```
-    Sort(arr : ARRAY, left : INTEGER, right : INTEGER) RETURNS ARRAY
+    PROCEDURE Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
     ```
 
 ## String

@@ -1,6 +1,7 @@
 from src.AST.data import *
 from src.AST_Base import *
 from src.global_var import *
+import copy
 
 class Function(AST_Node):
     def __init__(self, id, parameters, statements, returns=None, *args, **kwargs):
@@ -39,13 +40,20 @@ class Call_function(AST_Node):
             # 核对并传参
             for i in range(len(target_parameters)):
                 try:
+                    # 如果是要 by ref，那就直接传递类型实例
                     if target_parameters[i][2]:
                         if target_parameters[i][1] == parameters[i][1]:
                             new_dict[target_parameters[i][0]] = (parameters[i], False)
                         else:
                             add_error_message(f'Cannot reference `{parameters[i][1]}` to `{target_parameters[i][1]}`', self)
                     else:
-                        new_dict[target_parameters[i][0]] = (stack.structs[target_parameters[i][1]](parameters[i][0]), False)
+                        # 否则，赋值 value 并且然后传递
+                        new_dict[target_parameters[i][0]] = (
+                            stack.structs[target_parameters[i][1]](
+                                copy.copy(parameters[i][0])
+                            ),
+                            False
+                        )
                 except:
                     add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`', self)
         else:

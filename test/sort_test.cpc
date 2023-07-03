@@ -8,4 +8,5 @@ NEXT i
 
 OUTPUT "FINISH GENERATING ARRAY"
 
-OUTPUT Sort(arr, 1, n)
+CALL Sort(arr, 1, n)
+OUTPUT arr

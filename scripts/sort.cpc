@@ -1,5 +1,5 @@
 // 希尔排序
-FUNCTION Sort(arr : ARRAY, left : INTEGER, right : INTEGER) RETURNS ARRAY
+PROCEDURE Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
     DECLARE gap : INTEGER
     gap <- 1
     DECLARE len : INTEGER
@@ -22,6 +22,4 @@ FUNCTION Sort(arr : ARRAY, left : INTEGER, right : INTEGER) RETURNS ARRAY
         NEXT i
         gap <- gap / 3
     ENDWHILE
-
-    RETURN arr
-ENDFUNCTION
+ENDPROCEDURE
