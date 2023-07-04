@@ -14,7 +14,8 @@ class Output(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.value.get_tree(level+1)
 
     def exe(self):
-        print(self.value.exe())
+        v = self.value.exe()
+        print(v if v != None else '')
 
 class Output_expression(AST_Node):
     def __init__(self, *args, **kwargs):
