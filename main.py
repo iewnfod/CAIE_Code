@@ -117,7 +117,7 @@ def with_file(path, preload=False):
 # 错误的argument
 def wrong_argument(msg):
     print(f'Wrong arguments: \033[1m{msg}\033[0m\n')
-    help()
+    options.help()
 
 # 主函数
 def main():
@@ -129,7 +129,10 @@ def main():
                 i[2]()
                 break
         else:
-            file_path = arg
+            if arg[0] == '-':
+                wrong_argument(f'Unknown argument {arg}')
+            else:
+                file_path = arg
 
     # 预加载文件
     preload_scripts()
