@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "name": "Python: 当前项目",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
