@@ -168,7 +168,7 @@ CAIE Pseudocode Interpreter
         ```
     * WHILE 循环
         ```
-        WHILE <condition> DO
+        WHILE <condition>
             <statements>
         ENDWHILE
 7. 函数
