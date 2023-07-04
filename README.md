@@ -3,8 +3,6 @@ CAIE Pseudocode Interpreter
 
 ## 安装与使用
 1. 安装 `Python3` 环境
-(**强烈推荐 `PyPy` 而不是 `CPython` 以获得一个可观的速度**)
-(使用 [sort_test](test/sort_test.cpc) 测试，`PyPy3.9`运行了**3秒不到**，而同平台下`CPython3.10`则花费了**将近30秒**，`CPython3.11`也需**大约20秒**)
 2. 克隆此项目
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
 3. 进入项目
@@ -19,7 +17,7 @@ CAIE Pseudocode Interpreter
     ```build.pw1```
     * `Linux`用户请自行编译
     ```./build.sh```
-
+6. `-h` 获取更多使用方法
 
 ### 常见问题
 #### 成功执行了第四步的依赖安装但还是无法正常运行
@@ -33,6 +31,7 @@ CAIE Pseudocode Interpreter
 
 *若依旧无法解决问题，请提交issue*
 
+
 ## 效率测试
 ### 测试环境:
 * 机型: 2020 Macbook Pro
@@ -43,10 +42,14 @@ CAIE Pseudocode Interpreter
 * Python 版本: PyPy 3.9.16
 
 ### 基础测试
-* 赋值运算: 740w/s - 750w/s
+* 赋值: 740w/s - 750w/s
 * 显式转换+赋值: 580w/s - 590w/s
 * 隐式转换+赋值: 740w/s - 750w/s
 * 输出: 71w/s - 72w/s
+
+### 常见运算测试
+* 随机生成数据+希尔排序: 4.5w/s (当然，这东西看人品，如果随机数据很好的话...)
+
 
 ## 标准
 ### 基本标准

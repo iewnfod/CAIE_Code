@@ -1,12 +1,13 @@
 DECLARE n : INTEGER
-n <- 100000
+// n <- 100000
+n <- 45000
 DECLARE arr : ARRAY[1:n] OF REAL
 
 FOR i <- 1 TO n
     arr[i] <- RAND(n)
 NEXT i
 
-OUTPUT "FINISH GENERATING ARRAY"
+// OUTPUT "FINISH GENERATING ARRAY"
 
 CALL Sort(arr, 1, n)
-OUTPUT arr
+// OUTPUT arr
