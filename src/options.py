@@ -28,7 +28,7 @@ def help():
 
     print()
 
-    print('Usage: [file_path] [options]')
+    print('Usage: cpc [file_path] [options]')
 
     print()
 
