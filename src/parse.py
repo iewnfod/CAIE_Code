@@ -165,8 +165,12 @@ def p_repeat_statement(p):
     p[0] = AST.Repeat(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_while_statement(p):
-    """statement : WHILE expression DO statements ENDWHILE"""
-    p[0] = AST.While(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
+    """statement : WHILE expression DO statements ENDWHILE
+            | WHILE expression statements ENDWHILE"""
+    if len(p) == 5:
+        p[0] = AST.While(p[2], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
+    else:
+        p[0] = AST.While(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_expression_statement(p):
     """statement : expression"""
