@@ -168,7 +168,7 @@ CAIE Pseudocode Interpreter
         ```
     * WHILE 循环
         ```
-        WHILE <condition>
+        WHILE <condition> DO
             <statements>
         ENDWHILE
 7. 函数
@@ -208,6 +208,32 @@ CAIE Pseudocode Interpreter
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。
         * `BYREF` : 引用变量，在函数内修改后，函数外变量的本体的值也会修改
         * `BYVAL` : 复制变量的值，在函数内做出的任何修改都不会影响到传入的变量本体
+8. 文件读写
+    * 打开文件
+        ```
+        OPENFILE <file path> FOR <file mode>
+        ```
+    * 读取文件
+        ```
+        READFILE <file path>, <variable>
+        ```
+    * 写入文件
+        ```
+        READFILE <file path>, <data>
+        ```
+    * 关闭文件
+        ```
+        CLOSEFILE <file path>
+        ```
+    * 定位读取
+        ```
+        SEEK <file path>, <address>
+        ```
+    * File Mode
+        1. `READ`
+        2. `WRITE`
+        3. `APPEND`
+        4. `RANDOM`
 
 ### 内置函数
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
@@ -245,6 +271,7 @@ CAIE Pseudocode Interpreter
     $ RAND(87)
     35.43
     ```
+* `EOF(file_path : STRING) RETURNS BOOLEAN`
 * 更多非官方内置函数，请查阅 [scripts](./scripts/README.md)
 
 ## 目标
