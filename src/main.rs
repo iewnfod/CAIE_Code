@@ -5,8 +5,8 @@ use std::{env, process::Command};
 pub const PYTHON : &[&str] = &[
     "pypy3",
     "pypy",
-    "python3",
-    "python"
+    "python",
+    "python3"
 ];
 
 fn main() {
@@ -31,7 +31,14 @@ fn main() {
                 continue;
             }
         };
-        spawn.wait().unwrap();
-        break;
+
+        match spawn.wait() {
+            Ok(_) => {
+                break;
+            },
+            Err(_) => {
+                continue;
+            }
+        }
     }
 }
