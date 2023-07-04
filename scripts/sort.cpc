@@ -5,16 +5,16 @@ PROCEDURE Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
     DECLARE len : INTEGER
     len <- LENGTH(arr)
 
-    WHILE gap < len / 3
+    WHILE gap < len / 3 DO
         gap <- gap * 3 + 1
     ENDWHILE
 
-    WHILE gap > 0
+    WHILE gap > 0 DO
         FOR i <- gap TO len
             CONSTANT temp = arr[i]
             DECLARE j : INTEGER
             j <- i - gap
-            WHILE j >= left AND arr[j] > temp
+            WHILE j >= left AND arr[j] > temp DO
                 arr[j+gap] <- arr[j]
                 j <- j - gap
             ENDWHILE

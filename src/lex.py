@@ -22,6 +22,7 @@ reserved = {
     "REPEAT",
     "UNTIL",
     "WHILE",
+    "DO",
     "ENDWHILE",
     "PROCEDURE",
     "ENDPROCEDURE",

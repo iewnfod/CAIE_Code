@@ -47,10 +47,18 @@ def get_time():
     global show_time
     show_time = True
 
+def show_keywords():
+    from src.lex import reserved
+    t = ' '.join(reserved)
+    print('Keywords:')
+    print(t)
+    sys.exit(0)
+
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),
     ('-v', '--version', version, 'To show the version of this interpreter'),
     ('-h', '--help', help, 'To show this help page'),
     ('-d', '--debug', open_debug, 'To show debug information during running'),
     ('-t', '--time', get_time, 'To show the time for the script to run'),
+    ('-k', '--keywords', show_keywords, 'To show all the keywords')
 ]
