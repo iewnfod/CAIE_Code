@@ -12,9 +12,14 @@ CAIE Pseudocode Interpreter
 4. 安装依赖
     ```pip install -r requirements.txt```
 5. 运行
-    * 若是`MacOS`或`Linux`，使用指令`./cpc`运行，`MacOS`甚至可以直接双击目录内`cpc`文件启动终端模式运行
-    * 若是`Windows`，请使用`python main.py`运行
-6. 使用指令`./cpc -h`或`python main.py -h`获取更多帮助
+    * 二进制文件存在于`bin`中
+    * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译
+    ```./build.sh```
+    * `Windows`若无法正常运行，也可尝试自己编译
+    ```build.pw1```
+    * `Linux`用户请自行编译
+    ```./build.sh```
+
 
 ### 常见问题
 #### 成功执行了第四步的依赖安装但还是无法正常运行
