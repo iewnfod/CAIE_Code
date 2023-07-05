@@ -53,8 +53,13 @@ def multi_input():
     text = remove_comment(input(f'{preline} '))
     # 若为空，那就直接返回
     if not text:
-        return 1
-    parser.parse(text)
+        return ''
+    # 尝试解析
+    try:
+        parser.parse(text)
+    except Exception as e:
+        add_error_message(str(e), AST_Node())
+    # 空了 n 行
     n = 0
     # 如果出现了错误信息，那就说明这一行没写完，那就换行再写
     while get_error_messages() and n < 2:
@@ -65,8 +70,13 @@ def multi_input():
             n += 1
         else:
             n = 0
+        # 加上新的一行
         text += '\n' + t
-        parser.parse(text)
+        # 再尝试解析
+        try:
+            parser.parse(text)
+        except Exception as e:
+            add_error_message(str(e), AST_Node())
 
     return text
 
