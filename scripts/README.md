@@ -41,3 +41,7 @@
     ```
     Trim(s : STRING) RETURNS STRING
     ```
+* ArrayFromString 字符串转数组
+    ```
+    ArrayFromString(s : STRING) RETURNS ARRAY
+    ```
