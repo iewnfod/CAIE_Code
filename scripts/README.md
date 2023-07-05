@@ -21,7 +21,7 @@
 ## Sort
 * Sort 排序（希尔排序）
     ```
-    PROCEDURE Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
+    Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
     ```
 
 ## String
@@ -36,4 +36,8 @@
 * Ucase 大写
     ```
     Ucase(s : STRING) RETURNS STRING
+    ```
+* Trim 修剪空格
+    ```
+    Trim(s : STRING) RETURNS STRING
     ```

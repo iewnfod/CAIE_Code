@@ -41,3 +41,19 @@ FUNCTION Ucase(s : STRING) RETURNS STRING
 
     RETURN result
 ENDFUNCTION
+
+FUNCTION Trim(s : STRING) RETURNS STRING
+    DECLARE len : INTEGER
+    len <- LENGTH(s)
+    DECLARE result : STRING
+    DECLARE c : STRING
+
+    FOR i <- 1 TO len
+        c <- MID(s, i, 1)
+        IF c <> ' ' THEN
+            result <- result & c
+        ENDIF
+    NEXT i
+
+    RETURN result
+ENDFUNCTION
