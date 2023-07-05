@@ -1,15 +1,13 @@
-from src.global_var import *
-from src.lex import *
-from src.parse import *
-from ply import yacc
-from ply import lex
-import chardet
-from flask import Flask
+from lsprotocol import types
+from pygls.server import LanguageServer
 
-app = Flask(__name__)
+class cpc_server(LanguageServer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-@app.route('/')
-def index():
-    return 'Language Server for CAIE Pseudocode!'
+        self.documents = {}
 
-app.run()
+    @self.feature(types.INITIALIZE)
+    def initialize(self, params: types.InitializeParams):
+        opts = params.initialization_options
+        method = getattr(opts, 'method', 'builtin')
