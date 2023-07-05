@@ -174,7 +174,7 @@ def p_while_statement(p):
 
 def p_expression_statement(p):
     """statement : expression"""
-    output_expression = AST.Output_expression()
+    output_expression = AST.Output_expression(lineno=p.lineno(1), lexpos=p.lexpos(1))
     output_expression.add_expression(p[1])
     p[0] = AST.Output(output_expression, lineno=p.lineno(1), lexpos=p.lexpos(1))
 
@@ -363,7 +363,7 @@ def p_openfile_statement(p):
 
 def p_readfile_array_statement(p):
     """statement : READFILE expression COMMA ID LEFT_SQUARE indexes RIGHT_SQUARE"""
-    p[0] = AST.Read_file_array(p[2], p[4], p[6])
+    p[0] = AST.Read_file_array(p[2], p[4], p[6], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_readfile_statement(p):
     """statement : READFILE expression COMMA ID"""
