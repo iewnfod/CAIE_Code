@@ -16,6 +16,7 @@ except:
     pass
 
 preline = '$'
+multi_preline = '.'
 
 # 清除注释以及多余字符
 def remove_comment(text):
@@ -48,13 +49,35 @@ def output_error(p=''):
         # 清空错误数组
         global_var.clear_error_messages()
 
+def multi_input():
+    text = remove_comment(input(f'{preline} '))
+    # 若为空，那就直接返回
+    if not text:
+        return 1
+    parser.parse(text)
+    n = 0
+    # 如果出现了错误信息，那就说明这一行没写完，那就换行再写
+    while get_error_messages() and n < 2:
+        clear_error_messages()
+        t = remove_comment(input(f'{multi_preline} '))
+        # 如果这一行还是空，那就给一次机会，否则就视为结束，然后开始运行
+        if not t:
+            n += 1
+        else:
+            n = 0
+        text += '\n' + t
+        parser.parse(text)
+
+    return text
+
+
 # 终端模式，逐行输入并解析运行
 def with_line():
     # 基准输出
     options.standard_output()
     # 运行
     while 1:
-        text = remove_comment(input(f'{preline} '))
+        text = multi_input()
         if not text:
             continue
         try:

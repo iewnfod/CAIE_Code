@@ -13,7 +13,7 @@ class Stack:
             'BOOLEAN' : BOOLEAN,
             'ARRAY' : ARRAY,
         }  # {结构名: 结构实例}
-        self.return_variables = []
+        self.return_variables = None
         self.return_request = False
 
     def global_space(self):
@@ -62,7 +62,7 @@ class Stack:
 
     def get_return_variables(self):
         v = self.return_variables
-        self.return_variables = []
+        self.return_variables = None
         return v
 
     def add_function(self, function):
