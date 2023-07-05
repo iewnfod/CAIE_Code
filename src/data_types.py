@@ -6,9 +6,7 @@ class base:
         return str(self.value)
 
     def __getitem__(self, key):
-        if key == 0:
-            return self.value
-        elif key == 1:
+        if key == 1:
             return self.type
         else:
             return self.value
