@@ -1,4 +1,2 @@
 chardet==5.1.0
-lsprotocol==2023.0.0a2
 ply==3.11
-pygls==1.0.2
