@@ -39,10 +39,7 @@ class STRING(base):
         self.value = str(new_value)
 
     def __str__(self):
-        if self.value:
-            return str(self.value)
-        else:
-            return '""'
+        return '"' + self.value + '"'
 
 class CHAR(base):
     def __init__(self, value=''):
@@ -54,10 +51,7 @@ class CHAR(base):
         self.value = str(new_value)[0]
 
     def __str__(self):
-        if self.value:
-            return str(self.value)
-        else:
-            return "''"
+        return "'" + self.value + "'"
 
 class BOOLEAN(base):
     def __init__(self, value=True):

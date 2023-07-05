@@ -32,33 +32,16 @@ class Output_expression(AST_Node):
     def add_expression(self, expression):
         self.expressions.append(expression)
 
-    def get_str(self, value):
-        if value[1] == 'BOOLEAN':
-            return str({True: 'TRUE', False: 'FALSE', None: 'None'}[value[0]])
-        elif value[1] == 'STRING' and value[0] == '':
-            return '""'
-        elif value[1] == 'CHAR' and value[0] == '':
-            return "''"
-        else:
-            return str(value[0])
-
-    def get_array_str(self, value):
-        result = []
-        for i in value[0].values():
-            if i[1] == 'ARRAY':
-                result.append(str(self.get_array_str(i)))
-            else:
-                result.append(self.get_str(i))
-        return '[' + ', '.join(result) + ']'
-
     def exe(self):
         result = ''
         for i in self.expressions:
             t = i.exe()
             if t[1] == 'ARRAY':
-                result += self.get_array_str(t)
+                result += str(t)
+            elif t[1] == 'BOOLEAN':
+                result += {True: 'TRUE', False: 'FALSE'}[t[0]]
             else:
-                result += self.get_str(t)
+                result += str(t[0])
         return result
 
 class Input(AST_Node):
@@ -92,3 +75,28 @@ class Array_input(AST_Node):
             lineno=self.lineno,
             lexpos=self.lexpos
         ).exe()
+
+class Raw_output(AST_Node):
+    def __init__(self, expression, *args, **kwargs):
+        self.type = 'RAW_OUTPUT'
+        self.expression = expression
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
+
+    def exe(self):
+        t = self.expression.exe()
+        v = t[0] if type(t) == tuple else str(t)
+        # 如果是 tuple，那就看类型，并输出
+        if type(t) == tuple:
+            if t[1] == 'STRING':
+                print('"' + v + '"')
+            elif t[1] == 'CHAR':
+                print("'" + v + "'")
+            elif t[1] == 'BOOLEAN':
+                print({True: 'TRUE', False: 'FALSE'}[v])
+            else:
+                print(v)
+        else:
+            print(v)

@@ -174,9 +174,7 @@ def p_while_statement(p):
 
 def p_expression_statement(p):
     """statement : expression"""
-    output_expression = AST.Output_expression(lineno=p.lineno(1), lexpos=p.lexpos(1))
-    output_expression.add_expression(p[1])
-    p[0] = AST.Output(output_expression, lineno=p.lineno(1), lexpos=p.lexpos(1))
+    p[0] = AST.Raw_output(p[1], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_id_expression(p):
     """expression : ID"""
