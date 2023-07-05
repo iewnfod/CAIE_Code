@@ -54,11 +54,6 @@ def show_keywords():
     print(t)
     sys.exit(0)
 
-def start_language_server():
-    import lsp
-    lsp.__init__()
-    sys.exit(0)
-
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),
     ('-v', '--version', version, 'To show the version of this interpreter'),
@@ -66,5 +61,4 @@ arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述
     ('-d', '--debug', open_debug, 'To show debug information during running'),
     ('-t', '--time', get_time, 'To show the time for the script to run'),
     ('-k', '--keywords', show_keywords, 'To show all the keywords'),
-    ('-ls', '--language-server', start_language_server, 'To start a language server for this language')
 ]
