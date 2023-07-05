@@ -42,13 +42,36 @@ CAIE Pseudocode Interpreter
 * Python 版本: PyPy 3.9.16
 
 ### 基础测试
-* 赋值: 740w/s - 750w/s
-* 显式转换+赋值: 580w/s - 590w/s
-* 隐式转换+赋值: 740w/s - 750w/s
-* 输出: 71w/s - 72w/s
+* 赋值: 1000w/s
+```
+DECLARE a : INTEGER
+FOR i <- 1 TO 10000000
+    a <- i
+NEXT i
+```
+* 显式转换+赋值: 700w/s
+```
+DECLARE a : STRING
+FOR i <- 1 TO 7000000
+    a <- STRING(i)
+NEXT i
+```
+* 隐式转换+赋值: 920w/s
+```
+DECLARE a : STRING
+FOR i <- 1 TO 10000000
+    a <- i
+NEXT i
+```
+* 输出: 72w/s
+```
+FOR i <- 1 TO 720000
+    OUTPUT i
+NEXT i
+```
 
 ### 常见运算测试
-* 随机生成数据+希尔排序: 4.5w/s (当然，这东西看人品，如果随机数据很好的话...)
+* [随机生成10w数据+希尔排序](test/sort_test.cpc): 2.5s 左右
 
 
 ## 标准

@@ -90,17 +90,16 @@ class For(AST_Node):
             # 创建 index 变量
             stack.new_variable(self.id, 'INTEGER')
 
+            # 核对id是否相同
+            if self.id != self.next_id:
+                print(f'Expect `{self.id}` for next id, but found `{self.next_id}`')
+                return
+
             for i in range(left[0], right[0]+diff, step[0]):
                 # 给 index 赋值
                 stack.set_variable(self.id, i, 'INTEGER')
                 # 执行内部操作
                 self.body_statement.exe()
-                # 核对id是否相同
-                if self.id == self.next_id:
-                    continue
-                else:
-                    print(f'Expect `{self.id}` for next id, but found `{self.next_id}`')
-                    break
         else:
             print(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`. ')
 

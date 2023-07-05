@@ -1,6 +1,5 @@
 DECLARE n : INTEGER
-// n <- 100000
-n <- 45000
+n <- 100000
 DECLARE arr : ARRAY[1:n] OF REAL
 
 FOR i <- 1 TO n
