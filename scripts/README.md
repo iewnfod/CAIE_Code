@@ -7,7 +7,7 @@
     ```
 * POW 幂运算
     ```
-    POW(x : INTEGER, n : INTEGER) RETURNS INTEGER
+    POW(x : REAL, n : INTEGER) RETURNS REAL
     ```
 * Min 最小值
     ```
