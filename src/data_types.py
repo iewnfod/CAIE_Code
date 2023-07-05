@@ -31,12 +31,12 @@ class REAL(base):
 
 class STRING(base):
     def __init__(self, value=''):
-        self.value = str(value).encode('utf8').decode('unicode_escape')
+        self.value = str(value)
         self.type = 'STRING'
         super().__init__()
 
     def set_value(self, new_value):
-        self.value = str(new_value).encode('utf8').decode('unicode_escape')
+        self.value = str(new_value)
 
     def __str__(self):
         if self.value:
@@ -46,12 +46,12 @@ class STRING(base):
 
 class CHAR(base):
     def __init__(self, value=''):
-        self.value = str(value)[0].encode('utf8').decode('unicode_escape')
+        self.value = str(value)[0]
         self.type = 'CHAR'
         super().__init__()
 
     def set_value(self, new_value):
-        self.value = str(new_value)[0].encode('utf8').decode('unicode_escape')
+        self.value = str(new_value)[0]
 
     def __str__(self):
         if self.value:
