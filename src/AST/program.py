@@ -86,9 +86,12 @@ class For(AST_Node):
                 diff = -1
             else:
                 diff = 1
+
+            # 创建 index 变量
+            stack.new_variable(self.id, 'INTEGER')
+
             for i in range(left[0], right[0]+diff, step[0]):
                 # 给 index 赋值
-                stack.new_variable(self.id, 'INTEGER')
                 stack.set_variable(self.id, i, 'INTEGER')
                 # 执行内部操作
                 self.body_statement.exe()
