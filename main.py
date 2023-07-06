@@ -163,7 +163,7 @@ def main():
                 break
         else:
             if arg[0] == '-':
-                wrong_argument(f'Unknown argument {arg}')
+                wrong_argument(f'Unknown option {arg}')
             else:
                 file_path = arg
 
@@ -181,7 +181,7 @@ def main():
             else:
                 wrong_argument(f'`{file_path}` is not a file')
         else:
-            wrong_argument(f'`{file_path}` does not exist')
+            wrong_argument(f'File `{file_path}` does not exist')
 
 
 # 程序入口
