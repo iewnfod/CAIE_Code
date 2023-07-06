@@ -101,7 +101,7 @@ class For(AST_Node):
                 # 执行内部操作
                 self.body_statement.exe()
         else:
-            print(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`. ')
+            print(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`')
 
 class Case(AST_Node):
     def __init__(self, id, cases, *args, **kwargs):

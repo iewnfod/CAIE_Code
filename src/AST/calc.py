@@ -22,7 +22,7 @@ class Op_minus(AST_Node):
             else:
                 return (v, 'REAL')
         except:
-            add_error_message(f'Cannot minus `{n1[1]}` with `{n2[1]}`. ', self)
+            add_error_message(f'Cannot minus `{n1[1]}` with `{n2[1]}`', self)
 
 class Op_plus(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -44,7 +44,7 @@ class Op_plus(AST_Node):
             else:
                 return (v, 'REAL')
         except:
-            add_error_message(f'Cannot plus `{n1[1]}` with `{n2[1]}`. ', self)
+            add_error_message(f'Cannot plus `{n1[1]}` with `{n2[1]}`', self)
 
 class Op_mul(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -66,7 +66,7 @@ class Op_mul(AST_Node):
             else:
                 return (v, 'REAL')
         except:
-            add_error_message(f'Cannot multiply `{n1[1]}` with `{n2[1]}`. ', self)
+            add_error_message(f'Cannot multiply `{n1[1]}` with `{n2[1]}`', self)
 
 class Op_div(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -88,7 +88,7 @@ class Op_div(AST_Node):
             else:
                 return (v, 'REAL')
         except:
-            add_error_message(f'Cannot divide `{n1[1]}` with `{n2[1]}`. ', self)
+            add_error_message(f'Cannot divide `{n1[1]}` with `{n2[1]}`', self)
 
 class Op_connect(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
@@ -106,4 +106,4 @@ class Op_connect(AST_Node):
         try:
             return (s1[0] + s2[0], 'STRING')
         except:
-            add_error_message(f'Cannot connect `{s1[1]}` with `{s2[1]}`. ', self)
+            add_error_message(f'Cannot connect `{s1[1]}` with `{s2[1]}`', self)

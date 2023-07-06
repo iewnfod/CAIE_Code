@@ -35,7 +35,7 @@ class Call_function(AST_Node):
             target_parameters = function_obj.parameters.exe()  # (id, 类型)
             parameters = self.parameters.exe()  # (值, 类型)
             if len(target_parameters) != len(parameters):
-                add_error_message(f'Function `{self.id}` has wrong number of parameters. ', self)
+                add_error_message(f'Function `{self.id}` has wrong number of parameters', self)
 
             # 核对并传参
             for i in range(len(target_parameters)):
@@ -77,7 +77,7 @@ class Call_function(AST_Node):
             try:
                 return stack.structs[function_obj.returns](returns[0])
             except:
-                add_error_message(f'Function {self.id} expect `{function_obj.returns}` to return, but found `{returns[1]}`. ', self)
+                add_error_message(f'Function {self.id} expect `{function_obj.returns}` to return, but found `{returns[1]}`', self)
         else:
             return None
 

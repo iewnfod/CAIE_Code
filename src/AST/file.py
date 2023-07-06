@@ -22,9 +22,9 @@ class Open_file(AST_Node):
                 f = open(file_path[0], fm)
                 stack.add_file(file_path[0], f)
             else:
-                add_error_message(f'Unknown file mode: `{self.file_mode}`. ', self)
+                add_error_message(f'Unknown file mode: `{self.file_mode}`', self)
         else:
-            add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`. ', self)
+            add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)
 
 class Close_file(AST_Node):
     def __init__(self, file_path, *args, **kwargs):
@@ -41,7 +41,7 @@ class Close_file(AST_Node):
             f = stack.get_file(file_path[0])
             f.close()
         else:
-            add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`. ', self)
+            add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)
 
 class Read_file(AST_Node):
     def __init__(self, file_path, id, *args, **kwargs):
@@ -60,7 +60,7 @@ class Read_file(AST_Node):
             data = f.read()
             stack.set_variable(self.id, data, 'STRING')
         else:
-            add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`. ', self)
+            add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)
 
 class Read_file_array(AST_Node):
     def __init__(self, file_path, id, indexes, *args, **kwargs):
@@ -86,7 +86,7 @@ class Read_file_array(AST_Node):
                 lexpos=self.lexpos
             ).exe()
         else:
-            add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`. ', self)
+            add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)
 
 class Write_file(AST_Node):
     def __init__(self, file_path, value, *args, **kwargs):
@@ -106,7 +106,7 @@ class Write_file(AST_Node):
             f.write(str(value[0]))
             # f.flush()
         else:
-            add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`. ', self)
+            add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)
 
 class Seek(AST_Node):
     def __init__(self, file_path, ad, *args, **kwargs):
@@ -126,6 +126,6 @@ class Seek(AST_Node):
                 f = stack.get_file(fp[0])
                 f.seek(ad[0], 0)
             else:
-                add_error_message(f'Expect `INTEGER` for a address, but found `{ad[1]}`. ', self)
+                add_error_message(f'Expect `INTEGER` for a address, but found `{ad[1]}`', self)
         else:
-            add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`. ', self)
+            add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)

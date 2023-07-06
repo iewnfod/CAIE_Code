@@ -68,7 +68,7 @@ class Dimension(AST_Node):
         if left[1] == 'INTEGER' and right[1] == 'INTEGER':
             return (left[0], right[0])
         else:
-            add_error_message(f'Array dimension should be INTEGER, but found {left[0]} and {right[0]}. ', self)
+            add_error_message(f'Array dimension should be INTEGER, but found {left[0]} and {right[0]}', self)
 
 class Array_assign(AST_Node):
     def __init__(self, id, indexes, value, *args, **kwargs):
