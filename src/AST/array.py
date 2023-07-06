@@ -85,9 +85,9 @@ class Array_assign(AST_Node):
         if len(index) == 1:
             index = index[0]
             try:
-                arr[index] = (stack.structs[arr[index][1]](value[0]), arr[index][1])
+                arr[index][0].set_value(value[0])
             except:
-                add_error_message(f'Cannot assign `{value[1]}` to `{arr[index][1]}`. ', self)
+                add_error_message(f'Cannot assign `{value[1]}` to `{arr[index][1]}`', self)
         else:
             self.set_value(arr[index[0]], index[1:], value)
 
