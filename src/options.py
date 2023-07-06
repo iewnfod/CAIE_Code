@@ -49,9 +49,18 @@ def get_time():
 
 def show_keywords():
     from src.lex import reserved
-    t = ' '.join(reserved)
+    keywords = sorted(reserved)
+    l = {}
+    for k in keywords:
+        if k[0] in l.keys():
+            l[k[0]].append(k)
+        else:
+            l[k[0]] = [k]
+
     print('Keywords:')
-    print(t)
+    for v in l.values():
+        print(' '.join(v))
+
     sys.exit(0)
 
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
