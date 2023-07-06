@@ -1,8 +1,8 @@
-import platform
-import sys
+from platform import python_implementation, python_version, system
+from sys import exit
 
 VERSION = 'v0.1.0'
-PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
+PLATFORM = f'[ {python_implementation()} {python_version()} ] on {system()}'
 
 show_tree = False
 debug = False
@@ -21,7 +21,7 @@ def open_debug():
 
 def version():
     print('Version:', VERSION)
-    sys.exit(0)
+    exit(0)
 
 def help():
     standard_output()
@@ -37,7 +37,7 @@ def help():
     for i in arguments:
         print('\t', i[0], '\t', i[1], '\t', i[3])
 
-    sys.exit(0)
+    exit(0)
 
 def get_tree():
     global show_tree
@@ -61,7 +61,7 @@ def show_keywords():
     for v in l.values():
         print(' '.join(v))
 
-    sys.exit(0)
+    exit(0)
 
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),

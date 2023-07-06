@@ -4,10 +4,10 @@ import src.options as options
 import src.global_var as global_var
 from ply import yacc
 from ply import lex
-import sys
+from sys import argv, exit
 import os
-import chardet
-import time
+from chardet import detect
+from time import time
 # 尝试导入 readline，无法导入也不会导致核心功能受损
 try:
     import readline
@@ -96,12 +96,12 @@ def with_line():
                 print(ast.get_tree())
 
             if options.show_time:
-                t = time.time()
+                t = time()
 
             ast.exe()
 
             if options.show_time:
-                t = time.time() - t
+                t = time() - t
                 print(f'\033[4mDuration: {t}s\033[0m')
 
         except:
@@ -115,7 +115,7 @@ def with_file(path, preload=False):
     lexer.lineno = 1
     # 读取文件编码
     with open(path, 'rb') as f:
-        encode = chardet.detect(f.read())['encoding']
+        encode = detect(f.read())['encoding']
     # 读取文件
     with open(path, 'r', encoding=encode) as f:
         text = remove_comment(f.read())
@@ -134,12 +134,12 @@ def with_file(path, preload=False):
 
 
         if options.show_time and not preload:
-            t = time.time()
+            t = time()
 
         ast.exe()
 
         if options.show_time and not preload:
-            t = time.time() - t
+            t = time() - t
             print(f'\033[4mDuration: {t}s\033[0m')
 
     except:
@@ -156,7 +156,7 @@ def wrong_argument(msg):
 def main():
     # 解析参数
     file_path = ''
-    for arg in sys.argv[1:]:
+    for arg in argv[1:]:
         for i in options.arguments:
             if arg == i[0] or arg == i[1]:
                 i[2]()
@@ -195,7 +195,7 @@ if __name__ == '__main__':
         main()
     except EOFError:
         print("\nEXIT")
-        sys.exit(0)
+        exit(0)
     except KeyboardInterrupt:
         print('\nKeyboard Interrupt')
-        sys.exit(0)
+        exit(0)
