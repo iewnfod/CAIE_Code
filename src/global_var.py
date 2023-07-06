@@ -1,4 +1,6 @@
-from src.error import Error
+from .error import Error
+
+error_messages = []
 
 # 变量
 def __init__():

@@ -1,4 +1,4 @@
-from src.stack import Stack
+from ..stack import Stack
 
 LEVEL_STR = '| '
 stack = Stack()

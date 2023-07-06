@@ -1,5 +1,5 @@
-from src.global_var import *
-from src.data_types import *
+from .global_var import *
+from .data_types import *
 
 class Stack:
     def __init__(self) -> None:

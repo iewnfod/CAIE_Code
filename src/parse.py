@@ -1,8 +1,8 @@
-import src.AST as AST
-from src.AST.insert_func import *
-from src.global_var import *
-from src.error import *
-from src.AST_Base import *
+from . import AST
+from .AST.insert_func import *
+from .global_var import *
+from .error import *
+from .AST_Base import *
 
 start = 'statements'
 

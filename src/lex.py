@@ -1,4 +1,5 @@
-from src.global_var import *
+from .global_var import *
+from .AST_Base import *
 
 reserved = {
     "CONSTANT",
@@ -160,7 +161,7 @@ def t_ID(t):
 
 # 意外处理
 def t_error(t):
-    error_messages.append(f"Keyword not fount: `{t.value[0]}` at line {t.lineno}")
+    add_error_message(f"Keyword not fount: `{t.value[0]}` at line {t.lineno}", AST_Node())
     t.lexer.skip(1)
 
 def t_newline(t):

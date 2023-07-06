@@ -1,7 +1,7 @@
-from src.AST.data import *
+from .data import *
 from random import randint
-from src.AST_Base import *
-from src.global_var import *
+from ..AST_Base import *
+from ..global_var import *
 
 class Int_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):

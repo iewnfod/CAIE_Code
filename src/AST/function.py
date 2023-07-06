@@ -1,6 +1,6 @@
-from src.AST.data import *
-from src.AST_Base import *
-from src.global_var import *
+from .data import *
+from ..AST_Base import *
+from ..global_var import *
 import copy
 
 class Function(AST_Node):

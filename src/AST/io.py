@@ -1,8 +1,8 @@
-from src.AST.data import *
-from src.AST_Base import *
-from src.global_var import *
-from src.AST.array import *
-from src.AST.data_types import *
+from .data import *
+from ..AST_Base import *
+from ..global_var import *
+from .array import *
+from .data_types import *
 
 class Output(AST_Node):
     def __init__(self, value, *args, **kwargs):
