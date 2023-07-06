@@ -134,7 +134,7 @@ class Array_get(AST_Node):
 
     def get_value(self, arr, index):
         if len(index) == 1:
-            return arr[index[0]]
+            return arr[index[0]][0]
         else:
             return self.get_value(arr[index[0]], index[1:])
 

@@ -6,7 +6,7 @@ FOR i <- 1 TO n
     arr[i] <- RAND(n)
 NEXT i
 
-// OUTPUT "FINISH GENERATING ARRAY"
+OUTPUT "FINISH GENERATING ARRAY"
 
 CALL Sort(arr, 1, n)
-// OUTPUT arr
+OUTPUT arr
