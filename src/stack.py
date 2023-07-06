@@ -42,7 +42,7 @@ class Stack:
                     try:
                         self.spaces[i][1][id][0].set_value(value)
                     except:
-                        print(f'Stack Error: Cannot assign `{type}` to `{self.spaces[i][1][id][0].type}`. ')
+                        print(f'Stack Error: Cannot assign `{type}` to `{self.spaces[i][1][id][0][1]}`. ')
                 else:
                     print(f'Stack Error: Cannot assign value of constant `{id}`. ')
                 # 如果找到了这个变量存在，不管什么错误，都退出
