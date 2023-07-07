@@ -34,7 +34,7 @@ CAIE Pseudocode Interpreter
 * 机型: 2020 Macbook Pro
 * 处理器: Apple M1
 * 内存: 8GB
-* 核心数量: 8
+* 核心: 8个 (4能效，4性能)
 * 系统版本: MacOS 13.3.1 (22E261)
 * Python 版本: PyPy 3.9.16
 
@@ -46,10 +46,10 @@ FOR i <- 1 TO 10000000
     a <- i
 NEXT i
 ```
-* 显式转换+赋值: 700w/s
+* 显式转换+赋值: 730w/s
 ```
 DECLARE a : STRING
-FOR i <- 1 TO 7000000
+FOR i <- 1 TO 7300000
     a <- STRING(i)
 NEXT i
 ```
