@@ -11,12 +11,9 @@ CAIE Pseudocode Interpreter
     ```pip install -r requirements.txt```
 5. 运行
     * 二进制文件存在于`bin`中
-    * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译
-    ```./build.sh```
-    * `Windows`若无法正常运行，也可尝试自己编译
-    ```build.pw1```
-    * `Linux`用户请自行编译
-    ```./build.sh```
+    * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [build.sh](./build.sh)
+    * `Windows`若无法正常运行，也可尝试自己编译 [build.ps1](./build.ps1)
+    * `Linux`用户请自行编译 [build.sh](./build.sh)
 6. `-h` 获取更多使用方法
 
 ### 常见问题
