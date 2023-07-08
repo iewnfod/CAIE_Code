@@ -9,3 +9,4 @@ from .function import *
 from .array import *
 from .insert_func import *
 from .file import *
+from .types import *

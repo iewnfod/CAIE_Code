@@ -95,3 +95,6 @@ class Stack:
             return self.files[path][1]
         else:
             print(f'Stack Error: File `{path}` has not opened. ')
+
+    def add_struct(self, id, obj):
+        self.structs[id] = obj

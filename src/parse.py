@@ -378,3 +378,34 @@ def p_closefile_statement(p):
 def p_seek_statement(p):
     """statement : SEEK expression COMMA expression"""
     p[0] = AST.Seek(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_enumerate_type_statement(p):
+    """statement : TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN"""
+    p[0] = AST.Enumerate_type(p[2], p[5], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_enumerate_items(p):
+    """enumerate_items : enumerate_items COMMA ID
+            | ID"""
+    if len(p) == 2:
+        p[0] = AST.Enumerate_items(lineno=p.lineno(1), lexpos=p.lexpos(1))
+        p[0].add_item(p[1])
+    else:
+        p[1].add_item(p[3])
+        p[0] = p[1]
+
+def p_enumerate_get_expression(p):
+    """expression : ID DOT ID"""
+    p[0] = AST.Enumerate_get(p[1], p[3])
+
+def p_pointer_type_statement(p):
+    """statement : TYPE ID EQUAL POINTER ID"""
+
+def p_composite_type_statement(p):
+    """statement : TYPE ID composite_items ENDTYPE"""
+
+def p_composite_items(p):
+    """composite_items : composite_items composite_item
+            | composite_item"""
+
+def p_composite_item(p):
+    """composite_item : DECLARE ID COLON ID"""
