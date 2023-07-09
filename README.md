@@ -269,6 +269,21 @@ NEXT i
         2. `WRITE`
         3. `APPEND`
         4. `RANDOM`
+9. 自定义类型
+    * 枚举类型
+        ```
+        TYPE <identifier> = (<identifier>, ...)
+        ```
+    * 类型指针
+        ```
+        TYPE <identifier> = ^<data type>
+        ```
+    * 自定义 (注意: **若将一个类的实例`a`赋值给另一个实例`b`，此时不会检查类型，且`b`会成为`a`的引用**)
+        ```
+        TYPE <identifier>
+            <statements>
+        ENDTYPE
+        ```
 
 ### 内置函数
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
