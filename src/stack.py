@@ -3,7 +3,7 @@ from .data_types import *
 
 class Stack:
     def __init__(self) -> None:
-        self.spaces = [('GLOBAL', {}, {})]  # [(空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例})]
+        self.spaces = [('GLOBAL', {}, {}, {})]  # [(空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例}, {子空间变量实例: 空间体})]
         self.files = {}  # {文件名: 打开的文件实例}
         self.structs = {
             'INTEGER' : INTEGER,
@@ -12,6 +12,7 @@ class Stack:
             'CHAR' : CHAR,
             'BOOLEAN' : BOOLEAN,
             'ARRAY' : ARRAY,
+            'ENUM' : ENUM,
         }  # {结构名: 结构实例}
         self.return_variables = None
         self.return_request = False
@@ -30,7 +31,7 @@ class Stack:
             print(f'Stack Error: No variable or constant have id: `{id}`. ')
 
     def new_variable(self, id, type):
-        self.spaces[0][1][id] = (self.structs[type](), False)
+        self.spaces[0][1][id] = (self.structs[type](name=id), False)
 
     def new_constant(self, id, type, value):
         self.spaces[0][1][id] = (self.structs[type](value), True)
@@ -54,8 +55,8 @@ class Stack:
         self.spaces.pop(0)
         self.return_request = False
 
-    def new_space(self, space_name, var_dict, func_dict):
-        self.spaces.insert(0, (space_name, var_dict, func_dict))
+    def new_space(self, space_name, var_dict={}, func_dict={}, sub_spaces={}):
+        self.spaces.insert(0, (space_name, var_dict, func_dict, sub_spaces))
 
     def set_return_variables(self, variables):
         self.return_variables = variables
@@ -98,3 +99,10 @@ class Stack:
 
     def add_struct(self, id, obj):
         self.structs[id] = obj
+
+    def push_subspace(self, space_identifier):
+        space = self.spaces.pop(0)
+        self.spaces[0][3][space_identifier] = space
+
+    def pop_subspace(self, space_identifier):
+        self.spaces.insert(0, self.spaces[0][3][space_identifier])

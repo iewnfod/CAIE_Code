@@ -61,7 +61,7 @@ class Call_function(AST_Node):
                 add_error_message(f'Function `{self.id}` does not expect any parameters, but found', self)
 
         # 为函数创建新的命名空间
-        stack.new_space(self.id, new_dict, {})
+        stack.new_space(self.id, new_dict)
 
         # 运行函数
         function_obj.statements.exe()
