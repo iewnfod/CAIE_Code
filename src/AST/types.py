@@ -2,6 +2,7 @@ from .data import *
 from ..AST_Base import *
 from ..global_var import *
 from .var import *
+from .array import *
 
 class Enumerate_type(AST_Node):
     def __init__(self, id, enumerate_items, *args, **kwargs):
@@ -55,7 +56,7 @@ class Composite_type(AST_Node):
                 self.type = that.id
                 self.body = that.body
                 # 创建新的命名空间
-                stack.new_space(self.type)
+                stack.new_space(self.type, {}, {}, {})
                 self.body.exe()
                 # 将这个空间转移为子空间
                 stack.push_subspace(self)
@@ -68,19 +69,18 @@ class Composite_type(AST_Node):
 
         stack.add_struct(self.id, t)
 
-class Composite_type_get(AST_Node):
-    def __init__(self, origin, id, *args, **kwargs):
-        self.type = 'COMPOSITE_TYPE_GET'
-        self.origin = origin
-        self.id = id
+class Composite_type_expression(AST_Node):
+    def __init__(self, exp1, exp2, *args, **kwargs):
+        self.type = 'COMPOSITE_TYPE_EXPRESSION'
+        self.exp1 = exp1
+        self.exp2 = exp2
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level+1) + str(self.origin) + '\n' + LEVEL_STR * (level+1) + str(self.id)
+        return LEVEL_STR * level + self.type + '\n' + self.exp1.get_tree(level+1) + '\n' + self.exp2.get_tree(level+2)
 
     def exe(self):
-        # 拿到对象
-        obj = stack.get_variable(self.origin)
+        obj = self.exp1.exe()
         # 判断一下是不是枚举类型
         if obj[1] == 'ENUM':
             return (obj[0].__members__[self.id], 'ENUM')
@@ -88,33 +88,31 @@ class Composite_type_get(AST_Node):
         # 将此对象的空间放入主空间列表
         stack.pop_subspace(obj)
         # 获取变量的值
-        v = stack.get_variable(self.id)
+        v = self.exp2.exe()
         # 将空间放回子空间列表
         stack.push_subspace(obj)
         # 返回获得的值
         return v
 
-class Composite_type_assign(AST_Node):
-    def __init__(self, id1, id2, value, *args, **kwargs):
-        self.type = 'COMPOSITE_TYPE_ASSIGN'
-        self.id1 = id1
-        self.id2 = id2
-        self.value = value
+class Composite_type_statement(AST_Node):
+    def __init__(self, exp, statement, *args, **kwargs):
+        self.type = 'COMPOSITE_TYPE_STATEMENT'
+        self.exp = exp
+        self.statement = statement
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level+1) + str(self.id1) + '\n' + LEVEL_STR * (level+1) + str(self.id2) + '\n' + self.value.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.exp.get_tree(level+1) + '\n' + self.statement.get_tree(level+2)
 
     def exe(self):
-        # 拿到对象
-        obj = stack.get_variable(self.id1)
-        # 核对是不是enum
+        obj = self.exp.exe()
+        # 判断一下是不是枚举类型
         if obj[1] == 'ENUM':
-            add_error_message('Cannot assign value to a ENUMERATE structure', self)
-            return
-        # 加载命名空间
+            return (obj[0].__members__[self.id], 'ENUM')
+        # 否则，按照正常自定义类型的操作运行
+        # 将此对象的空间放入主空间列表
         stack.pop_subspace(obj)
-        # 赋值
-        Assign(self.id2, self.value).exe()
-        # 卸载命名空间
+        # 获取变量的值
+        self.statement.exe()
+        # 将空间放回子空间列表
         stack.push_subspace(obj)

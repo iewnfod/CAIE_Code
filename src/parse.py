@@ -379,17 +379,17 @@ def p_seek_statement(p):
     """statement : SEEK expression COMMA expression"""
     p[0] = AST.Seek(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
-def p_composite_type_statement(p):
+def p_composite_type_declare_statement(p):
     """statement : TYPE ID statements ENDTYPE"""
     p[0] = AST.Composite_type(p[2], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
-def p_composite_type_get_statement(p):
-    """expression : ID DOT ID"""
-    p[0] = AST.Composite_type_get(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
+def p_composite_type_expression(p):
+    """expression : expression DOT expression"""
+    p[0] = AST.Composite_type_expression(p[1], p[3])
 
-def p_composite_type_assign_statement(p):
-    """statement : ID DOT ID ASSIGN expression"""
-    p[0] = AST.Composite_type_assign(p[1], p[3], p[5], lineno=p.lineno(1), lexpos=p.lexpos(1))
+def p_composite_type_statement(p):
+    """statement : expression DOT statement"""
+    p[0] = AST.Composite_type_statement(p[1], p[3])
 
 def p_enumerate_type_statement(p):
     """statement : TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN"""

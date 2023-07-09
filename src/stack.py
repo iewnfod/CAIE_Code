@@ -55,7 +55,7 @@ class Stack:
         self.spaces.pop(0)
         self.return_request = False
 
-    def new_space(self, space_name, var_dict={}, func_dict={}, sub_spaces={}):
+    def new_space(self, space_name, var_dict, func_dict, sub_spaces):
         self.spaces.insert(0, (space_name, var_dict, func_dict, sub_spaces))
 
     def set_return_variables(self, variables):
