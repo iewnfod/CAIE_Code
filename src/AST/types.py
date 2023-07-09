@@ -122,3 +122,16 @@ class Composite_type_statement(AST_Node):
         self.statement.exe()
         # 将空间放回子空间列表
         stack.push_subspace(obj)
+
+class Pointer(AST_Node):
+    def __init__(self, new_id, old_id, *args, **kwargs):
+        self.type = 'POINTER'
+        self.new_id = new_id
+        self.old_id = old_id
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level+1) + str(self.new_id) + '\n' + LEVEL_STR * (level+1) + str(self.old_id)
+
+    def exe(self):
+        stack.add_struct(self.new_id, stack.structs[self.old_id])
