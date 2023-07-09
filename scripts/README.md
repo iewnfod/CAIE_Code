@@ -17,7 +17,10 @@
     ```
     Max(x : REAL, y : REAL) RETURNS REAL
     ```
-
+* Abs 绝对值
+    ```
+    Abs(x : REAL) RETURNS REAL
+    ```
 ## Sort
 * Sort 排序（希尔排序）
     ```
