@@ -322,7 +322,7 @@ NEXT i
     35.43
     ```
 * `EOF(file_path : STRING) RETURNS BOOLEAN`
-* 更多非官方内置函数，请查阅 [scripts](./scripts/README.md)
+* 更多非官方内置函数，请查阅 [scripts](./scripts)
 
 ## 目标
 - [x] 基础功能实现

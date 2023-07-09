@@ -1,6 +1,6 @@
 # 非官方函数
 
-## Math
+## [Math](./math.cpc)
 * MOD 取模
     ```
     MOD(n1 : INTEGER, n2 : INTEGER) RETURNS INTEGER
@@ -21,13 +21,14 @@
     ```
     Abs(x : REAL) RETURNS REAL
     ```
-## Sort
+
+## [Sort](./sort.cpc)
 * Sort 排序（希尔排序）
     ```
     Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
     ```
 
-## String
+## [String](./string.cpc)
 * Split 分割
     ```
     Split(s : STRING, sep : STRING) RETURNS ARRAY
