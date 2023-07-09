@@ -3,6 +3,7 @@ from ..AST_Base import *
 from ..global_var import *
 from .var import *
 from .array import *
+from copy import copy
 
 class Enumerate_type(AST_Node):
     def __init__(self, id, enumerate_items, *args, **kwargs):
@@ -66,6 +67,11 @@ class Composite_type(AST_Node):
                     return self.type
                 else:
                     return self
+
+            def set_value(self, value):
+                # 将对方的 subspace 设置为自己的
+                stack.pop_subspace(value)
+                stack.push_subspace(self)
 
         stack.add_struct(self.id, t)
 
