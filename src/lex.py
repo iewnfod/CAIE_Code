@@ -38,6 +38,7 @@ reserved = {
     "NEW",
     "CLASS",
     "INHERITS",
+    "ENDCLASS",
     "ARRAY",
     "RETURNS",
     "RETURN",

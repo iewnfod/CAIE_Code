@@ -6,6 +6,7 @@
         "chardet",
         "CLOSEFILE",
         "ENDCASE",
+        "ENDCLASS",
         "ENDFUNCTION",
         "ENDPROCEDURE",
         "ENDTYPE",
