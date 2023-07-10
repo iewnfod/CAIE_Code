@@ -1,6 +1,6 @@
 FUNCTION MOD(n1 : INTEGER, n2 : INTEGER) RETURNS INTEGER
     IF n1 < n2 THEN
-        RETURN 0
+        RETURN n1
     ENDIF
     DECLARE quotient : INTEGER
     quotient <- n1 / n2
