@@ -28,7 +28,7 @@ class Statements(AST_Node):
             try:
                 result.append(statement.exe())
             except Exception as e:
-                add_error_message(str(e), self)
+                add_error_message(str(e), statement)
                 break
 
         return result
