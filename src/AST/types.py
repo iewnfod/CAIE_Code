@@ -45,7 +45,7 @@ class Composite_type(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level + 1) + str(self.id) + '\n' + self.items.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level + 1) + str(self.id) + '\n' + self.body.get_tree(level+1)
 
     def exe(self):
         that = self

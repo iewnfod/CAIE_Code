@@ -105,4 +105,9 @@ class Stack:
         self.spaces[0][3][space_identifier] = space
 
     def pop_subspace(self, space_identifier):
-        self.spaces.insert(0, self.spaces[0][3][space_identifier])
+        for space in self.spaces:
+            if space_identifier in space[3]:
+                self.spaces.insert(0, space[3][space_identifier])
+                break
+        else:
+            print(f'Stack Error: Cannot find subspace `{space_identifier}`. ')
