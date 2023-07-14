@@ -1,7 +1,7 @@
 from sys import exit
 import platform
 
-VERSION = 'v0.1.0'
+VERSION = 'v0.1.1'
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
 show_tree = False
