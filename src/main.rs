@@ -21,6 +21,8 @@ fn main() {
     let sdk_catalog = exe_path.parent().unwrap().parent().unwrap();
     let script_path = sdk_catalog.join("main.py");
 
+    // 标记是否找到并成功运行
+    let mut flag = false;
     for py in PYTHON {
         let mut cmd = Command::new(py);
         cmd.arg(&script_path);
@@ -34,11 +36,18 @@ fn main() {
 
         match spawn.wait() {
             Ok(_) => {
+                flag = true;
                 break;
             },
             Err(_) => {
                 continue;
             }
         }
+    }
+
+    // 如果没有找到 python，发出错误
+    if !flag {
+        println!("Cannot find Python3. ");
+        println!("Please make sure Python3 is installed and is in your PATH. ");
     }
 }
