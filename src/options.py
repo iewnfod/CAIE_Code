@@ -28,14 +28,14 @@ def help():
 
     print()
 
-    print('Usage: cpc [file_path] [options]')
+    print('Usage: \033[1mcpc\033[0m [file_path] [options]')
 
     print()
 
     print('Options:')
     arguments.sort()
     for i in arguments:
-        print('\t', i[0], '\t', i[1], '\t', i[3])
+        print('\t\033[1m', i[0], '\t', i[1], '\033[0m\t', i[3])
 
     exit(0)
 
