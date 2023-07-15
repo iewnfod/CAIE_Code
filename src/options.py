@@ -20,7 +20,7 @@ def open_debug():
     debug = True
 
 def version():
-    print('Version:', VERSION)
+    print(f'Version: \033[1m{VERSION}\033[0m')
     exit(0)
 
 def help():
@@ -59,7 +59,9 @@ def show_keywords():
 
     print('Keywords:')
     for v in l.values():
-        print(' '.join(v))
+        for k in v:
+            print(f'\033[1m{k}\033[0m', end=' ')
+        print()
 
     exit(0)
 
