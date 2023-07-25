@@ -88,6 +88,7 @@ def with_line():
     # 运行
     while 1:
         text = multi_input()
+        lexer.lineno = 1
         if not text:
             continue
         try:
