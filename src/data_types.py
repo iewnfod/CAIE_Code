@@ -66,6 +66,25 @@ class BOOLEAN(base):
     def set_value(self, new_value):
         self.value = bool(new_value)
 
+import time
+class DATE(base):
+    def __init__(self, value=time.strftime("%d/%m/%Y", time.localtime()), *args, **kwargs):
+        self.day, self.month, self.year = value.split('/')
+        self.type = 'DATE'
+        super().__init__(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.day}/{self.month}/{self.year}'
+
+    def __getitem__(self, key):
+        if key == 1:
+            return self.type
+        else:
+            return (self.year, self.month, self.day)
+
+    def set_value(self, new_value):
+        self.year, self.month, self.day = new_value
+
 class ARRAY(base):
     def __init__(self, value={}, *args, **kwargs):
         self.value = value

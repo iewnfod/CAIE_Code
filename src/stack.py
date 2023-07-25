@@ -11,6 +11,7 @@ class Stack:
             'STRING' : STRING,
             'CHAR' : CHAR,
             'BOOLEAN' : BOOLEAN,
+            'DATE': DATE,
             'ARRAY' : ARRAY,
             'ENUM' : ENUM,
         }  # {结构名: 结构实例}

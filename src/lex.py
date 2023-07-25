@@ -64,6 +64,7 @@ tokens = (
     "CHAR",
     "STRING",
     "BOOLEAN",
+    "DATE",
     # 算数运算
     "PLUS",
     "MINUS",
@@ -123,6 +124,11 @@ t_CONNECT = r"&"
 t_ignore = r" "
 
 # 规则行为
+def t_DATE(t):
+    r'[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]'
+    t.value = str(t.value)
+    return t
+
 def t_BOOLEAN(t):
     r'TRUE|FALSE'
     if t.value == 'TRUE':

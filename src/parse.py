@@ -254,6 +254,10 @@ def p_paren_expression(p):
     p[0] = p[2]
 
 # 匹配基础数据类型
+def p_date_expression(p):
+    """expression : DATE"""
+    p[0] = AST.Date(p[1], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
 def p_boolean_expression(p):
     """expression : BOOLEAN"""
     p[0] = AST.Boolean(p[1], lineno=p.lineno(1), lexpos=p.lexpos(1))
