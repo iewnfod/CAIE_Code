@@ -57,7 +57,7 @@ class Stack:
         self.return_request = False
 
     def new_space(self, space_name, var_dict, func_dict, sub_spaces):
-        self.spaces.insert(0, (space_name, var_dict, func_dict, sub_spaces))
+        self.spaces = [(space_name, var_dict, func_dict, sub_spaces)] + self.spaces
 
     def set_return_variables(self, variables):
         self.return_variables = variables
@@ -108,7 +108,7 @@ class Stack:
     def pop_subspace(self, space_identifier):
         for space in self.spaces:
             if space_identifier in space[3]:
-                self.spaces.insert(0, space[3][space_identifier])
+                self.spaces = [space[3][space_identifier]] + self.spaces
                 break
         else:
             print(f'Stack Error: Cannot find subspace `{space_identifier}`. ')

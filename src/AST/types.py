@@ -91,7 +91,7 @@ class Composite_type_expression(AST_Node):
         if not obj.is_struct:
             buffer = stack.spaces.pop(0)
             obj = self.exp1.exe()
-            stack.spaces.insert(0, buffer)
+            stack.spaces = [buffer] + stack.spaces
         # 判断一下是不是枚举类型
         if obj[1] == 'ENUM':
             return (obj[0].__members__[self.id], 'ENUM')
