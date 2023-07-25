@@ -55,6 +55,7 @@ class Composite_type(AST_Node):
                 self.name = name
                 self.type = that.id
                 self.body = that.body
+                self.is_struct = True
                 # 创建新的命名空间
                 stack.new_space(self.type, {}, {}, {})
                 self.body.exe()
@@ -86,6 +87,11 @@ class Composite_type_expression(AST_Node):
 
     def exe(self):
         obj = self.exp1.exe()
+        # 如果不是一个结构体，那说明这个命名空间有变量名重复了，那就从上一个空间读取
+        if not obj.is_struct:
+            buffer = stack.spaces.pop(0)
+            obj = self.exp1.exe()
+            stack.spaces.insert(0, buffer)
         # 判断一下是不是枚举类型
         if obj[1] == 'ENUM':
             return (obj[0].__members__[self.id], 'ENUM')

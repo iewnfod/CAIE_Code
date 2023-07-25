@@ -1,6 +1,7 @@
 class base:
     def __init__(self, name=None):
         self.name = name
+        self.is_struct = False
 
     def __str__(self):
         return str(self.value)
