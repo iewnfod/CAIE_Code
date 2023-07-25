@@ -82,6 +82,11 @@ class Op_div(AST_Node):
         n1 = self.left.exe()
         n2 = self.right.exe()
         try:
+            # 检查除数是否是 0
+            if n2[0] == 0:
+                add_error_message('Cannot divide by zero', self)
+                return (0, 'INTEGER')
+
             v = n1[0] / n2[0]
             if int(v) == v:
                 return (int(v), 'INTEGER')
