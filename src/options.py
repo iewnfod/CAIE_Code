@@ -5,7 +5,7 @@ VERSION = 'v0.1.1'
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
 show_tree = False
-debug = False
+parse = False
 show_time = False
 
 def standard_output():
@@ -15,9 +15,9 @@ def standard_output():
     print('Copyright (c) 2023 Iewnfod. ')
     print('All Rights Reserved. ')
 
-def open_debug():
-    global debug
-    debug = True
+def open_parse_info():
+    global parse
+    parse = True
 
 def version():
     print(f'Version: \033[1m{VERSION}\033[0m')
@@ -69,7 +69,7 @@ arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),
     ('-v', '--version', version, 'To show the version of this interpreter'),
     ('-h', '--help', help, 'To show this help page'),
-    ('-d', '--debug', open_debug, 'To show debug information during running'),
+    ('-p', '--parse', open_parse_info, 'To show parse information during running'),
     ('-t', '--time', get_time, 'To show the time for the script to run'),
     ('-k', '--keywords', show_keywords, 'To show all the keywords'),
 ]

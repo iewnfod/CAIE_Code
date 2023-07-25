@@ -91,7 +91,7 @@ def with_line():
         if not text:
             continue
         try:
-            ast = parser.parse(text, debug=options.debug)
+            ast = parser.parse(text, debug=options.parse)
             if options.show_tree:
                 print(ast.get_tree())
 
@@ -125,7 +125,7 @@ def with_file(path, preload=False):
     # 尝试运行
     try:
         if not preload:
-            ast = parser.parse(text, debug=options.debug)
+            ast = parser.parse(text, debug=options.parse)
         else:
             ast = parser.parse(text)
 
