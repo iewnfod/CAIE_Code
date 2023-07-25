@@ -18,7 +18,14 @@ fn main() {
 
     // 获取文件所在目录
     let exe_path = env::current_exe().unwrap();
-    let sdk_catalog = exe_path.parent().unwrap().parent().unwrap();
+    let mut sdk_catalog = exe_path.parent().unwrap();
+    // 循环向上查找，直到找到包含main.py的目录
+    loop {
+        if sdk_catalog.join("main.py").exists() {
+            break;
+        }
+        sdk_catalog = sdk_catalog.parent().unwrap();
+    }
     let script_path = sdk_catalog.join("main.py");
 
     // 标记是否找到并成功运行
