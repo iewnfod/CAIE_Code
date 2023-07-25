@@ -280,6 +280,21 @@ class Eof(AST_Node):
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)
 
+class Pow(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        self.type = 'POW'
+        self.parameters = parameters
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        parameters = self.parameters.exe()
+        try:
+            return (parameters[0][0] ** parameters[1][0], 'REAL')
+        except:
+            add_error_message(f'Cannot power `{parameters[0][1]}` with `{parameters[1][1]}`', self)
 
 insert_functions = {
     "INT": Int_convert,
@@ -293,5 +308,6 @@ insert_functions = {
     "LCASE": Lcase,
     "UCASE": Ucase,
     "RAND": Rand,
-    "EOF": Eof
+    "EOF": Eof,
+    "POW": Pow,
 }

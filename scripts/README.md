@@ -5,9 +5,9 @@
     ```
     MOD(n1 : INTEGER, n2 : INTEGER) RETURNS INTEGER
     ```
-* POW 幂运算
+* QPow 手动实现的幂运算
     ```
-    POW(x : REAL, n : INTEGER) RETURNS REAL
+    QPow(x : REAL, n : INTEGER) RETURNS REAL
     ```
 * Min 最小值
     ```

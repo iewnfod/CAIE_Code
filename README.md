@@ -324,6 +324,7 @@ NEXT i
     35.43
     ```
 * `EOF(file_path : STRING) RETURNS BOOLEAN`
+* `POW(x: REAL, y: REAL) RETURNS REAL`
 * 更多非官方内置函数，请查阅 [scripts](./scripts)
 
 ## 目标
