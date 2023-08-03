@@ -15,7 +15,7 @@ try:
 except:
     pass
 
-preline = '$'
+preline = '>'
 multi_preline = '.'
 
 # 清除注释以及多余字符
@@ -49,6 +49,7 @@ def output_error(p=''):
         # 清空错误数组
         global_var.clear_error_messages()
 
+# 多行输入
 def multi_input():
     text = remove_comment(input(f'{preline} '))
     # 若为空，那就直接返回
@@ -80,6 +81,20 @@ def multi_input():
 
     return text
 
+# 运行 AST
+def run_AST(ast, preload=False):
+    if options.show_tree and not preload:
+        print(ast.get_tree())
+
+    if options.show_time and not preload:
+        t = time()
+
+    ast.exe()
+
+    if options.show_time and not preload:
+        t = time() - t
+        print(f'\033[4mDuration: {t}s\033[0m')
+
 
 # 终端模式，逐行输入并解析运行
 def with_line():
@@ -93,17 +108,8 @@ def with_line():
             continue
         try:
             ast = parser.parse(text, debug=options.parse)
-            if options.show_tree:
-                print(ast.get_tree())
 
-            if options.show_time:
-                t = time()
-
-            ast.exe()
-
-            if options.show_time:
-                t = time() - t
-                print(f'\033[4mDuration: {t}s\033[0m')
+            run_AST(ast)
 
         except:
             pass
@@ -130,18 +136,7 @@ def with_file(path, preload=False):
         else:
             ast = parser.parse(text)
 
-        if options.show_tree and not preload:
-            print(ast.get_tree())
-
-
-        if options.show_time and not preload:
-            t = time()
-
-        ast.exe()
-
-        if options.show_time and not preload:
-            t = time() - t
-            print(f'\033[4mDuration: {t}s\033[0m')
+        run_AST(ast, preload=preload)
 
     except:
         pass
