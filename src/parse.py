@@ -412,3 +412,9 @@ def p_enumerate_items(p):
 def p_pointer_type_statement(p):
     """statement : TYPE ID EQUAL POINTER ID"""
     p[0] = AST.Pointer(p[2], p[5])
+
+def p_private_statement(p):
+    """statement : PRIVATE statement"""
+
+def p_public_statement(p):
+    """statement : PUBLIC statement"""
