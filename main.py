@@ -191,8 +191,8 @@ if __name__ == '__main__':
     try:
         main()
     except EOFError:
-        print("\nEXIT")
+        print("EXIT")
         exit(0)
     except KeyboardInterrupt:
-        print('\nKeyboard Interrupt')
+        print('Keyboard Interrupt')
         exit(0)
