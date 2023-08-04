@@ -13,7 +13,7 @@ CAIE Pseudocode Interpreter
     * 二进制文件存在于`bin`中
     * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [build.sh](./build.sh)
     * `Windows`若无法正常运行，也可尝试自己编译 [build.ps1](./build.ps1)
-    * `Linux`用户若没有在[bin](./bin/linux/)中找到与自己类型匹配的编辑结果，请自行修改[build-linux.sh](./build-linux.sh)并编译
+    * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[build-linux.sh](./build-linux.sh)并编译
     * 非常欢迎`Linux`用户编译后提交pr
 6. `-h` 获取更多使用方法
 
