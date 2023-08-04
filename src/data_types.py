@@ -44,12 +44,15 @@ class STRING(base):
 
 class CHAR(base):
     def __init__(self, value='', *args, **kwargs):
-        self.value = str(value)[0]
+        self.set_value(value)
         self.type = 'CHAR'
         super().__init__(*args, **kwargs)
 
     def set_value(self, new_value):
-        self.value = str(new_value)[0]
+        if new_value == '':
+            self.value = ''
+        else:
+            self.value = str(new_value)[0]
 
     def __str__(self):
         return "'" + self.value + "'"

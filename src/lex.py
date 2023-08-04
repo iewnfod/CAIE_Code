@@ -138,7 +138,7 @@ def t_BOOLEAN(t):
     return t
 
 def t_CHAR(t):
-    r'\'[\s\S]\''
+    r'\'[\s\S]?\''
     t.value = str(t.value[1:-1])
     return t
 
