@@ -38,7 +38,8 @@ def preload_scripts():
 
 # 输出错误信息
 def output_error(p=''):
-    l = global_var.get_error_messages()
+    l = list(set(global_var.get_error_messages()))
+    l.reverse()
     if l:
         # 输出文件路径
         if p:
