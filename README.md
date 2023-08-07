@@ -15,7 +15,21 @@ CAIE Pseudocode Interpreter
     * `Windows`若无法正常运行，也可尝试自己编译 [build.ps1](./build.ps1)
     * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[build-linux.sh](./build-linux.sh)并编译
     * 非常欢迎`Linux`用户编译后提交pr
-6. `-h` 获取更多使用方法
+
+### Usage
+```
+cpc [file_path] [options]
+```
+
+### Options
+| Mnemonic | Option | Description |
+| -------- | ------ | ----------- |
+| `-gt` | `--get-tree` | To show the tree of the program after being parsed |
+| `-h` | `--help` | To show this help page |
+| `-k` | `--keywords` | To show all the keywords |
+| `-p` | `--parse` | To show parse information during running |
+| `-t` | `--time` | To show the time for the script to run |
+| `-v` | `--version` | To show the version of this interpreter |
 
 ### 常见问题
 #### 成功执行了第四步的依赖安装但还是无法正常运行
