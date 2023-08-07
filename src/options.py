@@ -1,7 +1,7 @@
 from sys import exit
 import platform
 
-VERSION = 'v0.1.1'
+VERSION = '0.1.1'
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
 show_tree = False
@@ -9,7 +9,7 @@ parse = False
 show_time = False
 
 def standard_output():
-    print(f'CAIE Pseudocode Interpreter {VERSION}')
+    print(f'CAIE Pseudocode Interpreter v{VERSION}')
     print(f'Base on {PLATFORM}')
     print('Submit issues at https://github.com/iewnfod/CAIE_Code/issues/new')
     print('Copyright (c) 2023 Iewnfod. ')
