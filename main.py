@@ -16,8 +16,7 @@ except:
     # 自动安装依赖
     print('缺少依赖，尝试安装依赖...')
     import pip
-    pip.main(['install', 'ply'])
-    pip.main(['install', 'chardet'])
+    pip.main(['install', 'ply', 'chardet'])
     # 再次导入
     from ply import yacc
     from ply import lex
