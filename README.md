@@ -8,7 +8,7 @@ CAIE Pseudocode Interpreter
 3. 进入项目
     ```cd CAIE_Code```
 4. 运行
-    * 二进制文件存在于`bin`中
+    * 二进制文件存在于`bin`中，请将自己系统对应的二进制文件加入到`PATH`中
     * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [build.sh](./build.sh)
     * `Windows`若无法正常运行，也可尝试自己编译 [build.ps1](./build.ps1)
     * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[build-linux.sh](./build-linux.sh)并编译
