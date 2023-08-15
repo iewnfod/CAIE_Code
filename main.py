@@ -2,18 +2,34 @@ from src.lex import *
 from src.parse import *
 import src.options as options
 import src.global_var as global_var
-from ply import yacc
-from ply import lex
+
 from sys import argv, exit
 import os
-from chardet import detect
 from time import time
+
+try:
+    # 导入需要安装的依赖
+    from ply import yacc
+    from ply import lex
+    from chardet import detect
+except:
+    # 自动安装依赖
+    print('缺少依赖，尝试安装依赖...')
+    import pip
+    pip.main(['install', 'ply'])
+    pip.main(['install', 'chardet'])
+    # 再次导入
+    from ply import yacc
+    from ply import lex
+    from chardet import detect
+
 # 尝试导入 readline，无法导入也不会导致核心功能受损
 try:
     import readline
     readline.clear_history()
 except:
     pass
+
 
 preline = '>'
 multi_preline = '.'

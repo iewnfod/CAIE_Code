@@ -7,9 +7,7 @@ CAIE Pseudocode Interpreter
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
 3. 进入项目
     ```cd CAIE_Code```
-4. 安装依赖
-    ```pip install -r requirements.txt```
-5. 运行
+4. 运行
     * 二进制文件存在于`bin`中
     * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [build.sh](./build.sh)
     * `Windows`若无法正常运行，也可尝试自己编译 [build.ps1](./build.ps1)
@@ -32,6 +30,12 @@ cpc [file_path] [options]
 | `-v` | `--version` | To show the version of this interpreter |
 
 ### 常见问题
+#### 出现 `Import Error`
+尝试手动安装依赖:
+```shell
+pip install -r requirements.txt
+```
+
 #### 成功执行了第四步的依赖安装但还是无法正常运行
 `cpc`文件会优先选择 `PyPy3` 运行
 因此，在安装依赖时，请确保安装在了正确版本的 `Python3` 上
