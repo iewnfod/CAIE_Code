@@ -1,3 +1,8 @@
+# 检查依赖
+from src.requirements import config
+config()
+
+# 正式导入
 from src.lex import *
 from src.parse import *
 import src.options as options
@@ -7,20 +12,9 @@ from sys import argv, exit
 import os
 from time import time
 
-try:
-    # 导入需要安装的依赖
-    from ply import yacc
-    from ply import lex
-    from chardet import detect
-except:
-    # 自动安装依赖
-    print('缺少依赖，尝试安装依赖...')
-    import pip
-    pip.main(['install', 'ply', 'chardet'])
-    # 再次导入
-    from ply import yacc
-    from ply import lex
-    from chardet import detect
+from ply import yacc
+from ply import lex
+from chardet import detect
 
 # 尝试导入 readline，无法导入也不会导致核心功能受损
 try:
