@@ -2,16 +2,22 @@
 CAIE Pseudocode Interpreter
 
 ## 安装与使用
-1. 安装 `Python3` 环境
-2. 克隆此项目
+
+### 安装前提
+1. `Python3` 环境
+2. `git` 指令
+
+### 正式安装
+1. 克隆此项目
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
+2. MacOS 用户可直接运行项目目录内的 [`install.sh`](./install.sh)，其他系统用户请继续根据`3, 4`步进行安装
 3. 进入项目
     ```cd CAIE_Code```
 4. 运行
     * 二进制文件存在于`bin`中，请将自己系统对应的二进制文件加入到`PATH`中
-    * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [build.sh](./build.sh)
-    * `Windows`若无法正常运行，也可尝试自己编译 [build.ps1](./build.ps1)
-    * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[build-linux.sh](./build-linux.sh)并编译
+    * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [`build.sh`](./build.sh)
+    * `Windows`若无法正常运行，也可尝试自己编译 [`build.ps1`](./build.ps1)
+    * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[`build-linux.sh`](./build-linux.sh)并编译
     * 非常欢迎`Linux`用户编译后提交pr
 
 ### Usage
