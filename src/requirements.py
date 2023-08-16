@@ -1,12 +1,12 @@
 with open('requirements.txt', 'r') as f:
     data = f.read().split('\n')
-    while '' in data:
-        data.remove('')
+    data.remove('')
 
-requirements = (
+requirements = [
+    "ply",
     "chardet",
-    "ply"
-)
+]
+requirements.sort()
 
 def config():
     import importlib
