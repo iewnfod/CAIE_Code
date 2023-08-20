@@ -49,3 +49,7 @@
     ```
     ArrayFromString(s : STRING) RETURNS ARRAY
     ```
+* Contains 是否包含了字符串
+    ```
+    Contains(s : STRING, target : STRING) RETURNS BOOLEAN
+    ```

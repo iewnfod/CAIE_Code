@@ -69,3 +69,16 @@ FUNCTION ArrayFromString(s : STRING) RETURNS ARRAY
 
     RETURN arr
 ENDFUNCTION
+
+FUNCTION Contains(s : STRING, target : STRING) RETURNS BOOLEAN
+    DECLARE targetLen : INTEGER
+    targetLen <- LENGTH(target)
+
+    FOR i <- 1 TO LENGTH(s) STEP targetLen
+        IF MID(s, i, targetLen) = target THEN
+            RETURN TRUE
+        ENDIF
+    NEXT i
+
+    RETURN FALSE
+ENDFUNCTION
