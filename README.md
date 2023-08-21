@@ -72,17 +72,17 @@ FOR i <- 1 TO 10000000
     a <- i
 NEXT i
 ```
-* 显式转换+赋值: 730w/s
+* 显式转换+赋值: 740w/s
 ```
 DECLARE a : STRING
-FOR i <- 1 TO 7300000
+FOR i <- 1 TO 7400000
     a <- STRING(i)
 NEXT i
 ```
 * 隐式转换+赋值: 920w/s
 ```
 DECLARE a : STRING
-FOR i <- 1 TO 10000000
+FOR i <- 1 TO 9200000
     a <- i
 NEXT i
 ```
