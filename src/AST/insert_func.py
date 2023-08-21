@@ -2,6 +2,7 @@ from .data import *
 from random import randint
 from ..AST_Base import *
 from ..global_var import *
+import os
 
 class Int_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
@@ -296,6 +297,27 @@ class Pow(AST_Node):
         except:
             add_error_message(f'Cannot power `{parameters[0][1]}` with `{parameters[1][1]}`', self)
 
+class Exit(AST_Node):
+    def __init__(self, parameters=None, *args, **kwargs):
+        self.type = 'EXIT'
+        self.parameters = parameters
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        if self.parameters != None:
+            parameters = self.parameters.exe()
+            try:
+                exit_code = int(parameters[0][0])
+            except:
+                exit_code = 0
+        else:
+            exit_code = 0
+
+        os._exit(exit_code)
+
 insert_functions = {
     "INT": Int_convert,
     "REAL": Real_convert,
@@ -310,4 +332,5 @@ insert_functions = {
     "RAND": Rand,
     "EOF": Eof,
     "POW": Pow,
+    "EXIT": Exit,
 }

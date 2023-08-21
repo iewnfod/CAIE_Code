@@ -345,7 +345,10 @@ def p_call_function_expression(p):
     """expression : ID LEFT_PAREN parameters RIGHT_PAREN
             | ID LEFT_PAREN RIGHT_PAREN"""
     if len(p) == 4:
-        p[0] = AST.Call_function(p[1], lineno=p.lineno(1), lexpos=p.lexpos(1))
+        if p[1] in insert_functions:
+            p[0] = insert_functions[p[1]](lineno=p.lineno(1), lexpos=p.lexpos(1))
+        else:
+            p[0] = AST.Call_function(p[1], lineno=p.lineno(1), lexpos=p.lexpos(1))
     else:
         if p[1] in insert_functions:
             p[0] = insert_functions[p[1]](p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))

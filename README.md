@@ -353,6 +353,7 @@ NEXT i
     ```
 * `EOF(file_path : STRING) RETURNS BOOLEAN`
 * `POW(x: REAL, y: REAL) RETURNS REAL`
+* `EXIT(code : INTEGER)` 以code为退出码，退出程序 (若不填写code，则默认为0) **(此方法并不属于CAIE的标准方法)**
 * 更多非官方内置函数，请查阅 [scripts](./scripts)
 
 ## 目标
