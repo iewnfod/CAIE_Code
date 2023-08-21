@@ -34,6 +34,7 @@ cpc [file_path] [options]
 | `-p` | `--parse` | To show parse information during running |
 | `-t` | `--time` | To show the time for the script to run |
 | `-v` | `--version` | To show the version of this interpreter |
+| `-ne` | `--no-error` | To remove all error messages |
 
 ### 常见问题
 #### 出现 `Import Error`

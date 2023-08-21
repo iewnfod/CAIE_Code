@@ -1,4 +1,4 @@
-from .error import Error
+from .error import Error, StackError
 
 error_messages = []
 
@@ -16,3 +16,6 @@ def get_error_messages():
 def clear_error_messages():
     global error_messages
     error_messages = []
+
+def add_stack_error_messages(msg):
+    error_messages.append(StackError(msg))

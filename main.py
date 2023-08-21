@@ -47,6 +47,12 @@ def preload_scripts():
 
 # 输出错误信息
 def output_error(p=''):
+    if not options.show_error:
+        # 如果不显示错误信息
+        # 清空错误并直接返回
+        global_var.clear_error_messages()
+        return
+
     l = list(set(global_var.get_error_messages()))
     l.reverse()
     if l:

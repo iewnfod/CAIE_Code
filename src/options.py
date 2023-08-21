@@ -7,6 +7,7 @@ PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] 
 show_tree = False
 parse = False
 show_time = False
+show_error = True
 
 def standard_output():
     print(f'CAIE Pseudocode Interpreter v{VERSION}')
@@ -65,6 +66,10 @@ def show_keywords():
 
     exit(0)
 
+def remove_error():
+    global show_error
+    show_error = False
+
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),
     ('-v', '--version', version, 'To show the version of this interpreter'),
@@ -72,4 +77,5 @@ arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述
     ('-p', '--parse', open_parse_info, 'To show parse information during running'),
     ('-t', '--time', get_time, 'To show the time for the script to run'),
     ('-k', '--keywords', show_keywords, 'To show all the keywords'),
+    ('-ne', '--no-error', remove_error, 'To remove all error messages')
 ]
