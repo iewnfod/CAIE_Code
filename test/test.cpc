@@ -1,15 +1,2 @@
-PROCEDURE swap(BYREF x : INTEGER, y : INTEGER)
-    DECLARE temp : INTEGER
-    temp <- x
-    x <- y
-    y <- temp
-ENDPROCEDURE
-
-DECLARE a : INTEGER
-a <- 1
-DECLARE b : INTEGER
-b <- 2
-OUTPUT a, " ", b
-
-CALL swap(a, b)
-OUTPUT a, " ", b
+"Raw Output"
+OUTPUT "Normal Output"

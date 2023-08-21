@@ -114,6 +114,7 @@ def run_AST(ast, preload=False):
 
 # 终端模式，逐行输入并解析运行
 def with_line():
+    global_var.set_running_mod('line')
     # 基准输出
     options.standard_output()
     # 运行
@@ -134,6 +135,7 @@ def with_line():
 
 # 文件模式，读取文件并解析运行
 def with_file(path, preload=False):
+    global_var.set_running_mod('file')
     # 恢复行数，也就是不计算预加载文件的行数
     lexer.lineno = 1
     # 读取文件编码
