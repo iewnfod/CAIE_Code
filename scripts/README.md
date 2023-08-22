@@ -53,3 +53,7 @@
     ```
     Contains(s : STRING, target : STRING) RETURNS BOOLEAN
     ```
+* Join 将数组拼接成字符串
+    ```
+    Join(sep : STRING, BYREF list : ARRAY, start : INTEGER, end : INTEGER) RETURNS STRING
+    ```

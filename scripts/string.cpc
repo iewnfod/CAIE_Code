@@ -82,3 +82,17 @@ FUNCTION Contains(s : STRING, target : STRING) RETURNS BOOLEAN
 
     RETURN FALSE
 ENDFUNCTION
+
+FUNCTION Join(sep : STRING, BYREF list : ARRAY, start : INTEGER, end : INTEGER) RETURNS STRING
+    DECLARE r : STRING
+
+    FOR i <- start TO end
+        IF i = end THEN
+            r <- r & list[i]
+        ELSE
+            r <- r & list[i] & sep
+        ENDIF
+    NEXT i
+
+    RETURN r
+ENDFUNCTION
