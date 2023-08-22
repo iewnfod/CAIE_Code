@@ -2,7 +2,7 @@ from .data import *
 from random import randint
 from ..AST_Base import *
 from ..global_var import *
-import os
+from ..quit import *
 
 class Int_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
@@ -316,7 +316,7 @@ class Exit(AST_Node):
         else:
             exit_code = 0
 
-        os._exit(exit_code)
+        quit(exit_code)
 
 insert_functions = {
     "INT": Int_convert,

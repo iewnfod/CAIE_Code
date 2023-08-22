@@ -45,26 +45,6 @@ def preload_scripts():
             if n == '.cpc':
                 with_file(path, True)
 
-# 输出错误信息
-def output_error(p=''):
-    if not options.show_error:
-        # 如果不显示错误信息
-        # 清空错误并直接返回
-        global_var.clear_error_messages()
-        return
-
-    l = list(set(global_var.get_error_messages()))
-    l.reverse()
-    if l:
-        # 输出文件路径
-        if p:
-            print(f'File `{p}`: ')
-        # 输出错误信息
-        for i in l:
-            i.raise_err()
-        # 清空错误数组
-        global_var.clear_error_messages()
-
 # 多行输入
 def multi_input():
     text = remove_comment(input(f'{preline} '))
@@ -115,6 +95,7 @@ def run_AST(ast, preload=False):
 # 终端模式，逐行输入并解析运行
 def with_line():
     global_var.set_running_mod('line')
+    global_var.set_running_path('')
     # 基准输出
     options.standard_output()
     # 运行
@@ -131,11 +112,12 @@ def with_line():
         except:
             pass
 
-        output_error()
+        global_var.output_error()
 
 # 文件模式，读取文件并解析运行
 def with_file(path, preload=False):
     global_var.set_running_mod('file')
+    global_var.set_running_path(path)
     # 恢复行数，也就是不计算预加载文件的行数
     lexer.lineno = 1
     # 读取文件编码
@@ -159,7 +141,7 @@ def with_file(path, preload=False):
     except:
         pass
 
-    output_error(path)
+    global_var.output_error()
 
 # 错误的argument
 def wrong_argument(msg):
