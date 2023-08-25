@@ -145,8 +145,10 @@ def with_file(path, preload=False):
 
 # 错误的argument
 def wrong_argument(msg):
-    print(f'Wrong arguments: \033[1m{msg}\033[0m\n')
-    options.help()
+    print(f'Wrong arguments: \033[1m{msg}\033[0m')
+    print(f'Use `cpc -h` to get detailed informations about how to use')
+    exit()
+    # options.help()
 
 # 主函数
 def main():
