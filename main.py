@@ -7,6 +7,7 @@ from src.lex import *
 from src.parse import *
 import src.options as options
 import src.global_var as global_var
+from src.quit import quit
 
 from sys import argv, exit
 import os
@@ -16,16 +17,10 @@ from ply import yacc
 from ply import lex
 from chardet import detect
 
-# 尝试导入 readline，无法导入也不会导致核心功能受损
-try:
-    import readline
-    readline.clear_history()
-except:
-    pass
-
 
 preline = '>'
 multi_preline = '.'
+home_path = os.path.dirname(__file__)
 
 # 清除注释以及多余字符
 def remove_comment(text: str):
@@ -37,7 +32,7 @@ def remove_comment(text: str):
 
 # 预加载文件
 def preload_scripts():
-    scripts_path = os.path.join(os.path.dirname(__file__), 'scripts')
+    scripts_path = os.path.join(home_path, 'scripts')
     for p, _dir_list, file_list in os.walk(scripts_path):
         for i in file_list:
             path = os.path.join(p, i)
@@ -193,7 +188,7 @@ if __name__ == '__main__':
         main()
     except EOFError:
         print("EXIT")
-        exit(0)
+        quit(0)
     except KeyboardInterrupt:
         print('Keyboard Interrupt')
-        exit(0)
+        quit(0)

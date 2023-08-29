@@ -1,15 +1,18 @@
 from .error import Error, StackError
 from . import options
+from .history import Cmd
 
 error_messages = []
 running_mod = 'file'  # file / line
 running_path = ''  # 当前运行文件
+console = Cmd()
 
 # 变量
 def __init__():
     global error_messages, running_mod
     error_messages = []
     running_mod = 'file'
+    console.preloop()
 
 def add_error_message(msg, obj):
     error_messages.append(Error(msg, obj))
