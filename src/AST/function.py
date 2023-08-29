@@ -137,6 +137,9 @@ class Parameters(AST_Node):
     def add_parameter(self, parameter):
         self.parameters.append(parameter)
 
+    def __len__(self):
+        return len(self.parameters)
+
     def exe(self):
         result = []
         for i in self.parameters:
