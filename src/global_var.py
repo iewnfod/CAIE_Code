@@ -50,7 +50,7 @@ def output_error():
             print(f'File `{running_path}`: ')
         # 输出错误信息
         for i in l:
-            print('\t', end='')
+            print('\t' if running_path else '', end='')
             i.raise_err()
         # 清空错误数组
         clear_error_messages()
