@@ -28,10 +28,10 @@ preline = '>'
 multi_preline = '.'
 
 # 清除注释以及多余字符
-def remove_comment(text):
+def remove_comment(text: str):
     text = text.split('\n')
     for i in range(len(text)):
-        text[i] = text[i].split('//')[0]
+        text[i] = text[i].split('//')[0].strip()
 
     return '\n'.join(text).strip()
 

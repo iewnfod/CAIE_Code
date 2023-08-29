@@ -1,2 +1,22 @@
-"Raw Output"
-OUTPUT "Normal Output"
+DECLARE n : INTEGER
+n <- 10000
+DECLARE arr : ARRAY[1:n] OF REAL
+
+FOR i <- 1 TO n
+    arr[i] <- RAND(n)
+NEXT i
+
+OUTPUT "FINISH GENERATING ARRAY"
+
+FOR i <- n TO 1 STEP -1
+    FOR j <- 1 TO i
+        IF arr[i] < arr[j] THEN
+            DECLARE temp : INTEGER
+            temp <- arr[i]
+            arr[i] <- arr[j]
+            arr[j] <- temp
+        ENDIF
+    NEXT j
+NEXT i
+
+OUTPUT arr
