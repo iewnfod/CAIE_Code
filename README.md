@@ -136,7 +136,7 @@ NEXT i
     "World"
     "!"
     ```
-* `BOOLEAN` 布尔值 (`TRUE`)
+* `BOOLEAN` 布尔值 (`FALSE`)
     ```
     TRUE
     FALSE

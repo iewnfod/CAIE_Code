@@ -58,7 +58,7 @@ class CHAR(base):
         return "'" + self.value + "'"
 
 class BOOLEAN(base):
-    def __init__(self, value=True, *args, **kwargs):
+    def __init__(self, value=False, *args, **kwargs):
         self.value = bool(value)
         self.type = 'BOOLEAN'
         super().__init__(*args, **kwargs)
