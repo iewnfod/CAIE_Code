@@ -4,10 +4,16 @@ import platform
 VERSION = '0.1.1'
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
-show_tree = False
-parse = False
-show_time = False
+options_dict = {
+    "show_tree": False,
+    "show_parse": False,
+    "show_time": False,
+    "show_error": True
+}
 show_error = True
+
+def get_value(value):
+    return options_dict[value]
 
 def standard_output():
     print(f'CAIE Pseudocode Interpreter v{VERSION}')
@@ -17,8 +23,7 @@ def standard_output():
     print('All Rights Reserved. ')
 
 def open_parse_info():
-    global parse
-    parse = True
+    options_dict['show_parse'] = True
 
 def version():
     print(f'Version: \033[1m{VERSION}\033[0m')
@@ -44,12 +49,10 @@ def help():
     exit(0)
 
 def get_tree():
-    global show_tree
-    show_tree = True
+    options_dict['show_tree'] = True
 
 def get_time():
-    global show_time
-    show_time = True
+    options_dict['show_time'] = True
 
 def show_keywords():
     from src.lex import reserved
@@ -70,8 +73,7 @@ def show_keywords():
     exit(0)
 
 def remove_error():
-    global show_error
-    show_error = False
+    options_dict['show_error'] = False
 
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),

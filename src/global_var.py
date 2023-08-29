@@ -1,5 +1,5 @@
 from .error import Error, StackError
-from .options import *
+from . import options
 
 error_messages = []
 running_mod = 'file'  # file / line
@@ -37,7 +37,7 @@ def set_running_path(p):
 
 # 输出错误信息
 def output_error():
-    if not show_error:
+    if not options.get_value('show_error'):
         # 如果不显示错误信息
         # 清空错误并直接返回
         clear_error_messages()

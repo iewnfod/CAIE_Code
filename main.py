@@ -79,15 +79,15 @@ def multi_input():
 
 # 运行 AST
 def run_AST(ast, preload=False):
-    if options.show_tree and not preload:
+    if options.get_value('show_tree') and not preload:
         print(ast.get_tree())
 
-    if options.show_time and not preload:
+    if options.get_value('show_time') and not preload:
         t = time()
 
     ast.exe()
 
-    if options.show_time and not preload:
+    if options.get_value('show_time') and not preload:
         t = time() - t
         print(f'\033[4mDuration: {t}s\033[0m')
 
@@ -105,7 +105,7 @@ def with_line():
         if not text:
             continue
         try:
-            ast = parser.parse(text, debug=options.parse)
+            ast = parser.parse(text, debug=options.get_value('show_parse'))
 
             run_AST(ast)
 
@@ -132,7 +132,7 @@ def with_file(path, preload=False):
     # 尝试运行
     try:
         if not preload:
-            ast = parser.parse(text, debug=options.parse)
+            ast = parser.parse(text, debug=options.get_value('show_parse'))
         else:
             ast = parser.parse(text)
 
