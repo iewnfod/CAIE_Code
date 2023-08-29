@@ -320,6 +320,7 @@ class Exit(AST_Node):
 
 insert_functions = {
     "INT": Int_convert,
+    "INTEGER": Int_convert,
     "REAL": Real_convert,
     "STRING": Str_convert,
     "BOOLEAN": Bool_convert,
