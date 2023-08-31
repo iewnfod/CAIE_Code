@@ -24,6 +24,7 @@ def update():
         u = input('There is a new version of the program. Do you want to update it? [y/N] ').strip().lower()
         if u == 'y':
             try:
+                print('Updating')
                 remote.pull()
                 print('\033[1mUpdate Successful\033[0m')
             except Exception as e:
