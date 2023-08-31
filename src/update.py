@@ -7,14 +7,12 @@ VERSION = ''
 with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
 
-flag = False
 
 def check_update(repo: git.Repo, remote: git.Remote):
-    global flag
     remote.fetch()
-    status = repo.is_dirty()
-    flag = True
-    return status
+    local_branch = repo.active_branch
+    remote_branch = repo.remotes.origin.refs[local_branch.name]
+    return local_branch.commit != remote_branch.commit
 
 def update():
     repo = git.Repo(HOME_PATH)
