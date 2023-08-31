@@ -87,5 +87,5 @@ arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述
     ('-t', '--time', get_time, 'To show the time for the script to run'),
     ('-k', '--keywords', show_keywords, 'To show all the keywords'),
     ('-ne', '--no-error', remove_error, 'To remove all error messages'),
-    ('-u', '--update', update_version, 'To check or update the version (only work if you are installing with git)')
+    ('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)')
 ]
