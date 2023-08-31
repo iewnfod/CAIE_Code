@@ -35,6 +35,7 @@ cpc [file_path] [options]
 | `-t` | `--time` | To show the time for the script to run |
 | `-v` | `--version` | To show the version of this interpreter |
 | `-ne` | `--no-error` | To remove all error messages |
+| `-u` | `--update` | To update the version (only useful when using a version equal or greater than `0.1.2` and installed by git) |
 
 ### 常见问题
 #### 出现 `Import Error`

@@ -1,7 +1,7 @@
 from sys import exit
 import platform
+from .update import VERSION, update
 
-VERSION = '0.1.1'
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
 options_dict = {
@@ -75,6 +75,10 @@ def show_keywords():
 def remove_error():
     options_dict['show_error'] = False
 
+def update_version():
+    update()
+    quit(0)
+
 arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
     ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),
     ('-v', '--version', version, 'To show the version of this interpreter'),
@@ -82,5 +86,6 @@ arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述
     ('-p', '--parse', open_parse_info, 'To show parse information during running'),
     ('-t', '--time', get_time, 'To show the time for the script to run'),
     ('-k', '--keywords', show_keywords, 'To show all the keywords'),
-    ('-ne', '--no-error', remove_error, 'To remove all error messages')
+    ('-ne', '--no-error', remove_error, 'To remove all error messages'),
+    ('-u', '--update', update_version, 'To check or update the version (only work if you are installing with git)')
 ]

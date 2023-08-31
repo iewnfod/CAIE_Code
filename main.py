@@ -7,6 +7,7 @@ from src.lex import *
 from src.parse import *
 import src.options as options
 import src.global_var as global_var
+from src.history import HOME_PATH
 from src.quit import quit
 
 from sys import argv, exit
@@ -20,7 +21,7 @@ from chardet import detect
 
 preline = '>'
 multi_preline = '.'
-home_path = os.path.dirname(__file__)
+home_path = HOME_PATH
 
 # 清除注释以及多余字符
 def remove_comment(text: str):
