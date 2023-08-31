@@ -206,13 +206,7 @@ NEXT i
     * CASE 语句
         此处官方语法中并没有分号`;`
         ```
-        CASE <identifier>
-            <value> : <statements>;
-            <value> : <statements>;
-            ...
-        ENDCASE
-
-        CASE <identifier>
+        CASE OF <identifier>
             <value> : <statements>;
             <value> : <statements>;
             ...
