@@ -19,11 +19,10 @@ def check_update(repo: git.Repo, remote: git.Remote):
 
 
 def animation(msg, count):
-    count += 1
-    n = 1
+    n = 0
     while flags[msg]:
-        print(msg + '.' * n, end='\r')
         n += 1
+        print(msg + '.' * n + ' ' * (count - n), end='\r')
         n %= count
         time.sleep(.5)
 
