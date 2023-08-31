@@ -8,6 +8,7 @@ Unused terminals:
     INHERITS
     LEFT_BRACE
     NEW
+    NEWLINE
     PUTRECORD
     RIGHT_BRACE
 
@@ -163,6 +164,7 @@ LESS_EQUAL           : 44
 MINUS                : 48 51
 MUL                  : 46
 NEW                  : 
+NEWLINE              : 
 NEXT                 : 29 30
 NOT                  : 39
 NOT_EQUAL            : 41

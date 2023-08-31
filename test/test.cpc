@@ -1,22 +1,13 @@
-DECLARE n : INTEGER
-n <- 10000
-DECLARE arr : ARRAY[1:n] OF REAL
+DECLARE Move : STRING
+DECLARE Position : INTEGER
 
-FOR i <- 1 TO n
-    arr[i] <- RAND(n)
-NEXT i
+INPUT Move
+CASE OF Move
+    'W' : Position <- Position - 10;
+    'S' : Position <- Position + 10;
+    'A' : Position <- Position - 1;
+    'D' : Position <- Position + 1;
+    OTHERWISE : OUTPUT "other";
+ENDCASE
 
-OUTPUT "FINISH GENERATING ARRAY"
-
-FOR i <- n TO 1 STEP -1
-    FOR j <- 1 TO i
-        IF arr[i] < arr[j] THEN
-            DECLARE temp : INTEGER
-            temp <- arr[i]
-            arr[i] <- arr[j]
-            arr[j] <- temp
-        ENDIF
-    NEXT j
-NEXT i
-
-OUTPUT arr
+OUTPUT Position

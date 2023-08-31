@@ -173,11 +173,11 @@ class A_case(AST_Node):
 
     def check(self, value):
         if self.condition.type == 'RANGE':
-            r = set(self.condition.exe())
+            r = set(map(lambda x : x[0], self.condition.exe()))
         else:
-            r = {self.condition.exe()}
+            r = {self.condition.exe()[0]}
 
-        return value in r
+        return value[0] in r
 
     def exe(self):
         self.true_statement.exe()

@@ -94,6 +94,8 @@ tokens = (
     "ASSIGN", # <-
     # Identifier
     "ID",
+    # 换行
+    "NEWLINE",
 ) + tuple(reserved)
 
 # 匹配正则表达式
@@ -166,11 +168,12 @@ def t_ID(t):
         t.type = 'ID'
     return t
 
+# 换行
+def t_NEWLINE(t):
+    r'\n+'
+    t.lexer.lineno += t.value.count('\n')
+
 # 意外处理
 def t_error(t):
     add_error_message(f"Keyword not fount: `{t.value[0]}` at line {t.lineno}", AST_Node())
     t.lexer.skip(1)
-
-def t_newline(t):
-    r'\n+'
-    t.lexer.lineno += t.value.count('\n')
