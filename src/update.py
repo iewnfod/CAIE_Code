@@ -26,10 +26,14 @@ def animation(msg, count):
         n %= count
         time.sleep(.5)
 
-def new_animation(msg, count, work, *args, **kwargs):
+def new_animation(msg: str, count: int, work, failed_msg='', *args, **kwargs):
     flags[msg] = True
     threading.Thread(target=animation, args=(msg, count)).start()
-    result = work(*args, **kwargs)
+    try:
+        result = work(*args, **kwargs)
+    except Exception as e:
+        print(f'\033[1;31m{failed_msg}\033[0m\n{e}')
+        os._exit(1)
     flags[msg] = False
     return result
 
@@ -38,15 +42,12 @@ def update():
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
 
-    if new_animation('Checking Update', 3, check_update, repo=repo, remote=remote):
+    if new_animation('Checking Update', 3, check_update, failed_msg='Failed to Check Update', repo=repo, remote=remote):
         # 询问是否更新
         u = input('There is a new version of the program. Do you want to update it? [y/N] ').strip().lower()
         if u == 'y':
-            try:
-                new_animation('Updating', 3, remote.pull)
+            if new_animation('Updating', 3, remote.pull, failed_msg='Failed to Update'):
                 print('\033[1mUpdate Successful\033[0m')
-            except Exception as e:
-                print(f'\033[1;31mFailed to Update\033[0m\n\t{e}')
         else:
             print('Stop Updating')
     else:
