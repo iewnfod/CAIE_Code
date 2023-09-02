@@ -9,6 +9,7 @@ import src.options as options
 import src.global_var as global_var
 from src.history import HOME_PATH
 from src.quit import quit
+from src.line_commands import run_command
 
 from sys import argv, exit
 import os
@@ -98,6 +99,10 @@ def with_line():
     while 1:
         text = multi_input()
         lexer.lineno = 1
+        # 尝试运行特殊指令
+        if run_command(text):
+            continue
+
         if not text:
             continue
         try:
@@ -151,9 +156,12 @@ def main():
     # 解析参数
     file_path = ''
     for arg in argv[1:]:
-        for i in options.arguments:
-            if arg == i[0] or arg == i[1]:
-                i[2]()
+        for opt in options.arguments:
+            if arg == opt[0] or arg == opt[1]:
+                opt[2]()
+                # 如果需要退出，那就 quit
+                if opt[3]:
+                    quit(0)
                 break
         else:
             if arg[0] == '-':

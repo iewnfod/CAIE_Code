@@ -17,8 +17,8 @@ def get_value(value):
 
 def standard_output():
     print(f'CAIE Pseudocode Interpreter v{VERSION}')
-    print(f'Base on {PLATFORM}')
-    print('Submit issues at https://github.com/iewnfod/CAIE_Code/issues/new')
+    print(f'Using {PLATFORM}')
+    print('Repository at https://github.com/iewnfod/CAIE_Code/')
     print('Copyright (c) 2023 Iewnfod. ')
     print('All Rights Reserved. ')
 
@@ -46,8 +46,6 @@ def help():
     for i in arguments:
         print('\t\033[1m', i[0], '\t', i[1], '\033[0m\t', i[3])
 
-    exit(0)
-
 def get_tree():
     options_dict['show_tree'] = True
 
@@ -70,22 +68,20 @@ def show_keywords():
             print(f'\033[1m{k}\033[0m', end=' ')
         print()
 
-    exit(0)
-
 def remove_error():
     options_dict['show_error'] = False
 
 def update_version():
     update()
-    quit(0)
 
-arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述)
-    ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed'),
-    ('-v', '--version', version, 'To show the version of this interpreter'),
-    ('-h', '--help', help, 'To show this help page'),
-    ('-p', '--parse', open_parse_info, 'To show parse information during running'),
-    ('-t', '--time', get_time, 'To show the time for the script to run'),
-    ('-k', '--keywords', show_keywords, 'To show all the keywords'),
-    ('-ne', '--no-error', remove_error, 'To remove all error messages'),
-    ('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)')
+
+arguments = [  # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出)
+    ('-gt', '--get-tree', get_tree, 'To show the tree of the program after being parsed', False),
+    ('-v', '--version', version, 'To show the version of this interpreter', True),
+    ('-h', '--help', help, 'To show this help page', True),
+    ('-p', '--parse', open_parse_info, 'To show parse information during running', False),
+    ('-t', '--time', get_time, 'To show the time for the script to run', False),
+    ('-k', '--keywords', show_keywords, 'To show all the keywords', True),
+    ('-ne', '--no-error', remove_error, 'To remove all error messages', False),
+    ('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)', True),
 ]
