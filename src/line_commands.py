@@ -1,5 +1,5 @@
 from .quit import quit
-from .options import help
+from .options import help, update_version
 from os import get_terminal_size
 
 def clear():
@@ -9,7 +9,8 @@ def clear():
 commands = {
     'exit': quit,
     'help': help,
-    'clear': clear
+    'clear': clear,
+    'update': update_version
 }
 
 def run_command(text: str):
