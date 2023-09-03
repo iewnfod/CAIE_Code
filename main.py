@@ -157,11 +157,8 @@ def main():
     file_path = ''
     for arg in argv[1:]:
         for opt in options.arguments:
-            if arg == opt[0] or arg == opt[1]:
-                opt[2]()
-                # 如果需要退出，那就 quit
-                if opt[3]:
-                    quit(0)
+            if opt.check(arg):
+                opt.run()
                 break
         else:
             if arg[0] == '-':
@@ -201,3 +198,6 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print('Keyboard Interrupt')
         quit(0)
+    except Exception as e:
+        print(e)
+        quit(1)
