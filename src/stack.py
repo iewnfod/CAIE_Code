@@ -29,7 +29,7 @@ class Stack:
             if id in i[1].keys():
                 return i[1][id][0]
         else:
-            add_stack_error_messages(f'No variable or constant have id: `{id}`')
+            add_stack_error_message(f'No variable or constant have id: `{id}`')
 
     def new_variable(self, id, type):
         self.spaces[0][1][id] = (self.structs[type](name=id), False)
@@ -44,13 +44,13 @@ class Stack:
                     try:
                         self.spaces[i][1][id][0].set_value(value)
                     except:
-                        add_stack_error_messages(f'Cannot assign `{type}` to `{self.spaces[i][1][id][0][1]}`')
+                        add_stack_error_message(f'Cannot assign `{type}` to `{self.spaces[i][1][id][0][1]}`')
                 else:
-                    add_stack_error_messages(f'Cannot assign value of constant `{id}`')
+                    add_stack_error_message(f'Cannot assign value of constant `{id}`')
                 # 如果找到了这个变量存在，不管什么错误，都退出
                 break
         else:
-            add_stack_error_messages(f'Variable `{id}` has not been declared yet')
+            add_stack_error_message(f'Variable `{id}` has not been declared yet')
 
     def pop_space(self):
         self.spaces.pop(0)
@@ -75,7 +75,7 @@ class Stack:
             if id in self.spaces[i][2].keys():
                 return self.spaces[i][2][id]
         else:
-            add_stack_error_messages(f'No function with id: `{id}`')
+            add_stack_error_message(f'No function with id: `{id}`')
 
     def add_file(self, path, file_obj):
         try:
@@ -90,13 +90,13 @@ class Stack:
         if path in self.files:
             return self.files[path][0]
         else:
-            add_stack_error_messages(f'File `{path}` has not opened')
+            add_stack_error_message(f'File `{path}` has not opened')
 
     def get_eof(self, path):
         if path in self.files:
             return self.files[path][1]
         else:
-            add_stack_error_messages(f'File `{path}` has not opened')
+            add_stack_error_message(f'File `{path}` has not opened')
 
     def add_struct(self, id, obj):
         self.structs[id] = obj
@@ -111,4 +111,4 @@ class Stack:
                 self.spaces.insert(0, space[3][space_identifier])
                 break
         else:
-            add_stack_error_messages(f'Cannot find subspace `{space_identifier}`')
+            add_stack_error_message(f'Cannot find subspace `{space_identifier}`')

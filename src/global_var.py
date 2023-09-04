@@ -1,4 +1,4 @@
-from .error import Error, StackError
+from .error import Error, StackError, PythonError
 from . import options
 from .history import Cmd
 
@@ -24,8 +24,11 @@ def clear_error_messages():
     global error_messages
     error_messages = []
 
-def add_stack_error_messages(msg):
+def add_stack_error_message(msg):
     error_messages.append(StackError(msg))
+
+def add_python_error_message(msg, obj):
+    error_messages.append(PythonError(msg, obj))
 
 def set_running_mod(mod):
     global running_mod
