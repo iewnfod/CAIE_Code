@@ -42,7 +42,7 @@ class Char(AST_Node):
 class String(AST_Node):
     def __init__(self, value, *args, **kwargs):
         self.type = 'STRING'
-        self.value = str(value).encode('utf8').decode('unicode_escape')
+        self.value = str(value).encode('raw_unicode_escape').decode('unicode_escape')
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
