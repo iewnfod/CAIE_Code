@@ -147,6 +147,7 @@ NEXT i
     25/07/2023
     10/12/2012
     ```
+* `None` 此类型表示未知的类型，无法通过常规方法声明，也不应该滥用，仅会作为某些特殊函数的返回值存在
 
 ### 语法定义
 
@@ -352,6 +353,7 @@ NEXT i
 **(以下方法均不属于CAIE提供的标准方法)**
 * `EXIT(code : INTEGER)` 以code为退出码，退出程序 (若不填写code，则默认为0)
 * `ROUND(x : REAL, decimalPlace : INTEGER)` decimalPlace不填写默认为0
+* `PYTHON(code: STRING)` Python3代码运行接口，并会返回code的运行结果，由于两个语言的类型系统并不互通，其返回的所有结果的类型皆为None，可赋值给任何本语言类型但不保证是否能够获得预期的结果
 * 更多非官方内置函数，请查阅 [scripts](./scripts)
 
 ## 目标

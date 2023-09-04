@@ -339,6 +339,26 @@ class Round(AST_Node):
         else:
             add_error_message(f'Round only have 1 or 2 parameters, but found 0', self)
 
+class Python(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        self.type = 'PYTHON'
+        self.parameters = parameters
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(self.parameters) == 1:
+                return (eval(parameters[0][0]), None)  # None 表示未知类型
+            else:
+                add_error_message(f'Python only have 1 parameters, but found {len(self.parameters)}', self)
+        else:
+            add_error_message(f'Python only have 1 parameters, but found 0', self)
+
+
 insert_functions = {
     "INT": Int_convert,
     "INTEGER": Int_convert,
@@ -356,4 +376,5 @@ insert_functions = {
     "POW": Pow,
     "EXIT": Exit,
     "ROUND": Round,
+    "PYTHON": Python,
 }
