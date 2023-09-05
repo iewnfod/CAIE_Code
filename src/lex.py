@@ -54,7 +54,8 @@ reserved = {
     "PUTRECORD",
     "RANDOM",
     "BYREF",
-    "BYVAL"
+    "BYVAL",
+    "MOD"
 }
 
 tokens = (

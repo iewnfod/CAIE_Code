@@ -220,6 +220,10 @@ def p_greater_equal_expression(p):
     """expression : expression GREATER_EQUAL expression"""
     p[0] = AST.Cmp_greater_equal(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
+def p_mod_expression(p):
+    """expression : expression MOD expression"""
+    p[0] = AST.Op_mod(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
 def p_mul_expression(p):
     """expression : expression MUL expression"""
     p[0] = AST.Op_mul(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))

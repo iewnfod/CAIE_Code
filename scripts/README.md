@@ -1,10 +1,6 @@
 # 非官方函数
 
 ## [Math](./math.cpc)
-* MOD 取模
-    ```
-    MOD(n1 : INTEGER, n2 : INTEGER) RETURNS INTEGER
-    ```
 * QPow 手动实现的幂运算
     ```
     QPow(x : REAL, n : INTEGER) RETURNS REAL
