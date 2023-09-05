@@ -135,3 +135,22 @@ class Op_mod(AST_Node):
                 return (v, 'REAL')
         except:
             add_error_message(f'Cannot module `{n1[1]}` with `{n2[1]}`', self)
+
+class Op_exact_div(AST_Node):
+    def __init__(self, left, right, *args, **kwargs):
+        self.type = 'EXACT_DIV'
+        self.left = left
+        self.right = right
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+
+    def exe(self):
+        n1 = self.left.exe()
+        n2 = self.right.exe()
+        try:
+            v = n1[0] // n2[0]
+            return (int(v), 'INTEGER')
+        except:
+            add_error_message(f'Cannot exact divide `{n1[1]}` with `{n2[1]}`', self)

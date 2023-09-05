@@ -55,7 +55,8 @@ reserved = {
     "RANDOM",
     "BYREF",
     "BYVAL",
-    "MOD"
+    "MOD",
+    "DIV"
 }
 
 tokens = (
@@ -70,7 +71,7 @@ tokens = (
     "PLUS",
     "MINUS",
     "MUL",
-    "DIV",
+    "N_DIV",
     # 符号
     "LEFT_PAREN", # (
     "RIGHT_PAREN", # )
@@ -104,7 +105,7 @@ t_ASSIGN = r"<-"
 t_PLUS = r"\+"
 t_MINUS = r"\-"
 t_MUL = r"\*"
-t_DIV = r"/"
+t_N_DIV = r"/"
 t_LEFT_PAREN = r"\("
 t_RIGHT_PAREN = r"\)"
 t_LEFT_SQUARE = r"\["

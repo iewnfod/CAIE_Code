@@ -224,12 +224,16 @@ def p_mod_expression(p):
     """expression : expression MOD expression"""
     p[0] = AST.Op_mod(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
+def p_exact_div_expression(p):
+    """expression : expression DIV expression"""
+    p[0] = AST.Op_exact_div(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
 def p_mul_expression(p):
     """expression : expression MUL expression"""
     p[0] = AST.Op_mul(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_div_expression(p):
-    """expression : expression DIV expression"""
+    """expression : expression N_DIV expression"""
     p[0] = AST.Op_div(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_uminus_expression(p):
