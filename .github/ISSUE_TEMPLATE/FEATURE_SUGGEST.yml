@@ -21,7 +21,7 @@ body:
     id: example
     attributes:
       label: 功能样例
-      description: 展示这样功能的例子，可以是某些语法，可以使实现以后能够做到什么。
+      description: 展示这样功能的例子，可以是某些语法，也可以是实现以后能够做到什么。
       placeholder: 能看到这个？说明你没有看描述，请自己加上“1. ”
       value: "1. "
     validations:
