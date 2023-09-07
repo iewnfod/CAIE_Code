@@ -1,0 +1,93 @@
+name: 问题报告
+description: "如果你想反馈 Bug，请使用此模板。"
+labels: ["漏洞"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        发Issue前请先看看[Issue列表](https://github.com/CreatechStudio/MC-Mod-Integration/issues?q=is%3Aopen+is%3Aissue+label%3A%E9%97%AE%E9%A2%98)里有没有你的问题，包括已关闭的问题。如有，请关注相关Issue而不是重复发问。
+        如果你不确定你遇到的问题是CMIP造成的还是你自己操作的失误，请先在[讨论·Discussions](https://github.com/CreatechStudio/MC-Mod-Integration/discussions)提出。
+        请在标题栏中用最简练的语言清晰的描述你遇到的问题。
+        标题和内容不必加敬词，所有人都是平等的。
+        请在标题内用一句话描述你遇到的问题，勿增加如“帮帮我”、“急急急”、“大神”之类的无意义词汇。
+  - type: textarea
+    id: description
+    attributes: 
+      label: 问题描述
+      description: 在下方的编辑框描述你的问题
+      placeholder: 请尽可能说明你遇到的问题，包括你是如何使用模组的，配置文件有没有调过等等
+    validations:
+      required: true
+  - type: textarea
+    id: recurrent
+    attributes: 
+      label: 复现方法
+      description: 在下方的编辑框描述如何触发这个漏洞（分步需换行请直接回车，会为你添加标号）
+      placeholder: 能看到这个？说明你没有看描述，请自己加上“1. ”
+      value: "1. "
+    validations:
+      required: true
+  - type: textarea
+    id: bugmod
+    attributes: 
+      label: 你认为造成此问题的模组
+      description: 在下方的编辑框填写（多个模组需换行请直接回车，会为你添加标号），若不清楚请留空！
+      placeholder: 能看到这个？说明你没有看描述，请自己加上“1. ”
+      value: "1. "
+    validations:
+      required: false
+  - type: dropdown
+    id: systype
+    attributes: 
+      label: 操作系统类型
+      description: 操作系统类型
+      options: 
+        - Windows
+        - macOS
+        - Linux
+    validations:
+      required: true
+  - type: input
+    id: sysversion
+    attributes:
+      label: 操作系统版本
+      description: 填写你正在使用的操作系统版本，例如 macOS 13.0
+      placeholder: 请自行搜索如何查看版本
+    validations:
+      required: true
+  - type: input
+    id: javaversion
+    attributes:
+      label: JDK版本
+      description: 填写你正在使用的JDK版本，例如 openjdk 17.0.3 2022-04-19 LTS OpenJDK Runtime Environment Zulu17.34+19-CA (build 17.0.3+7-LTS) OpenJDK 64-Bit Server VM Zulu17.34+19-CA (build 17.0.3+7-LTS, mixed mode, sharing)
+      placeholder: 请在终端或命令提示符中输入java --version
+    validations:
+      required: true
+  - type: textarea
+    id: launchlog
+    attributes: 
+      label: 启动日志
+      description: 在下方复制你的启动日志或复制crash-report文件夹内的崩溃报告
+      placeholder: 请提供完整的启动/错误日志，自以为知道问题所在而仅提供一两行将被直接关闭。
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes: 
+      label: 额外说明
+      description: 还有什么要补充的吗？
+      placeholder: |
+        提示：
+        你可以提供你使用了什么额外的模组
+        你还可以提供截图和文件（直接拖动文件到编辑框）
+  - type: checkboxes
+    id: agreement
+    attributes:
+      label: 协议
+      description: 请同意下列条款
+      options:
+        - label: 我已查阅[常见问题解答](https://github.com/CreatechStudio/MC-Mod-Integration/issues/12)以及[Issue列表](https://github.com/CreatechStudio/MC-Mod-Integration/issues?q=is%3Aopen+is%3Aissue+label%3A%E9%97%AE%E9%A2%98)，并确认我的问题不在其中。
+          required: true
+        - label: 我确认我已认真阅读所有注意事项并认真填写表单。
+          required: true
