@@ -355,7 +355,7 @@ NEXT i
 **(以下方法均不属于CAIE提供的标准方法)**
 * `EXIT(code : INTEGER)` 以code为退出码，退出程序 (若不填写code，则默认为0)
 * `ROUND(x : REAL, decimalPlace : INTEGER)` decimalPlace不填写默认为0
-* `PYTHON(code: STRING)` Python3代码运行接口，并会返回code的运行结果，由于两个语言的类型系统并不互通，其返回的所有结果的类型皆为None，可赋值给任何本语言类型但不保证是否能够获得预期的结果 (目前使用eval实现，因此无法执行复杂代码)
+* `PYTHON(code: STRING)` Python3代码运行接口，并会返回code的运行结果，由于两个语言的类型系统并不互通，其返回的所有结果的类型皆为None，可赋值给任何本语言类型但不保证是否能够获得预期的结果 ***若需要获得此接口的返回值，请将返回值赋值给名为`result`的变量，否则将不会返回任何值***
 * 更多非官方内置函数，请查阅 [scripts](./scripts)
 
 ## 目标

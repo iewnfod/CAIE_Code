@@ -352,7 +352,17 @@ class Python(AST_Node):
         if self.parameters:
             parameters = self.parameters.exe()
             if len(self.parameters) == 1:
-                return (eval(parameters[0][0]), None)  # None 表示未知类型
+                code = parameters[0][0]
+                global_space = {}
+                return_name = 'result'
+                try:
+                    exec(code, global_space)
+                except Exception as e:
+                    add_python_error_message(e, self)
+                    global_space[return_name] = e
+
+                if return_name in global_space:
+                    return (global_space[return_name], None)  # None 表示未知类型
             else:
                 add_error_message(f'Python only have 1 parameters, but found {len(self.parameters)}', self)
         else:
