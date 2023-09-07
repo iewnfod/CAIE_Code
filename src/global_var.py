@@ -50,6 +50,7 @@ def output_error():
         return
 
     l = list(set(get_error_messages()))
+    l.sort()
     if l:
         # 输出文件路径
         if running_path:
