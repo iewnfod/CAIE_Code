@@ -41,5 +41,7 @@ FUNCTION Abs(x : REAL) RETURNS REAL
 ENDFUNCTION
 
 // π
-DECLARE PI : REAL
-PI <- PYTHON("from math import pi; result=pi")
+DECLARE temp : REAL
+temp <- PYTHON("from math import pi; result=pi")
+CONSTANT PI = temp
+DELETE temp
