@@ -1,2 +1,3 @@
+rm -rf target
 cargo build --release
-mv target/release/CAIE_Code bin/cpc
+strip -o bin/cpc target/release/CAIE_Code
