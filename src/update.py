@@ -23,9 +23,7 @@ def update():
     if new_animation('Checking Update', 3, check_update, failed_msg='Failed to Check Update', repo=repo, remote=remote):
         # 询问是否更新
         u = input('There is a new version of the program. Do you want to update it? [Y/n] ').strip().lower()
-        if u == 'n':
-            return
-        elif u == '' or u == 'y':
+        if u == '' or u == 'y':
             # 读取历史记录防止被覆盖
             with open(os.path.join(HOME_PATH, '.history'), 'r') as f:
                 history = f.read()
