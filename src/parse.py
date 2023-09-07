@@ -26,9 +26,9 @@ precedence = (
 
 def p_error(p):
     if p:
-        add_error_message('Parse Error', AST_Node(p.lineno, p.lexpos))
+        add_parse_error_message(str(p), AST_Node(p.lineno, p.lexpos))
     else:
-        add_error_message('EOF Error', AST_Node())
+        add_eof_error_message(AST_Node())
 
 def p_statements(p):
     """statements : statements statement

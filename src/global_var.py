@@ -1,4 +1,4 @@
-from .error import Error, StackError, PythonError
+from .error import *
 from . import options
 from .history import Cmd
 
@@ -30,6 +30,15 @@ def add_stack_error_message(msg):
 def add_python_error_message(msg, obj):
     error_messages.append(PythonError(msg, obj))
 
+def add_parse_error_message(msg, obj):
+    error_messages.append(ParseError(msg, obj))
+
+def add_eof_error_message(obj):
+    error_messages.append(EofError(obj))
+
+def add_lexer_error_message(msg, obj):
+    error_messages.append(LexerError(msg, obj))
+
 def set_running_mod(mod):
     global running_mod
     running_mod = mod
@@ -49,8 +58,13 @@ def output_error():
         clear_error_messages()
         return
 
-    l = list(set(get_error_messages()))
-    l.sort()
+    errors = get_error_messages()
+    errors.sort()
+    l = set()
+    for i in errors:
+        if i not in l:
+            l.add(i)
+
     if l:
         # 输出文件路径
         if running_path:
