@@ -32,17 +32,10 @@ class Stack:
             add_stack_error_message(f'No variable or constant have id: `{id}`')
 
     def new_variable(self, id, type):
-        # 核查是否已经声明
-        if id in self.current_space()[1]:
-            add_stack_error_message(f'Variable or constant `{id}` has already been declared')
-        else:
-            self.spaces[0][1][id] = (self.structs[type](name=id), False)
+        self.spaces[0][1][id] = (self.structs[type](name=id), False)
 
     def new_constant(self, id, type, value):
-        if id in self.current_space()[1]:
-            add_stack_error_message(f'Variable or constant `{id}` has already been declared')
-        else:
-            self.spaces[0][1][id] = (self.structs[type](value), True)
+        self.spaces[0][1][id] = (self.structs[type](value), True)
 
     def set_variable(self, id, value, type):
         for i in range(len(self.spaces)):
