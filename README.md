@@ -166,6 +166,10 @@ NEXT i
         <identifier> <- <value>
         <identifier>[<index>, ...] <- <value>
         ```
+    * 删除 (CAIE 并未提供此语法)
+        ```
+        DELETE <identifier>
+        ```
 2. 输入与输出
     * 输入
         ```

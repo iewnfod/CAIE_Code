@@ -52,6 +52,14 @@ class Stack:
         else:
             add_stack_error_message(f'Variable `{id}` has not been declared yet')
 
+    def remove_variable(self, id):
+        for i in range(len(self.spaces)):
+            if id in self.spaces[i][1]:
+                del self.spaces[i][1][id]
+                return
+        else:
+            add_stack_error_message(f'Variable or constant `{id}` has not been declared yet')
+
     def pop_space(self):
         self.spaces.pop(0)
         self.return_request = False

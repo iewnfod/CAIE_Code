@@ -56,3 +56,15 @@ class Get(AST_Node):
 
     def exe(self):
         return stack.get_variable(self.id)
+
+class Delete(AST_Node):
+    def __init__(self, id, *args, **kwargs):
+        self.type = 'DELETE'
+        self.id = id
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + str(self.id)
+
+    def exe(self):
+        stack.remove_variable(self.id)

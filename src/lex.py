@@ -56,7 +56,8 @@ reserved = {
     "BYREF",
     "BYVAL",
     "MOD",
-    "DIV"
+    "DIV",
+    "DELETE",
 }
 
 tokens = (

@@ -40,6 +40,10 @@ def p_statements(p):
         p[1].add_statement(p[2])
         p[0] = p[1]
 
+def p_delete_statement(p):
+    """statement : DELETE ID"""
+    p[0] = AST.Delete(p[2], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
 def p_declare_statement(p):
     """statement : DECLARE ID COLON ID"""
     p[0] = AST.Variable(p[2], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
