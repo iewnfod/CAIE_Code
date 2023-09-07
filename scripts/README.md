@@ -1,4 +1,4 @@
-# 非官方函数
+# 非官方函数及常量
 
 ## [Math](./math.cpc)
 * QPow 手动实现的幂运算
@@ -17,6 +17,7 @@
     ```
     Abs(x : REAL) RETURNS REAL
     ```
+* PI π
 
 ## [Sort](./sort.cpc)
 * Sort 排序（希尔排序）

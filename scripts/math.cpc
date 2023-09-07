@@ -39,3 +39,7 @@ FUNCTION Abs(x : REAL) RETURNS REAL
         RETURN x
     ENDIF
 ENDFUNCTION
+
+// π
+DECLARE PI : REAL
+PI <- PYTHON("from math import pi; result=pi")
