@@ -17,6 +17,8 @@ echo $content >> ~/.zshrc
 echo "" >> ~/.config/fish/config.fish
 echo "# CAIE Code Binary Environment" >> ~/.config/fish/config.fish
 echo $fish_content >> ~/.config/fish/config.fish
+# 软链接到 man 目录
+sudo ln -f ${current_dir}/man/cpc.1 /usr/local/share/man/man1/cpc.1
 
 echo "安装完成"
 echo "请重启终端使配置生效"

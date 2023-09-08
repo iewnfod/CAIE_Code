@@ -1,3 +1,11 @@
+---
+title: CPC
+section: 1
+header: User Manual
+footer: cpc 0.1.2
+date: September 8, 2023
+---
+
 # NAME
 cpc - An interpreter for CAIE Pseudocode.
 
