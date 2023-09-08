@@ -1,6 +1,7 @@
-echo "安装 CAIE Code 中..."
+echo "安装 CAIE Code 中... (此过程中可能会需要sudo权限)"
 # 获取当前执行目录
 current_dir=$(cd $(dirname $0); pwd)
+# 生成 man : pandoc cpc.md -s -t man -o cpc.1
 # 合成写入内容
 content="export PATH=${current_dir}/bin:\$PATH"
 fish_content="set -x PATH \"${current_dir}/bin\" \$PATH"
