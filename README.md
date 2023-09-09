@@ -19,6 +19,12 @@ CAIE Pseudocode Interpreter
     * `Windows`若无法正常运行，也可尝试自己编译 [`build.ps1`](./build.ps1)
     * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[`build-linux.sh`](./build-linux.sh)并编译
     * 非常欢迎`Linux`用户编译后提交pr
+    * 如果需要使用`man`指令，请自行将[cpc.1](./man/cpc.1)硬链接到你的`MANPATH`内，以便更新后不必再次链接。
+        * `Linux`用户可以使用以下指令:
+            ```
+            sudo ln -f ./man/cpc.1 /your/man/path
+            ```
+        * `Windows`用户请自行搜索
 
 ### Usage
 ```
