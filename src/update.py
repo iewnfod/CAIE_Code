@@ -24,13 +24,7 @@ def update():
         # 询问是否更新
         u = input('There is a new version of the program. Do you want to update it? [Y/n] ').strip().lower()
         if u == '' or u == 'y':
-            # 读取历史记录防止被覆盖
-            with open(os.path.join(HOME_PATH, '.history'), 'r') as f:
-                history = f.read()
             if new_animation('Updating', 3, remote.pull, failed_msg='Failed to Update'):
-                # 写入历史记录
-                with open(os.path.join(HOME_PATH, '.history'), 'w') as f:
-                    f.write(history)
                 print('\033[1mUpdate Successful\033[0m')
         else:
             print('Stop Updating')
