@@ -16,8 +16,10 @@ precedence = (
     # 比较运算
     ("left", "LESS", "GREATER", "LESS_EQUAL", "GREATER_EQUAL", "EQUAL", "NOT_EQUAL"),
     # 加减乘除
-    ("left", "PLUS", "MINUS"),
-    ("left", "MUL", "DIV"),
+    ("left", "PLUS"),
+    ("left", "MINUS"),
+    ("left", "MUL"),
+    ("left", "N_DIV"),
     # 右结合操作符
     ("right", "UMINUS"),
     ("right", "UPLUS"),
