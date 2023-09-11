@@ -17,8 +17,7 @@ precedence = (
     ("left", "LESS", "GREATER", "LESS_EQUAL", "GREATER_EQUAL", "EQUAL", "NOT_EQUAL"),
     # 加减乘除
     ("left", "PLUS", "MINUS"),
-    ("left", "MUL", "N_DIV"),
-    ("left", "MOD", "DIV")
+    ("left", "MUL", "N_DIV", "MOD", "DIV"),
     # 右结合操作符
     ("right", "UMINUS"),
     ("right", "UPLUS"),
