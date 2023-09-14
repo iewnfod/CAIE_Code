@@ -18,7 +18,7 @@ def get_value(value):
 def standard_output():
     print(f'CAIE Pseudocode Interpreter v{VERSION}')
     print(f'Using {PLATFORM}')
-    print('Repository at https://github.com/iewnfod/CAIE_Code/')
+    print('Repository at \033[4mhttps://github.com/iewnfod/CAIE_Code/\33[0m')
     print('Copyright (c) 2023 Iewnfod. ')
     print('All Rights Reserved. ')
 
