@@ -120,3 +120,6 @@ class Stack:
                 break
         else:
             add_stack_error_message(f'Cannot find subspace `{space_identifier}`')
+
+    def delete(self):
+        del self
