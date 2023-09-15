@@ -42,6 +42,6 @@ ENDFUNCTION
 
 // π
 DECLARE temp : REAL
-temp <- PYTHON("from math import pi; result=pi")
+temp <- PYTHON("from math import pi; _result=pi")
 CONSTANT PI = temp
 DELETE temp
