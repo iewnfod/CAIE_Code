@@ -54,3 +54,7 @@
     ```
     Join(sep : STRING, BYREF list : ARRAY, start : INTEGER, end : INTEGER) RETURNS STRING
     ```
+* Reverse 反转字符串
+    ```
+    Reverse(s : STRING) RETURNS STRING
+    ```

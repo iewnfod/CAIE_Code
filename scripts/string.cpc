@@ -96,3 +96,13 @@ FUNCTION Join(sep : STRING, BYREF list : ARRAY, start : INTEGER, end : INTEGER) 
 
     RETURN r
 ENDFUNCTION
+
+FUNCTION Reverse(s : STRING) RETURNS STRING
+    DECLARE r : STRING
+
+    FOR i <- LENGTH(s) TO 0 STEP -1
+        r <- r & MID(s, i, 1)
+    NEXT i
+
+    RETURN r
+ENDFUNCTION
