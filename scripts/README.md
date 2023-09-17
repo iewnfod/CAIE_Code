@@ -58,3 +58,9 @@
     ```
     Reverse(s : STRING) RETURNS STRING
     ```
+
+## [Time](./time.cpc)
+* Time 获取当前时间戳
+    ```
+    Time RETURNS REAL
+    ```

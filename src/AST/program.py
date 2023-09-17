@@ -87,13 +87,13 @@ class For(AST_Node):
             else:
                 diff = 1
 
-            # 创建 index 变量
-            stack.new_variable(self.id, 'INTEGER')
-
             # 核对id是否相同
             if self.id != self.next_id:
                 print(f'Expect `{self.id}` for next id, but found `{self.next_id}`')
                 return
+
+            # 创建 index 变量
+            stack.new_variable(self.id, 'INTEGER')
 
             for i in range(left[0], right[0]+diff, step[0]):
                 # 给 index 赋值

@@ -1,3 +1,25 @@
-DECLARE a : INTEGER
-OUTPUT a
-DELETE a
+DECLARE t1 : REAL
+DECLARE t2 : REAL
+
+FUNCTION aux(n:INTEGER, acc1:INTEGER, acc2:INTEGER) RETURNS INTEGER
+    IF n = 1 THEN RETURN acc1 ENDIF
+    IF n = 2 THEN RETURN acc2 ENDIF
+    RETURN aux(n - 1, acc2, acc1 + acc2)
+ENDFUNCTION
+
+t1 <- PYTHON("from time import time; _result=time()")
+OUTPUT "aux: "
+OUTPUT aux(46, 0, 1)
+OUTPUT PYTHON("from time import time; _result=time()") - t1
+
+
+FUNCTION fib(i:INTEGER) RETURNS INTEGER
+    IF i = 1 THEN RETURN 1 ENDIF
+    IF i = 2 THEN RETURN 1 ENDIF
+    RETURN fib(i - 1) + fib(i - 2)
+ENDFUNCTION
+
+t2 <- PYTHON("from time import time; _result=time()")
+OUTPUT "fib: "
+OUTPUT fib(46)
+OUTPUT PYTHON("from time import time; _result=time()") - t2
