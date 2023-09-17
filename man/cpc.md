@@ -2,7 +2,7 @@
 title: CPC
 section: 1
 header: User Manual
-footer: cpc 0.1.2
+footer: cpc 0.1.3
 date: September 8, 2023
 ---
 
@@ -35,6 +35,10 @@ cpc - An interpreter for CAIE Pseudocode.
 **-p**
 : **--parse**
 : To show parse information during running
+
+**-r**
+: **--recursive-limit**
+: To set the recursive limit of the interpreter
 
 **-t**
 : **--time**

@@ -155,16 +155,23 @@ def wrong_argument(msg):
 def main():
     # 解析参数
     file_path = ''
-    for arg in argv[1:]:
+    i = 1
+    while i < len(argv):
+        arg = argv[i]
         for opt in options.arguments:
             if opt.check(arg):
-                opt.run()
+                opt.run(argv[i:])
+                i += opt.value_num
                 break
         else:
             if arg[0] == '-':
-                wrong_argument(f'Unknown option {arg}')
+                wrong_argument(f'Unknown option `{arg}`')
             else:
-                file_path = arg
+                if file_path == '':
+                    file_path = arg
+                else:
+                    wrong_argument(f'There should only be one file path, but found `{file_path}` and `{arg}`')
+        i += 1
 
     # 预加载文件
     preload_scripts()

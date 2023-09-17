@@ -1,4 +1,4 @@
-from sys import exit
+from sys import exit, setrecursionlimit
 import platform
 from .update import VERSION, update
 
@@ -74,23 +74,27 @@ def remove_error():
 def update_version():
     update()
 
+def set_recursive_limit(v):
+    setrecursionlimit(int(v))
 
-# 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 函数所需参数)
+
+# 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
 class Opt:
-    def __init__(self, short_arg, long_arg, func, description, exit_program, *args, **kwargs):
+    def __init__(self, short_arg, long_arg, func, description, exit_program, value_num=0, *args, **kwargs):
         self.short_arg = short_arg
         self.long_arg = long_arg
         self.func = func
         self.description = description
         self.exit_program = exit_program
+        self.value_num = value_num
         self.args = args
         self.kwargs = kwargs
 
     def check(self, t):
         return t == self.short_arg or t == self.long_arg
 
-    def run(self):
-        self.func(*self.args, **self.kwargs)
+    def run(self, value):
+        self.func(*value[1:self.value_num+1], *self.args, **self.kwargs)
         if self.exit_program:
             quit(0)
 
@@ -107,4 +111,5 @@ arguments = [
     Opt('-k', '--keywords', show_keywords, 'To show all the keywords', True),
     Opt('-ne', '--no-error', remove_error, 'To remove all error messages', False),
     Opt('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)', True),
+    Opt('-r', '--recursive-limit', set_recursive_limit, 'To set the recursive limit of the interpreter', False, 1)
 ]
