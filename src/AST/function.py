@@ -13,7 +13,10 @@ class Function(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+        if self.parameters:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+        else:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1)
 
     def exe(self):
         stack.add_function(self)
@@ -26,7 +29,10 @@ class Call_function(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1)
+        if self.parameters:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1)
+        else:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id)
 
     def exe(self):
         new_dict = {}  # {变量名: (值, 类型, 是否是常量)}
