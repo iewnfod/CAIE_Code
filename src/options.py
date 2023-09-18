@@ -10,7 +10,6 @@ options_dict = {
     "show_time": False,
     "show_error": True
 }
-show_error = True
 
 def get_value(value):
     return options_dict[value]
