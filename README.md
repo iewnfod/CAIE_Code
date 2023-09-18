@@ -28,7 +28,7 @@ CAIE Pseudocode Interpreter
 
 ### Usage
 ```
-cpc [file_path] [options]
+cpc [file_paths] [options]
 ```
 
 ### Options

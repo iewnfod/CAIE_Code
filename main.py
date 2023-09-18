@@ -154,7 +154,7 @@ def wrong_argument(msg):
 # 主函数
 def main():
     # 解析参数
-    file_path = ''
+    file_paths = set()
     i = 1
     while i < len(argv):
         arg = argv[i]
@@ -167,27 +167,26 @@ def main():
             if arg[0] == '-':
                 wrong_argument(f'Unknown option `{arg}`')
             else:
-                if file_path == '':
-                    file_path = arg
-                else:
-                    wrong_argument(f'There should only be one file path, but found `{file_path}` and `{arg}`')
+                file_paths.add(arg)
         i += 1
 
     # 预加载文件
     preload_scripts()
 
-    lexer.lineno = 1
     # 选择模式运行
-    if not file_path:
+    if not file_paths:
         with_line()
     else:
-        if os.path.exists(file_path):
-            if os.path.isfile(file_path):
-                with_file(file_path)
+        for file_path in file_paths:
+            lexer.lineno = 1
+            # 选择模式运行
+            if os.path.exists(file_path):
+                if os.path.isfile(file_path):
+                    with_file(file_path)
+                else:
+                    wrong_argument(f'`{file_path}` is not a file')
             else:
-                wrong_argument(f'`{file_path}` is not a file')
-        else:
-            wrong_argument(f'File `{file_path}` does not exist')
+                wrong_argument(f'File `{file_path}` does not exist')
 
 
 # 程序入口

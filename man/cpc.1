@@ -21,7 +21,7 @@
 cpc - An interpreter for CAIE Pseudocode.
 .SH SYNOPSIS
 .PP
-\f[B]cpc\f[R] [\f[I]FILE_PATH\f[R]] [\f[I]OPTIONS\f[R]]
+\f[B]cpc\f[R] [\f[I]FILE_PATHS\f[R]] [\f[I]OPTIONS\f[R]]
 .SH DESCRIPTION
 .PP
 \f[B]cpc\f[R] is a simple interpreter for CAIE Pseudocode written in
@@ -69,6 +69,9 @@ git)
 \f[B]-v\f[R]
 \f[B]\[en]version\f[R]
 To show the version of installed \f[I]cpc\f[R]
+.SS EXAMPLE
+.PP
+\f[I]cpc test/test.cpc test/recursive_test.cpc -r 10000 -t -gt\f[R]
 .SH PLAYGROUND OPTIONS
 .TP
 \f[B]clear\f[R]

@@ -10,7 +10,7 @@ date: September 8, 2023
 cpc - An interpreter for CAIE Pseudocode.
 
 # SYNOPSIS
-**cpc** [*FILE_PATH*] [*OPTIONS*]
+**cpc** [*FILE_PATHS*] [*OPTIONS*]
 
 # DESCRIPTION
 **cpc** is a simple interpreter for CAIE Pseudocode written in Python3. The language regulated by CAIE has a really retro grammar and even some grammar is not good for both developers and the interpreter. Thus, some unimportant grammars are changed in this interpreter. For more detailed information about this, you may look at README or <https://github.com/iewnfod/CAIE_Code>.
@@ -51,6 +51,9 @@ cpc - An interpreter for CAIE Pseudocode.
 **-v**
 : **--version**
 : To show the version of installed *cpc*
+
+## EXAMPLE
+*cpc test/test.cpc test/recursive_test.cpc -r 10000 -t -gt*
 
 # PLAYGROUND OPTIONS
 **clear**

@@ -34,10 +34,10 @@ def help():
 
     print()
 
-    print('Usage: \033[1mcpc\033[0m [file_path] [options]')
+    print('Usage: \033[1mcpc\033[0m [file_paths] [options]')
 
     # 提示
-    print('\033[2mThere should not be any space in a file path. \nOr, you need to add double quotation marks around the path. \033[0m')
+    print('\033[2mThere should not be any space in a single file path. \nOr, you need to add double quotation marks around the path. \033[0m')
 
     print()
 
