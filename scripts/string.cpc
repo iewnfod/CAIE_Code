@@ -17,7 +17,12 @@ FUNCTION Split(s : STRING, sep : STRING) RETURNS ARRAY
 
     result[item] <- MID(s, from, LENGTH(s)-from+1)
 
-    RETURN result
+    DECLARE returnArr : ARRAY[1:item] OF STRING
+    FOR i <- 1 TO item
+        returnArr[i] <- result[i]
+    NEXT i
+
+    RETURN returnArr
 ENDFUNCTION
 
 FUNCTION Lcase(s : STRING) RETURNS STRING
