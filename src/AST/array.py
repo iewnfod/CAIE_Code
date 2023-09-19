@@ -88,11 +88,11 @@ class Array_assign(AST_Node):
         if len(index) == 1:
             index = index[0]
             try:
-                arr[0][index][0].set_value(value[0])
+                arr[index][0].set_value(value[0])
             except:
                 add_error_message(f'Cannot assign `{value[1]}` to `{arr[index][1]}`', self)
         else:
-            self.set_value(arr[index[0]], index[1:], value)
+            self.set_value(arr[index[0]][0], index[1:], value)
 
     def exe(self):
         indexes = self.indexes.exe()
@@ -137,11 +137,15 @@ class Array_get(AST_Node):
 
     def get_value(self, arr, index):
         if len(index) == 1:
-            if arr[index[0]][1] == 'ARRAY':
-                return ARRAY(arr[index[0]][0])
-            return arr[0][index[0]]
+            if index[0] in arr.keys():
+                if arr[index[0]][1] == 'ARRAY':
+                    return ARRAY(arr[index[0]][0])
+                else:
+                    return arr[index[0]]
+            else:
+                add_error_message(f'List index `{index[0]}` out of range', self)
         else:
-            return self.get_value(arr[index[0]], index[1:])
+            return self.get_value(arr[index[0]][0], index[1:])
 
     def exe(self):
         indexes = self.indexes.exe()
