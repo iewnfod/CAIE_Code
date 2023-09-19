@@ -3,6 +3,8 @@ from ..AST_Base import *
 from ..error import *
 from ..global_var import *
 from ..AST.data_types import Integer
+from copy import deepcopy
+from ..data_types import ARRAY
 
 class Array(AST_Node):
     def __init__(self, id, dimensions, type, *args, **kwargs):
@@ -23,7 +25,7 @@ class Array(AST_Node):
         else:
             d = self.add_variables(dimensions[1:])
             for i in range(dimensions[0][0], dimensions[0][1]+1):
-                result[i] = (d.copy(), 'ARRAY')
+                result[i] = (deepcopy(d), 'ARRAY')
         return result
 
     def exe(self):
@@ -86,7 +88,7 @@ class Array_assign(AST_Node):
         if len(index) == 1:
             index = index[0]
             try:
-                arr[index][0].set_value(value[0])
+                arr[0][index][0].set_value(value[0])
             except:
                 add_error_message(f'Cannot assign `{value[1]}` to `{arr[index][1]}`', self)
         else:
@@ -135,7 +137,9 @@ class Array_get(AST_Node):
 
     def get_value(self, arr, index):
         if len(index) == 1:
-            return arr[index[0]][0]
+            if arr[index[0]][1] == 'ARRAY':
+                return ARRAY(arr[index[0]][0])
+            return arr[0][index[0]]
         else:
             return self.get_value(arr[index[0]], index[1:])
 
