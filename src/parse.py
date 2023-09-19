@@ -75,8 +75,22 @@ def p_assign_statement(p):
     p[0] = AST.Assign(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_array_assign_statement(p):
-    "statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"
+    """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"""
     p[0] = AST.Array_assign(p[1], p[3], p[6], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_array_total_assign_statement(p):
+    """statement : ID ASSIGN LEFT_SQUARE array_items RIGHT_SQUARE"""
+    p[0] = AST.Array_total_assign(p[1], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_array_items(p):
+    """array_items : array_items COMMA expression
+            | expression"""
+    if len(p) == 2:
+        p[0] = AST.Array_items(lineno=p.lineno(1), lexpos=p.lexpos(1))
+        p[0].add_item(p[1])
+    else:
+        p[1].add_item(p[3])
+        p[0] = p[1]
 
 def p_indexes(p):
     """indexes : indexes COMMA expression

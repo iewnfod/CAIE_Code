@@ -2,6 +2,7 @@ from .data import *
 from ..AST_Base import *
 from ..error import *
 from ..global_var import *
+from ..AST.data_types import Integer
 
 class Array(AST_Node):
     def __init__(self, id, dimensions, type, *args, **kwargs):
@@ -143,3 +144,43 @@ class Array_get(AST_Node):
         arr = stack.get_variable(self.id)[0]
         value = self.get_value(arr, indexes)
         return value
+
+class Array_total_assign(AST_Node):
+    def __init__(self, id, items, *args, **kwargs):
+        self.type = 'ARRAY_TOTAL_ASSIGN'
+        self.id = id
+        self.items = items
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.items.get_tree(level+1)
+
+    def exe(self):
+        items = self.items.exe()
+        arr = stack.get_variable(self.id)
+        if len(items) == len(arr[0]):
+            keys = list(arr[0].keys())
+            for i in range(len(items)):
+                index = Indexes()
+                index.add_index(Integer(keys[i]))
+                Array_assign(self.id, index, items[i]).exe()
+        else:
+            add_error_message(f'Cannot assign to `{self.id}` because they are not the same size', self)
+
+class Array_items(AST_Node):
+    def __init__(self, *args, **kwargs):
+        self.type = 'ARRAY_ITEMS'
+        self.items = []
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        result = LEVEL_STR * level + self.type
+        for i in self.items:
+            result += '\n' + i.get_tree(level+1)
+        return result
+
+    def add_item(self, item):
+        self.items.append(item)
+
+    def exe(self):
+        return self.items
