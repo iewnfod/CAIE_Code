@@ -82,6 +82,9 @@ def p_array_total_assign_statement(p):
     """statement : ID ASSIGN LEFT_SQUARE array_items RIGHT_SQUARE"""
     p[0] = AST.Array_total_assign(p[1], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
+def p_array_index_total_assign_statement(p):
+    """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN LEFT_SQUARE array_items RIGHT_SQUARE"""
+
 def p_array_items(p):
     """array_items : array_items COMMA expression
             | expression"""

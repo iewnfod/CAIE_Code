@@ -23,9 +23,8 @@ class Array(AST_Node):
             for i in range(dimensions[0][0], dimensions[0][1]+1):
                 result[i] = (stack.structs[self.var_type](name=i), self.var_type)
         else:
-            d = self.add_variables(dimensions[1:])
             for i in range(dimensions[0][0], dimensions[0][1]+1):
-                result[i] = (deepcopy(d), 'ARRAY')
+                result[i] = (self.add_variables(dimensions[1:]), 'ARRAY')
         return result
 
     def exe(self):
@@ -192,3 +191,18 @@ class Array_items(AST_Node):
 
     def exe(self):
         return self.items
+
+class Array_indexes_total_assign(AST_Node):
+    def __init__(self, id, indexes, items, *args, **kwargs):
+        self.type = 'ARRAY_INDEXES_TOTAL_ASSIGN'
+        self.id = id
+        self.indexes = indexes
+        self.items = items
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.items.get_tree(level+1)
+
+    def exe(self):
+        indexes = self.indexes.exe()
+        items = self.items.exe()
