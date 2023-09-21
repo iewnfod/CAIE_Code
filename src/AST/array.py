@@ -140,7 +140,7 @@ class Array_get(AST_Node):
                 if arr[index[0]][1] == 'ARRAY':
                     return ARRAY(arr[index[0]][0])
                 else:
-                    return arr[index[0]]
+                    return arr[index[0]][0]
             else:
                 add_error_message(f'List index `{index[0]}` out of range', self)
         else:
