@@ -86,7 +86,7 @@ class Composite_type_expression(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.exp1.get_tree(level+1) + '\n' + self.exp2.get_tree(level+2)
 
     def exe(self):
-        obj = self.exp1.exe()
+        obj = self.exp1.exe()[0]
         # 如果不是一个结构体，那说明这个命名空间有变量名重复了，那就从上一个空间读取
         if not obj.is_struct:
             buffer = stack.spaces.pop(0)
