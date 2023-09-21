@@ -204,5 +204,12 @@ class Array_indexes_total_assign(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.items.get_tree(level+1)
 
     def exe(self):
-        indexes = self.indexes.exe()
         items = self.items.exe()
+        keys = list(Array_get(self.id, self.indexes).exe()[0].keys())
+        if len(keys) == len(items):
+            for i in range(len(items)):
+                index = deepcopy(self.indexes)
+                index.add_index(Integer(keys[i]))
+                Array_assign(self.id, index, items[i]).exe()
+        else:
+            add_error_message(f'Cannot assign to `{self.id}` because they are not the same size', self)

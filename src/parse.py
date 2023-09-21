@@ -84,6 +84,7 @@ def p_array_total_assign_statement(p):
 
 def p_array_index_total_assign_statement(p):
     """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN LEFT_SQUARE array_items RIGHT_SQUARE"""
+    p[0] = AST.Array_indexes_total_assign(p[1], p[3], p[7])
 
 def p_array_items(p):
     """array_items : array_items COMMA expression
