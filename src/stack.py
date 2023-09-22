@@ -55,6 +55,9 @@ class Stack:
     def remove_variable(self, id):
         for i in range(len(self.spaces)):
             if id in self.spaces[i][1]:
+                var = self.spaces[i][1][id]
+                if var[0] in self.spaces[i-1][3]:
+                    del self.spaces[i-1][3][var[0]]
                 del self.spaces[i][1][id]
                 return
         else:
