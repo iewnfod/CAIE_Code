@@ -1,11 +1,14 @@
 from .error import *
 from . import options
 from .history import Cmd
+import sys
 
 error_messages = []
 running_mod = 'file'  # file / line
 running_path = ''  # 当前运行文件
 console = Cmd()
+std_in = sys.stdin
+std_out = sys.stdout
 
 # 变量
 def __init__():
@@ -13,6 +16,20 @@ def __init__():
     error_messages = []
     running_mod = 'file'
     console.preloop()
+
+def set_std_in(new_in):
+    global std_in
+    std_in = new_in
+
+def set_std_out(new_out):
+    global std_out
+    std_out = new_out
+
+def get_std_in():
+    return std_in
+
+def get_std_out():
+    return std_out
 
 def add_error_message(msg, obj):
     error_messages.append(Error(msg, obj))
@@ -50,6 +67,14 @@ def set_running_path(p):
     global running_path
     running_path = p
 
+def print_(t, end='\n'):
+    get_std_out().write(str(t) + end)
+    get_std_out().flush()
+
+def input_():
+    get_std_out().flush()
+    return get_std_in().readline()
+
 # 输出错误信息
 def output_error():
     if not options.get_value('show_error'):
@@ -68,10 +93,10 @@ def output_error():
     if l:
         # 输出文件路径
         if running_path:
-            print(f'File `{running_path}`: ')
+            print_(f'File `{running_path}`: ')
         # 输出错误信息
         for i in l:
-            print('\t' if running_path else '', end='')
+            print_('\t' if running_path else '', end='')
             i.raise_err()
         # 清空错误数组
         clear_error_messages()

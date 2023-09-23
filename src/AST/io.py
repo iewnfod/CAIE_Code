@@ -15,7 +15,7 @@ class Output(AST_Node):
 
     def exe(self):
         v = self.value.exe()
-        print(v if v != None else '')
+        print_(v if v != None else '')
 
 class Output_expression(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -54,7 +54,7 @@ class Input(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.id)
 
     def exe(self):
-        stack.set_variable(self.id, str(input()), 'STRING')
+        stack.set_variable(self.id, str(input_()), 'STRING')
 
 class Array_input(AST_Node):
     def __init__(self, id, indexes, *args, **kwargs):
@@ -94,12 +94,12 @@ class Raw_output(AST_Node):
         # 如果是 tuple，那就看类型，并输出
         if type(t) == tuple:
             if t[1] == 'STRING':
-                print('"' + v + '"')
+                print_('"' + v + '"')
             elif t[1] == 'CHAR':
-                print("'" + v + "'")
+                print_("'" + v + "'")
             elif t[1] == 'BOOLEAN':
-                print({True: 'TRUE', False: 'FALSE'}[v])
+                print_({True: 'TRUE', False: 'FALSE'}[v])
             else:
-                print(v)
+                print_(v)
         else:
-            print(v)
+            print_(v)

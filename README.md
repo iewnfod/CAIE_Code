@@ -4,7 +4,7 @@ CAIE Pseudocode Interpreter
 ## 安装与使用
 
 ### 安装前提
-1. `Python3` 环境 *推荐使用 Python3.11 或 PyPy3.9 (其他 Python 版本经过粗略测试，可能会出现 `ModuleNotFoundError`)*
+1. `Python3` 环境 *推荐使用 PyPy3 以获得更好的性能*
 2. `git` 指令
 
 ### 正式安装

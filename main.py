@@ -11,7 +11,7 @@ from src.history import HOME_PATH
 from src.quit import quit
 from src.line_commands import run_command
 
-from sys import argv, exit
+import sys
 import os
 from time import time
 
@@ -152,7 +152,9 @@ def wrong_argument(msg):
     # options.help()
 
 # 主函数
-def main():
+def main(argv, std_in=None, std_out=None):
+    if std_in: global_var.set_std_in(std_in)
+    if std_out: global_var.set_std_out(std_out)
     # 解析参数
     file_paths = set()
     i = 1
@@ -188,16 +190,16 @@ def main():
             else:
                 wrong_argument(f'File `{file_path}` does not exist')
 
+# 加载基础类型
+global_var.__init__()
+
+lexer = lex.lex()
+parser = yacc.yacc()
 
 # 程序入口
 if __name__ == '__main__':
-    global_var.__init__()
-
-    lexer = lex.lex()
-    parser = yacc.yacc()
-
     try:
-        main()
+        main(sys.argv)
     except EOFError:
         print("EXIT")
         quit(0)

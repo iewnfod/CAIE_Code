@@ -39,6 +39,7 @@ class Close_file(AST_Node):
         file_path = self.file_path.exe()
         if file_path[1] == 'STRING':
             f = stack.get_file(file_path[0])
+            f.flush()
             f.close()
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)

@@ -7,7 +7,8 @@ class Error:
         self.final_content = f'\033[1;31mError\033[0m: \033[1m{self.message}\033[0m {self.ast_obj.get_pos()}'
 
     def raise_err(self):
-        print(self.final_content)
+        from .global_var import print_
+        print_(self.final_content)
 
     def __lt__(self, other):
         return self.ast_obj.get_pos() < other.ast_obj.get_pos()
