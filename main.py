@@ -152,9 +152,9 @@ def wrong_argument(msg):
     # options.help()
 
 # 主函数
-def main(argv, std_in=None, std_out=None):
-    if std_in: global_var.set_std_in(std_in)
-    if std_out: global_var.set_std_out(std_out)
+def main(argv, input_=None, output_=None):
+    if input_: global_var.set_std_in(input_)
+    if output_: global_var.set_std_out(output_)
     # 解析参数
     file_paths = set()
     i = 1

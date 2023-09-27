@@ -1,10 +1,10 @@
 import os
 import uuid
 import socketserver
-import multiprocessing
+import threading
 import time
-import sys
-import importlib
+import asyncio
+
 
 # 初始化目录
 if not os.path.exists('temp'):
@@ -13,57 +13,72 @@ if not os.path.exists('temp'):
 
 # log
 class logger():
-    def __init__(self, log_path, log_name):
-        self.name = log_name
-        self.log_path = os.path.join(log_path, f'{log_name}.log')
-        self.type = {0: 'INFO', 1: 'WARNING', 2: 'ERROR', 3: 'FATAL'}
-        self.color_type = {0: '', 1: '\033[0;30;43m', 2: '\033[0;37;41m', 3: '\033[0;37;41m'}
-        self.color_end = '\033[0m'
-        self.time_color = '\x1B[3m'
-        self.time_color_end = '\x1B[0m'
-        self.max_type_length = 16
+	def __init__(self, log_path, log_name):
+		self.name = log_name
+		self.log_path = os.path.join(log_path, f'{log_name}.log')
+		self.type = {0: 'INFO', 1: 'WARNING', 2: 'ERROR', 3: 'FATAL'}
+		self.color_type = {0: '', 1: '\033[0;30;43m', 2: '\033[0;37;41m', 3: '\033[0;37;41m'}
+		self.color_end = '\033[0m'
+		self.time_color = '\x1B[3m'
+		self.time_color_end = '\x1B[0m'
+		self.max_type_length = 16
 
-        if os.path.exists(self.log_path):
-            pass
-        else:
-            with open(self.log_path, 'w') as f:
-                pass
+		if os.path.exists(self.log_path):
+			pass
+		else:
+			open(self.log_path, 'w').close()
 
-    def get_time(self, _format='%Y-%m-%d %H:%M:%S'):
-        return time.strftime(_format, time.localtime())
+	def get_time(self, _format='%Y-%m-%d %H:%M:%S'):
+		return time.strftime(_format, time.localtime())
 
-    def add_log(self, info:str, level:int = 0): # level: 0 普通；1 警告；2 错误；3 致命错误
-        if level in self.type.keys():
-            current_time = self.get_time()
-            log_content = current_time + '    ' + '[' + self.type[level] + '] ' + ' ' * (self.max_type_length - len(self.type[level])) + info + '\n'
-            with open(self.log_path, 'a') as f:
-                f.writelines(log_content)
-            self.output_log(current_time, info, level)
-        else:
-            self.add_log('Log Error : Not Correct Log Level.', 2)
-            self.add_log(f'Log with default level: 0. Content: {info}')
+	def add_log(self, info:str, level:int = 0): # level: 0 普通；1 警告；2 错误；3 致命错误
+		if level in self.type.keys():
+			current_time = self.get_time()
+			log_content = current_time + '    ' + '[' + self.type[level] + '] ' + ' ' * (self.max_type_length - len(self.type[level])) + info + '\n'
+			with open(self.log_path, 'a') as f:
+				f.writelines(log_content)
+			self.output_log(current_time, info, level)
+		else:
+			self.add_log('Log Error : Not Correct Log Level.', 2)
+			self.add_log(f'Log with default level: 0. Content: {info}')
 
-    def add_log_level(self, new_level_index:int, new_level_name:str, color_type:str='\033[0;37;41m'):
-        if new_level_index not in self.type.keys()and new_level_name not in self.type.values():
-            if len(new_level_name) >= self.max_type_length - 4:
-                self.add_log('Log Error : The new Log Name is Too Long. ', 1)
+	def add_log_level(self, new_level_index:int, new_level_name:str, color_type:str='\033[0;37;41m'):
+		if new_level_index not in self.type.keys()and new_level_name not in self.type.values():
+			if len(new_level_name) >= self.max_type_length - 4:
+				self.add_log('Log Error : The new Log Name is Too Long. ', 1)
 
-            self.type[new_level_index] = new_level_name
-            self.color_type[new_level_index] = color_type
-            self.add_log(f'Add New Log Level: "{new_level_name}" with Index: "{new_level_index}"')
+			self.type[new_level_index] = new_level_name
+			self.color_type[new_level_index] = color_type
+			self.add_log(f'Add New Log Level: "{new_level_name}" with Index: "{new_level_index}"')
 
-        else:
-            self.add_log('Log Warning : The new Log Level has already exists!', 2)
+		else:
+			self.add_log('Log Warning : The new Log Level has already exists!', 2)
 
-    def output_log(self, current_time:str, info:str, level:int):
-        # 输出日期
-        print(self.time_color + current_time + self.time_color_end, end='')
-        print('    ', end='')
-        # 输出等级
-        print(self.color_type[level] + self.type[level] + self.color_end, end='')
-        print(' '*(self.max_type_length-len(self.type[level])) + ' ', end='')
-        # 输出内容
-        print(info)
+	def output_log(self, current_time:str, info:str, level:int):
+		# 输出日期
+		print(self.time_color + current_time + self.time_color_end, end='')
+		print('    ', end='')
+		# 输出等级
+		print(self.color_type[level] + self.type[level] + self.color_end, end='')
+		print(' '*(self.max_type_length-len(self.type[level])) + ' ', end='')
+		# 输出内容
+		print(info)
+
+
+# 网络输入模拟
+class NetIn:
+	def __init__(self):
+		self.data = []
+		self.index = 0
+
+	def add_input(self, t):
+		self.data.append(t)
+
+	def readline(self):
+		while self.index >= len(self.data):
+			pass
+
+		return self.data[self.index]
 
 
 # 代码运行
@@ -76,7 +91,7 @@ class CodeRunner:
 
 		os.makedirs(self.parent_dir)
 
-		self.file_name = os.path.join(self.parent_dir, f'main.cpc')
+		self.file_name = os.path.join(self.parent_dir, 'main.cpc')
 		self.output_text = ''
 		self.output_stream = open(os.path.join(self.parent_dir, 'output'), 'w+')
 
@@ -84,20 +99,16 @@ class CodeRunner:
 		with open(self.file_name, 'w') as f:
 			f.write(code)
 
-	def add_input(self, text):
-		# 不修改输入流，而是将内容直接写入输入流
-		sys.stdin.write(text + '\n')
-		sys.stdin.flush()
-
-	def run(self):
+	def run(self, inp):
 		try:
 			import main
 			main.main(
 				('cpc', self.file_name),
-				std_out=self.output_stream,
+				input_=inp,
+				output_=self.output_stream,
 			)
 		except Exception as e:
-			log.add_log(e, 2)
+			log.add_log(f'{self.uid} [error] {e}, 2')
 
 	def has_output(self):
 		self.output_stream.seek(0)
@@ -127,6 +138,7 @@ class Handler(socketserver.StreamRequestHandler):
 		log.add_log(f'New Connection: {self.uid}')
 
 		self.runner = CodeRunner(self.uid)
+		self.input_ = NetIn()
 		self.index = 0
 
 		while 1:
@@ -140,32 +152,35 @@ class Handler(socketserver.StreamRequestHandler):
 					self.close_connection()
 					break
 
-			except:
-				self.close_connection()
+			except Exception as e:
+				self.close_connection(e)
 				break
 
-	def close_connection(self):
+	def close_connection(self, e=''):
 		self.runner.close()
 		self.server.connections[self.uid].close()
 		del self.server.connections[self.uid]
-		log.add_log(f'Close Connection: {self.uid}')
+		if e:
+			log.add_log(f'Close Connection: {self.uid} with error \033[1;31m{e}\033[0m')
+		else:
+			log.add_log(f'Close Connection: {self.uid}')
 
 	def handle_data(self, data):
 		if self.index == 0:
 			log.add_log(f'{self.uid} [code] {data}')
 			self.runner.set_code(data)
-			multiprocessing.Process(target=self.runner.run).run()
+			threading.Thread(target=self.runner.run, args=(self.input_, )).run()
 		else:
 			log.add_log(f'{self.uid} [input] {data}')
-			self.runner.add_input(data)
+			self.input_.add_input(data)
 
 		self.index += 1
 
 	def handle_output(self):
 		if self.runner.has_output():
 			output = self.runner.get_output()
-			log.add_log(f'{self.uid} [output] {output}')
 			self.request.sendall(output.encode('utf-8'))
+			log.add_log(f'{self.uid} [output] {output}')
 
 
 class ThreadingTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
