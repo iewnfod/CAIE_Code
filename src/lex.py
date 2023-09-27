@@ -58,6 +58,7 @@ reserved = {
     "MOD",
     "DIV",
     "DELETE",
+    "PASS",
 }
 
 tokens = (

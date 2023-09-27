@@ -236,3 +236,15 @@ class While(AST_Node):
     def exe(self):
         while self.condition.exe()[0]:
             self.true_statement.exe()[0]
+
+
+class Pass(AST_Node):
+    def __init__(self, *args, **kwargs):
+        self.type = 'WHILE'
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type
+
+    def exe(self):
+        return

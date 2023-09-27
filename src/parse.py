@@ -444,7 +444,11 @@ def p_enumerate_items(p):
 
 def p_pointer_type_statement(p):
     """statement : TYPE ID EQUAL POINTER ID"""
-    p[0] = AST.Pointer(p[2], p[5])
+    p[0] = AST.Pointer(p[2], p[5], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_pass_statement(p):
+    """statement : PASS"""
+    p[0] = AST.Pass(lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_private_statement(p):
     """statement : PRIVATE statement"""
