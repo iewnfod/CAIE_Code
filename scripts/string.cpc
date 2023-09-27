@@ -52,11 +52,32 @@ FUNCTION Trim(s : STRING) RETURNS STRING
     len <- LENGTH(s)
     DECLARE result : STRING
     DECLARE c : STRING
+    DECLARE flag : BOOLEAN
 
+    // 从前往后查看
+    flag <- TRUE
     FOR i <- 1 TO len
         c <- MID(s, i, 1)
-        IF c <> ' ' THEN
+        IF c = ' ' AND flag THEN
+            PASS
+        ELSE
             result <- result & c
+            flag <- FALSE
+        ENDIF
+    NEXT i
+
+    // 从后往前查看
+    s <- result
+    result <- ""
+    len <- LENGTH(s)
+    flag <- TRUE
+    FOR i <- len TO 1 STEP -1
+        c <- MID(s, i, 1)
+        IF c = ' ' AND flag THEN
+            PASS
+        ELSE
+            result <- c & result
+            flag <- FALSE
         ENDIF
     NEXT i
 
