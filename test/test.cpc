@@ -1,9 +1,3 @@
-TYPE shit
-	DECLARE i:INTEGER
-ENDTYPE
+IMPORT "import_test.cpc"
 
-DECLARE arr: ARRAY[1:10] OF shit
-
-arr[3].i <- 8
-
-OUTPUT arr[3].i + 1
+OUTPUT test_string

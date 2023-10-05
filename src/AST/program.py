@@ -2,6 +2,7 @@ from .data import *
 from ..AST_Base import *
 from ..global_var import *
 from .array import *
+from os.path import exists
 
 class Statements(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -248,3 +249,21 @@ class Pass(AST_Node):
 
     def exe(self):
         return
+
+
+class Import(AST_Node):
+    def __init__(self, target, *args, **kwargs):
+        self.type = 'IMPORT'
+        self.target = target
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.target.get_tree(level+1)
+
+    def exe(self):
+        path = self.target.exe()[0]
+        if exists(path):
+            from main import with_file
+            with_file(path)
+        else:
+            add_error_message(f'Cannot find `{path}` to import', self)

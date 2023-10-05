@@ -59,6 +59,7 @@ reserved = {
     "DIV",
     "DELETE",
     "PASS",
+    "IMPORT",
 }
 
 tokens = (

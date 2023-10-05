@@ -450,6 +450,10 @@ def p_pass_statement(p):
     """statement : PASS"""
     p[0] = AST.Pass(lineno=p.lineno(1), lexpos=p.lexpos(1))
 
+def p_import_statement(p):
+    """statement : IMPORT expression"""
+    p[0] = AST.Import(p[2], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
 def p_private_statement(p):
     """statement : PRIVATE statement"""
 
