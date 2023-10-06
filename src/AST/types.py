@@ -68,6 +68,15 @@ class Composite_type(AST_Node):
                 else:
                     return self
 
+            def __str__(self):
+                space = stack.subspaces[self]
+                s = self.type
+                if space.variables:
+                    s += f' {space.variables}'
+                if space.functions:
+                    s += f' {space.functions}'
+                return s
+
             def set_value(self, value):
                 # 将对方的 subspace 设置为自己的
                 stack.pop_subspace(value)

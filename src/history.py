@@ -1,4 +1,4 @@
-import os
+from os.path import join, exists, dirname
 
 # 尝试导入 readline，无法导入也不会导致核心功能受损
 try:
@@ -7,7 +7,7 @@ except:
     readline = None
 
 def parent_path(p):
-    return os.path.dirname(p)
+    return dirname(p)
 
 HOME_PATH = parent_path(parent_path(__file__))
 
@@ -16,11 +16,13 @@ class Cmd:
         self.home_path = home_path
         self.save_path = save_path
         self.history_size = history_size
-        self.path = os.path.join(self.home_path, self.save_path)
+        self.path = join(self.home_path, self.save_path)
 
     def preloop(self):
-        if readline and os.path.exists(self.path):
-            readline.read_history_file(self.path)
+        if readline:
+            readline.set_history_length(self.history_size)
+            if exists(self.path):
+                readline.read_history_file(self.path)
 
     def postloop(self):
         if readline:
