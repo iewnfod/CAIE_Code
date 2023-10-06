@@ -56,7 +56,7 @@ def multi_input():
     # 空了 n 行
     n = 0
     # 如果出现了错误信息，那就说明这一行没写完，那就换行再写
-    while get_error_messages() and n < 2:
+    while not is_error_messages_empty() and n < 2:
         clear_error_messages()
         t = remove_comment(input(f'{multi_preline} '))
         # 如果这一行还是空，那就给一次机会，否则就视为结束，然后开始运行

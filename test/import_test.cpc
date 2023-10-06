@@ -1,3 +1,5 @@
 DECLARE test_string : STRING
 
 test_string <- "Test String"
+
+OUTPUT feaw
