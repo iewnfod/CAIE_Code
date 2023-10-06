@@ -2,9 +2,42 @@ from .global_var import *
 from .data_types import *
 from copy import copy
 
+# (空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例})
+class Space:
+    def __init__(self, name: str, variables: dict, functions: dict):
+        self.name = name
+        self.variables = variables
+        self.functions = functions
+
+    def __getitem__(self, index):
+        if index == 0:
+            return self.name
+        elif index == 1:
+            return self.variables
+        elif index == 2:
+            return self.functions
+        else:
+            raise IndexError(f'Invalid index `{index}` for space `{self.name}`')
+
+    def new_variable(self, id, value, is_const):
+        self.variables[id] = (value, is_const)
+
+    def set_variable(self, id, value, type):
+        if self.variables[id][1] == False:
+            try:
+                self.variables[id][0].set_value(value)
+            except:
+                add_stack_error_message(f'Cannot assign `{type}` to `{self.variables[id][0][1]}`')
+        else:
+            add_stack_error_message(f'Cannot assign value of constant `{id}`')
+
+    def set_function(self, id, func):
+        self.functions[id] = func
+
+
 class Stack:
     def __init__(self) -> None:
-        self.spaces = [('GLOBAL', {}, {})]  # [(空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例})]
+        self.spaces = [Space('GLOBAL', {}, {})]  # [Space]
         self.files = {}  # {文件名: 打开的文件实例}
         self.subspaces = {}
         self.structs = {
@@ -28,13 +61,13 @@ class Stack:
 
     def get_variable(self, id):
         for i in self.spaces:
-            if id in i[1].keys():
-                return i[1][id][0]
+            if id in i.variables.keys():
+                return i.variables[id][0]
         else:
             add_stack_error_message(f'No variable or constant have id: `{id}`')
 
     def new_variable(self, id, type):
-        self.spaces[0][1][id] = (self.structs[type](name=id), False)
+        self.spaces[0].new_variable(id, self.structs[type](name=id), False)
 
     def new_constant(self, id, value):
         # 复制值
@@ -43,30 +76,23 @@ class Stack:
         if value in self.subspaces:
             self.subspaces[clone] = self.subspaces[value]
         # 赋值
-        self.spaces[0][1][id] = (clone, True)
+        self.spaces[0].new_variable(id, clone, True)
 
     def set_variable(self, id, value, type):
         for i in range(len(self.spaces)):
-            if id in self.spaces[i][1]:
-                if self.spaces[i][1][id][1] == False:
-                    try:
-                        self.spaces[i][1][id][0].set_value(value)
-                    except:
-                        add_stack_error_message(f'Cannot assign `{type}` to `{self.spaces[i][1][id][0][1]}`')
-                else:
-                    add_stack_error_message(f'Cannot assign value of constant `{id}`')
-                # 如果找到了这个变量存在，不管什么错误，都退出
+            if id in self.spaces[i].variables:
+                self.spaces[i].set_variable(id, value, type)
                 break
         else:
             add_stack_error_message(f'Variable `{id}` has not been declared yet')
 
     def remove_variable(self, id):
         for i in range(len(self.spaces)):
-            if id in self.spaces[i][1]:
-                var = self.spaces[i][1][id][0]
+            if id in self.spaces[i].variables:
+                var = self.spaces[i].variables[id][0]
                 if var in self.subspaces:
                     del self.subspaces[var]
-                del self.spaces[i][1][id]
+                del self.spaces[i].variables[id]
                 return
         else:
             add_stack_error_message(f'Variable or constant `{id}` has not been declared yet')
@@ -76,7 +102,7 @@ class Stack:
         self.return_request = False
 
     def new_space(self, space_name, var_dict, func_dict):
-        self.spaces.insert(0, (space_name, var_dict, func_dict))
+        self.spaces.insert(0, Space(space_name, var_dict, func_dict))
 
     def set_return_variables(self, variables):
         self.return_variables = variables
@@ -87,12 +113,12 @@ class Stack:
         return v
 
     def add_function(self, function):
-        self.current_space()[2][function.id] = function
+        self.current_space().set_function(function.id, function)
 
     def get_function(self, id):
         for i in range(len(self.spaces)):
-            if id in self.spaces[i][2].keys():
-                return self.spaces[i][2][id]
+            if id in self.spaces[i].functions.keys():
+                return self.spaces[i].functions[id]
         else:
             add_stack_error_message(f'No function with id: `{id}`')
 
