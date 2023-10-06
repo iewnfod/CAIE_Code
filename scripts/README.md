@@ -64,3 +64,9 @@
     ```
     Time RETURNS REAL
     ```
+
+## [Import](./import.cpc)
+* Import 导入另一个文件
+    ```
+    Import(target : STRING) RETURNS ImportObj
+    ```

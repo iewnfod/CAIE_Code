@@ -238,7 +238,6 @@ class While(AST_Node):
         while self.condition.exe()[0]:
             self.true_statement.exe()[0]
 
-
 class Pass(AST_Node):
     def __init__(self, *args, **kwargs):
         self.type = 'WHILE'
@@ -250,7 +249,6 @@ class Pass(AST_Node):
     def exe(self):
         return
 
-
 class Import(AST_Node):
     def __init__(self, target, *args, **kwargs):
         self.type = 'IMPORT'
@@ -261,9 +259,17 @@ class Import(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.target.get_tree(level+1)
 
     def exe(self):
+        # 保存当前运行路径，以及类型
+        last_file = get_running_path()
+        last_mod = get_running_mod()
+        # 获取要导入的路径
         path = self.target.exe()[0]
         if exists(path):
+            # 运行导入程序
             from main import with_file
             with_file(path)
+            # 修改回之前的路径，以及类型
+            set_running_path(last_file)
+            set_running_mod(last_mod)
         else:
             add_error_message(f'Cannot find `{path}` to import', self)

@@ -1,0 +1,7 @@
+FUNCTION Import(target : STRING) RETURNS ImportObj
+	TYPE ImportObj
+		IMPORT target
+	ENDTYPE
+	DECLARE obj : ImportObj
+	RETURN obj
+ENDFUNCTION

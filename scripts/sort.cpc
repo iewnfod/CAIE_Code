@@ -9,7 +9,7 @@ PROCEDURE Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
         gap <- gap * 3 + 1
     ENDWHILE
 
-    WHILE gap > 0
+    WHILE gap > 0 DO
         FOR i <- gap TO len
             CONSTANT temp = arr[i]
             DECLARE j : INTEGER

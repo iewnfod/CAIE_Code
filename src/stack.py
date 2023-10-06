@@ -1,10 +1,12 @@
 from .global_var import *
 from .data_types import *
+from copy import copy
 
 class Stack:
     def __init__(self) -> None:
-        self.spaces = [('GLOBAL', {}, {}, {})]  # [(空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例}, {子空间变量实例: 空间体})]
+        self.spaces = [('GLOBAL', {}, {})]  # [(空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例})]
         self.files = {}  # {文件名: 打开的文件实例}
+        self.subspaces = {}
         self.structs = {
             'INTEGER' : INTEGER,
             'REAL' : REAL,
@@ -34,8 +36,14 @@ class Stack:
     def new_variable(self, id, type):
         self.spaces[0][1][id] = (self.structs[type](name=id), False)
 
-    def new_constant(self, id, type, value):
-        self.spaces[0][1][id] = (self.structs[type](value), True)
+    def new_constant(self, id, value):
+        # 复制值
+        clone = copy(value)
+        # 复制子空间
+        if value in self.subspaces:
+            self.subspaces[clone] = self.subspaces[value]
+        # 赋值
+        self.spaces[0][1][id] = (clone, True)
 
     def set_variable(self, id, value, type):
         for i in range(len(self.spaces)):
@@ -55,9 +63,9 @@ class Stack:
     def remove_variable(self, id):
         for i in range(len(self.spaces)):
             if id in self.spaces[i][1]:
-                var = self.spaces[i][1][id]
-                if var[0] in self.spaces[i-1][3]:
-                    del self.spaces[i-1][3][var[0]]
+                var = self.spaces[i][1][id][0]
+                if var in self.subspaces:
+                    del self.subspaces[var]
                 del self.spaces[i][1][id]
                 return
         else:
@@ -67,8 +75,8 @@ class Stack:
         self.spaces.pop(0)
         self.return_request = False
 
-    def new_space(self, space_name, var_dict, func_dict, sub_spaces):
-        self.spaces.insert(0, (space_name, var_dict, func_dict, sub_spaces))
+    def new_space(self, space_name, var_dict, func_dict):
+        self.spaces.insert(0, (space_name, var_dict, func_dict))
 
     def set_return_variables(self, variables):
         self.return_variables = variables
@@ -114,13 +122,11 @@ class Stack:
 
     def push_subspace(self, space_identifier):
         space = self.spaces.pop(0)
-        self.spaces[0][3][space_identifier] = space
+        self.subspaces[space_identifier] = space
 
     def pop_subspace(self, space_identifier):
-        for space in self.spaces:
-            if space_identifier[0] in space[3]:
-                self.spaces.insert(0, space[3][space_identifier[0]])
-                break
+        if space_identifier[0] in self.subspaces.keys():
+            self.spaces.insert(0, self.subspaces[space_identifier[0]])
         else:
             add_stack_error_message(f'Cannot find subspace `{space_identifier}`')
 

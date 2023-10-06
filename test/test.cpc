@@ -1,3 +1,3 @@
-IMPORT "import_test.cpc"
+CONSTANT test = Import("test/import_test.cpc")
 
-OUTPUT test_string
+OUTPUT test.test_string

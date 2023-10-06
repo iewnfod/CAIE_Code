@@ -173,10 +173,6 @@ NEXT i
         <identifier> <- <value>
         <identifier>[<index>, ...] <- <value>
         ```
-    * 删除 (CAIE 并未提供此语法)
-        ```
-        DELETE <identifier>
-        ```
 2. 输入与输出
     * 输入
         ```
@@ -322,6 +318,25 @@ NEXT i
         TYPE <identifier>
             <statements>
         ENDTYPE
+        ```
+10. 由此解释器提供的特殊语法
+    * DELETE 删除变量或常量
+        ```
+        DELETE <identifier>
+        ```
+    * PASS 跳过 (即不执行任何操作)
+        ```
+        PASS
+        ```
+    * IMPORT 导入文件
+        ```
+        IMPORT <expression>
+        ```
+        * 此处的`expression`通常为一个被双引号包裹的字符串
+        * 导入操作并不会做任何隔离，也就是说，被导入的文件的所有内容都会完全暴露给当前文件，因此请注意变量名重复使用的问题
+        * 因此推荐使用[`Import`](./scripts/import.cpc)函数进行导入操作
+        ```
+        CONSTANT test = Import("test/import_test.cpc")
         ```
 
 ### 内置函数

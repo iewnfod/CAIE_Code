@@ -67,7 +67,7 @@ class Call_function(AST_Node):
                 add_error_message(f'Function `{self.id}` does not expect any parameters, but found', self)
 
         # 为函数创建新的命名空间
-        stack.new_space(self.id, new_dict, {}, {})
+        stack.new_space(self.id, new_dict, {})
 
         # 运行函数
         function_obj.statements.exe()
@@ -80,6 +80,10 @@ class Call_function(AST_Node):
         # 核查返回值，并返回
         if function_obj.returns:
             # 查看返回值类型是否相同
+            # 如果一样，就直接返回
+            if function_obj.returns == returns[1]:
+                return returns
+            # 否则尝试创建对象进行返回
             try:
                 return stack.structs[function_obj.returns](returns[0])
             except:

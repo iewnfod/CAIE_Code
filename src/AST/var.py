@@ -15,7 +15,7 @@ class Constant(AST_Node):
 
     def exe(self):
         value = self.value.exe()
-        stack.new_constant(self.id, value[1], value[0])
+        stack.new_constant(self.id, value)
 
 class Variable(AST_Node):
     def __init__(self, id, type, *args, **kwargs):

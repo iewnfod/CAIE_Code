@@ -57,7 +57,7 @@ class Composite_type(AST_Node):
                 self.body = that.body
                 self.is_struct = True
                 # 创建新的命名空间
-                stack.new_space(self.type, {}, {}, {})
+                stack.new_space(self.type, {}, {})
                 self.body.exe()
                 # 将这个空间转移为子空间
                 stack.push_subspace(self)

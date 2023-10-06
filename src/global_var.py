@@ -67,6 +67,9 @@ def set_running_path(p):
     global running_path
     running_path = p
 
+def get_running_path():
+    return running_path
+
 def print_(t, end='\n'):
     get_std_out().write(str(t) + end)
     get_std_out().flush()
