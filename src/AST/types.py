@@ -72,9 +72,15 @@ class Composite_type(AST_Node):
                 space = stack.subspaces[self]
                 s = self.type
                 if space.variables:
-                    s += f' {space.variables}'
+                    str_variables = {}
+                    for key, value in space.variables.items():
+                        str_variables[str(key)] = str(value[0])
+                    s += f' {str_variables}'
                 if space.functions:
-                    s += f' {space.functions}'
+                    str_functions = {}
+                    for key, value in space.functions.items():
+                        str_functions[str(key)] = str(value)
+                    s += f' {str_functions}'
                 return s
 
             def set_value(self, value):
