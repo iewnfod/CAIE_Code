@@ -9,3 +9,4 @@ lto = "fat"
 codegen-units = 1
 
 [dependencies]
+sysinfo = "0.29.10"
