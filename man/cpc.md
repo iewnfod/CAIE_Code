@@ -13,7 +13,7 @@ cpc - An interpreter for CAIE Pseudocode.
 **cpc** [*FILE_PATHS*] [*OPTIONS*]
 
 # DESCRIPTION
-**cpc** is a simple interpreter for CAIE Pseudocode written in Python3. The language regulated by CAIE has a really retro grammar and even some grammar is not good for both developers and the interpreter. Thus, some unimportant grammars are changed in this interpreter. For more detailed information about this, you may look at README or <https://github.com/iewnfod/CAIE_Code>.
+**cpc** is a simple interpreter for *C*AIE *P*seudo*c*ode written in Python3. The language regulated by CAIE has a really retro grammar and even some grammar will not benefit both developers and the interpreter. Thus, some unimportant grammars are changed in this interpreter and even some new grammars are added. For more detailed information about this, you may look at README or <https://github.com/iewnfod/CAIE_Code>.
 
 # OPTIONS
 **-gt**
