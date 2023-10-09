@@ -39,9 +39,12 @@ class Call_function(AST_Node):
         function_obj = stack.get_function(self.id)
         if function_obj.parameters:
             target_parameters = function_obj.parameters.exe()  # (id, 类型)
-            parameters = self.parameters.exe()  # (值, 类型)
+            if self.parameters:
+                parameters = self.parameters.exe()  # (值, 类型)
+            else:
+                add_error_message(f'Function `{self.id}` expect {len(target_parameters)} parameters, but found 0', self)
             if len(target_parameters) != len(parameters):
-                add_error_message(f'Function `{self.id}` has wrong number of parameters', self)
+                add_error_message(f'Function `{self.id}` expect {len(target_parameters)} parameters, but found {len(self.parameters)}', self)
 
             # 核对并传参
             for i in range(len(target_parameters)):
@@ -64,7 +67,7 @@ class Call_function(AST_Node):
                     add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`', self)
         else:
             if self.parameters:
-                add_error_message(f'Function `{self.id}` does not expect any parameters, but found', self)
+                add_error_message(f'Function `{self.id}` does not expect any parameters, but found {len(self.parameters)}', self)
 
         # 为函数创建新的命名空间
         stack.new_space(self.id, new_dict, {})
@@ -119,6 +122,9 @@ class Declare_parameters(AST_Node):
 
     def add_parameter(self, parameter):
         self.parameters.append(parameter)
+
+    def __len__(self):
+        return len(self.parameters)
 
     def exe(self):
         result = []
