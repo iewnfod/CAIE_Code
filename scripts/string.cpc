@@ -132,3 +132,8 @@ FUNCTION Reverse(s : STRING) RETURNS STRING
 
     RETURN r
 ENDFUNCTION
+
+FUNCTION Replace(s : STRING, from : STRING, to : STRING) RETURNS STRING
+    CONSTANT arr = Split(s, from)
+    RETURN Join(to, arr, 1, LENGTH(arr))
+ENDFUNCTION

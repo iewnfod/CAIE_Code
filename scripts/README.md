@@ -58,6 +58,10 @@
     ```
     Reverse(s : STRING) RETURNS STRING
     ```
+* Replace 替换字符串
+    ```
+    Replace(s : STRING, from : STRING, to : STRING) RETURNS STRING
+    ```
 
 ## [Time](./time.cpc)
 * Time 获取当前时间戳
