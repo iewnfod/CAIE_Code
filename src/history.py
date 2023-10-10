@@ -20,12 +20,12 @@ class Cmd:
 
     def preloop(self):
         if readline:
-            readline.set_history_length(self.history_size)
             if exists(self.path):
                 try:
                     readline.read_history_file(self.path)
-                except Exception as e:
-                    print(f"\033[1;31m[ERROR]\033[0m Failed to read history with error: \n\t{e}")
+                except:
+                    # 报错并不会影响历史记录的功能
+                    pass
 
     def postloop(self):
         if readline:
