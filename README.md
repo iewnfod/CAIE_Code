@@ -26,6 +26,10 @@ CAIE Pseudocode Interpreter
             ```
         * `Windows`用户请自行搜索
 
+### 更新
+* 如果您是完全使用以上步骤进行安装的，您可以使用`cpc -u`快速更新
+* 如果您并没有使用`git`进行安装，您需要手动下载新的版本，并使用和您之前相同的方法安装
+
 ### Usage
 ```
 cpc [file_paths] [options]
@@ -59,6 +63,16 @@ pip install -r requirements.txt
 #### Playground 模式下，上下左右键无法正常使用
 使用 `pip install readline` 安装依赖并尝试运行
 若 `readline` 无法正常安装，请安装 `gnureadline`，即 `pip install gnureadline`，再尝试运行
+
+#### cpc在启动时报OSError
+进入`cpc`安装目录，可使用
+删除`.history`文件
+更新`cpc`
+```shell
+cd $(which cpc)/../..
+rm -rf .history
+cpc -u
+```
 
 *若依旧无法解决问题，请提交issue*
 
