@@ -13,6 +13,9 @@ pub const MAC_PYTHON_HOME : &str = "/Library/Frameworks/Python.framework/Version
 
 fn solve_system_python(_python_home: &str) -> Vec<PathBuf> {
     let mut system_python = vec![];
+    if !PathBuf::from_str(_python_home).unwrap().exists() {
+        return vec![];
+    }
     let paths = fs::read_dir(_python_home).unwrap();
     for path in paths {
         let p = path.unwrap();
