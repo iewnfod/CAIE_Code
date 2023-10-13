@@ -85,21 +85,25 @@ class Raw_output(AST_Node):
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
 
-    def exe(self):
+    def _output(self, v):
         # 如果当前是文件模式，那么就应该输出此方法的结果
-        # if get_running_mod() == 'file': return
+        if get_running_mod() == 'file': need_output = False
+        else: need_output = True
 
+        print_(v)
+
+    def exe(self):
         t = self.expression.exe()
         v = t[0] if type(t) == tuple else str(t)
         # 如果是 tuple，那就看类型，并输出
         if type(t) == tuple:
             if t[1] == 'STRING':
-                print_('"' + v + '"')
+                self._output('"' + v + '"')
             elif t[1] == 'CHAR':
-                print_("'" + v + "'")
+                self._output("'" + v + "'")
             elif t[1] == 'BOOLEAN':
-                print_({True: 'TRUE', False: 'FALSE'}[v])
+                self._output({True: 'TRUE', False: 'FALSE'}[v])
             else:
-                print_(v)
+                self._output(v)
         else:
-            print_(v)
+            self._output(v)
