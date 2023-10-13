@@ -86,8 +86,8 @@ class Raw_output(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
 
     def exe(self):
-        # 如果当前是文件模式，那么就不应该运行此方法
-        if get_running_mod() == 'file': return
+        # 如果当前是文件模式，那么就应该输出此方法的结果
+        # if get_running_mod() == 'file': return
 
         t = self.expression.exe()
         v = t[0] if type(t) == tuple else str(t)

@@ -15,6 +15,25 @@ def check_update(repo: git.Repo, remote: git.Remote):
     remote_branch = repo.remotes.origin.refs[local_branch.name]
     return local_branch.commit != remote_branch.commit
 
+def _force_update(remote, repo):
+    # 清除本地修改
+    repo.index.checkout(force=True)
+    # 获取新的内容
+    remote.pull()
+
+def _update(remote, repo):
+    try:
+        if new_animation('Updating', 3, remote.pull, failed_msg='Failed to Update'):
+            print('\033[1mUpdate Successful\033[0m')
+    except git.GitCommandError:
+        override = (
+            'There might be some conflicts between your copy and the remote one. Do you want to overwrite it? [Y/n]'
+        ).strip().lower()
+        if override == '' or override == 'y':
+            if new_animation('Forced Updating', 3, _force_update, failed_msg='Failed to Update', remote=remote, repo=repo):
+                print('\033[1mUpdate Successful\033[0m')
+        else:
+            print('Stop Updating')
 
 def update():
     repo = git.Repo(HOME_PATH)
@@ -24,7 +43,7 @@ def update():
         # 询问是否更新
         u = input('There is a new version of the program. Do you want to update it? [Y/n] ').strip().lower()
         if u == '' or u == 'y':
-            if new_animation('Updating', 3, remote.pull, failed_msg='Failed to Update'):
+            if new_animation('Updating', 3, _update, failed_msg='Failed to Update', remote=remote, repo=repo):
                 print('\033[1mUpdate Successful\033[0m')
         else:
             print('Stop Updating')

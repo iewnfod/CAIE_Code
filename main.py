@@ -200,6 +200,7 @@ parser = yacc.yacc()
 if __name__ == '__main__':
     try:
         main(sys.argv)
+        # main(['cpc', 'test/test.cpc'])
     except EOFError:
         print("EXIT")
         quit(0)

@@ -1,5 +1,2 @@
-CONSTANT test = Import("test/import_test.cpc")
-
-OUTPUT test.test_string
-
-OUTPUT ffewaeaw
+EXIT()
+OUTPUT "After exit"

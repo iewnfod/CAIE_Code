@@ -79,6 +79,7 @@ def get_running_path():
     return running_path
 
 def print_(t, end='\n'):
+    if get_running_mod == 'file': return
     get_std_out().write(str(t) + end)
     get_std_out().flush()
 
