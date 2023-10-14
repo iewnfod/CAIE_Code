@@ -1,7 +1,8 @@
 requirements = [
     ('ply', 'ply'),
     ('chardet', 'chardet'),
-    ('GitPython', 'git')
+    ('GitPython', 'git'),
+    ('colorama', 'colorama'),
 ]
 
 def config():

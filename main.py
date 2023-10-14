@@ -18,6 +18,9 @@ from time import time
 from ply import yacc
 from ply import lex
 from chardet import detect
+# 导入色彩基础库，保证\033能正确的转译
+import colorama
+colorama.init()
 
 
 preline = '>'
