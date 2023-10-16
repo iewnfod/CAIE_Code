@@ -16,40 +16,31 @@ cpc - An interpreter for CAIE Pseudocode.
 **cpc** is a simple interpreter for *C*AIE *P*seudo*c*ode written in Python3. The language regulated by CAIE has a really retro grammar and even some grammar will not benefit both developers and the interpreter. Thus, some unimportant grammars are changed in this interpreter and even some new grammars are added. For more detailed information about this, you may look at README or <https://github.com/iewnfod/CAIE_Code>.
 
 # OPTIONS
-**-gt**
-: **--get-tree**
+**-gt**, **--get-tree**
 : To show the tree of the program after being parsed
 
-**-h**
-: **--help**
+**-h**, **--help**
 : To show the help page
 
-**-k**
-: **--keywords**
+**-k**, **--keywords**
 : To show all the keywords
 
-**-ne**
-: **--no-error**
+**-ne**, **--no-error**
 : To remove all error messages
 
-**-p**
-: **--parse**
+**-p**, **--parse**
 : To show parse information during running
 
-**-r**
-: **--recursive-limit**
+**-r**, **--recursive-limit**
 : To set the recursive limit of the interpreter
 
-**-t**
-: **--time**
+**-t**, **--time**
 : To show the time for the script to run
 
-**-u**
-: **--update**
+**-u**, **--update**
 : To check or update the version (only if *cpc* is installed with git)
 
-**-v**
-: **--version**
+**-v**, **--version**
 : To show the version of installed *cpc*
 
 ## EXAMPLE
