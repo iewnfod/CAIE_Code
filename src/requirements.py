@@ -12,5 +12,5 @@ def config():
         try:
             importlib.import_module(import_name)
         except:
-            print(f'\033[1mMissing Important Dependence `{package_name}`\nTrying to Install for You...\033[0m')
+            print(f'Missing Important Dependence `{package_name}`\nTrying to Install for You...')
             pip.main(['install', package_name])
