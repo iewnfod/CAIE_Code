@@ -6,7 +6,7 @@ current_dir=$(cd $(dirname $0); pwd)
 content="export PATH=${current_dir}/bin:\$PATH"
 fish_content="set -x PATH \"${current_dir}/bin\" \$PATH"
 # 如果已经可以用 cpc 了，那就不用重新写入了
-if type cpc >/dev/null 2>&1; then
+if ! type cpc >/dev/null 2>&1; then
 	# 写入 bash_profile 文件
 	if type bash >/dev/null 2>&1; then
 		echo "" >> ~/.bash_profile  # 换行
