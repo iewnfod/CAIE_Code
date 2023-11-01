@@ -13,7 +13,10 @@ class Function(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+        if self.parameters:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+        else:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1)
 
     def exe(self):
         stack.add_function(self)
@@ -26,16 +29,22 @@ class Call_function(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1)
+        if self.parameters:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1)
+        else:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id)
 
     def exe(self):
         new_dict = {}  # {变量名: (值, 类型, 是否是常量)}
         function_obj = stack.get_function(self.id)
         if function_obj.parameters:
             target_parameters = function_obj.parameters.exe()  # (id, 类型)
-            parameters = self.parameters.exe()  # (值, 类型)
+            if self.parameters:
+                parameters = self.parameters.exe()  # (值, 类型)
+            else:
+                add_error_message(f'Function `{self.id}` expect {len(target_parameters)} parameters, but found 0', self)
             if len(target_parameters) != len(parameters):
-                add_error_message(f'Function `{self.id}` has wrong number of parameters', self)
+                add_error_message(f'Function `{self.id}` expect {len(target_parameters)} parameters, but found {len(self.parameters)}', self)
 
             # 核对并传参
             for i in range(len(target_parameters)):
@@ -58,10 +67,10 @@ class Call_function(AST_Node):
                     add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`', self)
         else:
             if self.parameters:
-                add_error_message(f'Function `{self.id}` does not expect any parameters, but found', self)
+                add_error_message(f'Function `{self.id}` does not expect any parameters, but found {len(self.parameters)}', self)
 
         # 为函数创建新的命名空间
-        stack.new_space(self.id, new_dict, {}, {})
+        stack.new_space(self.id, new_dict, {})
 
         # 运行函数
         function_obj.statements.exe()
@@ -74,6 +83,10 @@ class Call_function(AST_Node):
         # 核查返回值，并返回
         if function_obj.returns:
             # 查看返回值类型是否相同
+            # 如果一样，就直接返回
+            if function_obj.returns == returns[1]:
+                return returns
+            # 否则尝试创建对象进行返回
             try:
                 return stack.structs[function_obj.returns](returns[0])
             except:
@@ -109,6 +122,9 @@ class Declare_parameters(AST_Node):
 
     def add_parameter(self, parameter):
         self.parameters.append(parameter)
+
+    def __len__(self):
+        return len(self.parameters)
 
     def exe(self):
         result = []

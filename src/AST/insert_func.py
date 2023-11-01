@@ -351,22 +351,28 @@ class Python(AST_Node):
     def exe(self):
         if self.parameters:
             parameters = self.parameters.exe()
-            if len(self.parameters) == 1:
-                code = parameters[0][0]
-                global_space = {}
-                return_name = 'result'
-                try:
-                    exec(code, global_space)
-                except Exception as e:
-                    add_python_error_message(e, self)
-                    global_space[return_name] = e
+            code = parameters[0][0]
+            global_space = {}
 
-                if return_name in global_space:
-                    return (global_space[return_name], None)  # None 表示未知类型
-            else:
-                add_error_message(f'Python only have 1 parameters, but found {len(self.parameters)}', self)
+            # 尝试导入参数
+            for var in parameters[1:]:
+                try:
+                    global_space[var.name] = var[0]
+                except:
+                    add_error_message(f'Pythons interface only accept variables with basic data types', self)
+
+            return_name = '_result'
+            global_space[return_name] = None
+
+            try:
+                exec(code, global_space)
+            except Exception as e:
+                add_python_error_message(e, self)
+                # global_space[return_name] = None
+
+            return (global_space[return_name], None)  # None 表示未知类型
         else:
-            add_error_message(f'Python only have 1 parameters, but found 0', self)
+            add_error_message(f'Python interface only have 1 parameters, but found 0', self)
 
 
 insert_functions = {

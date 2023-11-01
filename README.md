@@ -4,7 +4,7 @@ CAIE Pseudocode Interpreter
 ## 安装与使用
 
 ### 安装前提
-1. `Python3` 环境
+1. `Python3` 环境 *推荐使用 PyPy3 以获得更好的性能*
 2. `git` 指令
 
 ### 正式安装
@@ -19,10 +19,20 @@ CAIE Pseudocode Interpreter
     * `Windows`若无法正常运行，也可尝试自己编译 [`build.ps1`](./build.ps1)
     * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[`build-linux.sh`](./build-linux.sh)并编译
     * 非常欢迎`Linux`用户编译后提交pr
+    * 如果需要使用`man`指令，请自行将[cpc.1](./man/cpc.1)硬链接到你的`MANPATH`内，以便更新后不必再次链接。
+        * `Linux`用户可以使用以下指令:
+            ```
+            sudo ln -f ./man/cpc.1 /your/man/path
+            ```
+        * `Windows`用户请自行搜索
+
+### 更新
+* 如果您是完全使用以上步骤进行安装的，您可以使用`cpc -u`快速更新
+* 如果您并没有使用`git`进行安装，您需要手动下载新的版本，并使用和您之前相同的方法安装
 
 ### Usage
 ```
-cpc [file_path] [options]
+cpc [file_paths] [options]
 ```
 
 ### Options
@@ -36,6 +46,7 @@ cpc [file_path] [options]
 | `-v` | `--version` | To show the version of this interpreter |
 | `-ne` | `--no-error` | To remove all error messages |
 | `-u` | `--update` | To update the version (only useful when using a version equal or greater than `0.1.2` and installed by git) |
+| `-r` | `--recursive-limit` | To set the recursive limit of the interpreter |
 
 ### 常见问题
 #### 出现 `Import Error`
@@ -52,6 +63,16 @@ pip install -r requirements.txt
 #### Playground 模式下，上下左右键无法正常使用
 使用 `pip install readline` 安装依赖并尝试运行
 若 `readline` 无法正常安装，请安装 `gnureadline`，即 `pip install gnureadline`，再尝试运行
+
+#### cpc在启动时报OSError
+进入`cpc`安装目录，可使用
+删除`.history`文件
+更新`cpc`
+```shell
+cd $(which cpc)/../..
+rm -rf .history
+cpc -u
+```
 
 *若依旧无法解决问题，请提交issue*
 
@@ -165,10 +186,6 @@ NEXT i
         ```
         <identifier> <- <value>
         <identifier>[<index>, ...] <- <value>
-        ```
-    * 删除 (CAIE 并未提供此语法)
-        ```
-        DELETE <identifier>
         ```
 2. 输入与输出
     * 输入
@@ -316,6 +333,25 @@ NEXT i
             <statements>
         ENDTYPE
         ```
+10. 由此解释器提供的特殊语法
+    * DELETE 删除变量或常量
+        ```
+        DELETE <identifier>
+        ```
+    * PASS 跳过 (即不执行任何操作)
+        ```
+        PASS
+        ```
+    * IMPORT 导入文件
+        ```
+        IMPORT <expression>
+        ```
+        * 此处的`expression`通常为一个被双引号包裹的字符串
+        * 导入操作并不会做任何隔离，也就是说，被导入的文件的所有内容都会完全暴露给当前文件，因此请注意变量名重复使用的问题
+        * 因此推荐使用[`Import`](./scripts/import.cpc)函数进行导入操作
+        ```
+        CONSTANT test = Import("test/import_test.cpc")
+        ```
 
 ### 内置函数
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
@@ -359,7 +395,15 @@ NEXT i
 **(以下方法均不属于CAIE提供的标准方法)**
 * `EXIT(code : INTEGER)` 以code为退出码，退出程序 (若不填写code，则默认为0)
 * `ROUND(x : REAL, decimalPlace : INTEGER)` decimalPlace不填写默认为0
-* `PYTHON(code: STRING)` Python3代码运行接口，并会返回code的运行结果，由于两个语言的类型系统并不互通，其返回的所有结果的类型皆为None，可赋值给任何本语言类型但不保证是否能够获得预期的结果 ***若需要获得此接口的返回值，请将返回值赋值给名为`result`的变量，否则将不会返回任何值***
+* `PYTHON(code: STRING)` Python3代码运行接口，并会返回code的运行结果，由于两个语言的类型系统并不互通，其返回的所有结果的类型皆为None，可赋值给任何本语言类型但不保证是否能够获得预期的结果
+    * ***若需要获得此接口的返回值，请将返回值赋值给名为`_result`的变量，否则将会返回值为None的None类型***
+    * ***若需要向此接口内传入变量，请在Python3代码中使用与外部相同的变量名，并将那个变量作为参数传入此函数***
+        ```
+        > DECLARE a : INTEGER
+        > PYTHON("_result=a+1", a)
+        1
+        ```
+
 * 更多非官方内置函数，请查阅 [scripts](./scripts)
 
 ## 目标

@@ -11,13 +11,16 @@ from src.history import HOME_PATH
 from src.quit import quit
 from src.line_commands import run_command
 
-from sys import argv, exit
+import sys
 import os
 from time import time
 
 from ply import yacc
 from ply import lex
 from chardet import detect
+# 导入色彩基础库，保证\033能正确的转译
+import colorama
+colorama.init()
 
 
 preline = '>'
@@ -56,7 +59,7 @@ def multi_input():
     # 空了 n 行
     n = 0
     # 如果出现了错误信息，那就说明这一行没写完，那就换行再写
-    while get_error_messages() and n < 2:
+    while not is_error_messages_empty() and n < 2:
         clear_error_messages()
         t = remove_comment(input(f'{multi_preline} '))
         # 如果这一行还是空，那就给一次机会，否则就视为结束，然后开始运行
@@ -152,46 +155,55 @@ def wrong_argument(msg):
     # options.help()
 
 # 主函数
-def main():
+def main(argv, input_=None, output_=None):
+    if input_: global_var.set_std_in(input_)
+    if output_: global_var.set_std_out(output_)
     # 解析参数
-    file_path = ''
-    for arg in argv[1:]:
+    file_paths = set()
+    i = 1
+    while i < len(argv):
+        arg = argv[i]
         for opt in options.arguments:
             if opt.check(arg):
-                opt.run()
+                opt.run(argv[i:])
+                i += opt.value_num
                 break
         else:
             if arg[0] == '-':
-                wrong_argument(f'Unknown option {arg}')
+                wrong_argument(f'Unknown option `{arg}`')
             else:
-                file_path = arg
+                file_paths.add(arg)
+        i += 1
 
     # 预加载文件
     preload_scripts()
 
-    lexer.lineno = 1
     # 选择模式运行
-    if not file_path:
+    if not file_paths:
         with_line()
     else:
-        if os.path.exists(file_path):
-            if os.path.isfile(file_path):
-                with_file(file_path)
+        for file_path in file_paths:
+            lexer.lineno = 1
+            # 选择模式运行
+            if os.path.exists(file_path):
+                if os.path.isfile(file_path):
+                    with_file(file_path)
+                else:
+                    wrong_argument(f'`{file_path}` is not a file')
             else:
-                wrong_argument(f'`{file_path}` is not a file')
-        else:
-            wrong_argument(f'File `{file_path}` does not exist')
+                wrong_argument(f'File `{file_path}` does not exist')
 
+# 加载基础类型
+global_var.__init__()
+
+lexer = lex.lex()
+parser = yacc.yacc()
 
 # 程序入口
 if __name__ == '__main__':
-    global_var.__init__()
-
-    lexer = lex.lex()
-    parser = yacc.yacc()
-
     try:
-        main()
+        main(sys.argv)
+        # main(['cpc', 'test/test.cpc'])
     except EOFError:
         print("EXIT")
         quit(0)

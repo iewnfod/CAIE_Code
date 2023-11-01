@@ -1,11 +1,9 @@
 from .history import HOME_PATH
+from .animation import new_animation
 import os
 import git
-import time
-import threading
 
 VERSION = ''
-flags = {}
 
 with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
@@ -17,26 +15,25 @@ def check_update(repo: git.Repo, remote: git.Remote):
     remote_branch = repo.remotes.origin.refs[local_branch.name]
     return local_branch.commit != remote_branch.commit
 
+def _force_update(remote, repo):
+    # 清除本地修改
+    repo.index.checkout(force=True)
+    # 获取新的内容
+    remote.pull()
 
-def animation(msg, count):
-    n = 0
-    while flags[msg]:
-        n += 1
-        print(msg + '.' * n + ' ' * (count - n), end='\r')
-        n %= count
-        time.sleep(.5)
-
-def new_animation(msg: str, count: int, work, failed_msg='', *args, **kwargs):
-    flags[msg] = True
-    threading.Thread(target=animation, args=(msg, count)).start()
+def _update(remote, repo):
     try:
-        result = work(*args, **kwargs)
-    except Exception as e:
-        print(f'\033[1;31m{failed_msg}\033[0m\n{e}')
-        os._exit(1)
-    flags[msg] = False
-    return result
-
+        remote.pull()
+        print('\033[1mUpdate Successful\033[0m')
+    except git.GitCommandError:
+        override = (
+            'There might be some conflicts between your copy and the remote one. Do you want to overwrite it? [Y/n]'
+        ).strip().lower()
+        if override == '' or override == 'y':
+            if new_animation('Forced Updating', 3, _force_update, failed_msg='Failed to Update', remote=remote, repo=repo):
+                print('\033[1mUpdate Successful\033[0m')
+        else:
+            print('Stop Updating')
 
 def update():
     repo = git.Repo(HOME_PATH)
@@ -44,15 +41,9 @@ def update():
 
     if new_animation('Checking Update', 3, check_update, failed_msg='Failed to Check Update', repo=repo, remote=remote):
         # 询问是否更新
-        u = input('There is a new version of the program. Do you want to update it? [y/N] ').strip().lower()
-        if u == 'y':
-            # 读取历史记录防止被覆盖
-            with open(os.path.join(HOME_PATH, '.history'), 'r') as f:
-                history = f.read()
-            if new_animation('Updating', 3, remote.pull, failed_msg='Failed to Update'):
-                # 写入历史记录
-                with open(os.path.join(HOME_PATH, '.history'), 'w') as f:
-                    f.write(history)
+        u = input('There is a new version of the program. Do you want to update it? [Y/n] ').strip().lower()
+        if u == '' or u == 'y':
+            if new_animation('Updating', 3, _update, failed_msg='Failed to Update', remote=remote, repo=repo):
                 print('\033[1mUpdate Successful\033[0m')
         else:
             print('Stop Updating')

@@ -15,7 +15,7 @@ class Output(AST_Node):
 
     def exe(self):
         v = self.value.exe()
-        print(v if v != None else '')
+        print_(v if v != None else '')
 
 class Output_expression(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -54,7 +54,7 @@ class Input(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.id)
 
     def exe(self):
-        stack.set_variable(self.id, str(input()), 'STRING')
+        stack.set_variable(self.id, str(input_()), 'STRING')
 
 class Array_input(AST_Node):
     def __init__(self, id, indexes, *args, **kwargs):
@@ -85,21 +85,25 @@ class Raw_output(AST_Node):
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
 
-    def exe(self):
-        # 如果当前是文件模式，那么就不应该运行此方法
-        if get_running_mod() == 'file': return
+    def _output(self, v):
+        # 如果当前是文件模式，那么就应该输出此方法的结果
+        if get_running_mod() == 'file': need_output = False
+        else: need_output = True
 
+        print_(v)
+
+    def exe(self):
         t = self.expression.exe()
         v = t[0] if type(t) == tuple else str(t)
         # 如果是 tuple，那就看类型，并输出
         if type(t) == tuple:
             if t[1] == 'STRING':
-                print('"' + v + '"')
+                self._output('"' + v + '"')
             elif t[1] == 'CHAR':
-                print("'" + v + "'")
+                self._output("'" + v + "'")
             elif t[1] == 'BOOLEAN':
-                print({True: 'TRUE', False: 'FALSE'}[v])
+                self._output({True: 'TRUE', False: 'FALSE'}[v])
             else:
-                print(v)
+                self._output(v)
         else:
-            print(v)
+            self._output(v)

@@ -9,6 +9,7 @@
         "ENDCLASS",
         "ENDFUNCTION",
         "ENDPROCEDURE",
+        "ENDSUPERSPACE",
         "ENDTYPE",
         "ENDWHILE",
         "GETRECORD",

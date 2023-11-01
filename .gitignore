@@ -7,3 +7,5 @@ build/
 target/
 .vs/
 .history
+temp/
+*.log

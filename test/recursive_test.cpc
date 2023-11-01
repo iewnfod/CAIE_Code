@@ -1,0 +1,30 @@
+DECLARE test_num : INTEGER
+DECLARE t : REAL
+
+test_num <- 370
+
+FUNCTION aux(n:INTEGER, acc1:INTEGER, acc2:INTEGER) RETURNS INTEGER
+    IF n = 1 THEN RETURN acc1 ENDIF
+    IF n = 2 THEN RETURN acc2 ENDIF
+    RETURN aux(n - 1, acc2, acc1 + acc2)
+ENDFUNCTION
+
+t <- Time()
+OUTPUT "aux: "
+OUTPUT aux(test_num+1, 0, 1)
+OUTPUT Time() - t
+
+
+DECLARE arr : ARRAY[1:test_num] OF INTEGER
+FUNCTION fib(i:INTEGER) RETURNS INTEGER
+    IF i = 1 THEN RETURN 1 ENDIF
+    IF i = 2 THEN RETURN 1 ENDIF
+    IF arr[i] <> 0 THEN RETURN arr[i] ENDIF
+    arr[i] <- fib(i - 1) + fib(i - 2)
+    RETURN arr[i]
+ENDFUNCTION
+
+t <- Time()
+OUTPUT "fib: "
+OUTPUT fib(test_num)
+OUTPUT Time() - t

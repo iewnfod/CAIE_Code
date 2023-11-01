@@ -17,7 +17,7 @@ precedence = (
     ("left", "LESS", "GREATER", "LESS_EQUAL", "GREATER_EQUAL", "EQUAL", "NOT_EQUAL"),
     # 加减乘除
     ("left", "PLUS", "MINUS"),
-    ("left", "MUL", "DIV"),
+    ("left", "MUL", "N_DIV", "MOD", "DIV"),
     # 右结合操作符
     ("right", "UMINUS"),
     ("right", "UPLUS"),
@@ -26,9 +26,9 @@ precedence = (
 
 def p_error(p):
     if p:
-        add_error_message('Parse Error', AST_Node(p.lineno, p.lexpos))
+        add_parse_error_message(str(p), AST_Node(p.lineno, p.lexpos))
     else:
-        add_error_message('EOF Error', AST_Node())
+        add_eof_error_message(AST_Node())
 
 def p_statements(p):
     """statements : statements statement
@@ -75,8 +75,26 @@ def p_assign_statement(p):
     p[0] = AST.Assign(p[1], p[3], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_array_assign_statement(p):
-    "statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"
+    """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"""
     p[0] = AST.Array_assign(p[1], p[3], p[6], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_array_total_assign_statement(p):
+    """statement : ID ASSIGN LEFT_SQUARE array_items RIGHT_SQUARE"""
+    p[0] = AST.Array_total_assign(p[1], p[4], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_array_index_total_assign_statement(p):
+    """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN LEFT_SQUARE array_items RIGHT_SQUARE"""
+    p[0] = AST.Array_indexes_total_assign(p[1], p[3], p[7])
+
+def p_array_items(p):
+    """array_items : array_items COMMA expression
+            | expression"""
+    if len(p) == 2:
+        p[0] = AST.Array_items(lineno=p.lineno(1), lexpos=p.lexpos(1))
+        p[0].add_item(p[1])
+    else:
+        p[1].add_item(p[3])
+        p[0] = p[1]
 
 def p_indexes(p):
     """indexes : indexes COMMA expression
@@ -426,7 +444,15 @@ def p_enumerate_items(p):
 
 def p_pointer_type_statement(p):
     """statement : TYPE ID EQUAL POINTER ID"""
-    p[0] = AST.Pointer(p[2], p[5])
+    p[0] = AST.Pointer(p[2], p[5], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_pass_statement(p):
+    """statement : PASS"""
+    p[0] = AST.Pass(lineno=p.lineno(1), lexpos=p.lexpos(1))
+
+def p_import_statement(p):
+    """statement : IMPORT expression"""
+    p[0] = AST.Import(p[2], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
 def p_private_statement(p):
     """statement : PRIVATE statement"""

@@ -57,7 +57,7 @@ class Composite_type(AST_Node):
                 self.body = that.body
                 self.is_struct = True
                 # 创建新的命名空间
-                stack.new_space(self.type, {}, {}, {})
+                stack.new_space(self.type, {}, {})
                 self.body.exe()
                 # 将这个空间转移为子空间
                 stack.push_subspace(self)
@@ -67,6 +67,21 @@ class Composite_type(AST_Node):
                     return self.type
                 else:
                     return self
+
+            def __str__(self):
+                space = stack.subspaces[self]
+                s = self.type
+                if space.variables:
+                    str_variables = {}
+                    for key, value in space.variables.items():
+                        str_variables[str(key)] = str(value[0])
+                    s += f' {str_variables}'
+                if space.functions:
+                    str_functions = {}
+                    for key, value in space.functions.items():
+                        str_functions[str(key)] = str(value)
+                    s += f' {str_functions}'
+                return s
 
             def set_value(self, value):
                 # 将对方的 subspace 设置为自己的
@@ -86,7 +101,7 @@ class Composite_type_expression(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.exp1.get_tree(level+1) + '\n' + self.exp2.get_tree(level+2)
 
     def exe(self):
-        obj = self.exp1.exe()
+        obj = self.exp1.exe()[0]
         # 如果不是一个结构体，那说明这个命名空间有变量名重复了，那就从上一个空间读取
         if not obj.is_struct:
             buffer = stack.spaces.pop(0)

@@ -54,3 +54,23 @@
     ```
     Join(sep : STRING, BYREF list : ARRAY, start : INTEGER, end : INTEGER) RETURNS STRING
     ```
+* Reverse 反转字符串
+    ```
+    Reverse(s : STRING) RETURNS STRING
+    ```
+* Replace 替换字符串
+    ```
+    Replace(s : STRING, from : STRING, to : STRING) RETURNS STRING
+    ```
+
+## [Time](./time.cpc)
+* Time 获取当前时间戳
+    ```
+    Time RETURNS REAL
+    ```
+
+## [Import](./import.cpc)
+* Import 导入另一个文件
+    ```
+    Import(target : STRING) RETURNS ImportObj
+    ```
