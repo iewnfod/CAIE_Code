@@ -1,0 +1,3 @@
+[submodule "CAIE-Code-Extension"]
+	path = CAIE-Code-Extension
+	url = https://github.com/iewnfod/CAIE-Code-Extension
