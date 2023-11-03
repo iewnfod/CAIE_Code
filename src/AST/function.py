@@ -10,6 +10,26 @@ class Function(AST_Node):
         self.parameters = parameters
         self.statements = statements
         self.returns = returns
+        self.arr_type = None
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        if self.parameters:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+        else:
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1)
+
+    def exe(self):
+        stack.add_function(self)
+
+class ArrFunction(AST_Node):
+    def __init__(self, id, parameters, arr_type, statements, *args, **kwargs):
+        self.type = 'FUNCTION'
+        self.id = id
+        self.parameters = parameters
+        self.statements = statements
+        self.returns = 'ARRAY'
+        self.arr_type = arr_type
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
@@ -82,6 +102,11 @@ class Call_function(AST_Node):
 
         # 核查返回值，并返回
         if function_obj.returns:
+            if function_obj.returns == returns[1] and function_obj.returns == 'ARRAY':
+                if function_obj.arr_type:
+                    # 切换返回值的类型
+                    returns.to_target(function_obj.arr_type)
+                return returns
             # 查看返回值类型是否相同
             # 如果一样，就直接返回
             if function_obj.returns == returns[1]:

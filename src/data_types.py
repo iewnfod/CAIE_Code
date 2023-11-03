@@ -59,7 +59,12 @@ class CHAR(base):
 
 class BOOLEAN(base):
     def __init__(self, value=False, *args, **kwargs):
-        self.value = bool(value)
+        if value == 'FALSE':
+            self.value = False
+        elif value == 'TRUE':
+            self.value = True
+        else:
+            self.value = bool(value)
         self.type = 'BOOLEAN'
         super().__init__(*args, **kwargs)
 
@@ -111,6 +116,18 @@ class ARRAY(base):
 
     def set_value(self, value):
         self.value = value
+
+    def to_target(self, target, v=None):
+        from .AST.data import stack
+        if v == None:
+            v = self.value
+        for i in v.keys():
+            if v[i][1] == 'ARRAY':
+                self.to_target(target, v[i])
+            else:
+                # 如果不是目标类型，则需要转换
+                if v[i][1] != target:
+                    v[i] = stack.structs[target](v[i][0])
 
 from enum import Enum
 class ENUM(base):
