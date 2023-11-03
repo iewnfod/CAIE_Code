@@ -371,6 +371,14 @@ def p_function_statement(p):
     else:
         p[0] = AST.Function(p[2], p[4], p[8], p[7], lineno=p.lineno(1), lexpos=p.lexpos(1))
 
+def p_arr_function_statement(p):
+    """statement : FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION
+            | FUNCTION ID RETURNS ARRAY OF ID statements ENDFUNCTION"""
+    if len(p) == 9:
+        p[0] = AST.ArrFunction(p[2], None, p[6], p[7], lineno=p.lineno(1), lexpos=p.lexpos(1))
+    else:
+        p[0] = AST.ArrFunction(p[2], p[4], p[9], p[10], lineno=p.lineno(1), lexpos=p.lexpos(1))
+
 def p_call_function_expression(p):
     """expression : ID LEFT_PAREN parameters RIGHT_PAREN
             | ID LEFT_PAREN RIGHT_PAREN"""
