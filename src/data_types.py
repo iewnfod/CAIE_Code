@@ -21,6 +21,9 @@ class INTEGER(base):
     def set_value(self, new_value):
         self.value = int(new_value)
 
+    def __bool__(self):
+        return bool(self.value)
+
 class REAL(base):
     def __init__(self, value=.0, *args, **kwargs):
         self.value = float(value)
