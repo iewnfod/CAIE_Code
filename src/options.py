@@ -25,7 +25,7 @@ def open_parse_info():
     options_dict['show_parse'] = True
 
 def version():
-    print(f'Version: \033[1m{VERSION}\033[0m')
+    print(f'Version \033[1m{VERSION}\033[0m')
     exit(0)
 
 def help():
