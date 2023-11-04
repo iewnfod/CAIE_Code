@@ -1,2 +1,2 @@
-EXIT()
 OUTPUT "After exit"
+DECLARE cdas : cas
