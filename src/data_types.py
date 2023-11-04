@@ -21,6 +21,9 @@ class INTEGER(base):
     def set_value(self, new_value):
         self.value = int(new_value)
 
+    def __bool__(self):
+        return bool(self.value)
+
 class REAL(base):
     def __init__(self, value=.0, *args, **kwargs):
         self.value = float(value)
@@ -119,6 +122,7 @@ class ARRAY(base):
 
     def to_target(self, target, v=None):
         from .AST.data import stack
+        from .global_var import add_stack_error_message
         if v == None:
             v = self.value
         for i in v.keys():
@@ -127,7 +131,10 @@ class ARRAY(base):
             else:
                 # 如果不是目标类型，则需要转换
                 if v[i][1] != target:
-                    v[i] = stack.structs[target](v[i][0])
+                    try:
+                        v[i] = stack.structs[target](v[i][0])
+                    except:
+                        add_stack_error_message(f'Cannot change value `{str(v[i][0])}` into `{target}`')
 
 from enum import Enum
 class ENUM(base):

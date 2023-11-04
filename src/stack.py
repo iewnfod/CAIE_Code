@@ -39,7 +39,6 @@ class Stack:
     def __init__(self) -> None:
         self.spaces = [Space('GLOBAL', {}, {})]  # [Space]
         self.files = {}  # {文件名: 打开的文件实例}
-        self.subspaces = {}
         self.structs = {
             'INTEGER' : INTEGER,
             'REAL' : REAL,
@@ -72,9 +71,6 @@ class Stack:
     def new_constant(self, id, value):
         # 复制值
         clone = copy(value)
-        # 复制子空间
-        if value in self.subspaces:
-            self.subspaces[clone] = self.subspaces[value]
         # 赋值
         self.spaces[0].new_variable(id, clone, True)
 
@@ -89,9 +85,6 @@ class Stack:
     def remove_variable(self, id):
         for i in range(len(self.spaces)):
             if id in self.spaces[i].variables:
-                var = self.spaces[i].variables[id][0]
-                if var in self.subspaces:
-                    del self.subspaces[var]
                 del self.spaces[i].variables[id]
                 return
         else:
@@ -146,15 +139,11 @@ class Stack:
     def add_struct(self, id, obj):
         self.structs[id] = obj
 
-    def push_subspace(self, space_identifier):
-        space = self.spaces.pop(0)
-        self.subspaces[space_identifier] = space
+    def pop_subspace(self):
+        self.spaces.pop(0)
 
-    def pop_subspace(self, space_identifier):
-        if space_identifier[0] in self.subspaces.keys():
-            self.spaces.insert(0, self.subspaces[space_identifier[0]])
-        else:
-            add_stack_error_message(f'Cannot find subspace `{space_identifier}`')
+    def push_subspace(self, space):
+        self.spaces.insert(0, space)
 
     def delete(self):
         del self

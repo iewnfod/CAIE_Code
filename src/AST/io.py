@@ -90,7 +90,7 @@ class Raw_output(AST_Node):
         if get_running_mod() == 'file': need_output = False
         else: need_output = True
 
-        print_(v)
+        if need_output: print_(v)
 
     def exe(self):
         t = self.expression.exe()

@@ -77,12 +77,18 @@ class Call_function(AST_Node):
                             add_error_message(f'Cannot reference `{parameters[i][1]}` to `{target_parameters[i][1]}`', self)
                     else:
                         # 否则，赋值 value 并且然后传递
-                        new_dict[target_parameters[i][0]] = (
-                            stack.structs[target_parameters[i][1]](
-                                copy.copy(parameters[i][0])
-                            ),
-                            False
-                        )
+                        # 切换 target 类型
+                        if target_parameters[i][1] == 'ARRAY' and target_parameters[i][3]:
+                            cp = copy.copy(parameters[i])
+                            cp.to_target(target_parameters[i][3])
+                            new_dict[target_parameters[i][0]] = (cp, False)
+                        else:
+                            new_dict[target_parameters[i][0]] = (
+                                stack.structs[target_parameters[i][1]](
+                                    copy.copy(parameters[i][0])
+                                ),
+                                False
+                            )
                 except:
                     add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`', self)
         else:
@@ -131,7 +137,22 @@ class Declare_parameter(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
 
     def exe(self):
-        return (self.id, self.var_type, self.by_ref)
+        return (self.id, self.var_type, self.by_ref, None)
+
+class Declare_arr_parameter(AST_Node):
+    def __init__(self, id, arr_type, by_ref=None, *args, **kwargs):
+        self.type = 'DECLARE_ARR_PARAMETER'
+        self.id = id
+        self.var_type = 'ARRAY'
+        self.arr_type = arr_type
+        self.by_ref = by_ref
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level + 1) + str(self.var_type) + ' ' + str(self.arr_type)
+
+    def exe(self):
+        return (self.id, self.var_type, self.by_ref, self.arr_type)
 
 class Declare_parameters(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -157,9 +178,9 @@ class Declare_parameters(AST_Node):
             v = i.exe()
             if v[2] == None:
                 if len(result):
-                    v = (v[0], v[1], result[-1][2])
+                    v = (v[0], v[1], result[-1][2], v[3])
                 else:
-                    v = (v[0], v[1], False)
+                    v = (v[0], v[1], False, v[3])
             result.append(v)
         return result
 

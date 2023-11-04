@@ -3,6 +3,7 @@ from ..AST_Base import *
 from ..global_var import *
 from .var import *
 from .array import *
+from ..stack import Space
 
 class Enumerate_type(AST_Node):
     def __init__(self, id, enumerate_items, *args, **kwargs):
@@ -56,11 +57,10 @@ class Composite_type(AST_Node):
                 self.type = that.id
                 self.body = that.body
                 self.is_struct = True
-                # 创建新的命名空间
-                stack.new_space(self.type, {}, {})
+                self.space = Space(self.type, {}, {})
+                stack.push_subspace(self.space)
                 self.body.exe()
-                # 将这个空间转移为子空间
-                stack.push_subspace(self)
+                stack.pop_subspace()
 
             def __getitem__(self, i):
                 if i == 1:
@@ -69,7 +69,7 @@ class Composite_type(AST_Node):
                     return self
 
             def __str__(self):
-                space = stack.subspaces[self]
+                space = self.space
                 s = self.type
                 if space.variables:
                     str_variables = {}
@@ -85,8 +85,10 @@ class Composite_type(AST_Node):
 
             def set_value(self, value):
                 # 将对方的 subspace 设置为自己的
-                stack.pop_subspace(value)
-                stack.push_subspace(self)
+                if value.type == self.type:
+                    self.space = value.space
+                else:
+                    add_stack_error_message(f'Cannot assign `{value.type}` to `{self.type}`')
 
         stack.add_struct(self.id, t)
 
@@ -102,21 +104,16 @@ class Composite_type_expression(AST_Node):
 
     def exe(self):
         obj = self.exp1.exe()[0]
-        # 如果不是一个结构体，那说明这个命名空间有变量名重复了，那就从上一个空间读取
-        if not obj.is_struct:
-            buffer = stack.spaces.pop(0)
-            obj = self.exp1.exe()
-            stack.spaces.insert(0, buffer)
         # 判断一下是不是枚举类型
         if obj[1] == 'ENUM':
             return (obj[0].__members__[self.id], 'ENUM')
         # 否则，按照正常自定义类型的操作运行
         # 将此对象的空间放入主空间列表
-        stack.pop_subspace(obj)
+        stack.push_subspace(obj.space)
         # 获取变量的值
         v = self.exp2.exe()
         # 将空间放回子空间列表
-        stack.push_subspace(obj)
+        stack.pop_subspace()
         # 返回获得的值
         return v
 
@@ -137,11 +134,11 @@ class Composite_type_statement(AST_Node):
             return (obj[0].__members__[self.id], 'ENUM')
         # 否则，按照正常自定义类型的操作运行
         # 将此对象的空间放入主空间列表
-        stack.pop_subspace(obj)
+        stack.push_subspace(obj.space)
         # 获取变量的值
         self.statement.exe()
         # 将空间放回子空间列表
-        stack.push_subspace(obj)
+        stack.pop_subspace()
 
 class Pointer(AST_Node):
     def __init__(self, new_id, old_id, *args, **kwargs):
