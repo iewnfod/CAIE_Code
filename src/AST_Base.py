@@ -1,7 +1,12 @@
 class AST_Node:
-    def __init__(self, lineno=0, lexpos=0):
-        self.lineno = lineno
-        self.lexpos = lexpos
+    def __init__(self, p=None):
+        self.p = p
+        if self.p:
+            self.lineno = self.p.lineno(1)
+            self.lexpos = self.p.lexpos(1)
+        else:
+            self.lineno = 0
+            self.lexpos = 0
 
     def get_pos(self):
         if self.lineno:
