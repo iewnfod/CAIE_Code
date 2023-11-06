@@ -126,6 +126,10 @@ def with_file(path, preload=False):
     global_var.set_running_path(path)
     # 恢复行数，也就是不计算预加载文件的行数
     lexer.lineno = 1
+    # 检查时候是以.cpc结尾
+    if not path.endswith('.cpc'):
+        print_('Please change the file extension into `.cpc`')
+        quit(1)
     # 读取文件编码
     with open(path, 'rb') as f:
         encode = detect(f.read())['encoding']
@@ -153,20 +157,22 @@ def with_file(path, preload=False):
 def wrong_argument(msg):
     print(f'Wrong arguments: \033[1m{msg}\033[0m')
     print(f'Use `cpc -h` to get detailed informations about how to use')
-    exit()
+    quit(1)
     # options.help()
 
 # 主函数
 def main(argv, input_=None, output_=None):
+    # 设置输入输出
     if input_: global_var.set_std_in(input_)
     if output_: global_var.set_std_out(output_)
+    # 检测是否使用管理员运行
     try:
         is_admin = (os.getuid() == 0)
     except AttributeError:
         is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
     if is_admin:
         print("Please do not run as root or as Administrator, or with sudo.")
-        exit()
+        quit(1)
     # 解析参数
     file_paths = set()
     i = 1
