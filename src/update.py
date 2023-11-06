@@ -23,17 +23,11 @@ def _force_update(remote, repo):
 
 def _update(remote, repo):
     try:
+        repo,git.reset('--hard', 'origin/master')
         remote.pull()
         print('\033[1mUpdate Successful\033[0m')
-    except git.GitCommandError:
-        override = (
-            'There might be some conflicts between your copy and the remote one. Do you want to overwrite it? [Y/n]'
-        ).strip().lower()
-        if override == '' or override == 'y':
-            if new_animation('Forced Updating', 3, _force_update, failed_msg='Failed to Update', remote=remote, repo=repo):
-                print('\033[1mUpdate Successful\033[0m')
-        else:
-            print('Stop Updating')
+    except:
+        print('Failed to Update')
 
 def update():
     repo = git.Repo(HOME_PATH)
