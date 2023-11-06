@@ -15,12 +15,6 @@ def check_update(repo: git.Repo, remote: git.Remote):
     remote_branch = repo.remotes.origin.refs[local_branch.name]
     return local_branch.commit != remote_branch.commit
 
-def _force_update(remote, repo):
-    # 清除本地修改
-    repo.index.checkout(force=True)
-    # 获取新的内容
-    remote.pull()
-
 def _update(remote, repo):
     try:
         repo.git.reset('--hard', 'origin/master')
