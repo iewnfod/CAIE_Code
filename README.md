@@ -6,17 +6,20 @@ CAIE Pseudocode Interpreter
 ### 安装前提
 1. `Python3` 环境 *推荐使用 PyPy3 以获得更好的性能*
 2. `git` 指令
+> macOS用户请安装`Command Line Tools for Xcode`
+3. `cargo`命令
 
 ### 正式安装
 1. 克隆此项目
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
-2. MacOS 用户可直接运行项目目录内的 [`install.sh`](./install.sh)，其他系统用户请继续根据`3, 4`步进行安装
+2. MacOS 用户可直接运行Releases内的 [`CAIE_Code_Installer.pkg`](https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-pkg)，其他系统用户请继续根据`3, 4`步进行安装
 3. 进入项目
     ```cd CAIE_Code```
 4. 运行
     * 二进制文件存在于`bin`中，请将自己系统对应的二进制文件加入到`PATH`中
     * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [`build.sh`](./build.sh)
     * `Windows`若无法正常运行，也可尝试自己编译 [`build.ps1`](./build.ps1)
+    >若运行已有二进制文件后无反应，同上。若依旧无法解决，请提交issue
     * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[`build-linux.sh`](./build-linux.sh)并编译
     * 非常欢迎`Linux`用户编译后提交pr
     * 如果需要使用`man`指令，请自行将[cpc.1](./man/cpc.1)硬链接到你的`MANPATH`内，以便更新后不必再次链接。
