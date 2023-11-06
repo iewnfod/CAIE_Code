@@ -1,4 +1,6 @@
 # 检查依赖
+import ctypes
+
 from src.requirements import config
 config()
 
@@ -158,6 +160,13 @@ def wrong_argument(msg):
 def main(argv, input_=None, output_=None):
     if input_: global_var.set_std_in(input_)
     if output_: global_var.set_std_out(output_)
+    try:
+        is_admin = (os.getuid() == 0)
+    except AttributeError:
+        is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
+    if is_admin:
+        print("Please do not run as root or as Administrator, or with sudo.")
+        exit()
     # 解析参数
     file_paths = set()
     i = 1
