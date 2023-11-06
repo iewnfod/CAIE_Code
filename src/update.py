@@ -27,7 +27,7 @@ def _update(remote, repo):
         remote.pull()
         print('\033[1mUpdate Successful\033[0m')
     except:
-        print('Failed to Update')
+        print('\033[31;1mFailed to Update\033[0m')
 
 def update():
     repo = git.Repo(HOME_PATH)
