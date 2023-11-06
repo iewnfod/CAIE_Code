@@ -23,7 +23,7 @@ def _force_update(remote, repo):
 
 def _update(remote, repo):
     try:
-        repo,git.reset('--hard', 'origin/master')
+        repo.git.reset('--hard', 'origin/master')
         remote.pull()
         print('\033[1mUpdate Successful\033[0m')
     except:
