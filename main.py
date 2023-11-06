@@ -1,11 +1,9 @@
-import ctypes
-
-from src.requirements import config
 # 检查依赖
-
+from src.requirements import config
 config()
 
 # 正式导入
+from src.lex import *
 from src.parse import *
 import src.options as options
 import src.global_var as global_var
@@ -22,13 +20,12 @@ from ply import lex
 from chardet import detect
 # 导入色彩基础库，保证\033能正确的转译
 import colorama
-
 colorama.init()
+
 
 preline = '>'
 multi_preline = '.'
 home_path = HOME_PATH
-
 
 # 清除注释以及多余字符
 def remove_comment(text: str):
@@ -37,7 +34,6 @@ def remove_comment(text: str):
         text[i] = text[i].split('//')[0].strip()
 
     return '\n'.join(text).strip()
-
 
 # 预加载文件
 def preload_scripts():
@@ -48,7 +44,6 @@ def preload_scripts():
             _, n = os.path.splitext(path)
             if n == '.cpc':
                 with_file(path, True)
-
 
 # 多行输入
 def multi_input():
@@ -81,7 +76,6 @@ def multi_input():
             add_error_message(str(e), AST_Node())
 
     return text
-
 
 # 运行 AST
 def run_AST(ast, preload=False):
@@ -124,7 +118,6 @@ def with_line():
 
         global_var.output_error()
 
-
 # 文件模式，读取文件并解析运行
 def with_file(path, preload=False):
     global_var.set_running_mod('file')
@@ -154,14 +147,12 @@ def with_file(path, preload=False):
 
     global_var.output_error()
 
-
 # 错误的argument
 def wrong_argument(msg):
     print(f'Wrong arguments: \033[1m{msg}\033[0m')
     print(f'Use `cpc -h` to get detailed informations about how to use')
     exit()
     # options.help()
-
 
 # 主函数
 def main(argv, input_=None, output_=None):
@@ -202,7 +193,6 @@ def main(argv, input_=None, output_=None):
             else:
                 wrong_argument(f'File `{file_path}` does not exist')
 
-
 # 加载基础类型
 global_var.__init__()
 
@@ -212,21 +202,14 @@ parser = yacc.yacc()
 # 程序入口
 if __name__ == '__main__':
     try:
-        is_admin = (os.getuid() == 0)
-    except AttributeError:
-        is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
-    if not is_admin:
-        try:
-            main(sys.argv)
-            # main(['cpc', 'test/test.cpc'])
-        except EOFError:
-            print("EXIT")
-            quit(0)
-        except KeyboardInterrupt:
-            print('Keyboard Interrupt')
-            quit(0)
-        except Exception as e:
-            print(e)
-            quit(1)
-    else:
-        print("Please do not run with sudo or as root, or as Administrator")
+        main(sys.argv)
+        # main(['cpc', 'test/test.cpc'])
+    except EOFError:
+        print("EXIT")
+        quit(0)
+    except KeyboardInterrupt:
+        print('Keyboard Interrupt')
+        quit(0)
+    except Exception as e:
+        print(e)
+        quit(1)
