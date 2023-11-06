@@ -126,10 +126,6 @@ def with_file(path, preload=False):
     global_var.set_running_path(path)
     # 恢复行数，也就是不计算预加载文件的行数
     lexer.lineno = 1
-    # 检查时候是以.cpc结尾
-    if not path.endswith('.cpc'):
-        print_('Please change the file extension into `.cpc`')
-        quit(1)
     # 读取文件编码
     with open(path, 'rb') as f:
         encode = detect(f.read())['encoding']
