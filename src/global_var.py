@@ -85,7 +85,7 @@ def print_(t, end='\n', need_output=True):
 
 def input_():
     get_std_out().flush()
-    return get_std_in().readline()
+    return get_std_in().readline().strip()
 
 # 输出错误信息
 def output_error():
