@@ -1,44 +1,63 @@
-# CAIE Code
-CAIE Pseudocode Interpreter
+# CAIE PSEUDO CODE INTERPRETER, CPC
 
-## 安装与使用
+the *CAIE* pseudocode interpreter
 
-### 安装前提
-1. `Python3` 环境 *推荐使用 PyPy3 以获得更好的性能*
-2. `git` 指令
-> macOS用户请安装`Command Line Tools for Xcode`
-3. `cargo`命令（仅构建需要）
+## Installation and Update
 
-### 正式安装
-1. 克隆此项目
-    ```git clone https://github.com/iewnfod/CAIE_Code.git```
-2. MacOS 用户可直接运行Releases内的 [`CAIE_Code_Installer.pkg`](https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-pkg)，其他系统用户请继续根据`3, 4`步进行安装
-3. 进入项目
-    ```cd CAIE_Code```
-4. 运行
-    * 二进制文件存在于`bin`中，请将自己系统对应的二进制文件加入到`PATH`中
-    * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [`build.sh`](./build.sh)
-    * `Windows`若无法正常运行，也可尝试自己编译 [`build.ps1`](./build.ps1)
-    >若运行已有二进制文件后无反应，同上。若依旧无法解决，请提交issue
-    * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[`build-linux.sh`](./build-linux.sh)并编译
-    * 非常欢迎`Linux`用户编译后提交pr
-    * 如果需要使用`man`指令，请自行将[cpc.1](./man/cpc.1)硬链接到你的`MANPATH`内，以便更新后不必再次链接。
-        * `Linux`用户可以使用以下指令:
-            ```
-            sudo ln -f ./man/cpc.1 /your/man/path
-            ```
-        * `Windows`用户请自行搜索
+### Installation preliminaries
 
-### 更新
-* 如果您是完全使用以上步骤进行安装的，您可以使用`cpc -u`快速更新
-* 如果您并没有使用`git`进行安装，您需要手动下载新的版本，并使用和您之前相同的方法安装
+1. Have `python3` installed on your computer.
+> It is suggested to use `pypy3` to achieve best efficiency.
 
-### Usage
-```
-cpc [file_paths] [options]
-```
+2. Have `git` installed on your computer. If you do not know
+  what `git` is, see https://git-scm.com/downloads.
 
+> For **macOS** users ensure you installed `Command Line Tools for Xcode`.
+
+3. `cargo` if you want to complie manually
+
+### Installation
+
+0. For **macOS** users, you can install directy using **CAIE_Code_Installer.pkg**
+    from the [releases](https://github.com/iewnfod/CAIE_Code/releases) page.
+
+  *For other users...*
+
+1. Clone the project to your computer using
+    `git clone https://github.com/iewnfod/CAIE_Code.git`.
+2. Enter the project folder: `cd CAIE_Code`.
+
+3. The executable programs are in `bin/` folder. You may 
+    directy run or consider adding `bin/` to your `PATH`.
+
+4. If you want to complie manually:
+  - **macOS**: complie `build.sh`
+  - **Windows**: complie `build.ps1`
+  - **Linux**: complie `build-linux.sh`
+  > We welcome **Linux** users to send Pull Requests if you 
+  > find any bugs about compling and executing.
+
+5. If you want to see the manual page from `man` command, you should
+    consider link the manual file `man/cpc.1` to your `MANPATH`, for 
+    example(**Linux**): `sudo ln -f ./man/cpc.1 /your/man/path`.
+
+6. If you cannot execute the complied files, please submit 
+    the problems on our [issue page](https://github.com/iewnfod/CAIE_Code/issues).
+
+### Update
+If you followed the instructions and used `git` or PKG to install 
+`cpc`, you can update easily using `cpc -u`.
+
+Otherwise, you should manually re-install the whole project.
+
+## Usage
+
+`cpc [filepath] [options]`
+
+It runs the entire file if `filepath` is provided, otherwise 
+it enters playground mode.
 ### Options
+
 | Mnemonic | Option | Description |
 | -------- | ------ | ----------- |
 | `-gt` | `--get-tree` | To show the tree of the program after being parsed |
@@ -51,174 +70,188 @@ cpc [file_paths] [options]
 | `-u` | `--update` | To update the version (only useful when using a version equal or greater than `0.1.2` and installed by git) |
 | `-r` | `--recursive-limit` | To set the recursive limit of the interpreter |
 
-### 常见问题
-#### 出现 `Import Error`
-尝试手动安装依赖:
-```shell
-pip install -r requirements.txt
-```
 
-#### 成功执行了第四步的依赖安装但还是无法正常运行
-`cpc`文件会优先选择 `PyPy3` 运行
-因此，在安装依赖时，请确保安装在了正确版本的 `Python3` 上
-可以使用 `<指定Python版本> -m pip install -r requirements.txt` 进行安装
+## FAQs
 
-#### Playground 模式下，上下左右键无法正常使用
-使用 `pip install readline` 安装依赖并尝试运行
-若 `readline` 无法正常安装，请安装 `gnureadline`，即 `pip install gnureadline`，再尝试运行
+### Import Error
+Please try install all python packages manually using 
+`pip install -r requirements.txt`
 
-#### cpc在启动时报OSError
-进入`cpc`安装目录，可使用
-删除`.history`文件
-更新`cpc`
-```shell
-cd $(which cpc)/../..
-rm -rf .history
-cpc -u
-```
+### Import Error after I manually installed packages
+The program will automatically detect `pypy3` when available and use it to interpret 
+pseudocode because it has better efficiency. If you have `pypy3` installed
+you should install manually using `pypy3 -m pip install -r requirements.txt`
 
-*若依旧无法解决问题，请提交issue*
+### Incorrect UP, DOWN, LEFT, RIGHT key actions when in playground mode
+You should retry `pip install readline` or `pip install gnureadline`.
+
+### OSError when launching
+Enter the directory of this project, and run 
+`rm -rf .history
+cpc -u`
+
+### Other problems?
+If it still fails after re-installation, 
+please report it to us in [issue page](https://github.com/iewnfod/CAIE_Code/issues).
 
 
-## 效率测试
-### 测试环境:
-* 机型: 2020 Macbook Pro
-* 处理器: Apple M1
-* 内存: 8GB
-* 核心: 8个 (4能效，4性能)
-* 系统版本: MacOS 13.3.1 (22E261)
-* Python 版本: PyPy 3.9.16
+## Efficiency test
 
-### 基础测试
-* 赋值: 1000w/s
+### test environment
+- machine: 2020 MacBook Pro 
+- processor: Apple M1
+- RAM: 4GB 
+- Cores: 8 (4 efficient, 4 performance)
+- OS: macOS 13.3.1 (22E261)
+- Python version: PyPy 3.9.16
+
+### basic tests
+- assignment: 10m/s 
 ```
 DECLARE a : INTEGER
 FOR i <- 1 TO 10000000
     a <- i
 NEXT i
 ```
-* 显式转换+赋值: 740w/s
+
+- explicit conversion and assignment: 7.4m/s 
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 7400000
     a <- STRING(i)
 NEXT i
 ```
-* 隐式转换+赋值: 920w/s
+
+- implicit conversion and assignment: 9.2m/s 
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 9200000
     a <- i
 NEXT i
 ```
-* 输出: 72w/s
+
+- print to terminal: 720k/s 
 ```
-FOR i <- 1 TO 720000
-    OUTPUT i
+DECLARE a : STRING
+FOR i <- 1 TO 9200000
+    a <- i
 NEXT i
 ```
 
-### 常见运算测试
-* [随机生成10w数据+希尔排序](test/sort_test.cpc): 2.5s 左右
+### computation tests
+- [generating 100k randoms and shell sorting](https://github.com/iewnfod/CAIE_Code/blob/master/test/sort_test.cpc): about 2.5s 
 
 
-## 标准
-### 基本标准
-* 推荐使用驼峰命名法
-* 源文件后缀名推荐使用 **.cpc**（CAIE Pseudo Code 的首字母简写）
-* 源文件推荐使用 **utf-8** 编码
-* 所有保留字均为大写，并且程序有大小写区分
-* 使用 `//` 进行注释
+## Standards
 
-### 一些特性
-~~（说实话就是我不想改了，也有可能是没想到什么好方法来改）~~
-* 使用保留字以实现子空间 ~~（虽然官方文档要求有缩进，但是在此不做强制要求）~~
-* 由于没有进行缩进的识别，`CASE`中的每一项末尾都需要添加`;`表达这一项结束了
+### Basic Standards
 
-### 基础数据类型
-* `INTEGER` 整型 (`0`)
+- use camelCase naming
+- use `.cpc` as the file suffix
+- use `utf-8` encoding
+- all reserved words are in upper case 
+- the program is case-sensitive
+- use `//` to comment code 
+
+### Features
+Most syntax follows the [pseudocode standard of CAIE](https://www.cambridgeinternational.org/Images/697401-2026-syllabus-legacy-notice.pdf).
+
+However, indentation is *suggested but not compulsory*.
+
+Each statement following `CASE` statement must end with
+`;`, semicolon.
+
+### Basic Data Types
+The following items gives the `DATATYPE`, its description 
+and the defalt value set when defined in brackets.
+
+* `INTEGER` integer, whole number (`0`)
     ```
     1
     2
     123
     -123
     ```
-* `REAL` 浮点型 (`0.0`)
+* `REAL` float-point number (`0.0`)
     ```
     1.1
     0.1
     -12.1233
     ```
-* `CHAR` 单个字符 (`''`)
+* `CHAR` one single character (`''`)
     ```
     '1'
     '!'
     'd'
     ```
-* `STRING` 字符串 (`""`)
+* `STRING` string (`""`)
     ```
     "Hello"
     "World"
     "!"
     ```
-* `BOOLEAN` 布尔值 (`FALSE`)
+* `BOOLEAN` boolean (`FALSE`)
     ```
     TRUE
     FALSE
     ```
-* `DATE` 日期 (当前日期)
+* `DATE` date (current date)
     ```
     25/07/2023
     10/12/2012
     ```
-* `None` 此类型表示未知的类型，无法通过常规方法声明，也不应该滥用，仅会作为某些特殊函数的返回值存在
+*
 
-### 语法定义
+`None` is a null datatype returned by some special functions. it should not 
+be used in normal coding and cannot be declared.
 
-1. 变量与常量
-    * 变量声明
+### Syntax Definitions
+
+1. Variables and constants
+    * Declare variables
         ```
         DECLARE <identifier> : <data type>
         DECLARE <identifier> : ARRAY [<lower>:<upper>, ...] OF <data type>
         ```
-    * 常量声明
+    * Declare constants
         ```
         CONSTANT <identifier> = <value>
         ```
-    * 赋值
+    * Assignment
         ```
         <identifier> <- <value>
         <identifier>[<index>, ...] <- <value>
         ```
-2. 输入与输出
-    * 输入
+      > Pseudocode uses `<-` instead of `=`.
+2. I/O
+    * Input
         ```
         INPUT <identifier>
         ```
-    * 输出
+    * Output
         ```
         OUTPUT <value>, ...
         ```
-3. 操作符
-    * `+` 加法
-    * `-` 减法
-    * `*` 乘法
-    * `/` 除法
-    * `>` 大于
-    * `>=` 大于等于
-    * `<` 小于
-    * `<=` 小于等于
-    * `=` 等于
-    * `<>` 不等于
-    * `&` 字符串拼接
-    * `MOD` 取模
-    * `DIV` 整除
-4. 逻辑运算
-    * `AND` 与
-    * `OR` 或
-    * `NOT` 否
-5. 条件语句
-    * IF 语句
+3. Operations
+    * `+` addition
+    * `-` subtraction
+    * `*` multiplication
+    * `/` division
+    * `>` greater than
+    * `>=` greater than or equal to
+    * `<` smaller than
+    * `<=` smaller than  or equal to
+    * `=` equal (NOT AN ASSIGNMENT STATEMENT)
+    * `<>` not equal
+    * `&` conglomerate strings
+    * `MOD` modulus, find the remainder
+    * `DIV` integer division
+4. Logic operations
+    * `AND` 
+    * `OR` 
+    * `NOT` 
+5. Conditional statements
+    * IF statements
         ```
         IF <condition> THEN
             <statements>
@@ -230,8 +263,8 @@ NEXT i
             <statements>
         ENDIF
         ```
-    * CASE 语句
-        此处官方语法中并没有分号`;`
+    * CASE statements
+        > IMPORTANT: official standards do not have semicolons `;` here
         ```
         CASE OF <identifier>
             <value> : <statements>;
@@ -240,26 +273,26 @@ NEXT i
             OTHERWISE : <statements>;
         ENDCASE
         ```
-6. 循环语句
-    * FOR 循环
+6. Loop statements
+    * FOR loop
         ```
         FOR <identifier> <- <value> TO <value>
             <statements>
         NEXT <identifier>
         ```
-    * REPEAT 循环
+    * REPEAT loop
         ```
         REPEAT
             <statements>
         UNTIL <condition>
         ```
-    * WHILE 循环
+    * WHILE loop
         ```
         WHILE <condition>
             <statements>
         ENDWHILE
-7. 函数
-    * 无返回值函数定义
+7. functions
+    * functions without a return value (procedure)
         ```
         PROCEDURE <identifier>
             <statements>
@@ -269,13 +302,13 @@ NEXT i
             <statements>
         ENDPROCEDURE
         ```
-    * 无返回值函数调用
+    * call a procedure
         ```
         CALL <identifier>
 
         CALL <identifier> (<value>, ...)
         ```
-    * 有返回值函数定义
+    * functions with return values
         ```
         FUNCTION <identifier> RETURNS <data type>
             <statements>
@@ -286,34 +319,40 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-    * 有返回值函数调用
+    * call a function with return values
         ```
         <identifier> ()
 
         <identifier> (<value>, ...)
         ```
-    * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。
-        * 在 `BYVAL` 中，如果确定了数组的类型，隐式转换将会发生，但在 `BYREF` 中，并不会考虑数组类型
-        * `BYREF` : 引用变量，在函数内修改后，函数外变量的本体的值也会修改
-        * `BYVAL` : 复制变量的值，在函数内做出的任何修改都不会影响到传入的变量本体
-8. 文件读写
-    * 打开文件
+    * Before the parameters of those sub-routines you *can* use `BYREF` or `BYVAL` 
+      to force the program pass those parameters by-reference or by-value 
+      respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the 
+      prior parameter. If the program cannot find a clear indication it will, by 
+      defalt pass parameters by-value.
+        * If you explicitly define the data types of array passed `BYVAL`
+          the program will implicitly convert to the desinated data type;
+          the program will not convert data types when passed `BYREF`.
+        * `BYREF` : pass the reference of a variable
+        * `BYVAL` : pass a copy of the variable
+8. File I/O
+    * open a file
         ```
         OPENFILE <file path> FOR <file mode>
         ```
-    * 读取文件
+    * read a file
         ```
         READFILE <file path>, <variable>
         ```
-    * 写入文件
+    * write to a file
         ```
-        READFILE <file path>, <data>
+        WRITEFILE <file path>, <data>
         ```
-    * 关闭文件
+    * close a file
         ```
         CLOSEFILE <file path>
         ```
-    * 定位读取
+    * locate in the file
         ```
         SEEK <file path>, <address>
         ```
@@ -322,42 +361,46 @@ NEXT i
         2. `WRITE`
         3. `APPEND`
         4. `RANDOM`
-9. 自定义类型
-    * 枚举类型
+9. Self-defined data types
+    * enumerate type
         ```
         TYPE <identifier> = (<identifier>, ...)
         ```
-    * 类型指针
+    * pointer type
         ```
         TYPE <identifier> = ^<data type>
         ```
-    * 自定义 (注意: **若将一个类的实例`a`赋值给另一个实例`b`，此时不会检查类型，且`b`会成为`a`的引用**)
+    * records(classes)
+    > In this case, the program will not check the data types when 
+    > assigning a variable of this type to another. The program 
+    > will assign the other variable as the *reference* of this one.
         ```
         TYPE <identifier>
             <statements>
         ENDTYPE
         ```
-10. 由此解释器提供的特殊语法
-    * DELETE 删除变量或常量
+### Special Syntax of **CPC** Interpreter
+* delete a variable or constant on RAM
         ```
         DELETE <identifier>
         ```
-    * PASS 跳过 (即不执行任何操作)
+    * do nothing
         ```
         PASS
         ```
-    * IMPORT 导入文件
+    * import **CPC** files
         ```
         IMPORT <expression>
         ```
-        * 此处的`expression`通常为一个被双引号包裹的字符串
-        * 导入操作并不会做任何隔离，也就是说，被导入的文件的所有内容都会完全暴露给当前文件，因此请注意变量名重复使用的问题
-        * 因此推荐使用[`Import`](./scripts/import.cpc)函数进行导入操作
+        * `expression` here should be a string within double quotes.
+        * There is no isolation between the imported file and the 
+        main file. Identifiers may collide.
+        * It is suggested to use [`Import`](scripts/import.cpc) function
+        to import a package instead.
         ```
         CONSTANT test = Import("test/import_test.cpc")
         ```
-
-### 内置函数
+### Built-in Functions from CAIE Standard 
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
     ```
     $ RIGHT("ABCDEFGH", 3)
@@ -396,25 +439,67 @@ NEXT i
 * `EOF(file_path : STRING) RETURNS BOOLEAN`
 * `POW(x: REAL, y: REAL) RETURNS REAL`
 
-**(以下方法均不属于CAIE提供的标准方法)**
-* `EXIT(code : INTEGER)` 以code为退出码，退出程序 (若不填写code，则默认为0)
-* `ROUND(x : REAL, decimalPlace : INTEGER)` decimalPlace不填写默认为0
-* `PYTHON(code: STRING)` Python3代码运行接口，并会返回code的运行结果，由于两个语言的类型系统并不互通，其返回的所有结果的类型皆为None，可赋值给任何本语言类型但不保证是否能够获得预期的结果
-    * ***若需要获得此接口的返回值，请将返回值赋值给名为`_result`的变量，否则将会返回值为None的None类型***
-    * ***若需要向此接口内传入变量，请在Python3代码中使用与外部相同的变量名，并将那个变量作为参数传入此函数***
-        ```
+### Built-in Functions of this Interpreter
+> These functions are fairly useful, but they are not included
+> in the [CAIE standard](https://www.cambridgeinternational.org/Images/697401-2026-syllabus-legacy-notice.pdf).
+
+* `EXIT(code : INTEGER)`: exit the program with exit code 
+  `code`. Defalt exit code is 0.
+
+* `ROUND(x : REAL, decimalPlace : INTEGER)`: round the 
+  float-point number `x` to some decimal place. Defalt
+  decimal place is 0(to nearest whole number).
+
+* `PYTHON(code : STRING, *args)` is python interface. You can pass any 
+  python statements into `code` and the program will run 
+  it in standard python. the return value of this function 
+  is the value of variable `_result` in the python code. 
+
+  Example:
+  ```
         > DECLARE a : INTEGER
         > PYTHON("_result=a+1", a)
         1
-        ```
+  ```
+  - if the python code does not assign a value to `_result`, 
+    the function will return `None`.
+  - you *must* pass all variables used in the python code 
+    in `*args`, otherwise it will not run correctly.
 
-* 更多非官方内置函数，请查阅 [scripts](./scripts)
+* For more non-official scripts, please see [scripts](./scripts).
 
-## 目标
-- [x] 基础功能实现
-- [x] 函数实现
-- [x] 实现 `TYPE`
-- [ ] 实现 `CLASS`
-- [x] 实现文件读写（还剩 `GETRECORD` 和 `PUTRECORD`，这需要等自定义类型实现后才能实现）
-- [ ] 提供更多[非官方函数](./scripts/README.md)
-- [ ] 提高效率（正在进行）
+## Targets
+The following are development targets of this project. Issues 
+and PRs are welcome.
+
+- [x] basic operations
+- [x] functions and procedures
+- [x] materialize `TYPE`
+- [ ] materialize `CLASS`
+- [x] full file I/O support (`GETRECORD` and `PUTRECORD` not yet implemented)
+- [ ] more [non-official functions](./scripts/README.md)
+- [ ] improve efficiency (now improving)
+
+## Contact the Author 
+  ***Iewnfod*** 
+  https://github.com/iewnfod
+
+## Lisense
+  MIT License
+
+  Copyright (c) 2023 Iewnfod
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+  and associated documentation files (the "Software"), to deal in the Software without
+  restriction, including without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+  Software is furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all copies or
+  substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+  BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
