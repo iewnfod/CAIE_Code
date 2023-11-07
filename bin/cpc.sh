@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# author: ChengYuShun : https://github.com/ChengYuShun
+# Execute if the executable is executable.
+try_run() {
+	[ -x "$1" ] && [ -f "$1" ] && exec "$@"
+}
+
+# Find the directory that contains `main.py`.
+exe_path=$(realpath "$0")
+parent_path=$(dirname "$exe_path")
+script_path="$parent_path/main.py"
+while ! [ -f "$script_path" ]; do
+	parent_path=$(dirname "$parent_path")
+	script_path="$parent_path/main.py"
+done
+unset -v parent_path
+unset -v exe_path
+
+_MAC_PY_HOME="/Library/Frameworks/Python.framework/Versions"
+# Find python and run it.
+if [ $(uname -s) = "Darwin" ] && [ -d "$_MAC_PY_HOME" ]; then
+	for path in "$_MAC_PY_HOME"/*; do
+		case $(basename "$path" | tr '[:upper:]' '[:lower:]') in
+		*pypy*) try_run "$path/bin/python3" "$script_path" "$@";;
+		esac
+	done
+	for path in "$_MAC_PY_HOME"/*; do
+		case $(basename "$path" | tr '[:upper:]' '[:lower:]') in
+			*pypy*) ;;
+			*) try_run "$path/bin/python3" "$script_path" "$@";;
+		esac
+	done
+fi
+
+# Run with python command
+for python in pypy3 python3; do
+	try_run "$(which "$python" 2>/dev/null)" "$script_path" "$@"
+done
+
+# else
+echo "Cannot find python3 on your computer."
+echo "Please make sure python3 is installed and added to your PATH."
