@@ -1,77 +1,76 @@
-# LIST OF NON-OFFICIAL CONSTANTS AND FUNCTIONS
-All CAIE standard functions are in UPPER CASE.
-All non-official functions are Capitalized.
+# 非官方函数及常量
+
 ## [Math](./math.cpc)
-* `QPow`: quick power
+* QPow 手动实现的幂运算
     ```
     QPow(x : REAL, n : INTEGER) RETURNS REAL
     ```
-* `Min`: smaller value between two
+* Min 最小值
     ```
     Min(x : REAL, y : REAL) RETURNS REAL
     ```
-* `Max`: larger value between two
+* Max 最大值
     ```
     Max(x : REAL, y : REAL) RETURNS REAL
     ```
-* `Abs`: absolute value
+* Abs 绝对值
     ```
     Abs(x : REAL) RETURNS REAL
     ```
-* `PI` π
+* PI π
 
 ## [Sort](./sort.cpc)
-* `Sort`: shell sort
+* Sort 排序（希尔排序）
     ```
     Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
     ```
 
 ## [String](./string.cpc)
-* `Split`: truncate a string
+* Split 分割
     ```
     Split(s : STRING, sep : STRING) RETURNS ARRAY
     ```
-* `Lcase`: to lower case
+* Lcase 小写
     ```
     Lcase(s : STRING) RETURNS STRING
     ```
-* `Ucase`: to upper case
+* Ucase 大写
     ```
     Ucase(s : STRING) RETURNS STRING
     ```
-* `Trim`: remove blanks at the beginning and the ending of a string
+* Trim 修剪空格
     ```
     Trim(s : STRING) RETURNS STRING
     ```
-* `ArrayFromString`: returns an array of characters of a string
+* ArrayFromString 字符串转数组
     ```
     ArrayFromString(s : STRING) RETURNS ARRAY
     ```
-* `Contains`: if the `target` string is contained in a string `s`
+* Contains 是否包含了字符串
     ```
     Contains(s : STRING, target : STRING) RETURNS BOOLEAN
     ```
-* `Join`: join a array of string together with seperation
+* Join 将数组拼接成字符串
     ```
     Join(sep : STRING, BYREF list : ARRAY, start : INTEGER, end : INTEGER) RETURNS STRING
     ```
-* `Reverse`: return a new string in reverse order
+* Reverse 反转字符串
     ```
     Reverse(s : STRING) RETURNS STRING
     ```
-* `Replace`: replace string `from` in string `s` to a string named `to`
+* Replace 替换字符串
     ```
     Replace(s : STRING, from : STRING, to : STRING) RETURNS STRING
     ```
 
 ## [Time](./time.cpc)
-* `Time`: get current time seal
+* Time 获取当前时间戳
     ```
     Time RETURNS REAL
     ```
 
 ## [Import](./import.cpc)
-* `Import`: import another *cpc* file 
+* Import 导入另一个文件
     ```
     Import(target : STRING) RETURNS ImportObj
     ```
