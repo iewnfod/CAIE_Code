@@ -16,11 +16,11 @@
 
 > For **macOS** users ensure you installed `Command Line Tools for Xcode`.
 
-3. `cargo` if you want to complie manually
+3. `cargo` if you want to compile manually
 
 ### Installation
 
-0. For **macOS** users, you can install directy using **CAIE_Code_Installer.pkg**
+0. For **macOS** users, you can install directly using **CAIE_Code_Installer.pkg**
     from the [releases](https://github.com/iewnfod/CAIE_Code/releases) page.
 
   *For other users...*
@@ -30,18 +30,14 @@
 2. Enter the project folder: `cd CAIE_Code`.
 
 3. The executable programs are in `bin/` folder. You may
-    directy run or consider adding `bin/` to your `PATH`.
+    directly run or consider adding `bin/` to your `PATH`.
 
-4. If you want to complie manually:
-  - **macOS**: complie `build.sh`
-  - **Windows**: complie `build.ps1`
-  - **Linux**: complie `build-linux.sh`
-  > We welcome **Linux** users to send Pull Requests if you
-  > find any bugs about compling and executing.
+4. If you want to compile manually:
+  - **macOS**: run `build.sh`
+  - **Windows**: run `build.ps1`
 
-5. If you want to see the manual page from `man` command, you should
-    consider link the manual file `man/cpc.1` to your `MANPATH`, for
-    example(**Linux**): `sudo ln -f ./man/cpc.1 /your/man/path`.
+5. If you want to see the manual page from `man` command, you should consider link the manual file `man/cpc.1` to your `MANPATH`.
+    For example(**Linux**): `sudo ln -f ./man/cpc.1 /your/man/path`.
 
 6. If you cannot execute the complied files, please submit
     the problems on our [issue page](https://github.com/iewnfod/CAIE_Code/issues).
@@ -84,7 +80,7 @@ The program will automatically detect `pypy3` when available and use it to inter
 pseudocode because it has better efficiency. If you have `pypy3` installed
 you should install manually using `pypy3 -m pip install -r requirements.txt`
 
-### Incorrect UP, DOWN, LEFT, RIGHT key actions when in playground mode
+### Incorrect \<up\>, \<down\>, \<left\>, \<right\> key actions when in playground mode
 You should retry `pip install readline` or `pip install gnureadline`.
 
 ### OSError when launching
@@ -164,8 +160,7 @@ Each statement following `CASE` statement must end with
 `;`, semicolon.
 
 ### Basic Data Types
-The following items gives the `DATATYPE`, its description
-and the defalt value set when defined in brackets.
+The following items gives the `DATATYPE`, its description and the default value set when defined in brackets.
 
 * `INTEGER` integer, whole number (`0`)
     ```
@@ -331,9 +326,9 @@ be used in normal coding and cannot be declared.
       to force the program pass those parameters by-reference or by-value
       respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the
       prior parameter. If the program cannot find a clear indication it will, by
-      defalt pass parameters by-value.
+      default pass parameters by-value.
         * If you explicitly define the data types of array passed `BYVAL`
-          the program will implicitly convert to the desinated data type;
+          the program will implicitly convert to the designated data type;
           the program will not convert data types when passed `BYREF`.
         * `BYREF` : pass the reference of a variable
         * `BYVAL` : pass a copy of the variable
@@ -446,27 +441,22 @@ be used in normal coding and cannot be declared.
 > in the [CAIE standard](https://www.cambridgeinternational.org/Images/697401-2026-syllabus-legacy-notice.pdf).
 
 * `EXIT(code : INTEGER)`: exit the program with exit code
-  `code`. Defalt exit code is 0.
+    `code`. Defalt exit code is 0.
 
 * `ROUND(x : REAL, decimalPlace : INTEGER)`: round the
-  float-point number `x` to some decimal place. Defalt
-  decimal place is 0(to nearest whole number).
+    float-point number `x` to some decimal place. Default decimal place is 0(to nearest whole number).
 
-* `PYTHON(code : STRING, *args)` is python interface. You can pass any
-  python statements into `code` and the program will run
-  it in standard python. the return value of this function
-  is the value of variable `_result` in the python code.
+* `PYTHON(code : STRING, *args)` is python interface. You can pass any python statements into `code` and the program will run it in standard python. the return value of this function is the value of variable `_result` in the python code.
 
-  Example:
-  ```
-        > DECLARE a : INTEGER
-        > PYTHON("_result=a+1", a)
-        1
-  ```
-  - if the python code does not assign a value to `_result`,
-    the function will return `None`.
-  - you *must* pass all variables used in the python code
-    in `*args`, otherwise it will not run correctly.
+    Example:
+    ```
+    > DECLARE a : INTEGER
+    > a <- 0
+    > OUTPUT PYTHON("_result=a+1", a)
+    1
+    ```
+    > if the python code does not assign a value to `_result`, the function will return `None`.
+    > you *must* pass all variables used in the python code in `*args`, otherwise it will not run correctly.
 
 * For more non-official scripts, please see [scripts](./scripts).
 
@@ -482,26 +472,28 @@ and PRs are welcome.
 - [ ] more [non-official functions](./scripts/README.md)
 - [ ] improve efficiency (now improving)
 
-## Contact the Author
-  ***Iewnfod***
-  https://github.com/iewnfod
+## Author and Contributors
+* ***iewnfod*** https://github.com/iewnfod
+* ***lightumcc*** https://github.com/lightumcc
+* ***bbwanjia*** https://github.com/bbwanjia
+* ***ChengYuShun*** https://github.com/ChengYuShun
 
-## Lisense
-  MIT License
+## License
+MIT License
 
-  Copyright (c) 2023 Iewnfod
+Copyright (c) 2023 Iewnfod
 
-  Permission is hereby granted, free of charge, to any person obtaining a copy of this software
-  and associated documentation files (the "Software"), to deal in the Software without
-  restriction, including without limitation the rights to use, copy, modify, merge, publish,
-  distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
-  Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
 
-  The above copyright notice and this permission notice shall be included in all copies or
-  substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
-  BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
