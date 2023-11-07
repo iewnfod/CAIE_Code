@@ -1,14 +1,7 @@
 # CAIE Pseudocode Interpreter (cpc)
 
-<h3 align="center">the CAIE Pseudocode Interpreter</h3>
 <p align="center">
 <a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
-</p>
-<p align="center">
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![MIT License][license-shield]][license-url]
 </p>
 
 ## Installation and Update
