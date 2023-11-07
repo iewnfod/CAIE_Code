@@ -89,15 +89,15 @@ def p_indexes(p):
         p[0] = p[1]
 
 def p_array_expression(p):
-    """expression : LEFT_SQUARE arr_items RIGHT_SQUARE
+    """expression : LEFT_SQUARE array_items RIGHT_SQUARE
             | LEFT_SQUARE RIGHT_SQUARE"""
     if len(p) == 4:
         p[0] = AST.Array_expression(p[2], p=p)
     else:
         p[0] = AST.Array_expression(AST.Array_items(p=p), p=p)
 
-def p_arr_items(p):
-    """arr_items : arr_items COMMA expression
+def p_array_items(p):
+    """array_items : array_items COMMA expression
             | expression"""
     if len(p) == 2:
         p[0] = AST.Array_items(p=p)
@@ -105,7 +105,6 @@ def p_arr_items(p):
     else:
         p[1].add_item(p[3])
         p[0] = p[1]
-
 
 def p_input_statement(p):
     """statement : INPUT ID"""
