@@ -2,8 +2,6 @@ from .data import *
 from ..AST_Base import *
 from ..error import *
 from ..global_var import *
-from ..AST.data_types import Integer
-from copy import deepcopy
 from ..data_types import ARRAY
 
 class Array(AST_Node):
@@ -19,6 +17,8 @@ class Array(AST_Node):
 
     def add_variables(self, dimensions):
         result = {}
+        result['left'] = dimensions[0][0]
+        result['right'] = dimensions[0][1]
         if len(dimensions) == 1:
             for i in range(dimensions[0][0], dimensions[0][1]+1):
                 result[i] = (stack.structs[self.var_type](name=i), self.var_type)
@@ -30,8 +30,7 @@ class Array(AST_Node):
     def exe(self):
         dimensions = self.dimensions.exe()
         result = self.add_variables(dimensions)
-        stack.new_variable(self.id, 'ARRAY')
-        stack.set_variable(self.id, result, 'ARRAY')
+        stack.new_variable(self.id, 'ARRAY', result)
 
 class Dimensions(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -182,6 +181,8 @@ class Array_expression(AST_Node):
     def exe(self):
         value = {}
         items = self.items.exe()
+        value['left'] = 1
+        value['right'] = len(items)
         for i in range(1, len(items)+1):
             if type(items[i-1]) == tuple:
                 value[i] = (stack.structs[items[i-1][1]](items[i-1][0]), items[i-1][1])

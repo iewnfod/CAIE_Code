@@ -65,8 +65,11 @@ class Stack:
         else:
             add_stack_error_message(f'No variable or constant have id: `{id}`')
 
-    def new_variable(self, id, type):
-        self.spaces[0].new_variable(id, self.structs[type](name=id), False)
+    def new_variable(self, id, type, value=None):
+        if value:
+            self.spaces[0].new_variable(id, self.structs[type](name=id, value=value), False)
+        else:
+            self.spaces[0].new_variable(id, self.structs[type](name=id), False)
 
     def new_constant(self, id, value):
         # 复制值

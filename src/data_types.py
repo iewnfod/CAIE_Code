@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 class base:
     def __init__(self, name=None):
         self.name = name
@@ -105,16 +107,18 @@ class ARRAY(base):
     def get_str(self, v):
         if v[1] == 'ARRAY':
             l = []
-            for i in v[0].values():
-                l.append(self.get_str(i))
+            for key, val in v[0].items():
+                if key == 'left' or key == 'right': continue
+                l.append(self.get_str(val))
             return '[' + ', '.join(l) + ']'
         else:
             return str(v[0])
 
     def __str__(self) -> str:
         l = []
-        for i in self.value.values():
-            l.append(self.get_str(i))
+        for key, val in self.value.items():
+            if key == 'left' or key == 'right': continue
+            l.append(self.get_str(val))
         return '[' + ', '.join(l) + ']'
 
     def __len__(self):
@@ -122,11 +126,15 @@ class ARRAY(base):
 
     def set_value(self, value):
         from .global_var import add_stack_error_message
-        if len(value) == len(self.value) or len(self.value) == 0:
+        if value['left'] == self.value['left'] and value['right'] == self.value['right']:
             self.value = value
             # self.to_target(list(value.items())[0][1][1])
         else:
-            add_stack_error_message(f'Cannot assign an array with length `{len(value)}` to an array with length `{len(self.value)}`')
+            s_left = self.value['left']
+            s_right = self.value['right']
+            left = self.value['left']
+            right = self.value['right']
+            add_stack_error_message(f'Cannot assign an array with size `{left}:{right}` to an array with size `{s_left}:{s_right}`')
 
     def to_target(self, target, v=None):
         from .AST.data import stack
