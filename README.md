@@ -7,7 +7,7 @@ CAIE Pseudocode Interpreter
 1. `Python3` 环境 *推荐使用 PyPy3 以获得更好的性能*
 2. `git` 指令
 > macOS用户请安装`Command Line Tools for Xcode`
-3. `cargo`命令
+3. `cargo`命令（仅构建需要）
 
 ### 正式安装
 1. 克隆此项目
