@@ -1,5 +1,12 @@
 # 非官方函数及常量
 
+<p align="center">
+<a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
+</p>
+
+> 所有官方函数名均全部大写
+> 所有由此解释器提供的函数名首字母大写
+
 ## [Math](./math.cpc)
 * QPow 手动实现的幂运算
     ```

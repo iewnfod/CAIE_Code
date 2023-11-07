@@ -1,6 +1,12 @@
 # LIST OF NON-OFFICIAL CONSTANTS AND FUNCTIONS
-All CAIE standard functions are in UPPER CASE.
-All non-official functions are Capitalized.
+
+<p align="center">
+<a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
+</p>
+
+> All CAIE standard functions are in UPPER CASE.
+> All non-official functions are Capitalized.
+
 ## [Math](./math.cpc)
 * `QPow`: quick power
     ```
@@ -71,7 +77,7 @@ All non-official functions are Capitalized.
     ```
 
 ## [Import](./import.cpc)
-* `Import`: import another *cpc* file 
+* `Import`: import another *cpc* file
     ```
     Import(target : STRING) RETURNS ImportObj
     ```

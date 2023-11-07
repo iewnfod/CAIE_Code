@@ -1,10 +1,19 @@
-# CAIE PSEUDO CODE INTERPRETER, CPC
+# CAIE Pseudocode Interpreter (cpc)
 
-the *CAIE* pseudocode interpreter
+<h3 align="center">the CAIE Pseudocode Interpreter</h3>
+<p align="center">
+<a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
+</p>
+<p align="center">
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![MIT License][license-shield]][license-url]
+</p>
 
 ## Installation and Update
 
-### Installation preliminaries
+### Installation Preliminaries
 
 1. Have `python3` installed on your computer.
 > It is suggested to use `pypy3` to achieve best efficiency.
@@ -27,25 +36,25 @@ the *CAIE* pseudocode interpreter
     `git clone https://github.com/iewnfod/CAIE_Code.git`.
 2. Enter the project folder: `cd CAIE_Code`.
 
-3. The executable programs are in `bin/` folder. You may 
+3. The executable programs are in `bin/` folder. You may
     directy run or consider adding `bin/` to your `PATH`.
 
 4. If you want to complie manually:
   - **macOS**: complie `build.sh`
   - **Windows**: complie `build.ps1`
   - **Linux**: complie `build-linux.sh`
-  > We welcome **Linux** users to send Pull Requests if you 
+  > We welcome **Linux** users to send Pull Requests if you
   > find any bugs about compling and executing.
 
 5. If you want to see the manual page from `man` command, you should
-    consider link the manual file `man/cpc.1` to your `MANPATH`, for 
+    consider link the manual file `man/cpc.1` to your `MANPATH`, for
     example(**Linux**): `sudo ln -f ./man/cpc.1 /your/man/path`.
 
-6. If you cannot execute the complied files, please submit 
+6. If you cannot execute the complied files, please submit
     the problems on our [issue page](https://github.com/iewnfod/CAIE_Code/issues).
 
 ### Update
-If you followed the instructions and used `git` or PKG to install 
+If you followed the instructions and used `git` or PKG to install
 `cpc`, you can update easily using `cpc -u`.
 
 Otherwise, you should manually re-install the whole project.
@@ -54,7 +63,7 @@ Otherwise, you should manually re-install the whole project.
 
 `cpc [filepath] [options]`
 
-It runs the entire file if `filepath` is provided, otherwise 
+It runs the entire file if `filepath` is provided, otherwise
 it enters playground mode.
 ### Options
 
@@ -74,11 +83,11 @@ it enters playground mode.
 ## FAQs
 
 ### Import Error
-Please try install all python packages manually using 
+Please try install all python packages manually using
 `pip install -r requirements.txt`
 
 ### Import Error after I manually installed packages
-The program will automatically detect `pypy3` when available and use it to interpret 
+The program will automatically detect `pypy3` when available and use it to interpret
 pseudocode because it has better efficiency. If you have `pypy3` installed
 you should install manually using `pypy3 -m pip install -r requirements.txt`
 
@@ -86,27 +95,27 @@ you should install manually using `pypy3 -m pip install -r requirements.txt`
 You should retry `pip install readline` or `pip install gnureadline`.
 
 ### OSError when launching
-Enter the directory of this project, and run 
+Enter the directory of this project, and run
 `rm -rf .history
 cpc -u`
 
 ### Other problems?
-If it still fails after re-installation, 
+If it still fails after re-installation,
 please report it to us in [issue page](https://github.com/iewnfod/CAIE_Code/issues).
 
 
 ## Efficiency test
 
 ### test environment
-- machine: 2020 MacBook Pro 
+- machine: 2020 MacBook Pro
 - processor: Apple M1
-- RAM: 4GB 
+- RAM: 8GB
 - Cores: 8 (4 efficient, 4 performance)
 - OS: macOS 13.3.1 (22E261)
 - Python version: PyPy 3.9.16
 
 ### basic tests
-- assignment: 10m/s 
+- assignment: 10m/s
 ```
 DECLARE a : INTEGER
 FOR i <- 1 TO 10000000
@@ -114,7 +123,7 @@ FOR i <- 1 TO 10000000
 NEXT i
 ```
 
-- explicit conversion and assignment: 7.4m/s 
+- explicit conversion and assignment: 7.4m/s
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 7400000
@@ -122,7 +131,7 @@ FOR i <- 1 TO 7400000
 NEXT i
 ```
 
-- implicit conversion and assignment: 9.2m/s 
+- implicit conversion and assignment: 9.2m/s
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 9200000
@@ -130,7 +139,7 @@ FOR i <- 1 TO 9200000
 NEXT i
 ```
 
-- print to terminal: 720k/s 
+- print to terminal: 720k/s
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 9200000
@@ -139,7 +148,7 @@ NEXT i
 ```
 
 ### computation tests
-- [generating 100k randoms and shell sorting](https://github.com/iewnfod/CAIE_Code/blob/master/test/sort_test.cpc): about 2.5s 
+- [generating 100k randoms and shell sorting](https://github.com/iewnfod/CAIE_Code/blob/master/test/sort_test.cpc): about 2.5s
 
 
 ## Standards
@@ -149,9 +158,9 @@ NEXT i
 - use camelCase naming
 - use `.cpc` as the file suffix
 - use `utf-8` encoding
-- all reserved words are in upper case 
+- all reserved words are in upper case
 - the program is case-sensitive
-- use `//` to comment code 
+- use `//` to comment code
 
 ### Features
 Most syntax follows the [pseudocode standard of CAIE](https://www.cambridgeinternational.org/Images/697401-2026-syllabus-legacy-notice.pdf).
@@ -162,7 +171,7 @@ Each statement following `CASE` statement must end with
 `;`, semicolon.
 
 ### Basic Data Types
-The following items gives the `DATATYPE`, its description 
+The following items gives the `DATATYPE`, its description
 and the defalt value set when defined in brackets.
 
 * `INTEGER` integer, whole number (`0`)
@@ -202,7 +211,7 @@ and the defalt value set when defined in brackets.
     ```
 *
 
-`None` is a null datatype returned by some special functions. it should not 
+`None` is a null datatype returned by some special functions. it should not
 be used in normal coding and cannot be declared.
 
 ### Syntax Definitions
@@ -247,9 +256,9 @@ be used in normal coding and cannot be declared.
     * `MOD` modulus, find the remainder
     * `DIV` integer division
 4. Logic operations
-    * `AND` 
-    * `OR` 
-    * `NOT` 
+    * `AND`
+    * `OR`
+    * `NOT`
 5. Conditional statements
     * IF statements
         ```
@@ -325,10 +334,10 @@ be used in normal coding and cannot be declared.
 
         <identifier> (<value>, ...)
         ```
-    * Before the parameters of those sub-routines you *can* use `BYREF` or `BYVAL` 
-      to force the program pass those parameters by-reference or by-value 
-      respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the 
-      prior parameter. If the program cannot find a clear indication it will, by 
+    * Before the parameters of those sub-routines you *can* use `BYREF` or `BYVAL`
+      to force the program pass those parameters by-reference or by-value
+      respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the
+      prior parameter. If the program cannot find a clear indication it will, by
       defalt pass parameters by-value.
         * If you explicitly define the data types of array passed `BYVAL`
           the program will implicitly convert to the desinated data type;
@@ -371,8 +380,8 @@ be used in normal coding and cannot be declared.
         TYPE <identifier> = ^<data type>
         ```
     * records(classes)
-    > In this case, the program will not check the data types when 
-    > assigning a variable of this type to another. The program 
+    > In this case, the program will not check the data types when
+    > assigning a variable of this type to another. The program
     > will assign the other variable as the *reference* of this one.
         ```
         TYPE <identifier>
@@ -393,14 +402,14 @@ be used in normal coding and cannot be declared.
         IMPORT <expression>
         ```
         * `expression` here should be a string within double quotes.
-        * There is no isolation between the imported file and the 
+        * There is no isolation between the imported file and the
         main file. Identifiers may collide.
         * It is suggested to use [`Import`](scripts/import.cpc) function
         to import a package instead.
         ```
         CONSTANT test = Import("test/import_test.cpc")
         ```
-### Built-in Functions from CAIE Standard 
+### Built-in Functions from CAIE Standard
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
     ```
     $ RIGHT("ABCDEFGH", 3)
@@ -443,17 +452,17 @@ be used in normal coding and cannot be declared.
 > These functions are fairly useful, but they are not included
 > in the [CAIE standard](https://www.cambridgeinternational.org/Images/697401-2026-syllabus-legacy-notice.pdf).
 
-* `EXIT(code : INTEGER)`: exit the program with exit code 
+* `EXIT(code : INTEGER)`: exit the program with exit code
   `code`. Defalt exit code is 0.
 
-* `ROUND(x : REAL, decimalPlace : INTEGER)`: round the 
+* `ROUND(x : REAL, decimalPlace : INTEGER)`: round the
   float-point number `x` to some decimal place. Defalt
   decimal place is 0(to nearest whole number).
 
-* `PYTHON(code : STRING, *args)` is python interface. You can pass any 
-  python statements into `code` and the program will run 
-  it in standard python. the return value of this function 
-  is the value of variable `_result` in the python code. 
+* `PYTHON(code : STRING, *args)` is python interface. You can pass any
+  python statements into `code` and the program will run
+  it in standard python. the return value of this function
+  is the value of variable `_result` in the python code.
 
   Example:
   ```
@@ -461,15 +470,15 @@ be used in normal coding and cannot be declared.
         > PYTHON("_result=a+1", a)
         1
   ```
-  - if the python code does not assign a value to `_result`, 
+  - if the python code does not assign a value to `_result`,
     the function will return `None`.
-  - you *must* pass all variables used in the python code 
+  - you *must* pass all variables used in the python code
     in `*args`, otherwise it will not run correctly.
 
 * For more non-official scripts, please see [scripts](./scripts).
 
 ## Targets
-The following are development targets of this project. Issues 
+The following are development targets of this project. Issues
 and PRs are welcome.
 
 - [x] basic operations
@@ -480,8 +489,8 @@ and PRs are welcome.
 - [ ] more [non-official functions](./scripts/README.md)
 - [ ] improve efficiency (now improving)
 
-## Contact the Author 
-  ***Iewnfod*** 
+## Contact the Author
+  ***Iewnfod***
   https://github.com/iewnfod
 
 ## Lisense
