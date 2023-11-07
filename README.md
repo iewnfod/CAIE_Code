@@ -473,10 +473,9 @@ and PRs are welcome.
 - [ ] improve efficiency (now improving)
 
 ## Author and Contributors
-* ***iewnfod*** https://github.com/iewnfod
-* ***lightumcc*** https://github.com/lightumcc
-* ***bbwanjia*** https://github.com/bbwanjia
-* ***ChengYuShun*** https://github.com/ChengYuShun
+<a href="https://github.com/iewnfod/CAIE_Code/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=iewnfod/CAIE_Code">
+</a>
 
 ## License
 MIT License

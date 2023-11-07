@@ -23,8 +23,6 @@
     * `MacOS`若无法正常运行其中的二进制文件，可尝试自己编译 [`build.sh`](./build.sh)
     * `Windows`若无法正常运行，也可尝试自己编译 [`build.ps1`](./build.ps1)
     >若运行已有二进制文件后无反应，同上。若依旧无法解决，请提交issue
-    * `Linux`用户请在[bin](./bin/linux/)中寻找自己对应系统平台的编译文件，若没有找到，请自行修改[`build-linux.sh`](./build-linux.sh)并编译
-    * 非常欢迎`Linux`用户编译后提交pr
     * 如果需要使用`man`指令，请自行将[cpc.1](./man/cpc.1)硬链接到你的`MANPATH`内，以便更新后不必再次链接。
         * `Linux`用户可以使用以下指令:
             ```
@@ -424,10 +422,9 @@ NEXT i
 
 
 ## 作者与贡献者
-* ***iewnfod*** https://github.com/iewnfod
-* ***lightumcc*** https://github.com/lightumcc
-* ***bbwanjia*** https://github.com/bbwanjia
-* ***ChengYuShun*** https://github.com/ChengYuShun
+<a href="https://github.com/iewnfod/CAIE_Code/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=iewnfod/CAIE_Code">
+</a>
 
 ## License
 MIT License
