@@ -117,8 +117,16 @@ class ARRAY(base):
             l.append(self.get_str(i))
         return '[' + ', '.join(l) + ']'
 
+    def __len__(self):
+        return len(self.value)
+
     def set_value(self, value):
-        self.value = value
+        from .global_var import add_stack_error_message
+        if len(value) == len(self.value) or len(self.value) == 0:
+            self.value = value
+            # self.to_target(list(value.items())[0][1][1])
+        else:
+            add_stack_error_message(f'Cannot assign an array with length `{len(value)}` to an array with length `{len(self.value)}`')
 
     def to_target(self, target, v=None):
         from .AST.data import stack

@@ -78,24 +78,6 @@ def p_array_assign_statement(p):
     """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"""
     p[0] = AST.Array_assign(p[1], p[3], p[6], p=p)
 
-def p_array_total_assign_statement(p):
-    """statement : ID ASSIGN LEFT_SQUARE array_items RIGHT_SQUARE"""
-    p[0] = AST.Array_total_assign(p[1], p[4], p=p)
-
-def p_array_index_total_assign_statement(p):
-    """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN LEFT_SQUARE array_items RIGHT_SQUARE"""
-    p[0] = AST.Array_indexes_total_assign(p[1], p[3], p[7])
-
-def p_array_items(p):
-    """array_items : array_items COMMA expression
-            | expression"""
-    if len(p) == 2:
-        p[0] = AST.Array_items(p=p)
-        p[0].add_item(p[1])
-    else:
-        p[1].add_item(p[3])
-        p[0] = p[1]
-
 def p_indexes(p):
     """indexes : indexes COMMA expression
             | expression"""
@@ -105,6 +87,25 @@ def p_indexes(p):
     else:
         p[1].add_index(p[3])
         p[0] = p[1]
+
+def p_array_expression(p):
+    """expression : LEFT_SQUARE arr_items RIGHT_SQUARE
+            | LEFT_SQUARE RIGHT_SQUARE"""
+    if len(p) == 4:
+        p[0] = AST.Array_expression(p[2], p=p)
+    else:
+        p[0] = AST.Array_expression(AST.Array_items(p=p), p=p)
+
+def p_arr_items(p):
+    """arr_items : arr_items COMMA expression
+            | expression"""
+    if len(p) == 2:
+        p[0] = AST.Array_items(p=p)
+        p[0].add_item(p[1])
+    else:
+        p[1].add_item(p[3])
+        p[0] = p[1]
+
 
 def p_input_statement(p):
     """statement : INPUT ID"""
