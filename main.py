@@ -1,6 +1,4 @@
 # 检查依赖
-import ctypes
-
 from src.requirements import config
 config()
 
