@@ -5,6 +5,8 @@ import git
 
 VERSION = ''
 
+super_fast = False
+
 with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
 
@@ -21,6 +23,9 @@ def check_update(repo: git.Repo, remote: git.Remote):
         return True
     else:
         print("Good! Good! You are faster than your remote!")
+        print("At", *get_commit_hash_msg())
+        global super_fast
+        super_fast = True
         return False
 
 def _update(remote, repo):
@@ -63,4 +68,5 @@ def update():
         else:
             print('Stop Updating')
     else:
-        print(f'Good! You are using the latest version!\nAt {latest_commit_hash}: {latest_commit_message}')
+        if not super_fast:
+            print(f'Good! You are using the latest version!\nAt {latest_commit_hash}: {latest_commit_message}')
