@@ -1,5 +1,12 @@
 # CAIE Code (cpc)
 
+<br/>
+<p align="center">
+<a href="./assets/">
+<img src="./assets/CPC4096.png" width="80" height="80" alt="logo">
+</a>
+<h3 align="center">the CAIE Pseudocode Interpreter</h3>
+</p>
 <p align="center">
 <a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
 </p>
