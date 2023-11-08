@@ -1,6 +1,9 @@
 #!/bin/sh
+# -*- tab-width: 4; sh-basic-offset: 4; indent-tabs-mode: t -*-
+# vim: tabstop=4 shiftwidth=4 noexpandtab
+# LICENSE: MIT
+# Copyright 2023 Yushun Cheng <chengys@disroot.org>
 
-# author: ChengYuShun : https://github.com/ChengYuShun
 # Execute if the executable is executable.
 try_run() {
 	[ -x "$1" ] && [ -f "$1" ] && exec "$@"
