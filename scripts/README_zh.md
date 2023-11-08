@@ -4,8 +4,8 @@
 <a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
 </p>
 
-> 所有官方函数名均全部大写
-> 所有由此解释器提供的函数名首字母大写
+> 所有官方函数名均全部大写（UPPERCASE）
+> 所有由此解释器提供的函数名为大驼峰（UpperCamelCase）
 
 ## [Math](./math.cpc)
 * QPow 手动实现的幂运算
@@ -49,6 +49,14 @@
     ```
     Trim(s : STRING) RETURNS STRING
     ```
+* TrimStart 修剪字符串开头空格
+    ```
+    TrimStart(s : STRING) RETURNS STRING
+    ```
+* TrimEnd 修剪字符串结尾空格
+    ```
+    TrimEnd(s : STRING) RETURNS STRING
+    ```
 * ArrayFromString 字符串转数组
     ```
     ArrayFromString(s : STRING) RETURNS ARRAY
@@ -68,6 +76,14 @@
 * Replace 替换字符串
     ```
     Replace(s : STRING, from : STRING, to : STRING) RETURNS STRING
+    ```
+* EndsWith 字符串末端是否为另外一个字符串
+    ```
+    EndsWith(base : STRING, suffix : STRING) RETURNS BOOLEAN
+    ```
+* StartsWith 字符串开头是否为另外一个字符串
+    ```
+    StartsWith(base : STRING, prefix : STRING) RETURNS BOOLEAN
     ```
 
 ## [Time](./time.cpc)
