@@ -12,7 +12,7 @@ def parent_path(p):
 HOME_PATH = parent_path(parent_path(__file__))
 
 class Cmd:
-    def __init__(self, home_path=HOME_PATH, save_path='.history', history_size=1000):
+    def __init__(self, home_path=HOME_PATH, save_path='.cpc_history', history_size=1000):
         self.home_path = home_path
         self.save_path = save_path
         self.history_size = history_size

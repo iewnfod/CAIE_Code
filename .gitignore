@@ -6,6 +6,7 @@ build/
 .idea/
 target/
 .vs/
-.history
+.history/
+.cpc_history
 temp/
 *.log
