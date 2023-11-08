@@ -1,18 +1,4 @@
-#!/bin/bash
-
-function realpath ()
-{
-    f=$@;
-    if [ -d "$f" ]; then
-        base="";
-        dir="$f";
-    else
-        base="/$(basename "$f")";
-        dir=$(dirname "$f");
-    fi;
-    dir=$(cd "$dir" && /bin/pwd);
-    echo "$dir$base"
-}
+#!/bin/sh
 
 # author: ChengYuShun : https://github.com/ChengYuShun
 # Execute if the executable is executable.
@@ -21,11 +7,11 @@ try_run() {
 }
 
 # Find the directory that contains `main.py`.
-exe_path=$(realpath "$0")
-parent_path=$(dirname "$exe_path")
+exe_path="$(readlink -f "$0")"
+parent_path="$(dirname "$exe_path")"
 script_path="$parent_path/main.py"
 while ! [ -f "$script_path" ]; do
-	parent_path=$(dirname "$parent_path")
+	parent_path="$(dirname "$parent_path")"
 	script_path="$parent_path/main.py"
 done
 unset -v parent_path
