@@ -42,7 +42,10 @@ def update():
     git_remote = config.get_config('remote')
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
-    remote.set_url(git_remote)
+    if config.get_config('dev'):
+        print('In a developer mod, your remote will not be changed by config. \nYou can close the developer mod using `cpc -c dev false`. ')
+    else:
+        remote.set_url(git_remote)
     # 获取当前commit记录
     latest_commit_hash, latest_commit_message = get_commit_hash_msg()
 

@@ -10,7 +10,7 @@ class _Config:
 		self.update_func = update_func
 
 	def to_string(self):
-		return str(self.val)
+		return self.val
 
 	def update(self, value):
 		if self.update_func:
@@ -41,12 +41,24 @@ def pip_update(obj, value):
 		print(f'Config `{obj.name}` only accept `pip` or `tuna`')
 		quit(1)
 
+def dev_mod(obj, value):
+	value = value.lower()
+	if value == 'true':
+		obj.val = True
+	elif value == 'false':
+		obj.val = False
+	else:
+		from .quit import quit
+		print(f'Config `{obj.name}` only accept `true` or `false`')
+		quit(1)
+
 class Config:
 	def __init__(self, config_file_name=".cpc_config.json"):
 		self.config_path = os.path.join(HOME_PATH, config_file_name)
 		self.config = {
 			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', update_func=remote_update),
-			'pip': _Config('pip', 'https://pypi.tuna.tsinghua.edu.cn/simple/', update_func=pip_update)
+			'pip': _Config('pip', 'https://pypi.tuna.tsinghua.edu.cn/simple/', update_func=pip_update),
+			'dev': _Config('dev', False, update_func=dev_mod)
 		}
 		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):
