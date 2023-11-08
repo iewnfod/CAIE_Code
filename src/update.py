@@ -21,11 +21,13 @@ def check_update(repo: git.Repo, remote: git.Remote):
     # 比较时间戳
     if local_commit_time < remote_commit_time:
         return True
-    else:
+    elif local_commit_time > remote_commit_time:
         print("Good! Good! You are faster than your remote!")
         print("At", *get_commit_hash_msg())
         global super_fast
         super_fast = True
+        return False
+    else:
         return False
 
 def _update(remote, repo):
@@ -48,7 +50,7 @@ def update():
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
     if config.get_config('dev'):
-        print('In a developer mod, your remote will not be changed by config. \nYou can close the developer mod using `cpc -c dev false`. ')
+        print('In a developer mod, your remote will not be changed by config. \nYou can close the developer mod by using `cpc -c dev false`. ')
     else:
         remote.set_url(git_remote)
     # 获取当前commit记录
