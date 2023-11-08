@@ -85,8 +85,10 @@ You should retry `pip install readline` or `pip install gnureadline`.
 
 ### OSError when launching
 Enter the directory of this project, and run
-`rm -rf .cpc_history
-cpc -u`
+```shell
+rm -rf .cpc_history
+cpc -u
+```
 
 ### Other problems?
 If it still fails after re-installation,
