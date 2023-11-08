@@ -5,7 +5,7 @@
 </p>
 
 > All CAIE standard functions are in UPPER CASE.
-> All non-official functions are Capitalized.
+> All non-official functions are UpperCamelCase.
 
 ## [Math](./math.cpc)
 * `QPow`: quick power
@@ -45,9 +45,17 @@
     ```
     Ucase(s : STRING) RETURNS STRING
     ```
-* `Trim`: remove blanks at the beginning and the ending of a string
+* `Trim`: remove blanks at the beginning and the end of a string
     ```
     Trim(s : STRING) RETURNS STRING
+    ```
+* `TrimStart`: remove blanks at the beginning of a string
+    ```
+    TrimStart(s : STRING) RETURNS STRING
+    ```
+* `TrimEnd`: remove blanks at the end of a string
+    ```
+    TrimEnd(s : STRING) RETURNS STRING
     ```
 * `ArrayFromString`: returns an array of characters of a string
     ```
@@ -69,9 +77,17 @@
     ```
     Replace(s : STRING, from : STRING, to : STRING) RETURNS STRING
     ```
+* `EndsWith`: if a string `s` ends with a string `suffix`
+    ```
+    EndsWith(base : STRING, suffix : STRING) RETURNS BOOLEAN
+    ```
+* `StartsWith`: if a string `s` starts with a string `prefix`
+    ```
+    StartsWith(base : STRING, prefix : STRING) RETURNS BOOLEAN
+    ```
 
 ## [Time](./time.cpc)
-* `Time`: get current time seal
+* `Time`: get current timestamp
     ```
     Time RETURNS REAL
     ```

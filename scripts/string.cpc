@@ -47,7 +47,7 @@ FUNCTION Ucase(s : STRING) RETURNS STRING
     RETURN result
 ENDFUNCTION
 
-FUNCTION Trim(s : STRING) RETURNS STRING
+FUNCTION TrimStart(s : STRING) RETURNS STRING
     DECLARE len : INTEGER
     len <- LENGTH(s)
     DECLARE result : STRING
@@ -66,10 +66,17 @@ FUNCTION Trim(s : STRING) RETURNS STRING
         ENDIF
     NEXT i
 
-    // 从后往前查看
-    s <- result
-    result <- ""
+    RETURN result
+ENDFUNCTION
+
+FUNCTION TrimEnd(s : STRING) RETURNS STRING
+    DECLARE len : INTEGER
     len <- LENGTH(s)
+    DECLARE result : STRING
+    DECLARE c : STRING
+    DECLARE flag : BOOLEAN
+
+    // 从后往前查看
     flag <- TRUE
     FOR i <- len TO 1 STEP -1
         c <- MID(s, i, 1)
@@ -82,6 +89,10 @@ FUNCTION Trim(s : STRING) RETURNS STRING
     NEXT i
 
     RETURN result
+ENDFUNCTION
+
+FUNCTION Trim(s : STRING) RETURNS STRING
+    RETURN TrimStart(TrimEnd(s))
 ENDFUNCTION
 
 FUNCTION ArrayFromString(s : STRING) RETURNS ARRAY
@@ -136,4 +147,26 @@ ENDFUNCTION
 FUNCTION Replace(s : STRING, from : STRING, to : STRING) RETURNS STRING
     CONSTANT arr = Split(s, from)
     RETURN Join(to, arr, 1, LENGTH(arr))
+ENDFUNCTION
+
+FUNCTION EndsWith(base : STRING, suffix : STRING) RETURNS BOOLEAN
+    CONSTANT baseLen = LENGTH(base)
+    CONSTANT suffixLen = LENGTH(suffix)
+
+    IF baseLen < suffixLen THEN
+        RETURN FALSE
+    ENDIF
+
+    RETURN MID(base, baseLen - suffixLen + 1, suffixLen) = suffix
+ENDFUNCTION
+
+FUNCTION StartsWith(base : STRING, prefix : STRING) RETURNS BOOLEAN
+    CONSTANT baseLen = LENGTH(base)
+    CONSTANT prefixLen = LENGTH(prefix)
+
+    IF baseLen < prefixLen THEN
+        RETURN FALSE
+    ENDIF
+
+    RETURN MID(base, 1, prefixLen) = prefix
 ENDFUNCTION
