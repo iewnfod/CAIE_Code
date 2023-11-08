@@ -5,6 +5,8 @@ import git
 
 VERSION = ''
 
+super_fast = False
+
 with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
 
@@ -21,6 +23,9 @@ def check_update(repo: git.Repo, remote: git.Remote):
         return True
     else:
         print("Good! Good! You are faster than your remote!")
+        print("At", *get_commit_hash_msg())
+        global super_fast
+        super_fast = True
         return False
 
 def _update(remote, repo):
@@ -50,14 +55,18 @@ def update():
     latest_commit_hash, latest_commit_message = get_commit_hash_msg()
 
     if new_animation('Checking Update', 3, check_update, failed_msg='Failed to Check Update', repo=repo, remote=remote):
-        # 获取新的commit记录
+        # 更新后再次获取新的commit记录
+        _update(remote, repo)
         latest_commit_hash, latest_commit_message = get_commit_hash_msg()
         # 询问是否更新
         u = input(f'There is a new version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n] ').strip().lower()
         if u == '' or u == 'y':
             if new_animation('Updating', 3, _update, failed_msg='Failed to Update', remote=remote, repo=repo):
+                # 更新后再次获取新的commit记录
+                latest_commit_hash, latest_commit_message = get_commit_hash_msg()
                 print('\033[1mUpdate Successful\033[0m')
         else:
             print('Stop Updating')
     else:
-        print(f'Good! You are using the latest version!\nAt {latest_commit_hash}: {latest_commit_message}')
+        if not super_fast:
+            print(f'Good! You are using the latest version!\nAt {latest_commit_hash}: {latest_commit_message}')
