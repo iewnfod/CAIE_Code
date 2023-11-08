@@ -26,10 +26,11 @@ def _update(remote, repo):
 def update():
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
-    latest_commit_hash = repo.head.reference.commit.hexsha[:7]
-    latest_commit_message = repo.head.reference.commit.message
 
     if new_animation('Checking Update', 3, check_update, failed_msg='Failed to Check Update', repo=repo, remote=remote):
+        # 获取commit记录
+        latest_commit_hash = repo.head.reference.commit.hexsha[:7]
+        latest_commit_message = repo.head.reference.commit.message
         # 询问是否更新
         u = input(f'There is a new version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n]').strip().lower()
         if u == '' or u == 'y':
