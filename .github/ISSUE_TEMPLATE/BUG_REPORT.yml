@@ -27,6 +27,13 @@ body:
       value: "1. "
     validations:
       required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: 你的代码
+      description: 你可以把你的代码复制到这里
+      placeholder: |
+        请直接复制你的代码，避免缩进问题
   - type: dropdown
     id: systype
     attributes:
@@ -62,3 +69,4 @@ body:
       placeholder: |
         提示：
         你还可以提供截图和文件
+
