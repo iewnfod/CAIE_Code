@@ -1,7 +1,7 @@
 # CAIE Pseudocode Interpreter (cpc)
 
 <p align="center">
-<a href="./README_chinese.md">中文</a> | <a href="./README.md">English</a>
+<a href="./README_zh.md">中文</a> | <a href="./README.md">English</a>
 </p>
 
 ## Installation and Update
