@@ -1,6 +1,7 @@
 from sys import exit, setrecursionlimit
 import platform
 from .update import VERSION, update, get_commit_hash_msg
+import os
 
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
@@ -80,6 +81,19 @@ def change_config(opt_name, value):
     from .global_var import set_config
     set_config(opt_name, value)
 
+def migrate_files(directory):
+
+    for root, dirs, files in os.walk(directory):
+        # Filter out directories starting with a dot
+        dirs[:] = [d for d in dirs if not d.startswith('.')]
+        for file in files:
+            if file.endswith('.p'):
+                old_file_path = os.path.join(root, file)
+                new_file_path = os.path.join(root, file.replace('.p', '.cpc'))
+                os.rename(old_file_path, new_file_path)
+
+    print("Migration completed.")
+
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
 class Opt:
     def __init__(self, short_arg, long_arg, func, description, exit_program, value_num=0, *args, **kwargs):
@@ -114,5 +128,6 @@ arguments = [
     Opt('-ne', '--no-error', remove_error, 'To remove all error messages', False),
     Opt('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)', True),
     Opt('-r', '--recursive-limit', set_recursive_limit, 'To set the recursive limit of the interpreter', False, 1),
-    Opt('-c', '--config', change_config, 'To set configs of this interpreter', True, 2)
+    Opt('-c', '--config', change_config, 'To set configs of this interpreter', True, 2),
+    Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1)
 ]
