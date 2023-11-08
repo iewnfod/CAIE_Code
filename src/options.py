@@ -129,5 +129,5 @@ arguments = [
     Opt('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)', True),
     Opt('-r', '--recursive-limit', set_recursive_limit, 'To set the recursive limit of the interpreter', False, 1),
     Opt('-c', '--config', change_config, 'To set configs of this interpreter', True, 2),
-    Opt('-m', '--migrate', migrate_files, 'Migrate .p files to .cpc in a specified directory', True, 1)
+    Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1)
 ]

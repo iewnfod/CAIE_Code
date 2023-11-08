@@ -70,6 +70,7 @@ It runs the entire file if `filepath` is provided, otherwise it enters playgroun
 | `-u` | `--update` | To update the version (only useful when using a version equal or greater than `0.1.2` and installed by git) |
 | `-r` | `--recursive-limit` | To set the recursive limit of the interpreter |
 | `-c` | `--config` | To set configs of this interpreter |
+| `-m` | `--migrate` | To migrate .p files to .cpc in a specified directory |
 
 ### Config
 
