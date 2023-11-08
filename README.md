@@ -3,7 +3,7 @@
 <br/>
 <p align="center">
 <a href="./assets/">
-<img src="./assets/CPC4096.png" width="80" height="80" alt="logo">
+<img src="./assets/cpc-icon-high.png" width="80" height="80" alt="logo">
 </a>
 <h3 align="center">the CAIE Pseudocode Interpreter</h3>
 </p>
