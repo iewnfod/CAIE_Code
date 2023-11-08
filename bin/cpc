@@ -1,39 +1,29 @@
-#!/bin/bash
+#!/bin/sh
+# -*- tab-width: 4; sh-basic-offset: 4; indent-tabs-mode: t -*-
+# vim: tabstop=4 shiftwidth=4 noexpandtab
+# LICENSE: MIT
+# Copyright 2023 Yushun Cheng <chengys@disroot.org>
 
-function realpath ()
-{
-    f=$@;
-    if [ -d "$f" ]; then
-        base="";
-        dir="$f";
-    else
-        base="/$(basename "$f")";
-        dir=$(dirname "$f");
-    fi;
-    dir=$(cd "$dir" && /bin/pwd);
-    echo "$dir$base"
-}
-
-# author: ChengYuShun : https://github.com/ChengYuShun
 # Execute if the executable is executable.
 try_run() {
 	[ -x "$1" ] && [ -f "$1" ] && exec "$@"
 }
 
 # Find the directory that contains `main.py`.
-exe_path=$(realpath "$0")
-parent_path=$(dirname "$exe_path")
+exe_path="$(readlink -f "$0")"
+parent_path="$(dirname "$exe_path")"
 script_path="$parent_path/main.py"
 while ! [ -f "$script_path" ]; do
-	parent_path=$(dirname "$parent_path")
+	parent_path="$(dirname "$parent_path")"
 	script_path="$parent_path/main.py"
 done
 unset -v parent_path
 unset -v exe_path
 
-_MAC_PY_HOME="/Library/Frameworks/Python.framework/Versions"
 # Find python and run it.
+_MAC_PY_HOME="/Library/Frameworks/Python.framework/Versions"
 if [ $(uname -s) = "Darwin" ] && [ -d "$_MAC_PY_HOME" ]; then
+	# Search through MAC OS specific paths.
 	for path in "$_MAC_PY_HOME"/*; do
 		case $(basename "$path" | tr '[:upper:]' '[:lower:]') in
 		*pypy*) try_run "$path/bin/python3" "$script_path" "$@";;
@@ -46,12 +36,10 @@ if [ $(uname -s) = "Darwin" ] && [ -d "$_MAC_PY_HOME" ]; then
 		esac
 	done
 fi
-
-# Run with python command
 for python in pypy3 python3; do
 	try_run "$(which "$python" 2>/dev/null)" "$script_path" "$@"
 done
 
-# else
+# If we cannot find python3, we should output a warning message.
 echo "Cannot find python3 on your computer."
 echo "Please make sure python3 is installed and added to your PATH."
