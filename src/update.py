@@ -31,7 +31,7 @@ def update():
 
     if new_animation('Checking Update', 3, check_update, failed_msg='Failed to Check Update', repo=repo, remote=remote):
         # 询问是否更新
-        u = input(f'There is a new version of the program({latest_commit_hash}: {latest_commit_message}).\nDo you want to update it? [Y/n] ').strip().lower()
+        u = input(f'There is a new version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n]').strip().lower()
         if u == '' or u == 'y':
             if new_animation('Updating', 3, _update, failed_msg='Failed to Update', remote=remote, repo=repo):
                 print('\033[1mUpdate Successful\033[0m')
