@@ -3,7 +3,7 @@
 <br/>
 <p align="center">
 <a href="./assets/">
-<img src="./assets/CPC4096.png" width="80" height="80" alt="logo">
+<img src="./assets/cpc.svg" width="80" height="80" alt="logo">
 </a>
 <h3 align="center">the CAIE Pseudocode Interpreter</h3>
 </p>
@@ -35,7 +35,7 @@
 2. Enter the project folder: `cd CAIE_Code`.
 
 3. The executable programs are in `bin/` folder. You may directly run or consider adding `bin/` to your `PATH`.
-    
+
 4. If you want to compile manually:
   - **macOS**: run `build.sh`
   - **Windows**: run `build.ps1`
@@ -264,7 +264,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         IF <condition> THEN
             <statements>
         ENDIF
-        
+
         IF <condition> THEN
             <statements>
         ELSE
@@ -305,7 +305,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-        
+
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -313,7 +313,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a procedure
         ```
         CALL <identifier>
-        
+
         CALL <identifier> (<value>, ...)
         ```
     * functions with return values
@@ -322,7 +322,7 @@ The following items give the `DATATYPE`, its description, and the default value 
             <statements>
             RETURN <value>
         ENDFUNCTION
-        
+
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -330,7 +330,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a function with return values
         ```
         <identifier> ()
-        
+
         <identifier> (<value>, ...)
         ```
     * Before the parameters of those sub-routines, you *can* use `BYREF` or `BYVAL` to force the program to pass those parameters by reference or by-value respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the prior parameter. If the program cannot find a clear indication it will, by default pass parameters by value.

@@ -3,7 +3,7 @@
 <br/>
 <p align="center">
 <a href="./assets/">
-<img src="./assets/CPC4096.png" width="80" height="80" alt="logo">
+<img src="./assets/cpc.svg" width="80" height="80" alt="logo">
 </a>
 <h3 align="center">the CAIE Pseudocode Interpreter</h3>
 </p>
@@ -243,7 +243,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-        
+
         IF <condition> THEN
             <statements>
         ELSE
@@ -284,7 +284,7 @@ NEXT i
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-        
+
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -292,7 +292,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier>
-        
+
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -301,7 +301,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-        
+
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -309,7 +309,7 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-        
+
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。

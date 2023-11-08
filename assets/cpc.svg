@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 135.46669 135.46669"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed, 2023-07-21)"
+   sodipodi:docname="cpc.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.0475113"
+     inkscape:cx="155.60692"
+     inkscape:cy="254.88986"
+     inkscape:window-width="1632"
+     inkscape:window-height="997"
+     inkscape:window-x="52"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g2"
+     shape-rendering="auto" />
+  <defs
+     id="defs1">
+    <rect
+       x="219.35521"
+       y="419.31989"
+       width="296.91727"
+       height="158.75986"
+       id="rect11" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5">
+      <g
+         inkscape:label="Clip"
+         id="use5"
+         style="stroke-width:0.872473;stroke-dasharray:none">
+        <rect
+           style="opacity:1;fill:#8c52ff;fill-opacity:1;stroke-width:0.872473;stroke-dasharray:none"
+           id="rect6"
+           width="101.16623"
+           height="101.16623"
+           x="65.830658"
+           y="183.45456"
+           inkscape:label="rect2" />
+        <rect
+           style="opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.872473;stroke-dasharray:none"
+           id="rect7"
+           width="78.899979"
+           height="78.899979"
+           x="76.963791"
+           y="193.30753" />
+      </g>
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath5-9">
+      <g
+         inkscape:label="Clip"
+         id="use5-0"
+         style="stroke-width:0.902727;stroke-dasharray:none" />
+    </clipPath>
+  </defs>
+  <g
+     inkscape:label="图层 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g12">
+      <g
+         id="g1"
+         transform="matrix(0.88383597,0,0,0.89749197,-5.2667378,-41.141309)">
+        <g
+           id="g2"
+           transform="translate(-21.48358,-0.96195135)">
+          <rect
+             style="stroke-width:0.902727;stroke-dasharray:none;opacity:1;fill:#8c52ff;fill-rule:nonzero;fill-opacity:1"
+             id="rect2-9"
+             width="101.16623"
+             height="101.16623"
+             x="65.830658"
+             y="183.45456"
+             inkscape:label="rect2-9"
+             transform="matrix(1.0830898,0,0,1.0539193,-43.857973,-146.54403)" />
+          <text
+             xml:space="preserve"
+             transform="matrix(0.53487246,0,0,0.53487246,-76.26617,-120.61557)"
+             id="text11"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:86.9528px;font-family:'Baron Neue';-inkscape-font-specification:'Baron Neue, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;white-space:pre;shape-inside:url(#rect11);display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:3.77953;stroke-dasharray:none"
+             inkscape:label="text11"><tspan
+               x="219.35547"
+               y="495.40401"
+               id="tspan2">CPC</tspan></text>
+        </g>
+      </g>
+      <g
+         id="g6">
+        <rect
+           style="fill:#8c52ff;fill-opacity:1;stroke-width:0.426158"
+           id="rect4-4-2"
+           width="15.218305"
+           height="12.435416"
+           x="108.69392"
+           y="-51.329166"
+           transform="rotate(90)" />
+        <rect
+           style="fill:#8c52ff;fill-opacity:1;stroke-width:1.06206"
+           id="rect4"
+           width="96.572914"
+           height="12.170834"
+           x="38.893749"
+           y="123.29583" />
+        <rect
+           style="fill:#8c52ff;fill-opacity:1;stroke-width:1.06205"
+           id="rect4-7"
+           width="96.572914"
+           height="12.170834"
+           x="38.893749"
+           y="-135.46666"
+           transform="rotate(90)" />
+        <rect
+           style="fill:#8c52ff;fill-opacity:1;stroke-width:0.42794"
+           id="rect4-4"
+           width="15.345834"
+           height="12.435416"
+           x="110.06667"
+           y="38.893749" />
+      </g>
+    </g>
+  </g>
+</svg>
