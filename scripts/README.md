@@ -1,7 +1,7 @@
 # LIST OF NON-OFFICIAL CONSTANTS AND FUNCTIONS
 
 <p align="center">
-<a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
+<a href="./README_zh.md">中文</a> | <a href="./README.md">English</a>
 </p>
 
 > All CAIE standard functions are in UPPER CASE.
