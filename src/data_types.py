@@ -122,7 +122,7 @@ class ARRAY(base):
         return '[' + ', '.join(l) + ']'
 
     def __len__(self):
-        return len(self.value)
+        return len(self.value) - 2  # 减掉left和right
 
     def set_value(self, value):
         from .global_var import add_stack_error_message

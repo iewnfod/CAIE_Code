@@ -161,8 +161,10 @@ class Length(AST_Node):
             return
 
         s = parameters[0]
-        if s[1] == 'STRING' or s[1] == 'ARRAY':
+        if s[1] == 'STRING':
             return (len(s[0]), 'INTEGER')
+        elif s[1] == 'ARRAY':
+            return (len(s), 'ARRAY')
         else:
             add_error_message(f'Function `{self.type}` expect `STRING` or `ARRAY`, but found `{s[1]}`', self)
 
