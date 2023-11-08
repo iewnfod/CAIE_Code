@@ -12,6 +12,7 @@
         "ENDSUPERSPACE",
         "ENDTYPE",
         "ENDWHILE",
+        "funcs",
         "GETRECORD",
         "gitee",
         "gnureadline",

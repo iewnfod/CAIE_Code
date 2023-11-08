@@ -1,6 +1,7 @@
 import os
 import json
 from .history import HOME_PATH
+from .config_funcs import *
 
 class _Config:
 	def __init__(self, name, default_val, update_func=None):
@@ -20,37 +21,6 @@ class _Config:
 
 	def _init_update(self, value):
 		self.val = value
-
-def remote_update(obj, value):
-	if value == 'github':
-		obj.val = 'https://github.com/iewnfod/CAIE_Code.git'
-	elif value == 'gitee':
-		obj.val = 'https://gitee.com/ricky-tap/CAIE_Code.git'
-	else:
-		from .quit import quit
-		print(f'Config `{obj.name}` only accept `github` or `gitee`')
-		quit(1)
-
-def pip_update(obj, value):
-	if value == 'pip':
-		obj.val = 'https://pypi.python.org/simple/'
-	elif value == 'tuna':
-		obj.val = 'https://pypi.tuna.tsinghua.edu.cn/simple/'
-	else:
-		from .quit import quit
-		print(f'Config `{obj.name}` only accept `pip` or `tuna`')
-		quit(1)
-
-def dev_mod(obj, value):
-	value = value.lower()
-	if value == 'true':
-		obj.val = True
-	elif value == 'false':
-		obj.val = False
-	else:
-		from .quit import quit
-		print(f'Config `{obj.name}` only accept `true` or `false`')
-		quit(1)
 
 class Config:
 	def __init__(self, config_file_name=".cpc_config.json"):
@@ -90,12 +60,12 @@ class Config:
 
 	def output_available_configs(self):
 		print('Available configs: ')
-		for i in self._default_config.keys():
+		for i in self.config.keys():
 			print(f'\t{i}')
 
 	def err_config(self, opt_name):
 		from .quit import quit
-		print(f'Unknown config: \033[1m{opt_name}\033[0m')
+		print(f'Unknown config: {opt_name}')
 		self.output_available_configs()
 		quit(1)
 
