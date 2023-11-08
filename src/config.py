@@ -31,12 +31,24 @@ def remote_update(obj, value):
 		print(f'Config `{obj.name}` only accept `github` or `gitee`')
 		quit(1)
 
+def pip_update(obj, value):
+	if value == 'pip':
+		obj.val = 'https://pypi.python.org/simple/'
+	elif value == 'tuna':
+		obj.val = 'https://pypi.tuna.tsinghua.edu.cn/simple/'
+	else:
+		from .quit import quit
+		print(f'Config `{obj.name}` only accept `pip` or `tuna`')
+		quit(1)
+
 class Config:
 	def __init__(self, config_file_name=".cpc_config.json"):
 		self.config_path = os.path.join(HOME_PATH, config_file_name)
 		self.config = {
-			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', update_func=remote_update)
+			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', update_func=remote_update),
+			'pip': _Config('pip', 'https://pypi.tuna.tsinghua.edu.cn/simple/', update_func=pip_update)
 		}
+		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):
 			with open(self.config_path, 'r') as f:
 				dict = json.loads(f.read())
@@ -45,9 +57,8 @@ class Config:
 						self.config[key]._init_update(val)
 					else:
 						self.err_config(key)
-		else:
-			# 创建配置文件
-			self.write_config()
+
+		self.write_config()
 
 	def write_config(self):
 		dict = {}

@@ -1,12 +1,10 @@
-# 检查依赖
-from src.requirements import test_requirements
-test_requirements()
+# 全局变量初始化
+import src.global_var as global_var
 
 # 正式导入
 from src.lex import *
 from src.parse import *
 import src.options as options
-import src.global_var as global_var
 from src.history import HOME_PATH
 from src.quit import quit
 from src.line_commands import run_command
@@ -15,17 +13,48 @@ import sys
 import os
 from time import time
 
+
+preline = '>'
+multi_preline = '.'
+home_path = HOME_PATH
+
+
+# 错误的argument
+def wrong_argument(msg):
+    print(f'Unknown argument: {msg}')
+    print(f'Use `cpc -h` to get detailed informations about how to use')
+    quit(1)
+    # options.help()
+
+# 解析参数
+argv = sys.argv
+file_paths = set()
+i = 1
+while i < len(argv):
+    arg = argv[i]
+    for opt in options.arguments:
+        if opt.check(arg):
+            opt.run(argv[i:])
+            i += opt.value_num
+            break
+    else:
+        if arg[0] == '-':
+            wrong_argument(f'Unknown option `{arg}`')
+        else:
+            file_paths.add(arg)
+    i += 1
+
+
+# 检查依赖
+from src.requirements import test_requirements
+test_requirements()
+# 依赖库导入
 from ply import yacc
 from ply import lex
 from chardet import detect
 # 导入色彩基础库，保证\033能正确的转译
 import colorama
 colorama.init()
-
-
-preline = '>'
-multi_preline = '.'
-home_path = HOME_PATH
 
 # 清除注释以及多余字符
 def remove_comment(text: str):
@@ -147,34 +176,11 @@ def with_file(path, preload=False):
 
     global_var.output_error()
 
-# 错误的argument
-def wrong_argument(msg):
-    print(f'Unknown argument: \033[1m{msg}\033[0m')
-    print(f'Use `cpc -h` to get detailed informations about how to use')
-    quit(1)
-    # options.help()
-
 # 主函数
-def main(argv, input_=None, output_=None):
+def main(input_=None, output_=None):
     # 设置输入输出
     if input_: global_var.set_std_in(input_)
     if output_: global_var.set_std_out(output_)
-    # 解析参数
-    file_paths = set()
-    i = 1
-    while i < len(argv):
-        arg = argv[i]
-        for opt in options.arguments:
-            if opt.check(arg):
-                opt.run(argv[i:])
-                i += opt.value_num
-                break
-        else:
-            if arg[0] == '-':
-                wrong_argument(f'Unknown option `{arg}`')
-            else:
-                file_paths.add(arg)
-        i += 1
 
     # 预加载文件
     preload_scripts()
@@ -203,8 +209,7 @@ parser = yacc.yacc()
 # 程序入口
 if __name__ == '__main__':
     try:
-        main(sys.argv)
-        # main(['cpc', 'test/test.cpc'])
+        main()
     except EOFError:
         print("EXIT")
         quit(0)
