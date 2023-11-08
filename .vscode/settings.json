@@ -13,6 +13,7 @@
         "ENDTYPE",
         "ENDWHILE",
         "GETRECORD",
+        "gitee",
         "gnureadline",
         "Lcase",
         "lexpos",

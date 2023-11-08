@@ -1,12 +1,14 @@
 from .error import *
 from . import options
 from .history import Cmd
+from .config import Config
 import sys
 
 errors = {}
 running_mod = 'file'  # file / line
 running_path = ''  # 当前运行文件
 console = Cmd()
+config = Config()
 std_in = sys.stdin
 std_out = sys.stdout
 
@@ -30,6 +32,9 @@ def get_std_in():
 
 def get_std_out():
     return std_out
+
+def set_config(opt_name, value):
+    config.update_config(opt_name, value)
 
 def add_error_message(msg, obj):
     errors[running_path].append(Error(msg, obj))

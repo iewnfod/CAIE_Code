@@ -10,3 +10,4 @@ target/
 .cpc_history
 temp/
 *.log
+.cpc_config.json

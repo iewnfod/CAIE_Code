@@ -30,8 +30,11 @@ def get_commit_hash_msg():
     return latest_commit_hash, latest_commit_message
 
 def update():
+    from .global_var import config
+    git_remote = config.get_config('remote')
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
+    remote.set_url(git_remote)
     # 获取当前commit记录
     latest_commit_hash, latest_commit_message = get_commit_hash_msg()
 
@@ -39,7 +42,7 @@ def update():
         # 获取新的commit记录
         latest_commit_hash, latest_commit_message = get_commit_hash_msg()
         # 询问是否更新
-        u = input(f'There is a new version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n]').strip().lower()
+        u = input(f'There is a new version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n] ').strip().lower()
         if u == '' or u == 'y':
             if new_animation('Updating', 3, _update, failed_msg='Failed to Update', remote=remote, repo=repo):
                 print('\033[1mUpdate Successful\033[0m')

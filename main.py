@@ -1,6 +1,6 @@
 # 检查依赖
-from src.requirements import config
-config()
+from src.requirements import test_requirements
+test_requirements()
 
 # 正式导入
 from src.lex import *
@@ -149,7 +149,7 @@ def with_file(path, preload=False):
 
 # 错误的argument
 def wrong_argument(msg):
-    print(f'Wrong arguments: \033[1m{msg}\033[0m')
+    print(f'Unknown argument: \033[1m{msg}\033[0m')
     print(f'Use `cpc -h` to get detailed informations about how to use')
     quit(1)
     # options.help()

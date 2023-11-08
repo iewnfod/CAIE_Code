@@ -76,6 +76,9 @@ def update_version():
 def set_recursive_limit(v):
     setrecursionlimit(int(v))
 
+def change_config(opt_name, value):
+    from .global_var import set_config
+    set_config(opt_name, value)
 
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
 class Opt:
@@ -110,5 +113,6 @@ arguments = [
     Opt('-k', '--keywords', show_keywords, 'To show all the keywords', True),
     Opt('-ne', '--no-error', remove_error, 'To remove all error messages', False),
     Opt('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)', True),
-    Opt('-r', '--recursive-limit', set_recursive_limit, 'To set the recursive limit of the interpreter', False, 1)
+    Opt('-r', '--recursive-limit', set_recursive_limit, 'To set the recursive limit of the interpreter', False, 1),
+    Opt('-c', '--config', change_config, 'To set configs of this interpreter', True, 2)
 ]

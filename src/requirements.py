@@ -5,7 +5,7 @@ requirements = [
     ('colorama', 'colorama'),
 ]
 
-def config():
+def test_requirements():
     import importlib
     import pip
     for package_name, import_name in requirements:
