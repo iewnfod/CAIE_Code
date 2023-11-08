@@ -1,6 +1,6 @@
 from sys import exit, setrecursionlimit
 import platform
-from .update import VERSION, update
+from .update import VERSION, update, get_commit_hash_msg
 
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
@@ -15,7 +15,7 @@ def get_value(value):
     return options_dict[value]
 
 def standard_output():
-    print(f'CAIE Pseudocode Interpreter v{VERSION}')
+    print(f'CAIE Pseudocode Interpreter v{VERSION} ({get_commit_hash_msg()[0]})')
     print(f'Using {PLATFORM}')
     print('Repository at \033[4mhttps://github.com/iewnfod/CAIE_Code/\33[0m')
     print('Copyright (c) 2023 Iewnfod. ')
@@ -25,7 +25,7 @@ def open_parse_info():
     options_dict['show_parse'] = True
 
 def version():
-    print(f'Version \033[1m{VERSION}\033[0m')
+    print(f'Version \033[1m{VERSION}\033[0m ({get_commit_hash_msg()[0]})')
     exit(0)
 
 def help():
