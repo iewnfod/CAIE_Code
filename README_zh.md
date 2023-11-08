@@ -31,7 +31,7 @@
     * `Windows`若无法正常运行，也可尝试自己编译 [`build.ps1`](./build.ps1)
     >若运行已有二进制文件后无反应，同上。若依旧无法解决，请提交issue
     * 如果需要使用`man`指令，请自行将[cpc.1](./man/cpc.1)硬链接到你的`MANPATH`内，以便更新后不必再次链接。
-        * `Linux`用户可以使用以下指令:
+        * `Linux`用户可以使用以下指令：
             ```
             sudo ln -f ./man/cpc.1 /your/man/path
             ```
@@ -41,12 +41,12 @@
 * 如果您是完全使用以上步骤进行安装的，您可以使用`cpc -u`快速更新
 * 如果您并没有使用`git`进行安装，您需要手动下载新的版本，并使用和您之前相同的方法安装
 
-### Usage
+## 用法
 ```
 cpc [file_paths] [options]
 ```
 
-### Options
+### 选项
 | Mnemonic | Option | Description |
 | -------- | ------ | ----------- |
 | `-gt` | `--get-tree` | To show the tree of the program after being parsed |
@@ -58,10 +58,21 @@ cpc [file_paths] [options]
 | `-ne` | `--no-error` | To remove all error messages |
 | `-u` | `--update` | To update the version (only useful when using a version equal or greater than `0.1.2` and installed by git) |
 | `-r` | `--recursive-limit` | To set the recursive limit of the interpreter |
+| `-c` | `--config` | To set configs of this interpreter |
+
+### 可选配置
+
+- `remote`
+  - `github`：使用GitHub作为更新源并始终保持最新。
+  - `gitee`： 如果您在 GitHub 上遇到 Internet连接问题，请将其用作中国大陆用户的镜像源。
+- `dev`
+  - `true`： 启用开发者模式。
+  - `false`： 关闭开发者模式。
 
 ### 常见问题
+
 #### 出现 `Import Error`
-尝试手动安装依赖:
+尝试手动安装依赖：
 ```shell
 pip install -r requirements.txt
 ```
@@ -89,37 +100,37 @@ cpc -u
 
 
 ## 效率测试
-### 测试环境:
-* 机型: 2020 Macbook Pro
-* 处理器: Apple M1
-* 内存: 8GB
-* 核心: 8个 (4能效，4性能)
-* 系统版本: MacOS 13.3.1 (22E261)
-* Python 版本: PyPy 3.9.16
+### 测试环境：
+* 机型： 2020 Macbook Pro
+* 处理器： Apple M1
+* 内存： 8GB
+* 核心： 8个 (4能效，4性能)
+* 系统版本： MacOS 13.3.1 (22E261)
+* Python 版本： PyPy 3.9.16
 
 ### 基础测试
-* 赋值: 1000w/s
+* 赋值： 1000w/s
 ```
 DECLARE a : INTEGER
 FOR i <- 1 TO 10000000
     a <- i
 NEXT i
 ```
-* 显式转换+赋值: 740w/s
+* 显式转换+赋值： 740w/s
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 7400000
     a <- STRING(i)
 NEXT i
 ```
-* 隐式转换+赋值: 920w/s
+* 隐式转换+赋值： 920w/s
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 9200000
     a <- i
 NEXT i
 ```
-* 输出: 72w/s
+* 输出： 72w/s
 ```
 FOR i <- 1 TO 720000
     OUTPUT i
@@ -127,7 +138,7 @@ NEXT i
 ```
 
 ### 常见运算测试
-* [随机生成10w数据+希尔排序](test/sort_test.cpc): 2.5s 左右
+* [随机生成10w数据+希尔排序](test/sort_test.cpc)： 2.5s 左右
 
 
 ## 标准
@@ -231,7 +242,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-
+        
         IF <condition> THEN
             <statements>
         ELSE
@@ -272,7 +283,7 @@ NEXT i
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-
+        
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -280,7 +291,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier>
-
+        
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -289,7 +300,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-
+        
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -297,13 +308,13 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-
+        
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。
         * 在 `BYVAL` 中，如果确定了数组的类型，隐式转换将会发生，但在 `BYREF` 中，并不会考虑数组类型
-        * `BYREF` : 引用变量，在函数内修改后，函数外变量的本体的值也会修改
-        * `BYVAL` : 复制变量的值，在函数内做出的任何修改都不会影响到传入的变量本体
+        * `BYREF` ： 引用变量，在函数内修改后，函数外变量的本体的值也会修改
+        * `BYVAL` ： 复制变量的值，在函数内做出的任何修改都不会影响到传入的变量本体
 8. 文件读写
     * 打开文件
         ```
@@ -339,7 +350,7 @@ NEXT i
         ```
         TYPE <identifier> = ^<data type>
         ```
-    * 自定义 (注意: **若将一个类的实例`a`赋值给另一个实例`b`，此时不会检查类型，且`b`会成为`a`的引用**)
+    * 自定义 (注意： **若将一个类的实例`a`赋值给另一个实例`b`，此时不会检查类型，且`b`会成为`a`的引用**)
         ```
         TYPE <identifier>
             <statements>
