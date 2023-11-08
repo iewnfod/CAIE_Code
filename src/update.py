@@ -13,7 +13,15 @@ def check_update(repo: git.Repo, remote: git.Remote):
     remote.fetch()
     local_branch = repo.active_branch
     remote_branch = repo.remotes.origin.refs[local_branch.name]
-    return local_branch.commit != remote_branch.commit
+    # 获取本地和远程提交的时间戳
+    local_commit_time = local_branch.commit.committed_datetime
+    remote_commit_time = remote_branch.commit.committed_datetime
+    # 比较时间戳
+    if local_commit_time < remote_commit_time:
+        return True
+    else:
+        print("Good! Good! You are faster than your remote!")
+        return False
 
 def _update(remote, repo):
     try:
@@ -49,4 +57,4 @@ def update():
         else:
             print('Stop Updating')
     else:
-        print(f'You are using the latest version!\nAt {latest_commit_hash}: {latest_commit_message}')
+        print(f'Good! You are using the latest version!\nAt {latest_commit_hash}: {latest_commit_message}')
