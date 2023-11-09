@@ -44,7 +44,6 @@ while i < len(argv):
             file_paths.add(arg)
     i += 1
 
-
 # 检查依赖
 from src.requirements import test_requirements
 test_requirements()
