@@ -1,3 +1,5 @@
+name: Nightly update
+
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -13,7 +15,6 @@ jobs:
         with:
           title: "Nightly update in $(date '+%Y/%m/%d')"
           body: "This PR is for nightly update in $(date '+%Y/%m/%d')"
-          action_name: "Nightly update"
 
       - name: Add comment
         uses: github/create-pull-request-review-comment@v2
