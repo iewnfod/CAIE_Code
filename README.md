@@ -79,9 +79,9 @@ It runs the entire file if `filepath` is provided, otherwise it enters playgroun
   - `gitee`: If you have an Internet connection issue to GitHub, please use this as a mirror source in China Mainland.
 
 - `branch`
-  - `master`: The latest version of CPC, this may contain many untested functions.
   - `nightly`: This branch will update once a day. Early adopters can try this branch, please actively report the issue.
   - `stable`: Updates are slow, but the most stable.
+  - `dev`: The latest version of CPC, this may contain many untested functions.
 
   > In a developer mod, your remote will not be changed by config and the branch will be locked in `master`.
 
