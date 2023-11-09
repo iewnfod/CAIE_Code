@@ -4,6 +4,7 @@ from ..global_var import *
 from .array import *
 from .data_types import *
 
+
 class Output(AST_Node):
     def __init__(self, value, *args, **kwargs):
         self.type = 'OUTPUT'
@@ -11,11 +12,12 @@ class Output(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.value.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.value.get_tree(level + 1)
 
     def exe(self):
         v = self.value.exe()
         print_(v if v != None else '')
+
 
 class Output_expression(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -26,7 +28,7 @@ class Output_expression(AST_Node):
     def get_tree(self, level=0):
         r = LEVEL_STR * level + self.type
         for i in self.expressions:
-            r += '\n' + i.get_tree(level+1)
+            r += '\n' + i.get_tree(level + 1)
         return r
 
     def add_expression(self, expression):
@@ -44,6 +46,7 @@ class Output_expression(AST_Node):
                 result += str(t[0])
         return result
 
+
 class Input(AST_Node):
     def __init__(self, id, *args, **kwargs):
         self.type = 'INPUT'
@@ -56,6 +59,7 @@ class Input(AST_Node):
     def exe(self):
         stack.set_variable(self.id, str(input_()), 'STRING')
 
+
 class Array_input(AST_Node):
     def __init__(self, id, indexes, *args, **kwargs):
         self.type = 'ARRAY_INPUT'
@@ -64,7 +68,7 @@ class Array_input(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level + 1)
 
     def exe(self):
         inp = input()
@@ -76,6 +80,7 @@ class Array_input(AST_Node):
             lexpos=self.lexpos
         ).exe()
 
+
 class Raw_output(AST_Node):
     def __init__(self, expression, *args, **kwargs):
         self.type = 'RAW_OUTPUT'
@@ -83,12 +88,14 @@ class Raw_output(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level + 1)
 
     def _output(self, v):
         # 如果当前是文件模式，那么就应该输出此方法的结果
-        if get_running_mod() == 'file': need_output = False
-        else: need_output = True
+        if get_running_mod() == 'file':
+            need_output = False
+        else:
+            need_output = True
 
         if need_output: print_(v)
 

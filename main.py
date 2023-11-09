@@ -13,7 +13,6 @@ import sys
 import os
 from time import time
 
-
 preline = '>'
 multi_preline = '.'
 home_path = HOME_PATH
@@ -25,6 +24,7 @@ def wrong_argument(msg):
     print(f'Use `cpc -h` to get detailed informations about how to use')
     quit(1)
     # options.help()
+
 
 # 解析参数
 argv = sys.argv
@@ -44,9 +44,9 @@ while i < len(argv):
             file_paths.add(arg)
     i += 1
 
-
 # 检查依赖
 from src.requirements import test_requirements
+
 test_requirements()
 # 依赖库导入
 from ply import yacc
@@ -54,7 +54,9 @@ from ply import lex
 from chardet import detect
 # 导入色彩基础库，保证\033能正确的转译
 import colorama
+
 colorama.init()
+
 
 # 清除注释以及多余字符
 def remove_comment(text: str):
@@ -63,6 +65,7 @@ def remove_comment(text: str):
         text[i] = text[i].split('//')[0].strip()
 
     return '\n'.join(text).strip()
+
 
 # 预加载文件
 def preload_scripts():
@@ -73,6 +76,7 @@ def preload_scripts():
             _, n = os.path.splitext(path)
             if n == '.cpc':
                 with_file(path, True)
+
 
 # 多行输入
 def multi_input():
@@ -105,6 +109,7 @@ def multi_input():
             add_error_message(str(e), AST_Node())
 
     return text
+
 
 # 运行 AST
 def run_AST(ast, preload=False):
@@ -147,6 +152,7 @@ def with_line():
 
         global_var.output_error()
 
+
 # 文件模式，读取文件并解析运行
 def with_file(path, preload=False):
     global_var.set_running_mod('file')
@@ -176,6 +182,7 @@ def with_file(path, preload=False):
 
     global_var.output_error()
 
+
 # 主函数
 def main(input_=None, output_=None):
     # 设置输入输出
@@ -199,6 +206,7 @@ def main(input_=None, output_=None):
                     wrong_argument(f'`{file_path}` is not a file')
             else:
                 wrong_argument(f'File `{file_path}` does not exist')
+
 
 # 加载基础类型
 global_var.__init__()

@@ -6,10 +6,13 @@ try:
 except:
     readline = None
 
+
 def parent_path(p):
     return dirname(p)
 
+
 HOME_PATH = parent_path(parent_path(__file__))
+
 
 class Cmd:
     def __init__(self, home_path=HOME_PATH, save_path='.cpc_history', history_size=1000):

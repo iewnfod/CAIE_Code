@@ -4,6 +4,7 @@ from ..global_var import *
 from .array import *
 from .data_types import *
 
+
 class Open_file(AST_Node):
     def __init__(self, file_path, file_mode, *args, **kwargs):
         self.type = 'OPENFILE'
@@ -12,7 +13,8 @@ class Open_file(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + self.file_mode.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(
+            level + 1) + '\n' + self.file_mode.get_tree(level + 1)
 
     def exe(self):
         file_path = self.file_path.exe()
@@ -26,6 +28,7 @@ class Open_file(AST_Node):
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)
 
+
 class Close_file(AST_Node):
     def __init__(self, file_path, *args, **kwargs):
         self.type = 'CLOSEFILE'
@@ -33,7 +36,7 @@ class Close_file(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level + 1)
 
     def exe(self):
         file_path = self.file_path.exe()
@@ -44,6 +47,7 @@ class Close_file(AST_Node):
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)
 
+
 class Read_file(AST_Node):
     def __init__(self, file_path, id, *args, **kwargs):
         self.type = 'READFILE'
@@ -52,7 +56,8 @@ class Read_file(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.id)
+        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level + 1) + '\n' + LEVEL_STR * (
+                    level + 1) + str(self.id)
 
     def exe(self):
         file_path = self.file_path.exe()
@@ -63,6 +68,7 @@ class Read_file(AST_Node):
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)
 
+
 class Read_file_array(AST_Node):
     def __init__(self, file_path, id, indexes, *args, **kwargs):
         self.type = 'READFILE_ARRAY'
@@ -72,11 +78,12 @@ class Read_file_array(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.file_path(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.id) + '\n' + self.indexes.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.file_path(level + 1) + '\n' + LEVEL_STR * (level + 1) + str(
+            self.id) + '\n' + self.indexes.get_tree(level + 1)
 
     def exe(self):
         fp = self.file_path.exe()
-        if fp[1] == 'STRING' :
+        if fp[1] == 'STRING':
             f = stack.get_file(fp[0])
             data = f.read()
             Array_assign(
@@ -89,6 +96,7 @@ class Read_file_array(AST_Node):
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)
 
+
 class Write_file(AST_Node):
     def __init__(self, file_path, value, *args, **kwargs):
         self.type = 'WRITEFILE'
@@ -97,7 +105,8 @@ class Write_file(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + self.value.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level + 1) + '\n' + self.value.get_tree(
+            level + 1)
 
     def exe(self):
         file_path = self.file_path.exe()
@@ -109,6 +118,7 @@ class Write_file(AST_Node):
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{file_path[1]}`', self)
 
+
 class Seek(AST_Node):
     def __init__(self, file_path, ad, *args, **kwargs):
         self.type = 'SEEK'
@@ -117,7 +127,8 @@ class Seek(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + self.ad.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level + 1) + '\n' + self.ad.get_tree(
+            level + 1)
 
     def exe(self):
         fp = self.file_path.exe()

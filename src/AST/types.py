@@ -5,6 +5,7 @@ from .var import *
 from .array import *
 from ..stack import Space
 
+
 class Enumerate_type(AST_Node):
     def __init__(self, id, enumerate_items, *args, **kwargs):
         self.type = "ENUMERATE_TYPE"
@@ -13,12 +14,14 @@ class Enumerate_type(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level+1) + str(self.id) + '\n' + self.items.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level + 1) + str(
+            self.id) + '\n' + self.items.get_tree(level + 1)
 
     def exe(self):
         items = self.items.exe()
         stack.new_variable(self.id, 'ENUM')
         stack.set_variable(self.id, items, 'ENUM')
+
 
 class Enumerate_items(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -32,11 +35,12 @@ class Enumerate_items(AST_Node):
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type
         for i in self.items:
-            result += '\n' + LEVEL_STR * (level+1) + str(i)
+            result += '\n' + LEVEL_STR * (level + 1) + str(i)
         return result
 
     def exe(self):
         return self.items
+
 
 class Composite_type(AST_Node):
     def __init__(self, id, body_expression, *args, **kwargs):
@@ -46,7 +50,8 @@ class Composite_type(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level + 1) + str(self.id) + '\n' + self.body.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level + 1) + str(
+            self.id) + '\n' + self.body.get_tree(level + 1)
 
     def exe(self):
         that = self
@@ -92,6 +97,7 @@ class Composite_type(AST_Node):
 
         stack.add_struct(self.id, t)
 
+
 class Composite_type_expression(AST_Node):
     def __init__(self, exp1, exp2, *args, **kwargs):
         self.type = 'COMPOSITE_TYPE_EXPRESSION'
@@ -100,7 +106,8 @@ class Composite_type_expression(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.exp1.get_tree(level+1) + '\n' + self.exp2.get_tree(level+2)
+        return LEVEL_STR * level + self.type + '\n' + self.exp1.get_tree(level + 1) + '\n' + self.exp2.get_tree(
+            level + 2)
 
     def exe(self):
         obj = self.exp1.exe()[0]
@@ -117,6 +124,7 @@ class Composite_type_expression(AST_Node):
         # 返回获得的值
         return v
 
+
 class Composite_type_statement(AST_Node):
     def __init__(self, exp, statement, *args, **kwargs):
         self.type = 'COMPOSITE_TYPE_STATEMENT'
@@ -125,7 +133,8 @@ class Composite_type_statement(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.exp.get_tree(level+1) + '\n' + self.statement.get_tree(level+2)
+        return LEVEL_STR * level + self.type + '\n' + self.exp.get_tree(level + 1) + '\n' + self.statement.get_tree(
+            level + 2)
 
     def exe(self):
         obj = self.exp.exe()
@@ -140,6 +149,7 @@ class Composite_type_statement(AST_Node):
         # 将空间放回子空间列表
         stack.pop_subspace()
 
+
 class Pointer(AST_Node):
     def __init__(self, new_id, old_id, *args, **kwargs):
         self.type = 'POINTER'
@@ -148,7 +158,8 @@ class Pointer(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level+1) + str(self.new_id) + '\n' + LEVEL_STR * (level+1) + str(self.old_id)
+        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level + 1) + str(self.new_id) + '\n' + LEVEL_STR * (
+                    level + 1) + str(self.old_id)
 
     def exe(self):
         stack.add_struct(self.new_id, stack.structs[self.old_id])

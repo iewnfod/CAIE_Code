@@ -4,6 +4,7 @@ from ..AST_Base import *
 from ..global_var import *
 from ..quit import *
 
+
 class Int_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
         self.type = 'INTEGER_CONVERT'
@@ -11,7 +12,7 @@ class Int_convert(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level + 1)
 
     def exe(self):
         result = self.expression.exe()
@@ -26,6 +27,7 @@ class Int_convert(AST_Node):
         except:
             add_error_message(f'Cannot convert `{result[0]}` into `INTEGER`', self)
 
+
 class Str_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
         self.type = 'STRING_CONVERT'
@@ -33,7 +35,7 @@ class Str_convert(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level + 1)
 
     def exe(self):
         result = self.expression.exe()
@@ -48,6 +50,7 @@ class Str_convert(AST_Node):
         except:
             add_error_message(f'Cannot convert `{result[0]}` into `STRING`', self)
 
+
 class Char_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
         self.type = 'CHAR_CONVERT'
@@ -55,7 +58,7 @@ class Char_convert(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level + 1)
 
     def exe(self):
         result = self.expression.exe()
@@ -64,7 +67,6 @@ class Char_convert(AST_Node):
             return
         else:
             result = result[0]
-
 
         try:
             result = str(result[0])
@@ -78,6 +80,7 @@ class Char_convert(AST_Node):
         else:
             return (result, 'CHAR')
 
+
 class Real_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
         self.type = 'REAL_CONVERT'
@@ -85,7 +88,7 @@ class Real_convert(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level + 1)
 
     def exe(self):
         result = self.expression.exe()
@@ -100,6 +103,7 @@ class Real_convert(AST_Node):
         except:
             add_error_message(f'Cannot convert `{result[0]}` into `REAL`', self)
 
+
 class Bool_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
         self.type = 'BOOLEAN_CONVERT'
@@ -107,7 +111,7 @@ class Bool_convert(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level + 1)
 
     def exe(self):
         result = self.expression.exe()
@@ -130,7 +134,7 @@ class Right(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -141,9 +145,11 @@ class Right(AST_Node):
         s = parameters[0]
         x = parameters[1]
         if s[1] == 'STRING' and x[1] == 'INTEGER':
-            return (s[0][len(s[0])-x[0]:], 'STRING')
+            return (s[0][len(s[0]) - x[0]:], 'STRING')
         else:
-            add_error_message(f'Function `{self.type}` expect `STRING` and `INTEGER`, but found `{s[1]}` and `{x[1]}`', self)
+            add_error_message(f'Function `{self.type}` expect `STRING` and `INTEGER`, but found `{s[1]}` and `{x[1]}`',
+                              self)
+
 
 class Length(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -152,7 +158,7 @@ class Length(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -168,6 +174,7 @@ class Length(AST_Node):
         else:
             add_error_message(f'Function `{self.type}` expect `STRING` or `ARRAY`, but found `{s[1]}`', self)
 
+
 class Mid(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
         self.type = 'MID'
@@ -175,7 +182,7 @@ class Mid(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -187,9 +194,12 @@ class Mid(AST_Node):
         x = parameters[1]
         y = parameters[2]
         if s[1] == 'STRING' and x[1] == 'INTEGER' and y[1] == 'INTEGER':
-            return (s[0][x[0]-1:x[0]+y[0]-1], 'STRING')
+            return (s[0][x[0] - 1:x[0] + y[0] - 1], 'STRING')
         else:
-            add_error_message(f'Function `{self.type}` expect `STRING` and `INTEGER` and `INTEGER`, but found `{self.s[1]}` and `{self.x[1]}` and `{self.y[1]}`', self)
+            add_error_message(
+                f'Function `{self.type}` expect `STRING` and `INTEGER` and `INTEGER`, but found `{self.s[1]}` and `{self.x[1]}` and `{self.y[1]}`',
+                self)
+
 
 class Lcase(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -198,7 +208,7 @@ class Lcase(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -212,6 +222,7 @@ class Lcase(AST_Node):
         else:
             add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
 
+
 class Ucase(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
         self.type = 'UCASE'
@@ -219,7 +230,7 @@ class Ucase(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -242,7 +253,7 @@ class Rand(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -252,7 +263,7 @@ class Rand(AST_Node):
 
         n = parameters[0]
         if n[1] == 'INTEGER':
-            return ( randint(0, n[0]*self.rate)/self.rate , "REAL")
+            return (randint(0, n[0] * self.rate) / self.rate, "REAL")
         else:
             add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{n[1]}`', self)
 
@@ -264,7 +275,7 @@ class Eof(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -283,6 +294,7 @@ class Eof(AST_Node):
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)
 
+
 class Pow(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
         self.type = 'POW'
@@ -290,7 +302,7 @@ class Pow(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         parameters = self.parameters.exe()
@@ -299,6 +311,7 @@ class Pow(AST_Node):
         except:
             add_error_message(f'Cannot power `{parameters[0][1]}` with `{parameters[1][1]}`', self)
 
+
 class Exit(AST_Node):
     def __init__(self, parameters=None, *args, **kwargs):
         self.type = 'EXIT'
@@ -306,7 +319,7 @@ class Exit(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         if self.parameters != None:
@@ -320,6 +333,7 @@ class Exit(AST_Node):
 
         quit(exit_code)
 
+
 class Round(AST_Node):
     def __init__(self, parameters=None, *args, **kwargs):
         self.type = 'ROUND'
@@ -327,7 +341,7 @@ class Round(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         if self.parameters:
@@ -341,6 +355,7 @@ class Round(AST_Node):
         else:
             add_error_message(f'Round only have 1 or 2 parameters, but found 0', self)
 
+
 class Python(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
         self.type = 'PYTHON'
@@ -348,7 +363,7 @@ class Python(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level + 1)
 
     def exe(self):
         if self.parameters:

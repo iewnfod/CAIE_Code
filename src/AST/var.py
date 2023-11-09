@@ -2,6 +2,7 @@ from .data import *
 from ..AST_Base import *
 from ..global_var import *
 
+
 class Constant(AST_Node):
     def __init__(self, id, value, *args, **kwargs):
         self.type = 'CONSTANT'
@@ -10,12 +11,13 @@ class Constant(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        result = LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.value.get_tree(level+1)
+        result = LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.value.get_tree(level + 1)
         return result
 
     def exe(self):
         value = self.value.exe()
         stack.new_constant(self.id, value)
+
 
 class Variable(AST_Node):
     def __init__(self, id, type, *args, **kwargs):
@@ -25,10 +27,11 @@ class Variable(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level + 1) + str(self.var_type)
 
     def exe(self):
         stack.new_variable(self.id, self.var_type)
+
 
 class Assign(AST_Node):
     def __init__(self, id, expression, *args, **kwargs):
@@ -44,6 +47,7 @@ class Assign(AST_Node):
         r = self.expression.exe()
         stack.set_variable(self.id, r[0], r[1])
 
+
 # 唯一获取变量及常量值的方法
 class Get(AST_Node):
     def __init__(self, id, *args, **kwargs):
@@ -56,6 +60,7 @@ class Get(AST_Node):
 
     def exe(self):
         return stack.get_variable(self.id)
+
 
 class Delete(AST_Node):
     def __init__(self, id, *args, **kwargs):

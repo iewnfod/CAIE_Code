@@ -1,5 +1,6 @@
 from copy import deepcopy
 
+
 class base:
     def __init__(self, name=None):
         self.name = name
@@ -14,6 +15,7 @@ class base:
         else:
             return self.value
 
+
 class INTEGER(base):
     def __init__(self, value=0, *args, **kwargs):
         self.value = int(value)
@@ -26,6 +28,7 @@ class INTEGER(base):
     def __bool__(self):
         return bool(self.value)
 
+
 class REAL(base):
     def __init__(self, value=.0, *args, **kwargs):
         self.value = float(value)
@@ -34,6 +37,7 @@ class REAL(base):
 
     def set_value(self, new_value):
         self.value = float(new_value)
+
 
 class STRING(base):
     def __init__(self, value='', *args, **kwargs):
@@ -46,6 +50,7 @@ class STRING(base):
 
     def __str__(self):
         return '"' + self.value + '"'
+
 
 class CHAR(base):
     def __init__(self, value='', *args, **kwargs):
@@ -61,6 +66,7 @@ class CHAR(base):
 
     def __str__(self):
         return "'" + self.value + "'"
+
 
 class BOOLEAN(base):
     def __init__(self, value=False, *args, **kwargs):
@@ -79,7 +85,10 @@ class BOOLEAN(base):
     def set_value(self, new_value):
         self.value = bool(new_value)
 
+
 import time
+
+
 class DATE(base):
     def __init__(self, value=time.strftime("%d/%m/%Y", time.localtime()), *args, **kwargs):
         self.day, self.month, self.year = value.split('/')
@@ -97,6 +106,7 @@ class DATE(base):
 
     def set_value(self, new_value):
         self.year, self.month, self.day = new_value
+
 
 class ARRAY(base):
     def __init__(self, value={}, *args, **kwargs):
@@ -134,7 +144,8 @@ class ARRAY(base):
             s_right = self.value['right']
             left = self.value['left']
             right = self.value['right']
-            add_stack_error_message(f'Cannot assign an array with size `{left}:{right}` to an array with size `{s_left}:{s_right}`')
+            add_stack_error_message(
+                f'Cannot assign an array with size `{left}:{right}` to an array with size `{s_left}:{s_right}`')
 
     def to_target(self, target, v=None):
         from .AST.data import stack
@@ -152,7 +163,10 @@ class ARRAY(base):
                     except:
                         add_stack_error_message(f'Cannot change value `{str(v[i][0])}` into `{target}`')
 
+
 from enum import Enum
+
+
 class ENUM(base):
     def __init__(self, *args, **kwargs):
         self.value = None

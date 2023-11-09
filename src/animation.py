@@ -4,6 +4,7 @@ import threading
 
 flags = {}
 
+
 def animation(msg, count):
     n = 0
     while flags[msg]:
@@ -11,6 +12,7 @@ def animation(msg, count):
         print(msg + '.' * n + ' ' * (count - n), end='\r')
         n %= count
         time.sleep(.5)
+
 
 def new_animation(msg: str, count: int, work, failed_msg='', *args, **kwargs):
     flags[msg] = True

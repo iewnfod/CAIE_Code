@@ -2,6 +2,7 @@ from .data import *
 from ..AST_Base import *
 from ..global_var import *
 
+
 class Op_minus(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
         self.type = 'MINUS'
@@ -10,7 +11,8 @@ class Op_minus(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level + 1) + '\n' + self.right.get_tree(
+            level + 1)
 
     def exe(self):
         n1 = self.left.exe()
@@ -24,6 +26,7 @@ class Op_minus(AST_Node):
         except:
             add_error_message(f'Cannot minus `{n1[1]}` with `{n2[1]}`', self)
 
+
 class Op_plus(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
         self.type = 'PLUS'
@@ -32,7 +35,8 @@ class Op_plus(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level + 1) + '\n' + self.right.get_tree(
+            level + 1)
 
     def exe(self):
         n1 = self.left.exe()
@@ -46,6 +50,7 @@ class Op_plus(AST_Node):
         except:
             add_error_message(f'Cannot plus `{n1[1]}` with `{n2[1]}`', self)
 
+
 class Op_mul(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
         self.type = 'MUL'
@@ -54,7 +59,8 @@ class Op_mul(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level + 1) + '\n' + self.right.get_tree(
+            level + 1)
 
     def exe(self):
         n1 = self.left.exe()
@@ -68,6 +74,7 @@ class Op_mul(AST_Node):
         except:
             add_error_message(f'Cannot multiply `{n1[1]}` with `{n2[1]}`', self)
 
+
 class Op_div(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
         self.type = 'DIV'
@@ -76,7 +83,8 @@ class Op_div(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level + 1) + '\n' + self.right.get_tree(
+            level + 1)
 
     def exe(self):
         n1 = self.left.exe()
@@ -95,6 +103,7 @@ class Op_div(AST_Node):
         except:
             add_error_message(f'Cannot divide `{n1[1]}` with `{n2[1]}`', self)
 
+
 class Op_connect(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
         self.type = 'CONNECT'
@@ -103,7 +112,8 @@ class Op_connect(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level + 1) + '\n' + self.right.get_tree(
+            level + 1)
 
     def exe(self):
         s1 = self.left.exe()
@@ -122,7 +132,8 @@ class Op_mod(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level + 1) + '\n' + self.right.get_tree(
+            level + 1)
 
     def exe(self):
         n1 = self.left.exe()
@@ -136,6 +147,7 @@ class Op_mod(AST_Node):
         except:
             add_error_message(f'Cannot module `{n1[1]}` with `{n2[1]}`', self)
 
+
 class Op_exact_div(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
         self.type = 'EXACT_DIV'
@@ -144,7 +156,8 @@ class Op_exact_div(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level + 1) + '\n' + self.right.get_tree(
+            level + 1)
 
     def exe(self):
         n1 = self.left.exe()

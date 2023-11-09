@@ -3,6 +3,7 @@ from ..AST_Base import *
 from ..global_var import *
 import copy
 
+
 class Function(AST_Node):
     def __init__(self, id, parameters, statements, returns=None, *args, **kwargs):
         self.type = 'FUNCTION'
@@ -15,12 +16,14 @@ class Function(AST_Node):
 
     def get_tree(self, level=0):
         if self.parameters:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(
+                level + 1) + '\n' + self.statements.get_tree(level + 1)
         else:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level + 1)
 
     def exe(self):
         stack.add_function(self)
+
 
 class ArrFunction(AST_Node):
     def __init__(self, id, parameters, arr_type, statements, *args, **kwargs):
@@ -34,12 +37,14 @@ class ArrFunction(AST_Node):
 
     def get_tree(self, level=0):
         if self.parameters:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(
+                level + 1) + '\n' + self.statements.get_tree(level + 1)
         else:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level + 1)
 
     def exe(self):
         stack.add_function(self)
+
 
 class Call_function(AST_Node):
     def __init__(self, id, parameters=None, *args, **kwargs):
@@ -50,7 +55,7 @@ class Call_function(AST_Node):
 
     def get_tree(self, level=0):
         if self.parameters:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level + 1)
         else:
             return LEVEL_STR * level + self.type + ' ' + str(self.id)
 
@@ -64,7 +69,9 @@ class Call_function(AST_Node):
             else:
                 add_error_message(f'Function `{self.id}` expect {len(target_parameters)} parameters, but found 0', self)
             if len(target_parameters) != len(parameters):
-                add_error_message(f'Function `{self.id}` expect {len(target_parameters)} parameters, but found {len(self.parameters)}', self)
+                add_error_message(
+                    f'Function `{self.id}` expect {len(target_parameters)} parameters, but found {len(self.parameters)}',
+                    self)
 
             # 核对并传参
             for i in range(len(target_parameters)):
@@ -74,7 +81,8 @@ class Call_function(AST_Node):
                         if target_parameters[i][1] == parameters[i][1]:
                             new_dict[target_parameters[i][0]] = (parameters[i], False)
                         else:
-                            add_error_message(f'Cannot reference `{parameters[i][1]}` to `{target_parameters[i][1]}`', self)
+                            add_error_message(f'Cannot reference `{parameters[i][1]}` to `{target_parameters[i][1]}`',
+                                              self)
                     else:
                         # 否则，赋值 value 并且然后传递
                         # 切换 target 类型
@@ -90,10 +98,13 @@ class Call_function(AST_Node):
                                 False
                             )
                 except:
-                    add_error_message(f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`', self)
+                    add_error_message(
+                        f'Function `{self.id}` expect a parameter with type `{target_parameters[i][1]}`, but found `{parameters[i][1]}`',
+                        self)
         else:
             if self.parameters:
-                add_error_message(f'Function `{self.id}` does not expect any parameters, but found {len(self.parameters)}', self)
+                add_error_message(
+                    f'Function `{self.id}` does not expect any parameters, but found {len(self.parameters)}', self)
 
         # 为函数创建新的命名空间
         stack.new_space(self.id, new_dict, {})
@@ -121,9 +132,11 @@ class Call_function(AST_Node):
             try:
                 return stack.structs[function_obj.returns](returns[0])
             except:
-                add_error_message(f'Function {self.id} expect `{function_obj.returns}` to return, but found `{returns[1]}`', self)
+                add_error_message(
+                    f'Function {self.id} expect `{function_obj.returns}` to return, but found `{returns[1]}`', self)
         else:
             return None
+
 
 class Declare_parameter(AST_Node):
     def __init__(self, id, type, by_ref=None, *args, **kwargs):
@@ -134,10 +147,11 @@ class Declare_parameter(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level + 1) + str(self.var_type)
 
     def exe(self):
         return (self.id, self.var_type, self.by_ref, None)
+
 
 class Declare_arr_parameter(AST_Node):
     def __init__(self, id, arr_type, by_ref=None, *args, **kwargs):
@@ -149,10 +163,12 @@ class Declare_arr_parameter(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level + 1) + str(self.var_type) + ' ' + str(self.arr_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level + 1) + str(
+            self.var_type) + ' ' + str(self.arr_type)
 
     def exe(self):
         return (self.id, self.var_type, self.by_ref, self.arr_type)
+
 
 class Declare_parameters(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -163,7 +179,7 @@ class Declare_parameters(AST_Node):
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type + '\n'
         for i in self.parameters:
-            result += i.get_tree(level+1) + '\n'
+            result += i.get_tree(level + 1) + '\n'
         return result[:-1]
 
     def add_parameter(self, parameter):
@@ -184,6 +200,7 @@ class Declare_parameters(AST_Node):
             result.append(v)
         return result
 
+
 class Parameters(AST_Node):
     def __init__(self, *args, **kwargs):
         self.type = 'PARAMETERS'
@@ -193,7 +210,7 @@ class Parameters(AST_Node):
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type + '\n'
         for i in self.parameters:
-            result += i.get_tree(level+1) + '\n'
+            result += i.get_tree(level + 1) + '\n'
         return result[:-1]
 
     def add_parameter(self, parameter):
@@ -208,6 +225,7 @@ class Parameters(AST_Node):
             result.append(i.exe())
         return result
 
+
 class Return(AST_Node):
     def __init__(self, expression, *args, **kwargs):
         self.type = 'RETURN'
@@ -215,7 +233,7 @@ class Return(AST_Node):
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
+        return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level + 1)
 
     def exe(self):
         stack.set_return_variables(self.expression.exe())

@@ -2,6 +2,7 @@ from .global_var import *
 from .data_types import *
 from copy import copy
 
+
 # (空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例})
 class Space:
     def __init__(self, name: str, variables: dict, functions: dict):
@@ -40,14 +41,14 @@ class Stack:
         self.spaces = [Space('GLOBAL', {}, {})]  # [Space]
         self.files = {}  # {文件名: 打开的文件实例}
         self.structs = {
-            'INTEGER' : INTEGER,
-            'REAL' : REAL,
-            'STRING' : STRING,
-            'CHAR' : CHAR,
-            'BOOLEAN' : BOOLEAN,
+            'INTEGER': INTEGER,
+            'REAL': REAL,
+            'STRING': STRING,
+            'CHAR': CHAR,
+            'BOOLEAN': BOOLEAN,
             'DATE': DATE,
-            'ARRAY' : ARRAY,
-            'ENUM' : ENUM,
+            'ARRAY': ARRAY,
+            'ENUM': ENUM,
         }  # {结构名: 结构实例}
         self.return_variables = None
         self.return_request = False

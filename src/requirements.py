@@ -5,6 +5,7 @@ requirements = [
     ('colorama', 'colorama'),
 ]
 
+
 def test_requirements():
     import importlib
     import pip

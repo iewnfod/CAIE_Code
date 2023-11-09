@@ -3,6 +3,7 @@ from ..AST_Base import *
 from ..global_var import *
 from ..data_types import DATE
 
+
 class Integer(AST_Node):
     def __init__(self, value, *args, **kwargs):
         self.type = 'INTEGER'
@@ -14,6 +15,7 @@ class Integer(AST_Node):
 
     def exe(self):
         return (self.value, self.type)
+
 
 class Real(AST_Node):
     def __init__(self, value, *args, **kwargs):
@@ -27,6 +29,7 @@ class Real(AST_Node):
     def exe(self):
         return (self.value, self.type)
 
+
 class Char(AST_Node):
     def __init__(self, value, *args, **kwargs):
         self.type = 'CHAR'
@@ -38,6 +41,7 @@ class Char(AST_Node):
 
     def exe(self):
         return (self.value, self.type)
+
 
 class String(AST_Node):
     def __init__(self, value, *args, **kwargs):
@@ -51,6 +55,7 @@ class String(AST_Node):
     def exe(self):
         return (self.value, self.type)
 
+
 class Boolean(AST_Node):
     def __init__(self, value, *args, **kwargs):
         self.type = 'BOOLEAN'
@@ -62,6 +67,7 @@ class Boolean(AST_Node):
 
     def exe(self):
         return (self.value, self.type)
+
 
 class Date(AST_Node):
     def __init__(self, value, *args, **kwargs):
