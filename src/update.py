@@ -22,7 +22,7 @@ def check_update(repo: git.Repo, remote: git.Remote):
     if local_commit_time < remote_commit_time:
         return True
     elif local_commit_time > remote_commit_time:
-        print("Good! Good! You are faster than your remote!")
+        print(f"Good! Good! You are faster than \033[1m{get_current_branch()}\033[0m branch!")
         print("At", *get_commit_hash_msg())
         global super_fast
         super_fast = True
@@ -41,6 +41,11 @@ def _update(remote, repo):
     except:
         print('\033[31;1mFailed to Update\033[0m')
 
+def get_current_branch():
+    repo = git.Repo(HOME_PATH)
+    current_branch = repo.git.rev_parse("--abbrev-ref", "HEAD")
+    return current_branch
+
 def get_commit_hash_msg():
     repo = git.Repo(HOME_PATH)
     latest_commit_hash = repo.head.reference.commit.hexsha[:7]
@@ -53,7 +58,8 @@ def update():
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
     if config.get_config('dev'):
-        print('In a developer mod, your remote will not be changed by config. \nYou can close the developer mod by using `cpc -c dev false`. ')
+        print('In a developer mod, your remote will not be changed by config and branch will be locked in master.')
+        print('You can close the developer mod by using `cpc -c dev false`.')
     else:
         remote.set_url(git_remote)
     # 获取当前commit记录
@@ -64,14 +70,14 @@ def update():
         _update(remote, repo)
         latest_commit_hash, latest_commit_message = get_commit_hash_msg()
         # 询问是否更新
-        u = input(f'There is a new version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n] ').strip().lower()
+        u = input(f'There is a new \033[1m{get_current_branch()}\033[0m version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n] ').strip().lower()
         if u == '' or u == 'y':
             if new_animation('Updating', 3, _update, failed_msg='Failed to Update', remote=remote, repo=repo):
-                # 更新后再次获取新的commit记录
-                latest_commit_hash, latest_commit_message = get_commit_hash_msg()
                 print('\033[1mUpdate Successful\033[0m')
         else:
             print('Stop Updating')
     else:
         if not super_fast:
-            print(f'Good! You are using the latest version!\nAt {latest_commit_hash}: {latest_commit_message}')
+            # 更新后再次获取新的commit记录
+            latest_commit_hash, latest_commit_message = get_commit_hash_msg()
+            print(f'Good! You are using the latest \033[1m{get_current_branch()}\033[0m version!\nAt {latest_commit_hash}: {latest_commit_message}')
