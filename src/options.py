@@ -82,7 +82,9 @@ def change_config(opt_name, value):
     set_config(opt_name, value)
 
 def migrate_files(directory):
-
+    if os.path.isfile(directory):
+        print('Please enter a dir path instead of a single file.')
+        return
     for root, dirs, files in os.walk(directory):
         # Filter out directories starting with a dot
         dirs[:] = [d for d in dirs if not d.startswith('.')]
