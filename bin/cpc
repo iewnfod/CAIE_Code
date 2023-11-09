@@ -11,6 +11,9 @@
 # FYI, you can find the standard here:
 # https://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html
 
+# Get OS.
+_UNAME="$(uname)"
+
 # Define resolpath, which should resolve the given path so that the last
 # component is not a symbolic link.
 if type realpath 1>/dev/null; then
@@ -35,7 +38,7 @@ else
 			unset -v _link
 		}
 	else
-		echo "readlink is not installed, so symlink resolving is unsupported" 1>&2
+		echo "readlink not installed, so symlink resolving is unsupported" 1>&2
 		resolpath() {
 			echo "$1"
 		}
@@ -60,7 +63,7 @@ unset -v exe_path
 
 # Find python and run it.
 _MAC_PY_HOME="/Library/Frameworks/Python.framework/Versions"
-if [ $(uname -s) = "Darwin" ] && [ -d "$_MAC_PY_HOME" ]; then
+if [ "$_UNAME" = "Darwin" ] && [ -d "$_MAC_PY_HOME" ]; then
 	# Search through MAC OS specific paths.
 	for path in "$_MAC_PY_HOME"/*; do
 		case $(basename "$path" | tr '[:upper:]' '[:lower:]') in
@@ -82,3 +85,4 @@ done
 # If we cannot find python3, we should output a warning message.
 echo "cannot find python3 on your computer" 1>&2
 echo "please make sure python3 is installed and added to your PATH" 1>&2
+exit 1
