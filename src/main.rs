@@ -42,7 +42,10 @@ fn main() {
     args.reverse();
 
     // 获取文件所在目录
-    let exe_path = env::current_exe().unwrap();
+    let mut exe_path = env::current_exe().unwrap();
+    while exe_path.is_symlink() {
+        exe_path = exe_path.read_link().unwrap();
+    }
     let mut sdk_catalog = exe_path.parent().unwrap();
     // 循环向上查找，直到找到包含main.py的目录
     loop {
