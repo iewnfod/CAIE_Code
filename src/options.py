@@ -1,6 +1,6 @@
 from sys import exit, setrecursionlimit
 import platform
-from .update import VERSION, update, get_commit_hash_msg
+from .update import VERSION, update, get_commit_hash_msg, get_current_branch
 import os
 
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
@@ -26,7 +26,7 @@ def open_parse_info():
     options_dict['show_parse'] = True
 
 def version():
-    print(f'Version \033[1m{VERSION}\033[0m ({get_commit_hash_msg()[0]})')
+    print(f'Version \033[1m{VERSION}\033[0m ({get_current_branch()}/{get_commit_hash_msg()[0]})')
     exit(0)
 
 def help():
