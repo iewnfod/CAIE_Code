@@ -2,8 +2,8 @@
 
 <br/>
 <p align="center">
-<a href="./assets/">
-<img src="./assets/cpc.svg" width="80" height="80" alt="logo">
+<a href="./assets/cpc.svg">
+<img src="./assets/cpc.svg" width="100" height="100" alt="logo">
 </a>
 <h3 align="center">the CAIE Pseudocode Interpreter</h3>
 </p>
@@ -22,7 +22,7 @@
 ### 正式安装
 1. 克隆此项目
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
-2. MacOS 用户可直接运行Releases内的 [`CAIE_Code_Installer.pkg`](https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-pkg)，其他系统用户请继续根据`3, 4`步进行安装
+2. MacOS 用户可直接运行Releases内的 [`CAIE_Code_Installer.dmg`](https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-pkg)，其他系统用户请继续根据`3, 4`步进行安装
 3. 进入项目
     ```cd CAIE_Code```
 4. 运行
@@ -66,6 +66,15 @@ cpc [file_paths] [options]
 - `remote`
   - `github`：使用GitHub作为更新源并始终保持最新。
   - `gitee`： 如果您在 GitHub 上遇到 Internet连接问题，请将其用作中国大陆用户的镜像源。
+
+- 分支
+
+  - master`：最新版本的 CPC，可能包含许多未经测试的功能。
+  - `nightly`：此分支每天更新一次。早期用户可以试用此分支，请积极报告问题。
+  - `stable`：更新较慢，但最稳定。
+
+  > 在开发者模式中，您的远程配置不会被更改，分支将被锁定在 `master`。
+
 - `dev`
   - `true`： 启用开发者模式。
   - `false`： 关闭开发者模式。

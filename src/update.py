@@ -58,7 +58,7 @@ def update():
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
     if config.get_config('dev'):
-        print('In a developer mod, your remote will not be changed by config and branch will be locked in master.')
+        print('In a developer mod, your remote will not be changed by config and the branch will be locked in master.')
         print('You can close the developer mod by using `cpc -c dev false`.')
     else:
         remote.set_url(git_remote)

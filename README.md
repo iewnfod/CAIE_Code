@@ -2,8 +2,8 @@
 
 <br/>
 <p align="center">
-<a href="./assets/">
-<img src="./assets/cpc.svg" width="80" height="80" alt="logo">
+<a href="./assets/cpc.svg">
+<img src="./assets/cpc.svg" width="100" height="100" alt="logo">
 </a>
 <h3 align="center">the CAIE Pseudocode Interpreter</h3>
 </p>
@@ -26,7 +26,7 @@
 
 ### Installation
 
-0. For **macOS** users, you can install directly using **CAIE_Code_Installer.pkg**from the [releases](https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-pkg) page.
+0. For **macOS** users, you can install directly using **CAIE_Code_Installer.dmg** from the [releases](https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-pkg) page.
 
   *For other users...*
 
@@ -77,6 +77,14 @@ It runs the entire file if `filepath` is provided, otherwise it enters playgroun
 - `remote`
   - `github`: Use GitHub as the update source. This source is always the latest.
   - `gitee`: If you have an Internet connection issue to GitHub, please use this as a mirror source in China Mainland.
+
+- `branch`
+  - `master`: The latest version of CPC, this may contain many untested functions.
+  - `nightly`: This branch will update once a day. Early adopters can try this branch, please actively report the issue.
+  - `stable`: Updates are slow, but the most stable.
+
+  > In a developer mod, your remote will not be changed by config and the branch will be locked in `master`.
+
 - `dev`
   - `true`: Enable the developer mode.
   - `false`: Disable the developer mode.

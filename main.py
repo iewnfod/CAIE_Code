@@ -177,10 +177,13 @@ def with_file(path, preload=False):
     global_var.output_error()
 
 # 主函数
-def main(input_=None, output_=None):
+def main(input_=None, output_=None, addition_file_name=None):
     # 设置输入输出
     if input_: global_var.set_std_in(input_)
     if output_: global_var.set_std_out(output_)
+
+    if addition_file_name:
+        file_paths.add(addition_file_name)
 
     # 预加载文件
     preload_scripts()

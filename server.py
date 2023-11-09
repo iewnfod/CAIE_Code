@@ -103,9 +103,9 @@ class CodeRunner:
 		try:
 			import main
 			main.main(
-				('cpc', self.file_name),
 				input_=inp,
 				output_=self.output_stream,
+				addition_file_name=self.file_name
 			)
 		except Exception as e:
 			log.add_log(f'{self.uid} [error] {e}, 2')

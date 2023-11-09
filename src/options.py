@@ -27,6 +27,8 @@ def open_parse_info():
 
 def version():
     print(f'Version \033[1m{VERSION}\033[0m ({get_current_branch()}/{get_commit_hash_msg()[0]})')
+    print(f'Using {PLATFORM}')
+    print('Current Version Notes:', get_commit_hash_msg()[1])
     exit(0)
 
 def help():
@@ -82,7 +84,9 @@ def change_config(opt_name, value):
     set_config(opt_name, value)
 
 def migrate_files(directory):
-
+    if os.path.isfile(directory):
+        print('Please enter a dir path instead of a single file.')
+        return
     for root, dirs, files in os.walk(directory):
         # Filter out directories starting with a dot
         dirs[:] = [d for d in dirs if not d.startswith('.')]
