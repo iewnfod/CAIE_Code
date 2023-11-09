@@ -183,9 +183,15 @@ class Array_expression(AST_Node):
         items = self.items.exe()
         value['left'] = 1
         value['right'] = len(items)
-        for i in range(1, len(items)+1):
-            if type(items[i-1]) == tuple:
-                value[i] = (stack.structs[items[i-1][1]](items[i-1][0]), items[i-1][1])
-            else:
-                value[i] = items[i-1]
+        if items:
+            type_l = set()
+            for i in range(1, len(items)+1):
+                if type(items[i-1]) == tuple:
+                    value[i] = (stack.structs[items[i-1][1]](items[i-1][0]), items[i-1][1])
+                else:
+                    value[i] = items[i-1]
+                type_l.add(value[i][1])
+            # 如果有多种类型，set就不会是1
+            if len(type_l) > 1:
+                add_error_message('There should not be more than one type of value in a array', self)
         return ARRAY(value)
