@@ -14,7 +14,9 @@ with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
 def check_update(repo: git.Repo, remote: git.Remote):
     remote.fetch()
     local_branch = repo.active_branch
-    remote_branch = repo.remotes.origin.refs[local_branch.name]
+    from .global_var import config
+    config_branch = config.get_config('branch') if not config.get_config('dev') else 'master'
+    remote_branch = repo.remotes.origin.refs[config_branch]
     # 获取本地和远程提交的时间戳
     local_commit_time = local_branch.commit.committed_datetime
     remote_commit_time = remote_branch.commit.committed_datetime
@@ -35,8 +37,8 @@ def _update(remote, repo):
         from .global_var import config
         branch = config.get_config('branch') if not config.get_config('dev') else 'master'
         repo.git.reset('--hard', f'origin/{branch}')
-        remote.pull()
         repo.git.checkout(branch)
+        remote.pull()
         print('\033[1mUpdate Successful\033[0m')
     except:
         print('\033[31;1mFailed to Update\033[0m')
@@ -58,7 +60,7 @@ def update():
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
     if config.get_config('dev'):
-        print('In a developer mod, your remote will not be changed by config and the branch will be locked in master.')
+        print('In a developer mod, your remote will not be changed by config and branch will be locked in master.')
         print('You can close the developer mod by using `cpc -c dev false`.')
     else:
         remote.set_url(git_remote)
