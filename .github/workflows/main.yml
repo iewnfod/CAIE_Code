@@ -1,0 +1,27 @@
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  nightly-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create PR
+        uses: github/pull-request@v2
+        with:
+          title: "Nightly update in $(date '+%Y/%m/%d')"
+          body: "This PR is for nightly update in $(date '+%Y/%m/%d')"
+
+      - name: Add comment
+        uses: github/create-pull-request-review-comment@v2
+        with:
+          body: "This PR is for nightly update in $(date '+%Y/%m/%d')"
+          review_requested: true
+          review_requested_by: iewnfod
+
+      - name: Request review
+        uses: github/pull-request-review@v2
+        with:
+          reviewers: iewnfod
