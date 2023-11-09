@@ -29,11 +29,11 @@ def dev_mod(obj, value):
 		q(f'Config `{obj.name}` only accept `true` or `false`')
 
 def branch_update(obj, value):
-	if value == 'master':
-		obj.val = 'master'
-	elif value == 'stable':
+	if value == 'stable':
 		obj.val = 'stable'
 	elif value == 'nightly':
 		obj.val = 'nightly'
+	elif value == 'dev':
+		obj.val = 'dev'
 	else:
-		q(f'Config `{obj.name}` only accept `master`, `stable`,`nightly`')
+		q(f'Config `{obj.name}` only accept `stable`,`nightly`,`master`')
