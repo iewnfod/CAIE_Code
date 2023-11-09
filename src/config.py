@@ -28,7 +28,8 @@ class Config:
 		self.config = {
 			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', update_func=remote_update),
 			'pip': _Config('pip', 'https://pypi.tuna.tsinghua.edu.cn/simple/', update_func=pip_update),
-			'dev': _Config('dev', False, update_func=dev_mod)
+			'dev': _Config('dev', False, update_func=dev_mod),
+			'branch': _Config('branch','stable', update_func=branch_update),
 		}
 		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):

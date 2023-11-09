@@ -32,8 +32,11 @@ def check_update(repo: git.Repo, remote: git.Remote):
 
 def _update(remote, repo):
     try:
-        repo.git.reset('--hard', 'origin/master')
+        from .global_var import config
+        branch = config.get_config('branch') if not config.get_config('dev') else 'master'
+        repo.git.reset('--hard', f'origin/{branch}')
         remote.pull()
+        repo.git.checkout(branch)
         print('\033[1mUpdate Successful\033[0m')
     except:
         print('\033[31;1mFailed to Update\033[0m')
