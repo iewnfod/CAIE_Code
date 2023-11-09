@@ -15,7 +15,7 @@ class Cmp_less(AST_Node):
             level + 1)
 
     def exe(self):
-        return (self.left.exe()[0] < self.right.exe()[0], 'BOOLEAN')
+        return self.left.exe()[0] < self.right.exe()[0], 'BOOLEAN'
 
 
 class Cmp_greater(AST_Node):
@@ -30,7 +30,7 @@ class Cmp_greater(AST_Node):
             level + 1)
 
     def exe(self):
-        return (self.left.exe()[0] > self.right.exe()[0], 'BOOLEAN')
+        return self.left.exe()[0] > self.right.exe()[0], 'BOOLEAN'
 
 
 class Cmp_less_equal(AST_Node):
@@ -45,7 +45,7 @@ class Cmp_less_equal(AST_Node):
             level + 1)
 
     def exe(self):
-        return (self.left.exe()[0] <= self.right.exe()[0], 'BOOLEAN')
+        return self.left.exe()[0] <= self.right.exe()[0], 'BOOLEAN'
 
 
 class Cmp_greater_equal(AST_Node):
@@ -60,7 +60,7 @@ class Cmp_greater_equal(AST_Node):
             level + 1)
 
     def exe(self):
-        return (self.left.exe()[0] >= self.right.exe()[0], 'BOOLEAN')
+        return self.left.exe()[0] >= self.right.exe()[0], 'BOOLEAN'
 
 
 class Cmp_equal(AST_Node):
@@ -75,7 +75,7 @@ class Cmp_equal(AST_Node):
             level + 1)
 
     def exe(self):
-        return (self.left.exe()[0] == self.right.exe()[0], 'BOOLEAN')
+        return self.left.exe()[0] == self.right.exe()[0], 'BOOLEAN'
 
 
 class Cmp_not_equal(AST_Node):
@@ -90,4 +90,4 @@ class Cmp_not_equal(AST_Node):
             level + 1)
 
     def exe(self):
-        return (self.left.exe()[0] != self.right.exe()[0], 'BOOLEAN')
+        return self.left.exe()[0] != self.right.exe()[0], 'BOOLEAN'

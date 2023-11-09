@@ -150,7 +150,7 @@ class Declare_parameter(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level + 1) + str(self.var_type)
 
     def exe(self):
-        return (self.id, self.var_type, self.by_ref, None)
+        return self.id, self.var_type, self.by_ref, None
 
 
 class Declare_arr_parameter(AST_Node):
@@ -167,7 +167,7 @@ class Declare_arr_parameter(AST_Node):
             self.var_type) + ' ' + str(self.arr_type)
 
     def exe(self):
-        return (self.id, self.var_type, self.by_ref, self.arr_type)
+        return self.id, self.var_type, self.by_ref, self.arr_type
 
 
 class Declare_parameters(AST_Node):
@@ -192,7 +192,7 @@ class Declare_parameters(AST_Node):
         result = []
         for i in self.parameters:
             v = i.exe()
-            if v[2] == None:
+            if v[2] is None:
                 if len(result):
                     v = (v[0], v[1], result[-1][2], v[3])
                 else:

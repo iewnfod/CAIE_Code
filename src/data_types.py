@@ -102,14 +102,16 @@ class DATE(base):
         if key == 1:
             return self.type
         else:
-            return (self.year, self.month, self.day)
+            return self.year, self.month, self.day
 
     def set_value(self, new_value):
         self.year, self.month, self.day = new_value
 
 
 class ARRAY(base):
-    def __init__(self, value={}, *args, **kwargs):
+    def __init__(self, value=None, *args, **kwargs):
+        if value is None:
+            value = {}
         self.value = value
         self.type = 'ARRAY'
         super().__init__(*args, **kwargs)

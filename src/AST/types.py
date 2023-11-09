@@ -113,7 +113,7 @@ class Composite_type_expression(AST_Node):
         obj = self.exp1.exe()[0]
         # 判断一下是不是枚举类型
         if obj[1] == 'ENUM':
-            return (obj[0].__members__[self.id], 'ENUM')
+            return obj[0].__members__[self.id], 'ENUM'
         # 否则，按照正常自定义类型的操作运行
         # 将此对象的空间放入主空间列表
         stack.push_subspace(obj.space)
@@ -140,7 +140,7 @@ class Composite_type_statement(AST_Node):
         obj = self.exp.exe()
         # 判断一下是不是枚举类型
         if obj[1] == 'ENUM':
-            return (obj[0].__members__[self.id], 'ENUM')
+            return obj[0].__members__[self.id], 'ENUM'
         # 否则，按照正常自定义类型的操作运行
         # 将此对象的空间放入主空间列表
         stack.push_subspace(obj.space)

@@ -16,7 +16,7 @@ class Output(AST_Node):
 
     def exe(self):
         v = self.value.exe()
-        print_(v if v != None else '')
+        print_(v if v is not None else '')
 
 
 class Output_expression(AST_Node):

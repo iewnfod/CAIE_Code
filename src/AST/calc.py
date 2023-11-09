@@ -20,9 +20,9 @@ class Op_minus(AST_Node):
         try:
             v = n1[0] - n2[0]
             if int(v) == v:
-                return (int(v), 'INTEGER')
+                return int(v), 'INTEGER'
             else:
-                return (v, 'REAL')
+                return v, 'REAL'
         except:
             add_error_message(f'Cannot minus `{n1[1]}` with `{n2[1]}`', self)
 
@@ -44,9 +44,9 @@ class Op_plus(AST_Node):
         try:
             v = n1[0] + n2[0]
             if int(v) == v:
-                return (int(v), 'INTEGER')
+                return int(v), 'INTEGER'
             else:
-                return (v, 'REAL')
+                return v, 'REAL'
         except:
             add_error_message(f'Cannot plus `{n1[1]}` with `{n2[1]}`', self)
 
@@ -68,9 +68,9 @@ class Op_mul(AST_Node):
         try:
             v = n1[0] * n2[0]
             if int(v) == v:
-                return (int(v), 'INTEGER')
+                return int(v), 'INTEGER'
             else:
-                return (v, 'REAL')
+                return v, 'REAL'
         except:
             add_error_message(f'Cannot multiply `{n1[1]}` with `{n2[1]}`', self)
 
@@ -93,13 +93,13 @@ class Op_div(AST_Node):
             # 检查除数是否是 0
             if n2[0] == 0:
                 add_error_message('Cannot divide by zero', self)
-                return (0, 'INTEGER')
+                return 0, 'INTEGER'
 
             v = n1[0] / n2[0]
             if int(v) == v:
-                return (int(v), 'INTEGER')
+                return int(v), 'INTEGER'
             else:
-                return (v, 'REAL')
+                return v, 'REAL'
         except:
             add_error_message(f'Cannot divide `{n1[1]}` with `{n2[1]}`', self)
 
@@ -119,7 +119,7 @@ class Op_connect(AST_Node):
         s1 = self.left.exe()
         s2 = self.right.exe()
         try:
-            return (s1[0] + s2[0], 'STRING')
+            return s1[0] + s2[0], 'STRING'
         except:
             add_error_message(f'Cannot connect `{s1[1]}` with `{s2[1]}`', self)
 
@@ -141,9 +141,9 @@ class Op_mod(AST_Node):
         try:
             v = n1[0] % n2[0]
             if int(v) == v:
-                return (int(v), 'INTEGER')
+                return int(v), 'INTEGER'
             else:
-                return (v, 'REAL')
+                return v, 'REAL'
         except:
             add_error_message(f'Cannot module `{n1[1]}` with `{n2[1]}`', self)
 
@@ -164,6 +164,6 @@ class Op_exact_div(AST_Node):
         n2 = self.right.exe()
         try:
             v = n1[0] // n2[0]
-            return (int(v), 'INTEGER')
+            return int(v), 'INTEGER'
         except:
             add_error_message(f'Cannot exact divide `{n1[1]}` with `{n2[1]}`', self)

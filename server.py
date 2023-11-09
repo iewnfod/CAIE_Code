@@ -12,7 +12,7 @@ if not os.path.exists('temp'):
 
 
 # log
-class logger():
+class logger:
 	def __init__(self, log_path, log_name):
 		self.name = log_name
 		self.log_path = os.path.join(log_path, f'{log_name}.log')

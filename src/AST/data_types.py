@@ -14,7 +14,7 @@ class Integer(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.value)
 
     def exe(self):
-        return (self.value, self.type)
+        return self.value, self.type
 
 
 class Real(AST_Node):
@@ -27,7 +27,7 @@ class Real(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.value)
 
     def exe(self):
-        return (self.value, self.type)
+        return self.value, self.type
 
 
 class Char(AST_Node):
@@ -40,7 +40,7 @@ class Char(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + "'" + str(self.value) + "'"
 
     def exe(self):
-        return (self.value, self.type)
+        return self.value, self.type
 
 
 class String(AST_Node):
@@ -53,7 +53,7 @@ class String(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + '"' + str(self.value) + '"'
 
     def exe(self):
-        return (self.value, self.type)
+        return self.value, self.type
 
 
 class Boolean(AST_Node):
@@ -66,7 +66,7 @@ class Boolean(AST_Node):
         return LEVEL_STR * level + self.type + ' ' + str(self.value)
 
     def exe(self):
-        return (self.value, self.type)
+        return self.value, self.type
 
 
 class Date(AST_Node):

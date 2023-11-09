@@ -24,7 +24,7 @@ class Space:
         self.variables[id] = (value, is_const)
 
     def set_variable(self, id, value, type):
-        if self.variables[id][1] == False:
+        if not self.variables[id][1]:
             try:
                 self.variables[id][0].set_value(value)
             except:

@@ -18,9 +18,7 @@ class Array(AST_Node):
             level + 1) + '\n' + LEVEL_STR * (level + 1) + str(self.var_type)
 
     def add_variables(self, dimensions):
-        result = {}
-        result['left'] = dimensions[0][0]
-        result['right'] = dimensions[0][1]
+        result = {'left': dimensions[0][0], 'right': dimensions[0][1]}
         if len(dimensions) == 1:
             for i in range(dimensions[0][0], dimensions[0][1] + 1):
                 result[i] = (stack.structs[self.var_type](name=i), self.var_type)
