@@ -70,8 +70,8 @@ cpc [file_paths] [options]
 - 分支
 
   - `stable`：更新较慢，但最稳定。
-  - dev`：最新版本的 CPC，可能包含许多未经测试的功能。
   - `nightly`：此分支每天更新一次。早期用户可以试用此分支，请积极报告问题。
+  - `dev`：最新版本的 CPC，可能包含许多未经测试的功能。
 
   > 在开发者模式中，您的远程配置不会被更改，分支将被锁定在 `master`。
 
@@ -252,7 +252,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-
+        
         IF <condition> THEN
             <statements>
         ELSE
@@ -293,7 +293,7 @@ NEXT i
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-
+        
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -301,7 +301,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier>
-
+        
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -310,7 +310,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-
+        
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -318,7 +318,7 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-
+        
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。
