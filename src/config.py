@@ -4,18 +4,18 @@ from .history import HOME_PATH
 from .config_funcs import *
 
 class _Config:
-	def __init__(self, name, default_val, update_func=None):
+	def __init__(self, name, default_val, update_obj=None):
 		self.name = name
 		self.default_val = default_val
 		self.val = default_val
-		self.update_func = update_func
+		self.update_obj = update_obj
 
 	def to_string(self):
 		return self.val
 
 	def update(self, value):
-		if self.update_func:
-			self.update_func(self, value)
+		if self.update_obj:
+			self.update_obj.update(self, value)
 		else:
 			self.val = value
 
@@ -26,9 +26,9 @@ class Config:
 	def __init__(self, config_file_name=".cpc_config.json"):
 		self.config_path = os.path.join(HOME_PATH, config_file_name)
 		self.config = {
-			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', update_func=remote_update),
-			'dev': _Config('dev', False, update_func=dev_mod),
-			'branch': _Config('branch','stable', update_func=branch_update),
+			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', remote_update),
+			'dev': _Config('dev', False, dev_mod),
+			'branch': _Config('branch', 'stable', branch_update),
 		}
 		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):
@@ -52,7 +52,7 @@ class Config:
 
 	def update_config(self, opt_name, value):
 		if opt_name in self.config:
-			self.config[opt_name].update(value)
+			self.config[opt_name].update(value.lower())
 			self.write_config()
 			print(f'Successfully change `{opt_name}` into `{value}`')
 		else:
