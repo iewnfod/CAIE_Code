@@ -132,8 +132,8 @@ class ARRAY(base):
         else:
             s_left = self.value['left']
             s_right = self.value['right']
-            left = self.value['left']
-            right = self.value['right']
+            left = value['left']
+            right = value['right']
             add_stack_error_message(f'Cannot assign an array with size `{left}:{right}` to an array with size `{s_left}:{s_right}`')
 
     def to_target(self, target, v=None):
