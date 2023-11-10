@@ -10,9 +10,6 @@ class _Config:
 		self.val = default_val
 		self.update_obj = update_obj
 
-	def to_string(self):
-		return self.val
-
 	def update(self, value):
 		if self.update_obj:
 			self.update_obj.update(self, value)
@@ -29,6 +26,7 @@ class Config:
 			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', remote_update),
 			'dev': _Config('dev', False, dev_mod),
 			'branch': _Config('branch', 'stable', branch_update),
+			'rl': _Config('recursion-limit', 1000, recursive_limit)
 		}
 		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):
@@ -45,7 +43,7 @@ class Config:
 	def write_config(self):
 		dict = {}
 		for key, val in self.config.items():
-			dict[key] = val.to_string()
+			dict[key] = val.val
 
 		with open(self.config_path, 'w') as f:
 			f.write(json.dumps(dict))
@@ -71,6 +69,6 @@ class Config:
 
 	def get_config(self, opt_name):
 		if opt_name in self.config:
-			return self.config[opt_name].to_string()
+			return self.config[opt_name].val
 		else:
 			self.err_config(opt_name)

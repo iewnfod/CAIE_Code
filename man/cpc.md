@@ -37,9 +37,6 @@ cpc - An interpreter for CAIE Pseudocode.
 **-p**, **--parse**
 : To show parse information during running
 
-**-r**, **--recursive-limit**
-: To set the recursive limit of the interpreter
-
 **-t**, **--time**
 : To show the time for the script to run
 
@@ -48,6 +45,9 @@ cpc - An interpreter for CAIE Pseudocode.
 
 **-v**, **--version**
 : To show the version of installed *cpc*
+
+**-lc**, **--list-configs**
+: To show all configs of the interpreter
 
 ## CONFIGS
 **remote** - *Github* *Gitee*
@@ -58,6 +58,9 @@ cpc - An interpreter for CAIE Pseudocode.
 
 **branch** - *stable* *nightly* *dev*
 : To deicide the update branch
+
+**recursion-limit(rl)** - *all integer*
+: To set the recursion depth limit of the interpreter
 
 ## EXAMPLE
 *cpc test/test.cpc test/recursive_test.cpc -r 10000 -t -gt*

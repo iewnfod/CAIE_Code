@@ -55,9 +55,6 @@ To remove all error messages
 \f[B]-p\f[R], \f[B]\[en]parse\f[R]
 To show parse information during running
 .TP
-\f[B]-r\f[R], \f[B]\[en]recursive-limit\f[R]
-To set the recursive limit of the interpreter
-.TP
 \f[B]-t\f[R], \f[B]\[en]time\f[R]
 To show the time for the script to run
 .TP
@@ -67,6 +64,9 @@ git)
 .TP
 \f[B]-v\f[R], \f[B]\[en]version\f[R]
 To show the version of installed \f[I]cpc\f[R]
+.TP
+\f[B]-lc\f[R], \f[B]\[en]list-configs\f[R]
+To show all configs of the interpreter
 .SS CONFIGS
 .TP
 \f[B]remote\f[R] - \f[I]Github\f[R] \f[I]Gitee\f[R]
@@ -77,6 +77,9 @@ To toggle the developer mod
 .TP
 \f[B]branch\f[R] - \f[I]stable\f[R] \f[I]nightly\f[R] \f[I]dev\f[R]
 To deicide the update branch
+.TP
+\f[B]recursion-limit(rl)\f[R] - \f[I]all integer\f[R]
+To set the recursion depth limit of the interpreter
 .SS EXAMPLE
 .PP
 \f[I]cpc test/test.cpc test/recursive_test.cpc -r 10000 -t -gt\f[R]

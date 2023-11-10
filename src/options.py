@@ -1,4 +1,3 @@
-from sys import exit, setrecursionlimit
 import platform
 from .update import VERSION, update, get_commit_hash_msg, get_current_branch
 import os
@@ -11,6 +10,11 @@ options_dict = {
     "show_time": False,
     "show_error": True
 }
+
+def _dict_output(d: dict, space=4):
+    max_left_size = max(len(i) for i in d.keys())
+    for left, right in d.items():
+        print(left + ' '*(max_left_size-len(left)+space) + right)
 
 def get_value(value):
     return options_dict[value]
@@ -29,7 +33,6 @@ def version():
     print(f'Version \033[1m{VERSION}\033[0m ({get_current_branch()}/{get_commit_hash_msg()[0]})')
     print(f'Using {PLATFORM}')
     print('Current Version Notes:', get_commit_hash_msg()[1])
-    exit(0)
 
 def help():
     standard_output()
@@ -45,8 +48,12 @@ def help():
 
     print('Options:')
     arguments.sort()
+
+    result = {}
     for i in arguments:
-        print('\t\033[1m', i.short_arg, '\t', i.long_arg, '\033[0m\t', i.description)
+        result[f'\t\033[1m{i.short_arg}\t{i.long_arg}\033[0m'] = i.description
+
+    _dict_output(result)
 
 def get_tree():
     options_dict['show_tree'] = True
@@ -76,9 +83,6 @@ def remove_error():
 def update_version():
     update()
 
-def set_recursive_limit(v):
-    setrecursionlimit(int(v))
-
 def change_config(opt_name, value):
     from .global_var import set_config
     set_config(opt_name, value)
@@ -100,8 +104,21 @@ def migrate_files(directory):
 
 def list_configs():
     from .global_var import config
+    result = {}
     for key, val in config.config.items():
-        print(f'{key}\t{val.to_string()}')
+        if val.name != key:
+            left = f'{val.name}({key})'
+        else:
+            left = val.name
+
+        if val.val != val.default_val:
+            right = f'{val.val}({val.default_val})'
+        else:
+            right = str(val.val)
+
+        result[left] = right
+
+    _dict_output(result)
 
 
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
@@ -140,7 +157,6 @@ arguments = [
     Opt('-k', '--keywords', show_keywords, 'To show all the keywords', True),
     Opt('-ne', '--no-error', remove_error, 'To remove all error messages', False),
     Opt('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)', True),
-    Opt('-r', '--recursive-limit', set_recursive_limit, 'To set the recursive limit of the interpreter', False, 1),
     Opt('-c', '--config', change_config, 'To set configs of this interpreter', True, 2),
     Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1),
     Opt('-lc', '--list-configs', list_configs, 'To list all the configs of the interpreter', True)

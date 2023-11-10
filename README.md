@@ -65,7 +65,6 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 | `-k` | `--keywords` | To show all the keywords |
 | `-m` | `--migrate` | To migrate `.p` files to `.cpc` in a specified directory |
 | `-p` | `--parse` | To show parse information during running |
-| `-r` | `--recursive-limit` | To set the recursive limit of the interpreter |
 | `-t` | `--time` | To show the time for the script to run |
 | `-u` | `--update` | To update the version |
 | `-v` | `--version` | To show the version of this interpreter |
@@ -92,6 +91,9 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 - `dev`
   - `true`: Enable the developer mode.
   - `false`: Disable the developer mode.
+
+- `recursion-limit(rl)`
+    all integer number as the recursion depth limit of the interpreter.
 
 ## FAQs
 

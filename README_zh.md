@@ -54,7 +54,6 @@ cpc [file_paths] [options]
 | `-k` | `--keywords` | 显示所有的关键字 |
 | `-m` | `--migrate` | 将一个目录中的所有 `.p` 文件切换为 `.cpc` |
 | `-p` | `--parse` | 显示所有解析的信息 |
-| `-r` | `--recursive-limit` | 设置解释器的递归深度 |
 | `-t` | `--time` | 显示运行脚本花费的时间 |
 | `-u` | `--update` | 更新此解释器的版本 |
 | `-v` | `--version` | 显示解释器当前版本 |
@@ -81,6 +80,9 @@ cpc [file_paths] [options]
 - `dev`
   - `true`： 启用开发者模式。
   - `false`： 关闭开发者模式。
+
+- `recursion-limit(rl)`
+    接受所有整数，作为解释器的递归深度限制。
 
 ### 常见问题
 
