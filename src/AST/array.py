@@ -3,6 +3,7 @@ from ..AST_Base import *
 from ..error import *
 from ..global_var import *
 from ..data_types import ARRAY
+from copy import copy
 
 class Array(AST_Node):
     def __init__(self, id, dimensions, type, *args, **kwargs):
@@ -186,7 +187,7 @@ class Array_expression(AST_Node):
                 if type(items[i-1]) == tuple:
                     value[i] = (stack.structs[items[i-1][1]](items[i-1][0]), items[i-1][1])
                 else:
-                    value[i] = (items[i-1], items[i-1][1])
+                    value[i] = (copy(items[i-1]), items[i-1][1])
                 type_l.add(value[i][1])
             # 如果有多种类型，set就不会是1
             if len(type_l) > 1:
