@@ -98,6 +98,12 @@ def migrate_files(directory):
 
     print("Migration completed.")
 
+def list_configs():
+    from .global_var import config
+    for key, val in config.config.items():
+        print(f'{key}\t{val.to_string()}')
+
+
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
 class Opt:
     def __init__(self, short_arg, long_arg, func, description, exit_program, value_num=0, *args, **kwargs):
@@ -119,7 +125,10 @@ class Opt:
             quit(0)
 
     def __lt__(self, other):
-        return self.short_arg < other.short_arg
+        if len(self.short_arg) == len(other.short_arg):
+            return self.short_arg < other.short_arg
+        else:
+            return len(self.short_arg) < len(other.short_arg)
 
 
 arguments = [
@@ -133,5 +142,6 @@ arguments = [
     Opt('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)', True),
     Opt('-r', '--recursive-limit', set_recursive_limit, 'To set the recursive limit of the interpreter', False, 1),
     Opt('-c', '--config', change_config, 'To set configs of this interpreter', True, 2),
-    Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1)
+    Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1),
+    Opt('-lc', '--list-configs', list_configs, 'To list all the configs of the interpreter', True)
 ]

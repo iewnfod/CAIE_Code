@@ -60,17 +60,18 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 
 | Mnemonic | Option | Description |
 | -------- | ------ | ----------- |
-| `-gt` | `--get-tree` | To show the tree of the program after being parsed |
-| `-h` | `--help` | To show this help page |
-| `-k` | `--keywords` | To show all the keywords |
-| `-p` | `--parse` | To show parse information during running |
-| `-t` | `--time` | To show the time for the script to run |
-| `-v` | `--version` | To show the version of this interpreter |
-| `-ne` | `--no-error` | To remove all error messages |
-| `-u` | `--update` | To update the version (only useful when using a version equal or greater than `0.1.2` and installed by git) |
-| `-r` | `--recursive-limit` | To set the recursive limit of the interpreter |
 | `-c` | `--config` | To set configs of this interpreter |
-| `-m` | `--migrate` | To migrate .p files to .cpc in a specified directory |
+| `-h` | `--help` | To show the help page |
+| `-k` | `--keywords` | To show all the keywords |
+| `-m` | `--migrate` | To migrate `.p` files to `.cpc` in a specified directory |
+| `-p` | `--parse` | To show parse information during running |
+| `-r` | `--recursive-limit` | To set the recursive limit of the interpreter |
+| `-t` | `--time` | To show the time for the script to run |
+| `-u` | `--update` | To update the version |
+| `-v` | `--version` | To show the version of this interpreter |
+| `-gt` | `--get-tree` | To show the tree of the program after being parsed |
+| `-lc` | `--list-configs` | To list all the configs of the interpreter |
+| `-ne` | `--no-error` | To remove all error messages |
 
 ### Config
 

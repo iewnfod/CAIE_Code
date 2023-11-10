@@ -49,17 +49,18 @@ cpc [file_paths] [options]
 ### 选项
 | Mnemonic | Option | Description |
 | -------- | ------ | ----------- |
-| `-gt` | `--get-tree` | To show the tree of the program after being parsed |
-| `-h` | `--help` | To show this help page |
-| `-k` | `--keywords` | To show all the keywords |
-| `-p` | `--parse` | To show parse information during running |
-| `-t` | `--time` | To show the time for the script to run |
-| `-v` | `--version` | To show the version of this interpreter |
-| `-ne` | `--no-error` | To remove all error messages |
-| `-u` | `--update` | To update the version (only useful when using a version equal or greater than `0.1.2` and installed by git) |
-| `-r` | `--recursive-limit` | To set the recursive limit of the interpreter |
-| `-c` | `--config` | To set configs of this interpreter |
-| `-m` | `--migrate` | To migrate .p files to .cpc in a specified directory |
+| `-c` | `--config` | 对解释器进行设置 |
+| `-h` | `--help` | 显示帮助页面 |
+| `-k` | `--keywords` | 显示所有的关键字 |
+| `-m` | `--migrate` | 将一个目录中的所有 `.p` 文件切换为 `.cpc` |
+| `-p` | `--parse` | 显示所有解析的信息 |
+| `-r` | `--recursive-limit` | 设置解释器的递归深度 |
+| `-t` | `--time` | 显示运行脚本花费的时间 |
+| `-u` | `--update` | 更新此解释器的版本 |
+| `-v` | `--version` | 显示解释器当前版本 |
+| `-gt` | `--get-tree` | 显示脚本解析后生成的可运行的树 |
+| `-lc` | `--list-configs` | 显示解释器的所有设置 |
+| `-ne` | `--no-error` | 禁止所有错误的输出 |
 
 ### 可选配置
 
