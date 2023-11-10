@@ -76,7 +76,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 
 - `remote`
   - `github`: Use GitHub as the update source. This source is always the latest.
-  - `gitee`: If you have an Internet connection issue to GitHub, please use this as a mirror source in China Mainland.
+  - `gitee`: Use Gitee as the update source, which might be slower than Github.
 
 - `branch`
 
@@ -86,7 +86,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 
   > This setting needs to be run `cpc -u` once for it to take effect.
 
-  > In a developer mod, your remote will not be changed by config and the branch will be locked in `master`.
+  > In a developer mod, your remote will not be changed by config and the branch will be locked in `dev`.
 
 - `dev`
   - `true`: Enable the developer mode.
@@ -275,7 +275,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         IF <condition> THEN
             <statements>
         ENDIF
-        
+
         IF <condition> THEN
             <statements>
         ELSE
@@ -316,7 +316,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-        
+
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -324,7 +324,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a procedure
         ```
         CALL <identifier>
-        
+
         CALL <identifier> (<value>, ...)
         ```
     * functions with return values
@@ -333,7 +333,7 @@ The following items give the `DATATYPE`, its description, and the default value 
             <statements>
             RETURN <value>
         ENDFUNCTION
-        
+
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -341,7 +341,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a function with return values
         ```
         <identifier> ()
-        
+
         <identifier> (<value>, ...)
         ```
     * Before the parameters of those sub-routines, you *can* use `BYREF` or `BYVAL` to force the program to pass those parameters by reference or by-value respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the prior parameter. If the program cannot find a clear indication it will, by default pass parameters by value.

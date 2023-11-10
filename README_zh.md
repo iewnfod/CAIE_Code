@@ -64,10 +64,10 @@ cpc [file_paths] [options]
 ### 可选配置
 
 - `remote`
-  - `github`：使用GitHub作为更新源并始终保持最新。
-  - `gitee`： 如果您在 GitHub 上遇到 Internet连接问题，请将其用作中国大陆用户的镜像源。
+  - `github`：使用 GitHub 作为更新源并始终保持最新。
+  - `gitee`： 使用 Gitee 作为更新源。（此源可能比 Github 要慢）
 
-- 分支
+- `branch`
 
   - `stable`：更新较慢，但最稳定。
   - `nightly`：此分支每天更新一次。早期用户可以试用此分支，请积极报告问题。
@@ -75,7 +75,7 @@ cpc [file_paths] [options]
 
   > 此设置需要运行一次 `cpc -u` 才能生效。
 
-  > 在开发者模式中，您的远程配置不会被更改，分支将被锁定在 `master`。
+  > 在开发者模式中，您的远程配置不会被更改，分支将被锁定在 `dev`。
 
 - `dev`
   - `true`： 启用开发者模式。
@@ -254,7 +254,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-        
+
         IF <condition> THEN
             <statements>
         ELSE
@@ -295,7 +295,7 @@ NEXT i
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-        
+
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -303,7 +303,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier>
-        
+
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -312,7 +312,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-        
+
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -320,7 +320,7 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-        
+
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。
