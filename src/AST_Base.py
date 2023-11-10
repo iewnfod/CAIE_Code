@@ -2,8 +2,8 @@ class AST_Node:
     def __init__(self, p=None):
         self.p = p
         if self.p:
-            self.lineno = self.p.lineno(1)
-            self.lexpos = self.p.lexpos(1)
+            self.lineno = self.p.lineno
+            self.lexpos = self.p.lexpos
         else:
             self.lineno = 0
             self.lexpos = 0

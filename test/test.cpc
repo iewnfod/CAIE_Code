@@ -1,29 +1,29 @@
 DECLARE Result : ARRAY[1:1000,1:2] OF INTEGER
 
-// OUTPUT Result
 FOR stu <- 1 TO 1000
-	Result[stu] <- [stu,INT(RAND(100))]
+  Result[stu] <- [stu,RANDOM(100)]
 NEXT stu
 
 OUTPUT Result
 
-PROCEDURE Sort(array:ARRAY)
-	DECLARE tmp : INTEGER
-	FOR i <- 1 TO 1000
-		FOR j <- i TO 999
-			IF array[j, 2] > array[j+1, 2] THEN
-				tmp <- array[j,1]
-				array[j,1] <- array[j+1,1]
-				array[j+1,1] <- tmp
 
-				tmp <- array[j,2]
-				array[j,2] <- array[j+1,2]
-				array[j+1,2] <- tmp
-			ENDIF
-		NEXT j
-	NEXT i
-	RETURN 1
+
+PROCEDURE Sort(array:ARRAY)
+  DECLARE tmp : INTEGER
+  FOR i <- 1 TO 1000
+    FOR j <- i TO 999
+      IF array[j] > array[j+1] THEN
+        tmp <- array[j,1]
+        array[j,1] <- array[j+1,1]
+        array[j+1,1] <- tmp
+
+        tmp <- array[j,2]
+        array[j,2] <- array[j+1,2]
+        array[j+1,2] <- tmp
+      ENDIF
+    NEXT j
+  NEXT
 ENDPROCEDURE
 
-CALL Sort(Result)
+CALL Sort()
 OUTPUT Result
