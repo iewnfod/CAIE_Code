@@ -2,8 +2,8 @@
 
 <br/>
 <p align="center">
-<a href="./assets/">
-<img src="./assets/cpc.svg" width="80" height="80" alt="logo">
+<a href="./assets/cpc.svg">
+<img src="./assets/cpc.svg" width="100" height="100" alt="logo">
 </a>
 <h3 align="center">the CAIE Pseudocode Interpreter</h3>
 </p>
@@ -16,7 +16,7 @@
 ### Installation Preliminaries
 
 1. Have `python3` installed on your computer.
-> It is suggested to use `pypy3` to achieve best efficiency.
+> It is suggested to use `pypy3` to achieve the best efficiency.
 
 2. Have `git` installed on your computer. If you do not know what `git` is, see https://git-scm.com/downloads.
 
@@ -26,7 +26,7 @@
 
 ### Installation
 
-0. For **macOS** users, you can install directly using **CAIE_Code_Installer.pkg**from the [releases](https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-pkg) page.
+0. For **macOS** users, you can install directly using **CAIE_Code_Installer.dmg** from the [releases](https://github.com/iewnfod/CAIE_Code/releases/tag/v0.1.4-pkg) page.
 
   *For other users...*
 
@@ -55,7 +55,7 @@ Otherwise, you should manually re-install the whole project.
 
 `cpc [filepath] [options]`
 
-It runs the entire file if `filepath` is provided, otherwise it enters playground mode.
+It runs the entire file if `filepath` is provided, otherwise, it enters playground mode.
 ### Options
 
 | Mnemonic | Option | Description |
@@ -77,6 +77,17 @@ It runs the entire file if `filepath` is provided, otherwise it enters playgroun
 - `remote`
   - `github`: Use GitHub as the update source. This source is always the latest.
   - `gitee`: If you have an Internet connection issue to GitHub, please use this as a mirror source in China Mainland.
+
+- `branch`
+
+  - `stable`: Updates are slow, but the most stable.
+  - `nightly`: This branch will update once a day. Early adopters can try this branch, please actively report the issue.
+  - `dev`: The latest version of CPC may contain many untested functions.
+
+  > This setting needs to be run `cpc -u` once for it to take effect.
+
+  > In a developer mod, your remote will not be changed by config and the branch will be locked in `master`.
+
 - `dev`
   - `true`: Enable the developer mode.
   - `false`: Disable the developer mode.
@@ -264,7 +275,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         IF <condition> THEN
             <statements>
         ENDIF
-
+        
         IF <condition> THEN
             <statements>
         ELSE
@@ -305,7 +316,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-
+        
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -313,7 +324,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a procedure
         ```
         CALL <identifier>
-
+        
         CALL <identifier> (<value>, ...)
         ```
     * functions with return values
@@ -322,7 +333,7 @@ The following items give the `DATATYPE`, its description, and the default value 
             <statements>
             RETURN <value>
         ENDFUNCTION
-
+        
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -330,7 +341,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a function with return values
         ```
         <identifier> ()
-
+        
         <identifier> (<value>, ...)
         ```
     * Before the parameters of those sub-routines, you *can* use `BYREF` or `BYVAL` to force the program to pass those parameters by reference or by-value respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the prior parameter. If the program cannot find a clear indication it will, by default pass parameters by value.

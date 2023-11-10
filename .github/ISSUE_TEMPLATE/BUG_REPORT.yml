@@ -34,31 +34,11 @@ body:
       description: 你可以把你的代码复制到这里
       placeholder: |
         请直接复制你的代码，避免缩进问题
-  - type: dropdown
-    id: systype
+    id: version
     attributes:
-      label: 操作系统类型
-      description: 操作系统类型
-      options:
-        - Windows
-        - macOS
-        - Linux
-    validations:
-      required: true
-  - type: input
-    id: sysversion
-    attributes:
-      label: 操作系统版本
-      description: 填写你正在使用的操作系统版本，例如 macOS 13.0
-      placeholder: 请自行搜索如何查看版本
-    validations:
-      required: true
-  - type: input
-    id: pythonversion
-    attributes:
-      label: Python版本
-      description: 填写你正在使用的Python版本，例如 Python 3.11.5 (main, Aug 24 2023, 15:09:45) [Clang 14.0.3 (clang-1403.0.22.14.1)] on darwin
-      placeholder: 终端输入Python3显示的第一行
+      label: 版本信息
+      description: 填写你正在使用的CPC版本
+      placeholder: 终端输入`cpc -v`查看
     validations:
       required: true
   - type: textarea
