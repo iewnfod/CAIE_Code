@@ -107,7 +107,7 @@ class ARRAY(base):
     def get_str(self, v):
         if v[1] == 'ARRAY':
             l = []
-            for key, val in v[0].items():
+            for key, val in v[0][0].items():
                 if key == 'left' or key == 'right': continue
                 l.append(self.get_str(val))
             return '[' + ', '.join(l) + ']'
