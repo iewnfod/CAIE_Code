@@ -16,7 +16,7 @@
 ### Installation Preliminaries
 
 1. Have `python3` installed on your computer.
-> It is suggested to use `pypy3` to achieve best efficiency.
+> It is suggested to use `pypy3` to achieve the best efficiency.
 
 2. Have `git` installed on your computer. If you do not know what `git` is, see https://git-scm.com/downloads.
 
@@ -55,7 +55,7 @@ Otherwise, you should manually re-install the whole project.
 
 `cpc [filepath] [options]`
 
-It runs the entire file if `filepath` is provided, otherwise it enters playground mode.
+It runs the entire file if `filepath` is provided, otherwise, it enters playground mode.
 ### Options
 
 | Mnemonic | Option | Description |
@@ -79,13 +79,15 @@ It runs the entire file if `filepath` is provided, otherwise it enters playgroun
   - `gitee`: If you have an Internet connection issue to GitHub, please use this as a mirror source in China Mainland.
 
 - `branch`
-  
+
   - `stable`: Updates are slow, but the most stable.
   - `nightly`: This branch will update once a day. Early adopters can try this branch, please actively report the issue.
-  - `dev`: The latest version of CPC, this may contain many untested functions.
-  
+  - `dev`: The latest version of CPC may contain many untested functions.
+
+  > This setting needs to be run `cpc -u` once for it to take effect.
+
   > In a developer mod, your remote will not be changed by config and the branch will be locked in `master`.
-  
+
 - `dev`
   - `true`: Enable the developer mode.
   - `false`: Disable the developer mode.
