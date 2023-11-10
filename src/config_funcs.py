@@ -11,14 +11,6 @@ def remote_update(obj, value):
 	else:
 		q(f'Config `{obj.name}` only accept `github` or `gitee`')
 
-def pip_update(obj, value):
-	if value == 'pip':
-		obj.val = 'https://pypi.python.org/simple/'
-	elif value == 'tuna':
-		obj.val = 'https://pypi.tuna.tsinghua.edu.cn/simple/'
-	else:
-		q(f'Config `{obj.name}` only accept `pip` or `tuna`')
-
 def dev_mod(obj, value):
 	value = value.lower()
 	if value == 'true':

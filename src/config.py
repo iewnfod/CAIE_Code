@@ -27,7 +27,6 @@ class Config:
 		self.config_path = os.path.join(HOME_PATH, config_file_name)
 		self.config = {
 			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', update_func=remote_update),
-			'pip': _Config('pip', 'https://pypi.tuna.tsinghua.edu.cn/simple/', update_func=pip_update),
 			'dev': _Config('dev', False, update_func=dev_mod),
 			'branch': _Config('branch','stable', update_func=branch_update),
 		}
