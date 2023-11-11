@@ -34,6 +34,9 @@ For more detailed information about this, you may look at README or
 <https://github.com/iewnfod/CAIE_Code>.
 .SH OPTIONS
 .TP
+\f[B]-c\f[R], \f[B]\[en]config\f[R]
+To set configs of this interpreter
+.TP
 \f[B]-gt\f[R], \f[B]\[en]get-tree\f[R]
 To show the tree of the program after being parsed
 .TP
@@ -43,14 +46,14 @@ To show the help page
 \f[B]-k\f[R], \f[B]\[en]keywords\f[R]
 To show all the keywords
 .TP
+\f[B]-m\f[R], \f[B]\[en]migrate\f[R]
+To migrate .p files in a specified directory
+.TP
 \f[B]-ne\f[R], \f[B]\[en]no-error\f[R]
 To remove all error messages
 .TP
 \f[B]-p\f[R], \f[B]\[en]parse\f[R]
 To show parse information during running
-.TP
-\f[B]-r\f[R], \f[B]\[en]recursive-limit\f[R]
-To set the recursive limit of the interpreter
 .TP
 \f[B]-t\f[R], \f[B]\[en]time\f[R]
 To show the time for the script to run
@@ -61,6 +64,22 @@ git)
 .TP
 \f[B]-v\f[R], \f[B]\[en]version\f[R]
 To show the version of installed \f[I]cpc\f[R]
+.TP
+\f[B]-lc\f[R], \f[B]\[en]list-configs\f[R]
+To show all configs of the interpreter
+.SS CONFIGS
+.TP
+\f[B]remote\f[R] - \f[I]Github\f[R] \f[I]Gitee\f[R]
+To decide the update source
+.TP
+\f[B]dev\f[R] - \f[I]true\f[R] \f[I]false\f[R]
+To toggle the developer mod
+.TP
+\f[B]branch\f[R] - \f[I]stable\f[R] \f[I]nightly\f[R] \f[I]dev\f[R]
+To deicide the update branch
+.TP
+\f[B]recursion-limit(rl)\f[R] - \f[I]all integer\f[R]
+To set the recursion depth limit of the interpreter
 .SS EXAMPLE
 .PP
 \f[I]cpc test/test.cpc test/recursive_test.cpc -r 10000 -t -gt\f[R]

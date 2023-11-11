@@ -16,6 +16,9 @@ cpc - An interpreter for CAIE Pseudocode.
 **cpc** is a simple interpreter for *C*AIE *P*seudo*c*ode written in Python3. The language regulated by CAIE has a really retro grammar and even some grammar will not benefit both developers and the interpreter. Thus, some unimportant grammars are changed in this interpreter and even some new grammars are added. For more detailed information about this, you may look at README or <https://github.com/iewnfod/CAIE_Code>.
 
 # OPTIONS
+**-c**, **--config**
+: To set configs of this interpreter
+
 **-gt**, **--get-tree**
 : To show the tree of the program after being parsed
 
@@ -25,14 +28,14 @@ cpc - An interpreter for CAIE Pseudocode.
 **-k**, **--keywords**
 : To show all the keywords
 
+**-m**, **--migrate**
+: To migrate .p files in a specified directory
+
 **-ne**, **--no-error**
 : To remove all error messages
 
 **-p**, **--parse**
 : To show parse information during running
-
-**-r**, **--recursive-limit**
-: To set the recursive limit of the interpreter
 
 **-t**, **--time**
 : To show the time for the script to run
@@ -42,6 +45,22 @@ cpc - An interpreter for CAIE Pseudocode.
 
 **-v**, **--version**
 : To show the version of installed *cpc*
+
+**-lc**, **--list-configs**
+: To show all configs of the interpreter
+
+## CONFIGS
+**remote** - *Github* *Gitee*
+: To decide the update source
+
+**dev** - *true* *false*
+: To toggle the developer mod
+
+**branch** - *stable* *nightly* *dev*
+: To deicide the update branch
+
+**recursion-limit(rl)** - *all integer*
+: To set the recursion depth limit of the interpreter
 
 ## EXAMPLE
 *cpc test/test.cpc test/recursive_test.cpc -r 10000 -t -gt*

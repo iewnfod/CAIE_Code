@@ -26,7 +26,7 @@ precedence = (
 
 def p_error(p):
     if p:
-        add_parse_error_message(str(p), AST_Node(p=p))
+        add_parse_error_message(f'{p.type} `{p.value}`', AST_Node(p=p))
     else:
         add_eof_error_message(AST_Node())
 
