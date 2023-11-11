@@ -35,8 +35,6 @@ class Config:
 				for key, val in dict.items():
 					if key in self.config:
 						self.config[key]._init_update(val)
-					else:
-						self.err_config(key)
 
 		self.write_config()
 
@@ -62,10 +60,8 @@ class Config:
 			print(f'\t{i}')
 
 	def err_config(self, opt_name):
-		from .quit import quit
 		print(f'Unknown config: {opt_name}')
 		self.output_available_configs()
-		quit(1)
 
 	def get_config(self, opt_name):
 		if opt_name in self.config:
