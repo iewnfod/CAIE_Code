@@ -11,10 +11,12 @@ options_dict = {
     "show_error": True
 }
 
-def _dict_output(d: dict, space=4):
+def _dict_connect(d: dict, space=4):
     max_left_size = max(len(i) for i in d.keys())
+    result = []
     for left, right in d.items():
-        print(left + ' '*(max_left_size-len(left)+space) + right)
+        result.append(left + ' '*(max_left_size-len(left)+space) + right)
+    return result
 
 def get_value(value):
     return options_dict[value]
@@ -49,11 +51,16 @@ def help():
     print('Options:')
     arguments.sort()
 
-    result = {}
+    left_result = {}
     for i in arguments:
-        result[f'\t\033[1m{i.short_arg}\t{i.long_arg}\033[0m'] = i.description
+        left_result[f'    \033[1m{i.short_arg}\033[0m'] = f'\033[1m{i.long_arg}\033[0m'
 
-    _dict_output(result)
+    left_result = _dict_connect(left_result)
+    result = {}
+    for i in range(len(arguments)):
+        result[left_result[i]] = arguments[i].description
+
+    print('\n'.join(_dict_connect(result)))
 
 def get_tree():
     options_dict['show_tree'] = True
@@ -111,14 +118,9 @@ def list_configs():
         else:
             left = val.name
 
-        if val.val != val.default_val:
-            right = f'{val.val}({val.default_val})'
-        else:
-            right = str(val.val)
+        result[left] = str(val.val)
 
-        result[left] = right
-
-    _dict_output(result)
+    print('\n'.join(_dict_connect(result)))
 
 
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
