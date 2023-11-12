@@ -122,6 +122,10 @@ def list_configs():
 
     print('\n'.join(_dict_connect(result)))
 
+def reset_configs():
+    from .global_var import config
+    config.reset_config()
+
 
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
 class Opt:
@@ -161,5 +165,6 @@ arguments = [
     Opt('-u', '--update', update_version, 'To check or update the version (only if this is installed with git)', True),
     Opt('-c', '--config', change_config, 'To set configs of this interpreter', True, 2),
     Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1),
-    Opt('-lc', '--list-configs', list_configs, 'To list all the configs of the interpreter', True)
+    Opt('-lc', '--list-configs', list_configs, 'To list all the configs of the interpreter', True),
+    Opt('-rc', '--reset-configs', reset_configs, 'To reset all the configs of the interpreter', True)
 ]

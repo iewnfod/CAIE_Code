@@ -59,6 +59,7 @@ cpc [file_paths] [options]
 | `-v` | `--version` | 显示解释器当前版本 |
 | `-gt` | `--get-tree` | 显示脚本解析后生成的可运行的树 |
 | `-lc` | `--list-configs` | 显示解释器的所有设置 |
+| `-rc` | `--reset-configs` | 删除解释器的所有设置 |
 | `-ne` | `--no-error` | 禁止所有错误的输出 |
 
 ### 可选配置
@@ -257,7 +258,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-
+        
         IF <condition> THEN
             <statements>
         ELSE
@@ -298,7 +299,7 @@ NEXT i
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-
+        
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -306,7 +307,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier>
-
+        
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -315,7 +316,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-
+        
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -323,7 +324,7 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-
+        
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。

@@ -70,6 +70,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 | `-v` | `--version` | To show the version of this interpreter |
 | `-gt` | `--get-tree` | To show the tree of the program after being parsed |
 | `-lc` | `--list-configs` | To list all the configs of the interpreter |
+| `-rc` | `--reset-configs` | To reset all the configs of the interpreter |
 | `-ne` | `--no-error` | To remove all error messages |
 
 ### Config
@@ -278,7 +279,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         IF <condition> THEN
             <statements>
         ENDIF
-
+        
         IF <condition> THEN
             <statements>
         ELSE
@@ -319,7 +320,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-
+        
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -327,7 +328,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a procedure
         ```
         CALL <identifier>
-
+        
         CALL <identifier> (<value>, ...)
         ```
     * functions with return values
@@ -336,7 +337,7 @@ The following items give the `DATATYPE`, its description, and the default value 
             <statements>
             RETURN <value>
         ENDFUNCTION
-
+        
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -344,7 +345,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a function with return values
         ```
         <identifier> ()
-
+        
         <identifier> (<value>, ...)
         ```
     * Before the parameters of those sub-routines, you *can* use `BYREF` or `BYVAL` to force the program to pass those parameters by reference or by-value respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the prior parameter. If the program cannot find a clear indication it will, by default pass parameters by value.

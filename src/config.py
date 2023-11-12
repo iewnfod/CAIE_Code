@@ -54,6 +54,13 @@ class Config:
 		else:
 			self.err_config(opt_name)
 
+	def reset_config(self):
+		try:
+			os.remove(self.config_path)
+			print('Successfully reset all configs.')
+		except Exception as e:
+			print(f"Error deleting config file: {e}")
+
 	def output_available_configs(self):
 		print('Available configs: ')
 		for i in self.config.keys():
