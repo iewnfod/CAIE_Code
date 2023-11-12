@@ -1,3 +1,14 @@
+# 检查依赖
+from src.requirements import test_requirements
+test_requirements()
+# 依赖库导入
+from ply import yacc
+from ply import lex
+from chardet import detect
+# 导入色彩基础库，保证\033能正确的转译
+import colorama
+colorama.init()
+
 # 全局变量初始化
 import src.global_var as global_var
 
@@ -12,17 +23,6 @@ from src.line_commands import run_command
 import sys
 import os
 from time import time
-
-# 检查依赖
-from src.requirements import test_requirements
-test_requirements()
-# 依赖库导入
-from ply import yacc
-from ply import lex
-from chardet import detect
-# 导入色彩基础库，保证\033能正确的转译
-import colorama
-colorama.init()
 
 
 preline = '>'
