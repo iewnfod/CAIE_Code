@@ -3,37 +3,46 @@ def q(msg):
 	print(msg)
 	quit(1)
 
-def remote_update(obj, value):
-	if value == 'github':
-		obj.val = 'https://github.com/iewnfod/CAIE_Code.git'
-	elif value == 'gitee':
-		obj.val = 'https://gitee.com/ricky-tap/CAIE_Code.git'
-	else:
-		q(f'Config `{obj.name}` only accept `github` or `gitee`')
+def _connect_string(l):
+	return '\n'.join([f'\t\033[1m{i}\033[0m' for i in l])
 
-def pip_update(obj, value):
-	if value == 'pip':
-		obj.val = 'https://pypi.python.org/simple/'
-	elif value == 'tuna':
-		obj.val = 'https://pypi.tuna.tsinghua.edu.cn/simple/'
-	else:
-		q(f'Config `{obj.name}` only accept `pip` or `tuna`')
+class DictConfig:
+	def __init__(self, d: dict):
+		self.d = d
 
-def dev_mod(obj, value):
-	value = value.lower()
-	if value == 'true':
-		obj.val = True
-	elif value == 'false':
-		obj.val = False
-	else:
-		q(f'Config `{obj.name}` only accept `true` or `false`')
+	def update(self, obj, val):
+		if val in self.d:
+			obj.val = self.d[val]
+		else:
+			q(f'Config `{obj.name}` only accept: \n{_connect_string(self.d.keys())}')
 
-def branch_update(obj, value):
-	if value == 'stable':
-		obj.val = 'stable'
-	elif value == 'nightly':
-		obj.val = 'nightly'
-	elif value == 'dev':
-		obj.val = 'dev'
-	else:
-		q(f'Config `{obj.name}` only accept `stable`,`nightly`,`master`')
+class SetConfig:
+	def __init__(self, available_set: set):
+		self.available_set = available_set
+
+	def update(self, obj, val):
+		if val in self.available_set:
+			obj.val = val
+		else:
+			q(f'Config `{obj.name}` only accept: \n{_connect_string(self.available_set)}')
+
+class TypeConfig:
+	def __init__(self, available_type):
+		self.available_type = available_type
+
+	def update(self, obj, val):
+		try:
+			obj.val = self.available_type(val)
+		except:
+			q(f'Config `{obj.name}` only accept {self.available_type} values')
+
+remote_update = DictConfig({
+	'github': 'https://github.com/iewnfod/CAIE_Code.git',
+	'gitee': 'https://gitee.com/ricky-tap/CAIE_Code.git',
+})
+
+dev_mod = DictConfig({'true': True, 'false': False})
+
+branch_update = SetConfig({'stable', 'nightly', 'dev'})
+
+recursive_limit = TypeConfig(int)

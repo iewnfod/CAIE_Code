@@ -29,7 +29,16 @@ class Space:
             except:
                 add_stack_error_message(f'Cannot assign `{type}` to `{self.variables[id][0][1]}`')
         else:
-            add_stack_error_message(f'Cannot assign value of constant `{id}`')
+            add_stack_error_message(f'Cannot assign value to constant `{id}`')
+
+    def force_set_variable(self, id, value, type):
+        if self.variables[id][1] == False:
+            if self.variables[id][0][1] == type:
+                self.variables[id] = (value, False)
+            else:
+                add_stack_error_message(f'Cannot assign `{type}` pointer to `{self.variables[id][0][1]}`')
+        else:
+            add_stack_error_message(f'Cannot assign value to constant `{id}`')
 
     def set_function(self, id, func):
         self.functions[id] = func
@@ -81,6 +90,14 @@ class Stack:
         for i in range(len(self.spaces)):
             if id in self.spaces[i].variables:
                 self.spaces[i].set_variable(id, value, type)
+                break
+        else:
+            add_stack_error_message(f'Variable `{id}` has not been declared yet')
+
+    def force_set_variable(self, id, value, type):
+        for i in range(len(self.spaces)):
+            if id in self.spaces[i].variables:
+                self.spaces[i].force_set_variable(id, value, type)
                 break
         else:
             add_stack_error_message(f'Variable `{id}` has not been declared yet')

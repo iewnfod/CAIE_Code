@@ -26,7 +26,7 @@ precedence = (
 
 def p_error(p):
     if p:
-        add_parse_error_message(str(p), AST_Node(p=p))
+        add_parse_error_message(f'{p.type} `{p.value}`', AST_Node(p=p))
     else:
         add_eof_error_message(AST_Node())
 
@@ -464,7 +464,11 @@ def p_enumerate_items(p):
 
 def p_pointer_type_statement(p):
     """statement : TYPE ID EQUAL POINTER ID"""
-    p[0] = AST.Pointer(p[2], p[5], p=p)
+    p[0] = AST.TypePointerStatement(p[2], p[5], p=p)
+
+def p_pointer_statement(p):
+    """statement : ID ASSIGN POINTER ID"""
+    p[0] = AST.PointerStatement(p[1], p[4], p=p)
 
 def p_pass_statement(p):
     """statement : PASS"""

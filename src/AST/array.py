@@ -3,6 +3,7 @@ from ..AST_Base import *
 from ..error import *
 from ..global_var import *
 from ..data_types import ARRAY
+from copy import copy
 
 class Array(AST_Node):
     def __init__(self, id, dimensions, type, *args, **kwargs):
@@ -85,6 +86,9 @@ class Array_assign(AST_Node):
     def set_value(self, arr, index, value):
         if len(index) == 1:
             index = index[0]
+            if index not in arr:
+                add_error_message(f'Array index `{index}` out of bounds', self)
+                return
             try:
                 arr[index][0].set_value(value[0])
             except:
@@ -138,7 +142,7 @@ class Array_get(AST_Node):
             if index[0] in arr.keys():
                 return arr[index[0]][0]
             else:
-                add_error_message(f'List index `{index[0]}` out of range', self)
+                add_error_message(f'Array index `{index[0]}` out of bounds', self)
         else:
             return self.get_value(arr[index[0]][0][0], index[1:])
 
@@ -186,7 +190,7 @@ class Array_expression(AST_Node):
                 if type(items[i-1]) == tuple:
                     value[i] = (stack.structs[items[i-1][1]](items[i-1][0]), items[i-1][1])
                 else:
-                    value[i] = (items[i-1], items[i-1][1])
+                    value[i] = (copy(items[i-1]), items[i-1][1])
                 type_l.add(value[i][1])
             # 如果有多种类型，set就不会是1
             if len(type_l) > 1:

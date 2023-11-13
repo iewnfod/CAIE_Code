@@ -1,3 +1,14 @@
+# 检查依赖
+from src.requirements import test_requirements
+test_requirements()
+# 依赖库导入
+from ply import yacc
+from ply import lex
+from chardet import detect
+# 导入色彩基础库，保证\033能正确的转译
+import colorama
+colorama.init()
+
 # 全局变量初始化
 import src.global_var as global_var
 
@@ -25,35 +36,6 @@ def wrong_argument(msg):
     print(f'Use `cpc -h` to get detailed informations about how to use')
     quit(1)
     # options.help()
-
-# 解析参数
-argv = sys.argv
-file_paths = set()
-i = 1
-while i < len(argv):
-    arg = argv[i]
-    for opt in options.arguments:
-        if opt.check(arg):
-            opt.run(argv[i:])
-            i += opt.value_num
-            break
-    else:
-        if arg[0] == '-':
-            wrong_argument(f'Unknown option `{arg}`')
-        else:
-            file_paths.add(arg)
-    i += 1
-
-# 检查依赖
-from src.requirements import test_requirements
-test_requirements()
-# 依赖库导入
-from ply import yacc
-from ply import lex
-from chardet import detect
-# 导入色彩基础库，保证\033能正确的转译
-import colorama
-colorama.init()
 
 # 清除注释以及多余字符
 def remove_comment(text: str):
@@ -180,6 +162,24 @@ def main(input_=None, output_=None, addition_file_name=None):
     # 设置输入输出
     if input_: global_var.set_std_in(input_)
     if output_: global_var.set_std_out(output_)
+
+    # 解析参数
+    argv = sys.argv
+    file_paths = set()
+    i = 1
+    while i < len(argv):
+        arg = argv[i]
+        for opt in options.arguments:
+            if opt.check(arg):
+                opt.run(argv[i:])
+                i += opt.value_num
+                break
+        else:
+            if arg[0] == '-':
+                wrong_argument(f'Unknown option `{arg}`')
+            else:
+                file_paths.add(arg)
+        i += 1
 
     if addition_file_name:
         file_paths.add(addition_file_name)

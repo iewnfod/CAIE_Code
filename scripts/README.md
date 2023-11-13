@@ -24,6 +24,10 @@
     ```
     Abs(x : REAL) RETURNS REAL
     ```
+* `Sum`: get the sum of an array
+    ```
+    Sum(BYREF arr : ARRAY, BYVAL start : INTEGER, end : INTEGER) RETURNS REAL
+    ```
 * `PI` π
 
 ## [Sort](./sort.cpc)

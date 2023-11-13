@@ -18,6 +18,7 @@ def __init__():
     errors = {}
     running_mod = 'file'
     console.preloop()
+    sys.setrecursionlimit(config.get_config('rl'))
 
 def set_std_in(new_in):
     global std_in
