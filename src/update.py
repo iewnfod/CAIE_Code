@@ -12,12 +12,12 @@ with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
 
 def check_github_connectivity():
-    url = "https://github.com"
+    url = "https://github.com/"
     try:
         response = requests.get(url, timeout=5)
         response.raise_for_status()
         return True
-    except requests.RequestException as e:
+    except requests.RequestException:
         return False
 
 def check_update(repo: git.Repo, remote: git.Remote):
