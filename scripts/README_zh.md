@@ -101,22 +101,19 @@
     ```
     Import(target : STRING) RETURNS ImportObj
     ```
+
 ## [Numpy](./numpy.cpc)
-
-- ArrayOne设置一个自定义长宽的数组内容为1
-
+* ArrayOne设置一个自定义长宽的数组内容为1
   ```
   ArrayOne(BYVAL row : INTEGER, col : INTEGER) RETURNS ARRAY
   ```
 
-- ArrayArrange在闭包范围内生成均匀的间隔为n的数字
-
+* ArrayArrange在闭包范围内生成均匀的间隔为n的数字
   ```
   ArrayArrange(BYVAL low : INTEGER, high: INTEGER, div : REAL) RETURNS ARRAY
   ```
 
-- ArrayLinSpace在闭包范围内生成间隔均匀的n个数字
-
+* ArrayLinSpace在闭包范围内生成间隔均匀的n个数字
   ```
   ArrayLinSpace(BYVAL low : INTEGER, high: INTEGER, num : INTEGER) RETURNS ARRAY
   ```
