@@ -2,6 +2,7 @@ from .history import HOME_PATH
 from .animation import new_animation
 import os
 import git
+import requests
 
 VERSION = ''
 
@@ -10,6 +11,14 @@ super_fast = False
 with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
 
+def check_github_connectivity():
+    url = "https://github.com"
+    try:
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        return True
+    except requests.RequestException as e:
+        return False
 
 def check_update(repo: git.Repo, remote: git.Remote):
     remote.fetch()
@@ -57,6 +66,12 @@ def get_commit_hash_msg():
 def update():
     from .global_var import config
     git_remote = config.get_config('remote')
+    # 检查是否能连接到 GitHub
+    if git_remote == config.get_default_config('remote') and not check_github_connectivity():
+        print('Failed to connect to GitHub, switch to Gitee as remote.')
+        config.update_config('remote', 'gitee')
+        git_remote = config.get_config('remote')
+    # 正式开始更新
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
     if config.get_config('dev'):
