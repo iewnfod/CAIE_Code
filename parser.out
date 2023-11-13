@@ -123,17 +123,18 @@ Rule 105   statement -> TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
 Rule 106   enumerate_items -> enumerate_items COMMA ID
 Rule 107   enumerate_items -> ID
 Rule 108   statement -> TYPE ID EQUAL POINTER ID
-Rule 109   statement -> PASS
-Rule 110   statement -> IMPORT expression
-Rule 111   statement -> PRIVATE statement
-Rule 112   statement -> PUBLIC statement
+Rule 109   statement -> ID ASSIGN POINTER ID
+Rule 110   statement -> PASS
+Rule 111   statement -> IMPORT expression
+Rule 112   statement -> PRIVATE statement
+Rule 113   statement -> PUBLIC statement
 
 Terminals, with rules where they appear
 
 AND                  : 43
 APPEND               : 95
 ARRAY                : 6 70 72 74 75 76 77 85 87 88 89
-ASSIGN               : 10 11 34 35
+ASSIGN               : 10 11 34 35 109
 BOOLEAN              : 62
 BYREF                : 71 72 76
 BYVAL                : 73 74 77
@@ -166,9 +167,9 @@ FUNCTION             : 84 85 86 87 88 89
 GETRECORD            : 
 GREATER              : 48
 GREATER_EQUAL        : 50
-ID                   : 3 4 4 5 6 6 10 11 18 19 25 26 34 34 35 35 40 41 69 69 70 71 71 72 73 73 74 75 75 76 76 77 77 80 81 82 83 84 84 85 86 86 87 88 88 89 89 90 91 97 98 102 105 106 107 108 108
+ID                   : 3 4 4 5 6 6 10 11 18 19 25 26 34 34 35 35 40 41 69 69 70 71 71 72 73 73 74 75 75 76 76 77 77 80 81 82 83 84 84 85 86 86 87 88 88 89 89 90 91 97 98 102 105 106 107 108 108 109 109
 IF                   : 23 24
-IMPORT               : 110
+IMPORT               : 111
 INHERITS             : 
 INPUT                : 18 19
 INTEGER              : 66
@@ -191,12 +192,12 @@ OPENFILE             : 93 94 95 96
 OR                   : 42
 OTHERWISE            : 33
 OUTPUT               : 20
-PASS                 : 109
+PASS                 : 110
 PLUS                 : 56 57
-POINTER              : 108
-PRIVATE              : 111
+POINTER              : 108 109
+PRIVATE              : 112
 PROCEDURE            : 80 81
-PUBLIC               : 112
+PUBLIC               : 113
 PUTRECORD            : 
 RANDOM               : 96
 READ                 : 93
@@ -232,12 +233,12 @@ declare_parameters   : 67 80 84 85 88
 dimension            : 7 8
 dimensions           : 6 7
 enumerate_items      : 105 106
-expression           : 5 9 9 10 11 12 13 16 17 21 22 23 24 31 31 32 34 34 34 35 35 36 37 38 39 42 42 43 43 44 45 45 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 56 57 57 58 58 59 59 60 78 79 92 93 94 95 96 97 98 99 99 100 101 101 103 103 104 110
+expression           : 5 9 9 10 11 12 13 16 17 21 22 23 24 31 31 32 34 34 34 35 35 36 37 38 39 42 42 43 43 44 45 45 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 56 57 57 58 58 59 59 60 78 79 92 93 94 95 96 97 98 99 99 100 101 101 103 103 104 111
 indexes              : 11 12 19 26 41 97
 otherwise_statement  : 30
 output_expression    : 20 21
 parameters           : 78 82 90
-statement            : 1 2 104 111 112
+statement            : 1 2 104 112 113
 statements           : 1 23 23 24 29 33 34 35 36 37 38 80 81 84 85 86 87 88 89 102 0
 
 Parsing method: LALR
@@ -290,10 +291,11 @@ state 0
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -415,10 +417,11 @@ state 1
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -555,6 +558,7 @@ state 4
 
     (10) statement -> ID . ASSIGN expression
     (11) statement -> ID . LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
+    (109) statement -> ID . ASSIGN POINTER ID
     (40) expression -> ID .
     (41) expression -> ID . LEFT_SQUARE indexes RIGHT_SQUARE
     (90) expression -> ID . LEFT_PAREN parameters RIGHT_PAREN
@@ -965,10 +969,11 @@ state 14
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -1495,59 +1500,59 @@ state 26
 
 state 27
 
-    (109) statement -> PASS .
+    (110) statement -> PASS .
 
-    DELETE          reduce using rule 109 (statement -> PASS .)
-    DECLARE         reduce using rule 109 (statement -> PASS .)
-    CONSTANT        reduce using rule 109 (statement -> PASS .)
-    ID              reduce using rule 109 (statement -> PASS .)
-    INPUT           reduce using rule 109 (statement -> PASS .)
-    OUTPUT          reduce using rule 109 (statement -> PASS .)
-    IF              reduce using rule 109 (statement -> PASS .)
-    CASE            reduce using rule 109 (statement -> PASS .)
-    FOR             reduce using rule 109 (statement -> PASS .)
-    REPEAT          reduce using rule 109 (statement -> PASS .)
-    WHILE           reduce using rule 109 (statement -> PASS .)
-    PROCEDURE       reduce using rule 109 (statement -> PASS .)
-    CALL            reduce using rule 109 (statement -> PASS .)
-    FUNCTION        reduce using rule 109 (statement -> PASS .)
-    RETURN          reduce using rule 109 (statement -> PASS .)
-    OPENFILE        reduce using rule 109 (statement -> PASS .)
-    READFILE        reduce using rule 109 (statement -> PASS .)
-    WRITEFILE       reduce using rule 109 (statement -> PASS .)
-    CLOSEFILE       reduce using rule 109 (statement -> PASS .)
-    SEEK            reduce using rule 109 (statement -> PASS .)
-    TYPE            reduce using rule 109 (statement -> PASS .)
-    PASS            reduce using rule 109 (statement -> PASS .)
-    IMPORT          reduce using rule 109 (statement -> PASS .)
-    PRIVATE         reduce using rule 109 (statement -> PASS .)
-    PUBLIC          reduce using rule 109 (statement -> PASS .)
-    LEFT_SQUARE     reduce using rule 109 (statement -> PASS .)
-    NOT             reduce using rule 109 (statement -> PASS .)
-    MINUS           reduce using rule 109 (statement -> PASS .)
-    PLUS            reduce using rule 109 (statement -> PASS .)
-    LEFT_PAREN      reduce using rule 109 (statement -> PASS .)
-    DATE            reduce using rule 109 (statement -> PASS .)
-    BOOLEAN         reduce using rule 109 (statement -> PASS .)
-    CHAR            reduce using rule 109 (statement -> PASS .)
-    STRING          reduce using rule 109 (statement -> PASS .)
-    REAL            reduce using rule 109 (statement -> PASS .)
-    INTEGER         reduce using rule 109 (statement -> PASS .)
-    $end            reduce using rule 109 (statement -> PASS .)
-    UNTIL           reduce using rule 109 (statement -> PASS .)
-    ENDWHILE        reduce using rule 109 (statement -> PASS .)
-    ENDPROCEDURE    reduce using rule 109 (statement -> PASS .)
-    ENDTYPE         reduce using rule 109 (statement -> PASS .)
-    ELSE            reduce using rule 109 (statement -> PASS .)
-    ENDIF           reduce using rule 109 (statement -> PASS .)
-    ENDFUNCTION     reduce using rule 109 (statement -> PASS .)
-    SEMICOLON       reduce using rule 109 (statement -> PASS .)
-    NEXT            reduce using rule 109 (statement -> PASS .)
+    DELETE          reduce using rule 110 (statement -> PASS .)
+    DECLARE         reduce using rule 110 (statement -> PASS .)
+    CONSTANT        reduce using rule 110 (statement -> PASS .)
+    ID              reduce using rule 110 (statement -> PASS .)
+    INPUT           reduce using rule 110 (statement -> PASS .)
+    OUTPUT          reduce using rule 110 (statement -> PASS .)
+    IF              reduce using rule 110 (statement -> PASS .)
+    CASE            reduce using rule 110 (statement -> PASS .)
+    FOR             reduce using rule 110 (statement -> PASS .)
+    REPEAT          reduce using rule 110 (statement -> PASS .)
+    WHILE           reduce using rule 110 (statement -> PASS .)
+    PROCEDURE       reduce using rule 110 (statement -> PASS .)
+    CALL            reduce using rule 110 (statement -> PASS .)
+    FUNCTION        reduce using rule 110 (statement -> PASS .)
+    RETURN          reduce using rule 110 (statement -> PASS .)
+    OPENFILE        reduce using rule 110 (statement -> PASS .)
+    READFILE        reduce using rule 110 (statement -> PASS .)
+    WRITEFILE       reduce using rule 110 (statement -> PASS .)
+    CLOSEFILE       reduce using rule 110 (statement -> PASS .)
+    SEEK            reduce using rule 110 (statement -> PASS .)
+    TYPE            reduce using rule 110 (statement -> PASS .)
+    PASS            reduce using rule 110 (statement -> PASS .)
+    IMPORT          reduce using rule 110 (statement -> PASS .)
+    PRIVATE         reduce using rule 110 (statement -> PASS .)
+    PUBLIC          reduce using rule 110 (statement -> PASS .)
+    LEFT_SQUARE     reduce using rule 110 (statement -> PASS .)
+    NOT             reduce using rule 110 (statement -> PASS .)
+    MINUS           reduce using rule 110 (statement -> PASS .)
+    PLUS            reduce using rule 110 (statement -> PASS .)
+    LEFT_PAREN      reduce using rule 110 (statement -> PASS .)
+    DATE            reduce using rule 110 (statement -> PASS .)
+    BOOLEAN         reduce using rule 110 (statement -> PASS .)
+    CHAR            reduce using rule 110 (statement -> PASS .)
+    STRING          reduce using rule 110 (statement -> PASS .)
+    REAL            reduce using rule 110 (statement -> PASS .)
+    INTEGER         reduce using rule 110 (statement -> PASS .)
+    $end            reduce using rule 110 (statement -> PASS .)
+    UNTIL           reduce using rule 110 (statement -> PASS .)
+    ENDWHILE        reduce using rule 110 (statement -> PASS .)
+    ENDPROCEDURE    reduce using rule 110 (statement -> PASS .)
+    ENDTYPE         reduce using rule 110 (statement -> PASS .)
+    ELSE            reduce using rule 110 (statement -> PASS .)
+    ENDIF           reduce using rule 110 (statement -> PASS .)
+    ENDFUNCTION     reduce using rule 110 (statement -> PASS .)
+    SEMICOLON       reduce using rule 110 (statement -> PASS .)
+    NEXT            reduce using rule 110 (statement -> PASS .)
 
 
 state 28
 
-    (110) statement -> IMPORT . expression
+    (111) statement -> IMPORT . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -1598,7 +1603,7 @@ state 28
 
 state 29
 
-    (111) statement -> PRIVATE . statement
+    (112) statement -> PRIVATE . statement
     (3) statement -> . DELETE ID
     (4) statement -> . DECLARE ID COLON ID
     (5) statement -> . CONSTANT ID EQUAL expression
@@ -1642,10 +1647,11 @@ state 29
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -1721,7 +1727,7 @@ state 29
 
 state 30
 
-    (112) statement -> PUBLIC . statement
+    (113) statement -> PUBLIC . statement
     (3) statement -> . DELETE ID
     (4) statement -> . DECLARE ID COLON ID
     (5) statement -> . CONSTANT ID EQUAL expression
@@ -1765,10 +1771,11 @@ state 30
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -2546,6 +2553,7 @@ state 41
 state 42
 
     (10) statement -> ID ASSIGN . expression
+    (109) statement -> ID ASSIGN . POINTER ID
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -2579,6 +2587,7 @@ state 42
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
+    POINTER         shift and go to state 93
     LEFT_SQUARE     shift and go to state 8
     ID              shift and go to state 66
     NOT             shift and go to state 31
@@ -2646,8 +2655,8 @@ state 43
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    indexes                        shift and go to state 93
-    expression                     shift and go to state 94
+    indexes                        shift and go to state 94
+    expression                     shift and go to state 95
 
 state 44
 
@@ -2688,7 +2697,7 @@ state 44
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    RIGHT_PAREN     shift and go to state 96
+    RIGHT_PAREN     shift and go to state 97
     LEFT_SQUARE     shift and go to state 8
     ID              shift and go to state 66
     NOT             shift and go to state 31
@@ -2702,22 +2711,22 @@ state 44
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    parameters                     shift and go to state 95
-    expression                     shift and go to state 97
+    parameters                     shift and go to state 96
+    expression                     shift and go to state 98
 
 state 45
 
     (4) statement -> DECLARE ID . COLON ID
     (6) statement -> DECLARE ID . COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
 
-    COLON           shift and go to state 98
+    COLON           shift and go to state 99
 
 
 state 46
 
     (5) statement -> CONSTANT ID . EQUAL expression
 
-    EQUAL           shift and go to state 99
+    EQUAL           shift and go to state 100
 
 
 state 47
@@ -2767,10 +2776,11 @@ state 47
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -2841,8 +2851,8 @@ state 47
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 100
-    statement                      shift and go to state 101
+    expression                     shift and go to state 101
+    statement                      shift and go to state 102
 
 state 48
 
@@ -2893,7 +2903,7 @@ state 48
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 102
+    expression                     shift and go to state 103
 
 state 49
 
@@ -2944,7 +2954,7 @@ state 49
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 103
+    expression                     shift and go to state 104
 
 state 50
 
@@ -2995,7 +3005,7 @@ state 50
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 104
+    expression                     shift and go to state 105
 
 state 51
 
@@ -3046,7 +3056,7 @@ state 51
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 105
+    expression                     shift and go to state 106
 
 state 52
 
@@ -3097,7 +3107,7 @@ state 52
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 106
+    expression                     shift and go to state 107
 
 state 53
 
@@ -3148,7 +3158,7 @@ state 53
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 107
+    expression                     shift and go to state 108
 
 state 54
 
@@ -3199,7 +3209,7 @@ state 54
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 108
+    expression                     shift and go to state 109
 
 state 55
 
@@ -3250,7 +3260,7 @@ state 55
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 109
+    expression                     shift and go to state 110
 
 state 56
 
@@ -3301,7 +3311,7 @@ state 56
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 110
+    expression                     shift and go to state 111
 
 state 57
 
@@ -3352,7 +3362,7 @@ state 57
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 111
+    expression                     shift and go to state 112
 
 state 58
 
@@ -3403,7 +3413,7 @@ state 58
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 112
+    expression                     shift and go to state 113
 
 state 59
 
@@ -3454,7 +3464,7 @@ state 59
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 113
+    expression                     shift and go to state 114
 
 state 60
 
@@ -3505,7 +3515,7 @@ state 60
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 114
+    expression                     shift and go to state 115
 
 state 61
 
@@ -3556,7 +3566,7 @@ state 61
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 115
+    expression                     shift and go to state 116
 
 state 62
 
@@ -3607,15 +3617,15 @@ state 62
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 116
+    expression                     shift and go to state 117
 
 state 63
 
     (14) expression -> LEFT_SQUARE array_items . RIGHT_SQUARE
     (16) array_items -> array_items . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 117
-    COMMA           shift and go to state 118
+    RIGHT_SQUARE    shift and go to state 118
+    COMMA           shift and go to state 119
 
 
 state 64
@@ -3729,7 +3739,7 @@ state 65
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
 state 66
@@ -3807,7 +3817,7 @@ state 66
     TO              reduce using rule 40 (expression -> ID .)
     COLON           reduce using rule 40 (expression -> ID .)
     STEP            reduce using rule 40 (expression -> ID .)
-    LEFT_SQUARE     shift and go to state 120
+    LEFT_SQUARE     shift and go to state 121
     LEFT_PAREN      shift and go to state 44
 
   ! LEFT_SQUARE     [ reduce using rule 40 (expression -> ID .) ]
@@ -3865,7 +3875,7 @@ state 67
     ENDFUNCTION     reduce using rule 18 (statement -> INPUT ID .)
     SEMICOLON       reduce using rule 18 (statement -> INPUT ID .)
     NEXT            reduce using rule 18 (statement -> INPUT ID .)
-    LEFT_SQUARE     shift and go to state 121
+    LEFT_SQUARE     shift and go to state 122
 
   ! LEFT_SQUARE     [ reduce using rule 18 (statement -> INPUT ID .) ]
 
@@ -3921,7 +3931,7 @@ state 68
     ENDFUNCTION     reduce using rule 20 (statement -> OUTPUT output_expression .)
     SEMICOLON       reduce using rule 20 (statement -> OUTPUT output_expression .)
     NEXT            reduce using rule 20 (statement -> OUTPUT output_expression .)
-    COMMA           shift and go to state 122
+    COMMA           shift and go to state 123
 
 
 state 69
@@ -4006,7 +4016,7 @@ state 69
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 22 (output_expression -> expression .) ]
   ! PLUS            [ reduce using rule 22 (output_expression -> expression .) ]
@@ -4033,7 +4043,7 @@ state 70
     (59) expression -> expression . CONNECT expression
     (103) expression -> expression . DOT expression
 
-    THEN            shift and go to state 123
+    THEN            shift and go to state 124
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -4049,7 +4059,7 @@ state 70
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
 state 71
@@ -4057,7 +4067,7 @@ state 71
     (25) statement -> CASE OF . ID cases ENDCASE
     (26) statement -> CASE OF . ID LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE
 
-    ID              shift and go to state 124
+    ID              shift and go to state 125
 
 
 state 72
@@ -4065,7 +4075,7 @@ state 72
     (34) statement -> FOR ID . ASSIGN expression TO expression STEP expression statements NEXT ID
     (35) statement -> FOR ID . ASSIGN expression TO expression statements NEXT ID
 
-    ASSIGN          shift and go to state 125
+    ASSIGN          shift and go to state 126
 
 
 state 73
@@ -4115,10 +4125,11 @@ state 73
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -4152,7 +4163,7 @@ state 73
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    UNTIL           shift and go to state 126
+    UNTIL           shift and go to state 127
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -4258,10 +4269,11 @@ state 74
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -4295,7 +4307,7 @@ state 74
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    DO              shift and go to state 127
+    DO              shift and go to state 128
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -4308,10 +4320,10 @@ state 74
     DIV             shift and go to state 57
     MUL             shift and go to state 58
     N_DIV           shift and go to state 59
-    PLUS            shift and go to state 129
-    MINUS           shift and go to state 130
+    PLUS            shift and go to state 130
+    MINUS           shift and go to state 131
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -4348,7 +4360,7 @@ state 74
     INTEGER         shift and go to state 39
 
     expression                     shift and go to state 7
-    statements                     shift and go to state 128
+    statements                     shift and go to state 129
     statement                      shift and go to state 2
 
 state 75
@@ -4400,10 +4412,11 @@ state 75
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -4437,7 +4450,7 @@ state 75
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    LEFT_PAREN      shift and go to state 131
+    LEFT_PAREN      shift and go to state 132
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -4474,7 +4487,7 @@ state 75
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 132
+    statements                     shift and go to state 133
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
@@ -4498,7 +4511,7 @@ state 76
     (59) expression -> expression . CONNECT expression
     (103) expression -> expression . DOT expression
 
-    RIGHT_PAREN     shift and go to state 133
+    RIGHT_PAREN     shift and go to state 134
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -4514,7 +4527,7 @@ state 76
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
 state 77
@@ -4523,7 +4536,7 @@ state 77
     (83) statement -> CALL ID .
 
   ! shift/reduce conflict for LEFT_PAREN resolved as shift
-    LEFT_PAREN      shift and go to state 134
+    LEFT_PAREN      shift and go to state 135
     DELETE          reduce using rule 83 (statement -> CALL ID .)
     DECLARE         reduce using rule 83 (statement -> CALL ID .)
     CONSTANT        reduce using rule 83 (statement -> CALL ID .)
@@ -4582,8 +4595,8 @@ state 78
     (88) statement -> FUNCTION ID . LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION
     (89) statement -> FUNCTION ID . RETURNS ARRAY OF ID statements ENDFUNCTION
 
-    LEFT_PAREN      shift and go to state 135
-    RETURNS         shift and go to state 136
+    LEFT_PAREN      shift and go to state 136
+    RETURNS         shift and go to state 137
 
 
 state 79
@@ -4667,7 +4680,7 @@ state 79
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 92 (statement -> RETURN expression .) ]
   ! PLUS            [ reduce using rule 92 (statement -> RETURN expression .) ]
@@ -4696,7 +4709,7 @@ state 80
     (59) expression -> expression . CONNECT expression
     (103) expression -> expression . DOT expression
 
-    FOR             shift and go to state 137
+    FOR             shift and go to state 138
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -4712,52 +4725,13 @@ state 80
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
 state 81
 
     (97) statement -> READFILE expression . COMMA ID LEFT_SQUARE indexes RIGHT_SQUARE
     (98) statement -> READFILE expression . COMMA ID
-    (42) expression -> expression . OR expression
-    (43) expression -> expression . AND expression
-    (45) expression -> expression . EQUAL expression
-    (46) expression -> expression . NOT_EQUAL expression
-    (47) expression -> expression . LESS expression
-    (48) expression -> expression . GREATER expression
-    (49) expression -> expression . LESS_EQUAL expression
-    (50) expression -> expression . GREATER_EQUAL expression
-    (51) expression -> expression . MOD expression
-    (52) expression -> expression . DIV expression
-    (53) expression -> expression . MUL expression
-    (54) expression -> expression . N_DIV expression
-    (57) expression -> expression . PLUS expression
-    (58) expression -> expression . MINUS expression
-    (59) expression -> expression . CONNECT expression
-    (103) expression -> expression . DOT expression
-
-    COMMA           shift and go to state 138
-    OR              shift and go to state 48
-    AND             shift and go to state 49
-    EQUAL           shift and go to state 50
-    NOT_EQUAL       shift and go to state 51
-    LESS            shift and go to state 52
-    GREATER         shift and go to state 53
-    LESS_EQUAL      shift and go to state 54
-    GREATER_EQUAL   shift and go to state 55
-    MOD             shift and go to state 56
-    DIV             shift and go to state 57
-    MUL             shift and go to state 58
-    N_DIV           shift and go to state 59
-    PLUS            shift and go to state 60
-    MINUS           shift and go to state 61
-    CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
-
-
-state 82
-
-    (99) statement -> WRITEFILE expression . COMMA expression
     (42) expression -> expression . OR expression
     (43) expression -> expression . AND expression
     (45) expression -> expression . EQUAL expression
@@ -4791,7 +4765,46 @@ state 82
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
+
+
+state 82
+
+    (99) statement -> WRITEFILE expression . COMMA expression
+    (42) expression -> expression . OR expression
+    (43) expression -> expression . AND expression
+    (45) expression -> expression . EQUAL expression
+    (46) expression -> expression . NOT_EQUAL expression
+    (47) expression -> expression . LESS expression
+    (48) expression -> expression . GREATER expression
+    (49) expression -> expression . LESS_EQUAL expression
+    (50) expression -> expression . GREATER_EQUAL expression
+    (51) expression -> expression . MOD expression
+    (52) expression -> expression . DIV expression
+    (53) expression -> expression . MUL expression
+    (54) expression -> expression . N_DIV expression
+    (57) expression -> expression . PLUS expression
+    (58) expression -> expression . MINUS expression
+    (59) expression -> expression . CONNECT expression
+    (103) expression -> expression . DOT expression
+
+    COMMA           shift and go to state 140
+    OR              shift and go to state 48
+    AND             shift and go to state 49
+    EQUAL           shift and go to state 50
+    NOT_EQUAL       shift and go to state 51
+    LESS            shift and go to state 52
+    GREATER         shift and go to state 53
+    LESS_EQUAL      shift and go to state 54
+    GREATER_EQUAL   shift and go to state 55
+    MOD             shift and go to state 56
+    DIV             shift and go to state 57
+    MUL             shift and go to state 58
+    N_DIV           shift and go to state 59
+    PLUS            shift and go to state 60
+    MINUS           shift and go to state 61
+    CONNECT         shift and go to state 62
+    DOT             shift and go to state 120
 
 
 state 83
@@ -4875,7 +4888,7 @@ state 83
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 100 (statement -> CLOSEFILE expression .) ]
   ! PLUS            [ reduce using rule 100 (statement -> CLOSEFILE expression .) ]
@@ -4901,7 +4914,7 @@ state 84
     (59) expression -> expression . CONNECT expression
     (103) expression -> expression . DOT expression
 
-    COMMA           shift and go to state 140
+    COMMA           shift and go to state 141
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -4917,7 +4930,7 @@ state 84
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
 state 85
@@ -4970,10 +4983,11 @@ state 85
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -5007,7 +5021,7 @@ state 85
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    EQUAL           shift and go to state 142
+    EQUAL           shift and go to state 143
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -5045,13 +5059,13 @@ state 85
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 141
+    statements                     shift and go to state 142
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
 state 86
 
-    (110) statement -> IMPORT expression .
+    (111) statement -> IMPORT expression .
     (42) expression -> expression . OR expression
     (43) expression -> expression . AND expression
     (45) expression -> expression . EQUAL expression
@@ -5071,50 +5085,50 @@ state 86
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
-    DELETE          reduce using rule 110 (statement -> IMPORT expression .)
-    DECLARE         reduce using rule 110 (statement -> IMPORT expression .)
-    CONSTANT        reduce using rule 110 (statement -> IMPORT expression .)
-    ID              reduce using rule 110 (statement -> IMPORT expression .)
-    INPUT           reduce using rule 110 (statement -> IMPORT expression .)
-    OUTPUT          reduce using rule 110 (statement -> IMPORT expression .)
-    IF              reduce using rule 110 (statement -> IMPORT expression .)
-    CASE            reduce using rule 110 (statement -> IMPORT expression .)
-    FOR             reduce using rule 110 (statement -> IMPORT expression .)
-    REPEAT          reduce using rule 110 (statement -> IMPORT expression .)
-    WHILE           reduce using rule 110 (statement -> IMPORT expression .)
-    PROCEDURE       reduce using rule 110 (statement -> IMPORT expression .)
-    CALL            reduce using rule 110 (statement -> IMPORT expression .)
-    FUNCTION        reduce using rule 110 (statement -> IMPORT expression .)
-    RETURN          reduce using rule 110 (statement -> IMPORT expression .)
-    OPENFILE        reduce using rule 110 (statement -> IMPORT expression .)
-    READFILE        reduce using rule 110 (statement -> IMPORT expression .)
-    WRITEFILE       reduce using rule 110 (statement -> IMPORT expression .)
-    CLOSEFILE       reduce using rule 110 (statement -> IMPORT expression .)
-    SEEK            reduce using rule 110 (statement -> IMPORT expression .)
-    TYPE            reduce using rule 110 (statement -> IMPORT expression .)
-    PASS            reduce using rule 110 (statement -> IMPORT expression .)
-    IMPORT          reduce using rule 110 (statement -> IMPORT expression .)
-    PRIVATE         reduce using rule 110 (statement -> IMPORT expression .)
-    PUBLIC          reduce using rule 110 (statement -> IMPORT expression .)
-    LEFT_SQUARE     reduce using rule 110 (statement -> IMPORT expression .)
-    NOT             reduce using rule 110 (statement -> IMPORT expression .)
-    LEFT_PAREN      reduce using rule 110 (statement -> IMPORT expression .)
-    DATE            reduce using rule 110 (statement -> IMPORT expression .)
-    BOOLEAN         reduce using rule 110 (statement -> IMPORT expression .)
-    CHAR            reduce using rule 110 (statement -> IMPORT expression .)
-    STRING          reduce using rule 110 (statement -> IMPORT expression .)
-    REAL            reduce using rule 110 (statement -> IMPORT expression .)
-    INTEGER         reduce using rule 110 (statement -> IMPORT expression .)
-    $end            reduce using rule 110 (statement -> IMPORT expression .)
-    UNTIL           reduce using rule 110 (statement -> IMPORT expression .)
-    ENDWHILE        reduce using rule 110 (statement -> IMPORT expression .)
-    ENDPROCEDURE    reduce using rule 110 (statement -> IMPORT expression .)
-    ENDTYPE         reduce using rule 110 (statement -> IMPORT expression .)
-    ELSE            reduce using rule 110 (statement -> IMPORT expression .)
-    ENDIF           reduce using rule 110 (statement -> IMPORT expression .)
-    ENDFUNCTION     reduce using rule 110 (statement -> IMPORT expression .)
-    SEMICOLON       reduce using rule 110 (statement -> IMPORT expression .)
-    NEXT            reduce using rule 110 (statement -> IMPORT expression .)
+    DELETE          reduce using rule 111 (statement -> IMPORT expression .)
+    DECLARE         reduce using rule 111 (statement -> IMPORT expression .)
+    CONSTANT        reduce using rule 111 (statement -> IMPORT expression .)
+    ID              reduce using rule 111 (statement -> IMPORT expression .)
+    INPUT           reduce using rule 111 (statement -> IMPORT expression .)
+    OUTPUT          reduce using rule 111 (statement -> IMPORT expression .)
+    IF              reduce using rule 111 (statement -> IMPORT expression .)
+    CASE            reduce using rule 111 (statement -> IMPORT expression .)
+    FOR             reduce using rule 111 (statement -> IMPORT expression .)
+    REPEAT          reduce using rule 111 (statement -> IMPORT expression .)
+    WHILE           reduce using rule 111 (statement -> IMPORT expression .)
+    PROCEDURE       reduce using rule 111 (statement -> IMPORT expression .)
+    CALL            reduce using rule 111 (statement -> IMPORT expression .)
+    FUNCTION        reduce using rule 111 (statement -> IMPORT expression .)
+    RETURN          reduce using rule 111 (statement -> IMPORT expression .)
+    OPENFILE        reduce using rule 111 (statement -> IMPORT expression .)
+    READFILE        reduce using rule 111 (statement -> IMPORT expression .)
+    WRITEFILE       reduce using rule 111 (statement -> IMPORT expression .)
+    CLOSEFILE       reduce using rule 111 (statement -> IMPORT expression .)
+    SEEK            reduce using rule 111 (statement -> IMPORT expression .)
+    TYPE            reduce using rule 111 (statement -> IMPORT expression .)
+    PASS            reduce using rule 111 (statement -> IMPORT expression .)
+    IMPORT          reduce using rule 111 (statement -> IMPORT expression .)
+    PRIVATE         reduce using rule 111 (statement -> IMPORT expression .)
+    PUBLIC          reduce using rule 111 (statement -> IMPORT expression .)
+    LEFT_SQUARE     reduce using rule 111 (statement -> IMPORT expression .)
+    NOT             reduce using rule 111 (statement -> IMPORT expression .)
+    LEFT_PAREN      reduce using rule 111 (statement -> IMPORT expression .)
+    DATE            reduce using rule 111 (statement -> IMPORT expression .)
+    BOOLEAN         reduce using rule 111 (statement -> IMPORT expression .)
+    CHAR            reduce using rule 111 (statement -> IMPORT expression .)
+    STRING          reduce using rule 111 (statement -> IMPORT expression .)
+    REAL            reduce using rule 111 (statement -> IMPORT expression .)
+    INTEGER         reduce using rule 111 (statement -> IMPORT expression .)
+    $end            reduce using rule 111 (statement -> IMPORT expression .)
+    UNTIL           reduce using rule 111 (statement -> IMPORT expression .)
+    ENDWHILE        reduce using rule 111 (statement -> IMPORT expression .)
+    ENDPROCEDURE    reduce using rule 111 (statement -> IMPORT expression .)
+    ENDTYPE         reduce using rule 111 (statement -> IMPORT expression .)
+    ELSE            reduce using rule 111 (statement -> IMPORT expression .)
+    ENDIF           reduce using rule 111 (statement -> IMPORT expression .)
+    ENDFUNCTION     reduce using rule 111 (statement -> IMPORT expression .)
+    SEMICOLON       reduce using rule 111 (statement -> IMPORT expression .)
+    NEXT            reduce using rule 111 (statement -> IMPORT expression .)
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -5130,114 +5144,114 @@ state 86
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
-  ! MINUS           [ reduce using rule 110 (statement -> IMPORT expression .) ]
-  ! PLUS            [ reduce using rule 110 (statement -> IMPORT expression .) ]
+  ! MINUS           [ reduce using rule 111 (statement -> IMPORT expression .) ]
+  ! PLUS            [ reduce using rule 111 (statement -> IMPORT expression .) ]
 
 
 state 87
 
-    (111) statement -> PRIVATE statement .
+    (112) statement -> PRIVATE statement .
 
-    DELETE          reduce using rule 111 (statement -> PRIVATE statement .)
-    DECLARE         reduce using rule 111 (statement -> PRIVATE statement .)
-    CONSTANT        reduce using rule 111 (statement -> PRIVATE statement .)
-    ID              reduce using rule 111 (statement -> PRIVATE statement .)
-    INPUT           reduce using rule 111 (statement -> PRIVATE statement .)
-    OUTPUT          reduce using rule 111 (statement -> PRIVATE statement .)
-    IF              reduce using rule 111 (statement -> PRIVATE statement .)
-    CASE            reduce using rule 111 (statement -> PRIVATE statement .)
-    FOR             reduce using rule 111 (statement -> PRIVATE statement .)
-    REPEAT          reduce using rule 111 (statement -> PRIVATE statement .)
-    WHILE           reduce using rule 111 (statement -> PRIVATE statement .)
-    PROCEDURE       reduce using rule 111 (statement -> PRIVATE statement .)
-    CALL            reduce using rule 111 (statement -> PRIVATE statement .)
-    FUNCTION        reduce using rule 111 (statement -> PRIVATE statement .)
-    RETURN          reduce using rule 111 (statement -> PRIVATE statement .)
-    OPENFILE        reduce using rule 111 (statement -> PRIVATE statement .)
-    READFILE        reduce using rule 111 (statement -> PRIVATE statement .)
-    WRITEFILE       reduce using rule 111 (statement -> PRIVATE statement .)
-    CLOSEFILE       reduce using rule 111 (statement -> PRIVATE statement .)
-    SEEK            reduce using rule 111 (statement -> PRIVATE statement .)
-    TYPE            reduce using rule 111 (statement -> PRIVATE statement .)
-    PASS            reduce using rule 111 (statement -> PRIVATE statement .)
-    IMPORT          reduce using rule 111 (statement -> PRIVATE statement .)
-    PRIVATE         reduce using rule 111 (statement -> PRIVATE statement .)
-    PUBLIC          reduce using rule 111 (statement -> PRIVATE statement .)
-    LEFT_SQUARE     reduce using rule 111 (statement -> PRIVATE statement .)
-    NOT             reduce using rule 111 (statement -> PRIVATE statement .)
-    MINUS           reduce using rule 111 (statement -> PRIVATE statement .)
-    PLUS            reduce using rule 111 (statement -> PRIVATE statement .)
-    LEFT_PAREN      reduce using rule 111 (statement -> PRIVATE statement .)
-    DATE            reduce using rule 111 (statement -> PRIVATE statement .)
-    BOOLEAN         reduce using rule 111 (statement -> PRIVATE statement .)
-    CHAR            reduce using rule 111 (statement -> PRIVATE statement .)
-    STRING          reduce using rule 111 (statement -> PRIVATE statement .)
-    REAL            reduce using rule 111 (statement -> PRIVATE statement .)
-    INTEGER         reduce using rule 111 (statement -> PRIVATE statement .)
-    $end            reduce using rule 111 (statement -> PRIVATE statement .)
-    UNTIL           reduce using rule 111 (statement -> PRIVATE statement .)
-    ENDWHILE        reduce using rule 111 (statement -> PRIVATE statement .)
-    ENDPROCEDURE    reduce using rule 111 (statement -> PRIVATE statement .)
-    ENDTYPE         reduce using rule 111 (statement -> PRIVATE statement .)
-    ELSE            reduce using rule 111 (statement -> PRIVATE statement .)
-    ENDIF           reduce using rule 111 (statement -> PRIVATE statement .)
-    ENDFUNCTION     reduce using rule 111 (statement -> PRIVATE statement .)
-    SEMICOLON       reduce using rule 111 (statement -> PRIVATE statement .)
-    NEXT            reduce using rule 111 (statement -> PRIVATE statement .)
+    DELETE          reduce using rule 112 (statement -> PRIVATE statement .)
+    DECLARE         reduce using rule 112 (statement -> PRIVATE statement .)
+    CONSTANT        reduce using rule 112 (statement -> PRIVATE statement .)
+    ID              reduce using rule 112 (statement -> PRIVATE statement .)
+    INPUT           reduce using rule 112 (statement -> PRIVATE statement .)
+    OUTPUT          reduce using rule 112 (statement -> PRIVATE statement .)
+    IF              reduce using rule 112 (statement -> PRIVATE statement .)
+    CASE            reduce using rule 112 (statement -> PRIVATE statement .)
+    FOR             reduce using rule 112 (statement -> PRIVATE statement .)
+    REPEAT          reduce using rule 112 (statement -> PRIVATE statement .)
+    WHILE           reduce using rule 112 (statement -> PRIVATE statement .)
+    PROCEDURE       reduce using rule 112 (statement -> PRIVATE statement .)
+    CALL            reduce using rule 112 (statement -> PRIVATE statement .)
+    FUNCTION        reduce using rule 112 (statement -> PRIVATE statement .)
+    RETURN          reduce using rule 112 (statement -> PRIVATE statement .)
+    OPENFILE        reduce using rule 112 (statement -> PRIVATE statement .)
+    READFILE        reduce using rule 112 (statement -> PRIVATE statement .)
+    WRITEFILE       reduce using rule 112 (statement -> PRIVATE statement .)
+    CLOSEFILE       reduce using rule 112 (statement -> PRIVATE statement .)
+    SEEK            reduce using rule 112 (statement -> PRIVATE statement .)
+    TYPE            reduce using rule 112 (statement -> PRIVATE statement .)
+    PASS            reduce using rule 112 (statement -> PRIVATE statement .)
+    IMPORT          reduce using rule 112 (statement -> PRIVATE statement .)
+    PRIVATE         reduce using rule 112 (statement -> PRIVATE statement .)
+    PUBLIC          reduce using rule 112 (statement -> PRIVATE statement .)
+    LEFT_SQUARE     reduce using rule 112 (statement -> PRIVATE statement .)
+    NOT             reduce using rule 112 (statement -> PRIVATE statement .)
+    MINUS           reduce using rule 112 (statement -> PRIVATE statement .)
+    PLUS            reduce using rule 112 (statement -> PRIVATE statement .)
+    LEFT_PAREN      reduce using rule 112 (statement -> PRIVATE statement .)
+    DATE            reduce using rule 112 (statement -> PRIVATE statement .)
+    BOOLEAN         reduce using rule 112 (statement -> PRIVATE statement .)
+    CHAR            reduce using rule 112 (statement -> PRIVATE statement .)
+    STRING          reduce using rule 112 (statement -> PRIVATE statement .)
+    REAL            reduce using rule 112 (statement -> PRIVATE statement .)
+    INTEGER         reduce using rule 112 (statement -> PRIVATE statement .)
+    $end            reduce using rule 112 (statement -> PRIVATE statement .)
+    UNTIL           reduce using rule 112 (statement -> PRIVATE statement .)
+    ENDWHILE        reduce using rule 112 (statement -> PRIVATE statement .)
+    ENDPROCEDURE    reduce using rule 112 (statement -> PRIVATE statement .)
+    ENDTYPE         reduce using rule 112 (statement -> PRIVATE statement .)
+    ELSE            reduce using rule 112 (statement -> PRIVATE statement .)
+    ENDIF           reduce using rule 112 (statement -> PRIVATE statement .)
+    ENDFUNCTION     reduce using rule 112 (statement -> PRIVATE statement .)
+    SEMICOLON       reduce using rule 112 (statement -> PRIVATE statement .)
+    NEXT            reduce using rule 112 (statement -> PRIVATE statement .)
 
 
 state 88
 
-    (112) statement -> PUBLIC statement .
+    (113) statement -> PUBLIC statement .
 
-    DELETE          reduce using rule 112 (statement -> PUBLIC statement .)
-    DECLARE         reduce using rule 112 (statement -> PUBLIC statement .)
-    CONSTANT        reduce using rule 112 (statement -> PUBLIC statement .)
-    ID              reduce using rule 112 (statement -> PUBLIC statement .)
-    INPUT           reduce using rule 112 (statement -> PUBLIC statement .)
-    OUTPUT          reduce using rule 112 (statement -> PUBLIC statement .)
-    IF              reduce using rule 112 (statement -> PUBLIC statement .)
-    CASE            reduce using rule 112 (statement -> PUBLIC statement .)
-    FOR             reduce using rule 112 (statement -> PUBLIC statement .)
-    REPEAT          reduce using rule 112 (statement -> PUBLIC statement .)
-    WHILE           reduce using rule 112 (statement -> PUBLIC statement .)
-    PROCEDURE       reduce using rule 112 (statement -> PUBLIC statement .)
-    CALL            reduce using rule 112 (statement -> PUBLIC statement .)
-    FUNCTION        reduce using rule 112 (statement -> PUBLIC statement .)
-    RETURN          reduce using rule 112 (statement -> PUBLIC statement .)
-    OPENFILE        reduce using rule 112 (statement -> PUBLIC statement .)
-    READFILE        reduce using rule 112 (statement -> PUBLIC statement .)
-    WRITEFILE       reduce using rule 112 (statement -> PUBLIC statement .)
-    CLOSEFILE       reduce using rule 112 (statement -> PUBLIC statement .)
-    SEEK            reduce using rule 112 (statement -> PUBLIC statement .)
-    TYPE            reduce using rule 112 (statement -> PUBLIC statement .)
-    PASS            reduce using rule 112 (statement -> PUBLIC statement .)
-    IMPORT          reduce using rule 112 (statement -> PUBLIC statement .)
-    PRIVATE         reduce using rule 112 (statement -> PUBLIC statement .)
-    PUBLIC          reduce using rule 112 (statement -> PUBLIC statement .)
-    LEFT_SQUARE     reduce using rule 112 (statement -> PUBLIC statement .)
-    NOT             reduce using rule 112 (statement -> PUBLIC statement .)
-    MINUS           reduce using rule 112 (statement -> PUBLIC statement .)
-    PLUS            reduce using rule 112 (statement -> PUBLIC statement .)
-    LEFT_PAREN      reduce using rule 112 (statement -> PUBLIC statement .)
-    DATE            reduce using rule 112 (statement -> PUBLIC statement .)
-    BOOLEAN         reduce using rule 112 (statement -> PUBLIC statement .)
-    CHAR            reduce using rule 112 (statement -> PUBLIC statement .)
-    STRING          reduce using rule 112 (statement -> PUBLIC statement .)
-    REAL            reduce using rule 112 (statement -> PUBLIC statement .)
-    INTEGER         reduce using rule 112 (statement -> PUBLIC statement .)
-    $end            reduce using rule 112 (statement -> PUBLIC statement .)
-    UNTIL           reduce using rule 112 (statement -> PUBLIC statement .)
-    ENDWHILE        reduce using rule 112 (statement -> PUBLIC statement .)
-    ENDPROCEDURE    reduce using rule 112 (statement -> PUBLIC statement .)
-    ENDTYPE         reduce using rule 112 (statement -> PUBLIC statement .)
-    ELSE            reduce using rule 112 (statement -> PUBLIC statement .)
-    ENDIF           reduce using rule 112 (statement -> PUBLIC statement .)
-    ENDFUNCTION     reduce using rule 112 (statement -> PUBLIC statement .)
-    SEMICOLON       reduce using rule 112 (statement -> PUBLIC statement .)
-    NEXT            reduce using rule 112 (statement -> PUBLIC statement .)
+    DELETE          reduce using rule 113 (statement -> PUBLIC statement .)
+    DECLARE         reduce using rule 113 (statement -> PUBLIC statement .)
+    CONSTANT        reduce using rule 113 (statement -> PUBLIC statement .)
+    ID              reduce using rule 113 (statement -> PUBLIC statement .)
+    INPUT           reduce using rule 113 (statement -> PUBLIC statement .)
+    OUTPUT          reduce using rule 113 (statement -> PUBLIC statement .)
+    IF              reduce using rule 113 (statement -> PUBLIC statement .)
+    CASE            reduce using rule 113 (statement -> PUBLIC statement .)
+    FOR             reduce using rule 113 (statement -> PUBLIC statement .)
+    REPEAT          reduce using rule 113 (statement -> PUBLIC statement .)
+    WHILE           reduce using rule 113 (statement -> PUBLIC statement .)
+    PROCEDURE       reduce using rule 113 (statement -> PUBLIC statement .)
+    CALL            reduce using rule 113 (statement -> PUBLIC statement .)
+    FUNCTION        reduce using rule 113 (statement -> PUBLIC statement .)
+    RETURN          reduce using rule 113 (statement -> PUBLIC statement .)
+    OPENFILE        reduce using rule 113 (statement -> PUBLIC statement .)
+    READFILE        reduce using rule 113 (statement -> PUBLIC statement .)
+    WRITEFILE       reduce using rule 113 (statement -> PUBLIC statement .)
+    CLOSEFILE       reduce using rule 113 (statement -> PUBLIC statement .)
+    SEEK            reduce using rule 113 (statement -> PUBLIC statement .)
+    TYPE            reduce using rule 113 (statement -> PUBLIC statement .)
+    PASS            reduce using rule 113 (statement -> PUBLIC statement .)
+    IMPORT          reduce using rule 113 (statement -> PUBLIC statement .)
+    PRIVATE         reduce using rule 113 (statement -> PUBLIC statement .)
+    PUBLIC          reduce using rule 113 (statement -> PUBLIC statement .)
+    LEFT_SQUARE     reduce using rule 113 (statement -> PUBLIC statement .)
+    NOT             reduce using rule 113 (statement -> PUBLIC statement .)
+    MINUS           reduce using rule 113 (statement -> PUBLIC statement .)
+    PLUS            reduce using rule 113 (statement -> PUBLIC statement .)
+    LEFT_PAREN      reduce using rule 113 (statement -> PUBLIC statement .)
+    DATE            reduce using rule 113 (statement -> PUBLIC statement .)
+    BOOLEAN         reduce using rule 113 (statement -> PUBLIC statement .)
+    CHAR            reduce using rule 113 (statement -> PUBLIC statement .)
+    STRING          reduce using rule 113 (statement -> PUBLIC statement .)
+    REAL            reduce using rule 113 (statement -> PUBLIC statement .)
+    INTEGER         reduce using rule 113 (statement -> PUBLIC statement .)
+    $end            reduce using rule 113 (statement -> PUBLIC statement .)
+    UNTIL           reduce using rule 113 (statement -> PUBLIC statement .)
+    ENDWHILE        reduce using rule 113 (statement -> PUBLIC statement .)
+    ENDPROCEDURE    reduce using rule 113 (statement -> PUBLIC statement .)
+    ENDTYPE         reduce using rule 113 (statement -> PUBLIC statement .)
+    ELSE            reduce using rule 113 (statement -> PUBLIC statement .)
+    ENDIF           reduce using rule 113 (statement -> PUBLIC statement .)
+    ENDFUNCTION     reduce using rule 113 (statement -> PUBLIC statement .)
+    SEMICOLON       reduce using rule 113 (statement -> PUBLIC statement .)
+    NEXT            reduce using rule 113 (statement -> PUBLIC statement .)
 
 
 state 89
@@ -5344,7 +5358,7 @@ state 89
   ! OR              [ shift and go to state 48 ]
   ! AND             [ shift and go to state 49 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
 state 90
@@ -5451,7 +5465,7 @@ state 90
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
 state 91
@@ -5558,7 +5572,7 @@ state 91
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
 state 92
@@ -5642,7 +5656,7 @@ state 92
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 10 (statement -> ID ASSIGN expression .) ]
   ! PLUS            [ reduce using rule 10 (statement -> ID ASSIGN expression .) ]
@@ -5650,15 +5664,22 @@ state 92
 
 state 93
 
+    (109) statement -> ID ASSIGN POINTER . ID
+
+    ID              shift and go to state 144
+
+
+state 94
+
     (11) statement -> ID LEFT_SQUARE indexes . RIGHT_SQUARE ASSIGN expression
     (41) expression -> ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (12) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 143
-    COMMA           shift and go to state 144
+    RIGHT_SQUARE    shift and go to state 145
+    COMMA           shift and go to state 146
 
 
-state 94
+state 95
 
     (13) indexes -> expression .
     (42) expression -> expression . OR expression
@@ -5695,19 +5716,19 @@ state 94
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 95
+state 96
 
     (90) expression -> ID LEFT_PAREN parameters . RIGHT_PAREN
     (78) parameters -> parameters . COMMA expression
 
-    RIGHT_PAREN     shift and go to state 145
-    COMMA           shift and go to state 146
+    RIGHT_PAREN     shift and go to state 147
+    COMMA           shift and go to state 148
 
 
-state 96
+state 97
 
     (91) expression -> ID LEFT_PAREN RIGHT_PAREN .
 
@@ -5781,7 +5802,7 @@ state 96
     STEP            reduce using rule 91 (expression -> ID LEFT_PAREN RIGHT_PAREN .)
 
 
-state 97
+state 98
 
     (79) parameters -> expression .
     (42) expression -> expression . OR expression
@@ -5818,19 +5839,19 @@ state 97
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 98
+state 99
 
     (4) statement -> DECLARE ID COLON . ID
     (6) statement -> DECLARE ID COLON . ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
 
-    ID              shift and go to state 147
-    ARRAY           shift and go to state 148
+    ID              shift and go to state 149
+    ARRAY           shift and go to state 150
 
 
-state 99
+state 100
 
     (5) statement -> CONSTANT ID EQUAL . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -5879,9 +5900,9 @@ state 99
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 149
+    expression                     shift and go to state 151
 
-state 100
+state 101
 
     (103) expression -> expression DOT expression .
     (39) statement -> expression .
@@ -6090,7 +6111,7 @@ state 100
   ! PLUS            [ reduce using rule 39 (statement -> expression .) ]
 
 
-state 101
+state 102
 
     (104) statement -> expression DOT statement .
 
@@ -6142,7 +6163,7 @@ state 101
     NEXT            reduce using rule 104 (statement -> expression DOT statement .)
 
 
-state 102
+state 103
 
     (42) expression -> expression OR expression .
     (42) expression -> expression . OR expression
@@ -6246,10 +6267,10 @@ state 102
   ! OR              [ shift and go to state 48 ]
   ! AND             [ shift and go to state 49 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 103
+state 104
 
     (43) expression -> expression AND expression .
     (42) expression -> expression . OR expression
@@ -6353,10 +6374,10 @@ state 103
   ! MINUS           [ reduce using rule 43 (expression -> expression AND expression .) ]
   ! AND             [ shift and go to state 49 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 104
+state 105
 
     (45) expression -> expression EQUAL expression .
     (42) expression -> expression . OR expression
@@ -6460,10 +6481,10 @@ state 104
   ! LESS_EQUAL      [ shift and go to state 54 ]
   ! GREATER_EQUAL   [ shift and go to state 55 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 105
+state 106
 
     (46) expression -> expression NOT_EQUAL expression .
     (42) expression -> expression . OR expression
@@ -6567,10 +6588,10 @@ state 105
   ! LESS_EQUAL      [ shift and go to state 54 ]
   ! GREATER_EQUAL   [ shift and go to state 55 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 106
+state 107
 
     (47) expression -> expression LESS expression .
     (42) expression -> expression . OR expression
@@ -6674,10 +6695,10 @@ state 106
   ! LESS_EQUAL      [ shift and go to state 54 ]
   ! GREATER_EQUAL   [ shift and go to state 55 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 107
+state 108
 
     (48) expression -> expression GREATER expression .
     (42) expression -> expression . OR expression
@@ -6781,10 +6802,10 @@ state 107
   ! LESS_EQUAL      [ shift and go to state 54 ]
   ! GREATER_EQUAL   [ shift and go to state 55 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 108
+state 109
 
     (49) expression -> expression LESS_EQUAL expression .
     (42) expression -> expression . OR expression
@@ -6888,10 +6909,10 @@ state 108
   ! LESS_EQUAL      [ shift and go to state 54 ]
   ! GREATER_EQUAL   [ shift and go to state 55 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 109
+state 110
 
     (50) expression -> expression GREATER_EQUAL expression .
     (42) expression -> expression . OR expression
@@ -6995,10 +7016,10 @@ state 109
   ! LESS_EQUAL      [ shift and go to state 54 ]
   ! GREATER_EQUAL   [ shift and go to state 55 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 110
+state 111
 
     (51) expression -> expression MOD expression .
     (42) expression -> expression . OR expression
@@ -7102,10 +7123,10 @@ state 110
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 111
+state 112
 
     (52) expression -> expression DIV expression .
     (42) expression -> expression . OR expression
@@ -7209,10 +7230,10 @@ state 111
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 112
+state 113
 
     (53) expression -> expression MUL expression .
     (42) expression -> expression . OR expression
@@ -7316,10 +7337,10 @@ state 112
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 113
+state 114
 
     (54) expression -> expression N_DIV expression .
     (42) expression -> expression . OR expression
@@ -7423,10 +7444,10 @@ state 113
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 114
+state 115
 
     (57) expression -> expression PLUS expression .
     (42) expression -> expression . OR expression
@@ -7530,10 +7551,10 @@ state 114
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 115
+state 116
 
     (58) expression -> expression MINUS expression .
     (42) expression -> expression . OR expression
@@ -7637,10 +7658,10 @@ state 115
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 116
+state 117
 
     (59) expression -> expression CONNECT expression .
     (42) expression -> expression . OR expression
@@ -7743,7 +7764,7 @@ state 116
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! DOT             [ reduce using rule 59 (expression -> expression CONNECT expression .) ]
   ! OR              [ reduce using rule 59 (expression -> expression CONNECT expression .) ]
@@ -7763,7 +7784,7 @@ state 116
   ! CONNECT         [ reduce using rule 59 (expression -> expression CONNECT expression .) ]
 
 
-state 117
+state 118
 
     (14) expression -> LEFT_SQUARE array_items RIGHT_SQUARE .
 
@@ -7837,7 +7858,7 @@ state 117
     STEP            reduce using rule 14 (expression -> LEFT_SQUARE array_items RIGHT_SQUARE .)
 
 
-state 118
+state 119
 
     (16) array_items -> array_items COMMA . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -7886,9 +7907,9 @@ state 118
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 150
+    expression                     shift and go to state 152
 
-state 119
+state 120
 
     (103) expression -> expression DOT . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -7937,9 +7958,9 @@ state 119
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 151
+    expression                     shift and go to state 153
 
-state 120
+state 121
 
     (41) expression -> ID LEFT_SQUARE . indexes RIGHT_SQUARE
     (12) indexes -> . indexes COMMA expression
@@ -7990,10 +8011,10 @@ state 120
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    indexes                        shift and go to state 152
-    expression                     shift and go to state 94
+    indexes                        shift and go to state 154
+    expression                     shift and go to state 95
 
-state 121
+state 122
 
     (19) statement -> INPUT ID LEFT_SQUARE . indexes RIGHT_SQUARE
     (12) indexes -> . indexes COMMA expression
@@ -8044,10 +8065,10 @@ state 121
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    indexes                        shift and go to state 153
-    expression                     shift and go to state 94
+    indexes                        shift and go to state 155
+    expression                     shift and go to state 95
 
-state 122
+state 123
 
     (21) output_expression -> output_expression COMMA . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -8096,9 +8117,9 @@ state 122
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 154
+    expression                     shift and go to state 156
 
-state 123
+state 124
 
     (23) statement -> IF expression THEN . statements ELSE statements ENDIF
     (24) statement -> IF expression THEN . statements ENDIF
@@ -8147,10 +8168,11 @@ state 123
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -8222,10 +8244,10 @@ state 123
     INTEGER         shift and go to state 39
 
     expression                     shift and go to state 7
-    statements                     shift and go to state 155
+    statements                     shift and go to state 157
     statement                      shift and go to state 2
 
-state 124
+state 125
 
     (25) statement -> CASE OF ID . cases ENDCASE
     (26) statement -> CASE OF ID . LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE
@@ -8269,8 +8291,8 @@ state 124
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    LEFT_SQUARE     shift and go to state 157
-    OTHERWISE       shift and go to state 162
+    LEFT_SQUARE     shift and go to state 159
+    OTHERWISE       shift and go to state 164
     ID              shift and go to state 66
     NOT             shift and go to state 31
     MINUS           shift and go to state 32
@@ -8283,13 +8305,13 @@ state 124
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    cases                          shift and go to state 156
-    case                           shift and go to state 158
-    case_expression                shift and go to state 159
-    otherwise_statement            shift and go to state 160
-    expression                     shift and go to state 161
+    cases                          shift and go to state 158
+    case                           shift and go to state 160
+    case_expression                shift and go to state 161
+    otherwise_statement            shift and go to state 162
+    expression                     shift and go to state 163
 
-state 125
+state 126
 
     (34) statement -> FOR ID ASSIGN . expression TO expression STEP expression statements NEXT ID
     (35) statement -> FOR ID ASSIGN . expression TO expression statements NEXT ID
@@ -8339,9 +8361,9 @@ state 125
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 163
+    expression                     shift and go to state 165
 
-state 126
+state 127
 
     (36) statement -> REPEAT statements UNTIL . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -8390,9 +8412,9 @@ state 126
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 164
+    expression                     shift and go to state 166
 
-state 127
+state 128
 
     (37) statement -> WHILE expression DO . statements ENDWHILE
     (1) statements -> . statements statement
@@ -8440,10 +8462,11 @@ state 127
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -8515,10 +8538,10 @@ state 127
     INTEGER         shift and go to state 39
 
     expression                     shift and go to state 7
-    statements                     shift and go to state 165
+    statements                     shift and go to state 167
     statement                      shift and go to state 2
 
-state 128
+state 129
 
     (38) statement -> WHILE expression statements . ENDWHILE
     (1) statements -> statements . statement
@@ -8565,10 +8588,11 @@ state 128
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -8602,7 +8626,7 @@ state 128
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDWHILE        shift and go to state 166
+    ENDWHILE        shift and go to state 168
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -8643,7 +8667,7 @@ state 128
     expression                     shift and go to state 7
     statement                      shift and go to state 40
 
-state 129
+state 130
 
     (57) expression -> expression PLUS . expression
     (56) expression -> PLUS . expression
@@ -8693,9 +8717,9 @@ state 129
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 167
+    expression                     shift and go to state 169
 
-state 130
+state 131
 
     (58) expression -> expression MINUS . expression
     (55) expression -> MINUS . expression
@@ -8745,9 +8769,9 @@ state 130
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 168
+    expression                     shift and go to state 170
 
-state 131
+state 132
 
     (80) statement -> PROCEDURE ID LEFT_PAREN . declare_parameters RIGHT_PAREN statements ENDPROCEDURE
     (60) expression -> LEFT_PAREN . expression RIGHT_PAREN
@@ -8796,7 +8820,7 @@ state 131
     (77) declare_parameter -> . BYVAL ID COLON ARRAY OF ID
 
     LEFT_SQUARE     shift and go to state 8
-    ID              shift and go to state 169
+    ID              shift and go to state 171
     NOT             shift and go to state 31
     MINUS           shift and go to state 32
     PLUS            shift and go to state 33
@@ -8807,14 +8831,14 @@ state 131
     STRING          shift and go to state 37
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
-    BYREF           shift and go to state 172
-    BYVAL           shift and go to state 173
+    BYREF           shift and go to state 174
+    BYVAL           shift and go to state 175
 
-    declare_parameters             shift and go to state 170
+    declare_parameters             shift and go to state 172
     expression                     shift and go to state 76
-    declare_parameter              shift and go to state 171
+    declare_parameter              shift and go to state 173
 
-state 132
+state 133
 
     (81) statement -> PROCEDURE ID statements . ENDPROCEDURE
     (1) statements -> statements . statement
@@ -8861,10 +8885,11 @@ state 132
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -8898,7 +8923,7 @@ state 132
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDPROCEDURE    shift and go to state 174
+    ENDPROCEDURE    shift and go to state 176
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -8939,7 +8964,7 @@ state 132
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 133
+state 134
 
     (60) expression -> LEFT_PAREN expression RIGHT_PAREN .
 
@@ -9013,7 +9038,7 @@ state 133
     STEP            reduce using rule 60 (expression -> LEFT_PAREN expression RIGHT_PAREN .)
 
 
-state 134
+state 135
 
     (82) statement -> CALL ID LEFT_PAREN . parameters RIGHT_PAREN
     (78) parameters -> . parameters COMMA expression
@@ -9064,10 +9089,10 @@ state 134
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    parameters                     shift and go to state 175
-    expression                     shift and go to state 97
+    parameters                     shift and go to state 177
+    expression                     shift and go to state 98
 
-state 135
+state 136
 
     (84) statement -> FUNCTION ID LEFT_PAREN . declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
     (85) statement -> FUNCTION ID LEFT_PAREN . declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
@@ -9084,45 +9109,45 @@ state 135
     (76) declare_parameter -> . BYREF ID COLON ARRAY OF ID
     (77) declare_parameter -> . BYVAL ID COLON ARRAY OF ID
 
-    ID              shift and go to state 176
-    BYREF           shift and go to state 172
-    BYVAL           shift and go to state 173
+    ID              shift and go to state 178
+    BYREF           shift and go to state 174
+    BYVAL           shift and go to state 175
 
-    declare_parameters             shift and go to state 177
-    declare_parameter              shift and go to state 171
+    declare_parameters             shift and go to state 179
+    declare_parameter              shift and go to state 173
 
-state 136
+state 137
 
     (86) statement -> FUNCTION ID RETURNS . ID statements ENDFUNCTION
     (87) statement -> FUNCTION ID RETURNS . ARRAY statements ENDFUNCTION
     (89) statement -> FUNCTION ID RETURNS . ARRAY OF ID statements ENDFUNCTION
 
-    ID              shift and go to state 178
-    ARRAY           shift and go to state 179
+    ID              shift and go to state 180
+    ARRAY           shift and go to state 181
 
 
-state 137
+state 138
 
     (93) statement -> OPENFILE expression FOR . READ
     (94) statement -> OPENFILE expression FOR . WRITE
     (95) statement -> OPENFILE expression FOR . APPEND
     (96) statement -> OPENFILE expression FOR . RANDOM
 
-    READ            shift and go to state 180
-    WRITE           shift and go to state 181
-    APPEND          shift and go to state 182
-    RANDOM          shift and go to state 183
+    READ            shift and go to state 182
+    WRITE           shift and go to state 183
+    APPEND          shift and go to state 184
+    RANDOM          shift and go to state 185
 
 
-state 138
+state 139
 
     (97) statement -> READFILE expression COMMA . ID LEFT_SQUARE indexes RIGHT_SQUARE
     (98) statement -> READFILE expression COMMA . ID
 
-    ID              shift and go to state 184
+    ID              shift and go to state 186
 
 
-state 139
+state 140
 
     (99) statement -> WRITEFILE expression COMMA . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -9171,9 +9196,9 @@ state 139
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 185
+    expression                     shift and go to state 187
 
-state 140
+state 141
 
     (101) statement -> SEEK expression COMMA . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -9222,9 +9247,9 @@ state 140
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 186
+    expression                     shift and go to state 188
 
-state 141
+state 142
 
     (102) statement -> TYPE ID statements . ENDTYPE
     (1) statements -> statements . statement
@@ -9271,10 +9296,11 @@ state 141
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -9308,7 +9334,7 @@ state 141
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDTYPE         shift and go to state 187
+    ENDTYPE         shift and go to state 189
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -9349,21 +9375,73 @@ state 141
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 142
+state 143
 
     (105) statement -> TYPE ID EQUAL . LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> TYPE ID EQUAL . POINTER ID
 
-    LEFT_PAREN      shift and go to state 188
-    POINTER         shift and go to state 189
+    LEFT_PAREN      shift and go to state 190
+    POINTER         shift and go to state 191
 
 
-state 143
+state 144
+
+    (109) statement -> ID ASSIGN POINTER ID .
+
+    DELETE          reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    DECLARE         reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    CONSTANT        reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    ID              reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    INPUT           reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    OUTPUT          reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    IF              reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    CASE            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    FOR             reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    REPEAT          reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    WHILE           reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    PROCEDURE       reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    CALL            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    FUNCTION        reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    RETURN          reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    OPENFILE        reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    READFILE        reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    WRITEFILE       reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    CLOSEFILE       reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    SEEK            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    TYPE            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    PASS            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    IMPORT          reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    PRIVATE         reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    PUBLIC          reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    LEFT_SQUARE     reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    NOT             reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    MINUS           reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    PLUS            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    LEFT_PAREN      reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    DATE            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    BOOLEAN         reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    CHAR            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    STRING          reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    REAL            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    INTEGER         reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    $end            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    UNTIL           reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    ENDWHILE        reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    ENDPROCEDURE    reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    ENDTYPE         reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    ELSE            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    ENDIF           reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    ENDFUNCTION     reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    SEMICOLON       reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+    NEXT            reduce using rule 109 (statement -> ID ASSIGN POINTER ID .)
+
+
+state 145
 
     (11) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE . ASSIGN expression
     (41) expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
-    ASSIGN          shift and go to state 190
+    ASSIGN          shift and go to state 192
     DOT             reduce using rule 41 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     OR              reduce using rule 41 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
     AND             reduce using rule 41 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
@@ -9426,7 +9504,7 @@ state 143
     NEXT            reduce using rule 41 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 144
+state 146
 
     (12) indexes -> indexes COMMA . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -9475,9 +9553,9 @@ state 144
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 191
+    expression                     shift and go to state 193
 
-state 145
+state 147
 
     (90) expression -> ID LEFT_PAREN parameters RIGHT_PAREN .
 
@@ -9551,7 +9629,7 @@ state 145
     STEP            reduce using rule 90 (expression -> ID LEFT_PAREN parameters RIGHT_PAREN .)
 
 
-state 146
+state 148
 
     (78) parameters -> parameters COMMA . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -9600,9 +9678,9 @@ state 146
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 192
+    expression                     shift and go to state 194
 
-state 147
+state 149
 
     (4) statement -> DECLARE ID COLON ID .
 
@@ -9654,14 +9732,14 @@ state 147
     NEXT            reduce using rule 4 (statement -> DECLARE ID COLON ID .)
 
 
-state 148
+state 150
 
     (6) statement -> DECLARE ID COLON ARRAY . LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
 
-    LEFT_SQUARE     shift and go to state 193
+    LEFT_SQUARE     shift and go to state 195
 
 
-state 149
+state 151
 
     (5) statement -> CONSTANT ID EQUAL expression .
     (42) expression -> expression . OR expression
@@ -9740,13 +9818,13 @@ state 149
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 5 (statement -> CONSTANT ID EQUAL expression .) ]
   ! PLUS            [ reduce using rule 5 (statement -> CONSTANT ID EQUAL expression .) ]
 
 
-state 150
+state 152
 
     (16) array_items -> array_items COMMA expression .
     (42) expression -> expression . OR expression
@@ -9783,10 +9861,10 @@ state 150
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 151
+state 153
 
     (103) expression -> expression DOT expression .
     (42) expression -> expression . OR expression
@@ -9889,7 +9967,7 @@ state 151
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! OR              [ reduce using rule 103 (expression -> expression DOT expression .) ]
   ! AND             [ reduce using rule 103 (expression -> expression DOT expression .) ]
@@ -9909,25 +9987,25 @@ state 151
   ! DOT             [ reduce using rule 103 (expression -> expression DOT expression .) ]
 
 
-state 152
+state 154
 
     (41) expression -> ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (12) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 194
-    COMMA           shift and go to state 144
+    RIGHT_SQUARE    shift and go to state 196
+    COMMA           shift and go to state 146
 
 
-state 153
+state 155
 
     (19) statement -> INPUT ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (12) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 195
-    COMMA           shift and go to state 144
+    RIGHT_SQUARE    shift and go to state 197
+    COMMA           shift and go to state 146
 
 
-state 154
+state 156
 
     (21) output_expression -> output_expression COMMA expression .
     (42) expression -> expression . OR expression
@@ -10009,13 +10087,13 @@ state 154
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 21 (output_expression -> output_expression COMMA expression .) ]
   ! PLUS            [ reduce using rule 21 (output_expression -> output_expression COMMA expression .) ]
 
 
-state 155
+state 157
 
     (23) statement -> IF expression THEN statements . ELSE statements ENDIF
     (24) statement -> IF expression THEN statements . ENDIF
@@ -10063,10 +10141,11 @@ state 155
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -10100,8 +10179,8 @@ state 155
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ELSE            shift and go to state 196
-    ENDIF           shift and go to state 197
+    ELSE            shift and go to state 198
+    ENDIF           shift and go to state 199
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -10142,7 +10221,7 @@ state 155
     expression                     shift and go to state 7
     statement                      shift and go to state 40
 
-state 156
+state 158
 
     (25) statement -> CASE OF ID cases . ENDCASE
     (27) cases -> cases . case
@@ -10184,8 +10263,8 @@ state 156
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDCASE         shift and go to state 198
-    OTHERWISE       shift and go to state 162
+    ENDCASE         shift and go to state 200
+    OTHERWISE       shift and go to state 164
     LEFT_SQUARE     shift and go to state 8
     ID              shift and go to state 66
     NOT             shift and go to state 31
@@ -10199,12 +10278,12 @@ state 156
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    case                           shift and go to state 199
-    case_expression                shift and go to state 159
-    otherwise_statement            shift and go to state 160
-    expression                     shift and go to state 161
+    case                           shift and go to state 201
+    case_expression                shift and go to state 161
+    otherwise_statement            shift and go to state 162
+    expression                     shift and go to state 163
 
-state 157
+state 159
 
     (26) statement -> CASE OF ID LEFT_SQUARE . indexes RIGHT_SQUARE cases ENDCASE
     (14) expression -> LEFT_SQUARE . array_items RIGHT_SQUARE
@@ -10260,11 +10339,11 @@ state 157
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    indexes                        shift and go to state 200
+    indexes                        shift and go to state 202
     array_items                    shift and go to state 63
-    expression                     shift and go to state 201
+    expression                     shift and go to state 203
 
-state 158
+state 160
 
     (28) cases -> case .
 
@@ -10284,21 +10363,21 @@ state 158
     INTEGER         reduce using rule 28 (cases -> case .)
 
 
-state 159
+state 161
 
     (29) case -> case_expression . COLON statements SEMICOLON
 
-    COLON           shift and go to state 202
+    COLON           shift and go to state 204
 
 
-state 160
+state 162
 
     (30) case -> otherwise_statement . SEMICOLON
 
-    SEMICOLON       shift and go to state 203
+    SEMICOLON       shift and go to state 205
 
 
-state 161
+state 163
 
     (31) case_expression -> expression . TO expression
     (32) case_expression -> expression .
@@ -10319,7 +10398,7 @@ state 161
     (59) expression -> expression . CONNECT expression
     (103) expression -> expression . DOT expression
 
-    TO              shift and go to state 204
+    TO              shift and go to state 206
     COLON           reduce using rule 32 (case_expression -> expression .)
     OR              shift and go to state 48
     AND             shift and go to state 49
@@ -10336,17 +10415,17 @@ state 161
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 162
+state 164
 
     (33) otherwise_statement -> OTHERWISE . COLON statements
 
-    COLON           shift and go to state 205
+    COLON           shift and go to state 207
 
 
-state 163
+state 165
 
     (34) statement -> FOR ID ASSIGN expression . TO expression STEP expression statements NEXT ID
     (35) statement -> FOR ID ASSIGN expression . TO expression statements NEXT ID
@@ -10367,7 +10446,7 @@ state 163
     (59) expression -> expression . CONNECT expression
     (103) expression -> expression . DOT expression
 
-    TO              shift and go to state 206
+    TO              shift and go to state 208
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -10383,10 +10462,10 @@ state 163
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 164
+state 166
 
     (36) statement -> REPEAT statements UNTIL expression .
     (42) expression -> expression . OR expression
@@ -10467,13 +10546,13 @@ state 164
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 36 (statement -> REPEAT statements UNTIL expression .) ]
   ! PLUS            [ reduce using rule 36 (statement -> REPEAT statements UNTIL expression .) ]
 
 
-state 165
+state 167
 
     (37) statement -> WHILE expression DO statements . ENDWHILE
     (1) statements -> statements . statement
@@ -10520,10 +10599,11 @@ state 165
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -10557,7 +10637,7 @@ state 165
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDWHILE        shift and go to state 207
+    ENDWHILE        shift and go to state 209
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -10598,7 +10678,7 @@ state 165
     expression                     shift and go to state 7
     statement                      shift and go to state 40
 
-state 166
+state 168
 
     (38) statement -> WHILE expression statements ENDWHILE .
 
@@ -10650,7 +10730,7 @@ state 166
     NEXT            reduce using rule 38 (statement -> WHILE expression statements ENDWHILE .)
 
 
-state 167
+state 169
 
     (57) expression -> expression PLUS expression .
     (56) expression -> PLUS expression .
@@ -10841,10 +10921,10 @@ state 167
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 168
+state 170
 
     (58) expression -> expression MINUS expression .
     (55) expression -> MINUS expression .
@@ -11035,10 +11115,10 @@ state 168
   ! PLUS            [ shift and go to state 60 ]
   ! MINUS           [ shift and go to state 61 ]
   ! CONNECT         [ shift and go to state 62 ]
-  ! DOT             [ shift and go to state 119 ]
+  ! DOT             [ shift and go to state 120 ]
 
 
-state 169
+state 171
 
     (40) expression -> ID .
     (41) expression -> ID . LEFT_SQUARE indexes RIGHT_SQUARE
@@ -11065,21 +11145,21 @@ state 169
     MINUS           reduce using rule 40 (expression -> ID .)
     CONNECT         reduce using rule 40 (expression -> ID .)
     DOT             reduce using rule 40 (expression -> ID .)
-    LEFT_SQUARE     shift and go to state 120
+    LEFT_SQUARE     shift and go to state 121
     LEFT_PAREN      shift and go to state 44
-    COLON           shift and go to state 208
+    COLON           shift and go to state 210
 
 
-state 170
+state 172
 
     (80) statement -> PROCEDURE ID LEFT_PAREN declare_parameters . RIGHT_PAREN statements ENDPROCEDURE
     (67) declare_parameters -> declare_parameters . COMMA declare_parameter
 
-    RIGHT_PAREN     shift and go to state 209
-    COMMA           shift and go to state 210
+    RIGHT_PAREN     shift and go to state 211
+    COMMA           shift and go to state 212
 
 
-state 171
+state 173
 
     (68) declare_parameters -> declare_parameter .
 
@@ -11087,25 +11167,25 @@ state 171
     COMMA           reduce using rule 68 (declare_parameters -> declare_parameter .)
 
 
-state 172
+state 174
 
     (71) declare_parameter -> BYREF . ID COLON ID
     (72) declare_parameter -> BYREF . ID COLON ARRAY
     (76) declare_parameter -> BYREF . ID COLON ARRAY OF ID
 
-    ID              shift and go to state 211
+    ID              shift and go to state 213
 
 
-state 173
+state 175
 
     (73) declare_parameter -> BYVAL . ID COLON ID
     (74) declare_parameter -> BYVAL . ID COLON ARRAY
     (77) declare_parameter -> BYVAL . ID COLON ARRAY OF ID
 
-    ID              shift and go to state 212
+    ID              shift and go to state 214
 
 
-state 174
+state 176
 
     (81) statement -> PROCEDURE ID statements ENDPROCEDURE .
 
@@ -11157,36 +11237,36 @@ state 174
     NEXT            reduce using rule 81 (statement -> PROCEDURE ID statements ENDPROCEDURE .)
 
 
-state 175
+state 177
 
     (82) statement -> CALL ID LEFT_PAREN parameters . RIGHT_PAREN
     (78) parameters -> parameters . COMMA expression
 
-    RIGHT_PAREN     shift and go to state 213
-    COMMA           shift and go to state 146
+    RIGHT_PAREN     shift and go to state 215
+    COMMA           shift and go to state 148
 
 
-state 176
+state 178
 
     (69) declare_parameter -> ID . COLON ID
     (70) declare_parameter -> ID . COLON ARRAY
     (75) declare_parameter -> ID . COLON ARRAY OF ID
 
-    COLON           shift and go to state 208
+    COLON           shift and go to state 210
 
 
-state 177
+state 179
 
     (84) statement -> FUNCTION ID LEFT_PAREN declare_parameters . RIGHT_PAREN RETURNS ID statements ENDFUNCTION
     (85) statement -> FUNCTION ID LEFT_PAREN declare_parameters . RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
     (88) statement -> FUNCTION ID LEFT_PAREN declare_parameters . RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION
     (67) declare_parameters -> declare_parameters . COMMA declare_parameter
 
-    RIGHT_PAREN     shift and go to state 214
-    COMMA           shift and go to state 210
+    RIGHT_PAREN     shift and go to state 216
+    COMMA           shift and go to state 212
 
 
-state 178
+state 180
 
     (86) statement -> FUNCTION ID RETURNS ID . statements ENDFUNCTION
     (1) statements -> . statements statement
@@ -11234,10 +11314,11 @@ state 178
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -11308,11 +11389,11 @@ state 178
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 215
+    statements                     shift and go to state 217
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
-state 179
+state 181
 
     (87) statement -> FUNCTION ID RETURNS ARRAY . statements ENDFUNCTION
     (89) statement -> FUNCTION ID RETURNS ARRAY . OF ID statements ENDFUNCTION
@@ -11361,10 +11442,11 @@ state 179
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -11398,7 +11480,7 @@ state 179
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    OF              shift and go to state 217
+    OF              shift and go to state 219
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -11436,11 +11518,11 @@ state 179
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 216
+    statements                     shift and go to state 218
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
-state 180
+state 182
 
     (93) statement -> OPENFILE expression FOR READ .
 
@@ -11492,7 +11574,7 @@ state 180
     NEXT            reduce using rule 93 (statement -> OPENFILE expression FOR READ .)
 
 
-state 181
+state 183
 
     (94) statement -> OPENFILE expression FOR WRITE .
 
@@ -11544,7 +11626,7 @@ state 181
     NEXT            reduce using rule 94 (statement -> OPENFILE expression FOR WRITE .)
 
 
-state 182
+state 184
 
     (95) statement -> OPENFILE expression FOR APPEND .
 
@@ -11596,7 +11678,7 @@ state 182
     NEXT            reduce using rule 95 (statement -> OPENFILE expression FOR APPEND .)
 
 
-state 183
+state 185
 
     (96) statement -> OPENFILE expression FOR RANDOM .
 
@@ -11648,13 +11730,13 @@ state 183
     NEXT            reduce using rule 96 (statement -> OPENFILE expression FOR RANDOM .)
 
 
-state 184
+state 186
 
     (97) statement -> READFILE expression COMMA ID . LEFT_SQUARE indexes RIGHT_SQUARE
     (98) statement -> READFILE expression COMMA ID .
 
   ! shift/reduce conflict for LEFT_SQUARE resolved as shift
-    LEFT_SQUARE     shift and go to state 218
+    LEFT_SQUARE     shift and go to state 220
     DELETE          reduce using rule 98 (statement -> READFILE expression COMMA ID .)
     DECLARE         reduce using rule 98 (statement -> READFILE expression COMMA ID .)
     CONSTANT        reduce using rule 98 (statement -> READFILE expression COMMA ID .)
@@ -11704,7 +11786,7 @@ state 184
   ! LEFT_SQUARE     [ reduce using rule 98 (statement -> READFILE expression COMMA ID .) ]
 
 
-state 185
+state 187
 
     (99) statement -> WRITEFILE expression COMMA expression .
     (42) expression -> expression . OR expression
@@ -11785,13 +11867,13 @@ state 185
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 99 (statement -> WRITEFILE expression COMMA expression .) ]
   ! PLUS            [ reduce using rule 99 (statement -> WRITEFILE expression COMMA expression .) ]
 
 
-state 186
+state 188
 
     (101) statement -> SEEK expression COMMA expression .
     (42) expression -> expression . OR expression
@@ -11872,13 +11954,13 @@ state 186
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 101 (statement -> SEEK expression COMMA expression .) ]
   ! PLUS            [ reduce using rule 101 (statement -> SEEK expression COMMA expression .) ]
 
 
-state 187
+state 189
 
     (102) statement -> TYPE ID statements ENDTYPE .
 
@@ -11930,24 +12012,24 @@ state 187
     NEXT            reduce using rule 102 (statement -> TYPE ID statements ENDTYPE .)
 
 
-state 188
+state 190
 
     (105) statement -> TYPE ID EQUAL LEFT_PAREN . enumerate_items RIGHT_PAREN
     (106) enumerate_items -> . enumerate_items COMMA ID
     (107) enumerate_items -> . ID
 
-    ID              shift and go to state 219
+    ID              shift and go to state 221
 
-    enumerate_items                shift and go to state 220
+    enumerate_items                shift and go to state 222
 
-state 189
+state 191
 
     (108) statement -> TYPE ID EQUAL POINTER . ID
 
-    ID              shift and go to state 221
+    ID              shift and go to state 223
 
 
-state 190
+state 192
 
     (11) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -11996,9 +12078,9 @@ state 190
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 222
+    expression                     shift and go to state 224
 
-state 191
+state 193
 
     (12) indexes -> indexes COMMA expression .
     (42) expression -> expression . OR expression
@@ -12035,10 +12117,10 @@ state 191
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 192
+state 194
 
     (78) parameters -> parameters COMMA expression .
     (42) expression -> expression . OR expression
@@ -12075,10 +12157,10 @@ state 192
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 193
+state 195
 
     (6) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE . dimensions RIGHT_SQUARE OF ID
     (7) dimensions -> . dimensions COMMA dimension
@@ -12130,11 +12212,11 @@ state 193
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    dimensions                     shift and go to state 223
-    dimension                      shift and go to state 224
-    expression                     shift and go to state 225
+    dimensions                     shift and go to state 225
+    dimension                      shift and go to state 226
+    expression                     shift and go to state 227
 
-state 194
+state 196
 
     (41) expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
@@ -12208,7 +12290,7 @@ state 194
     STEP            reduce using rule 41 (expression -> ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 195
+state 197
 
     (19) statement -> INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
@@ -12260,7 +12342,7 @@ state 195
     NEXT            reduce using rule 19 (statement -> INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 196
+state 198
 
     (23) statement -> IF expression THEN statements ELSE . statements ENDIF
     (1) statements -> . statements statement
@@ -12308,10 +12390,11 @@ state 196
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -12383,10 +12466,10 @@ state 196
     INTEGER         shift and go to state 39
 
     expression                     shift and go to state 7
-    statements                     shift and go to state 226
+    statements                     shift and go to state 228
     statement                      shift and go to state 2
 
-state 197
+state 199
 
     (24) statement -> IF expression THEN statements ENDIF .
 
@@ -12438,7 +12521,7 @@ state 197
     NEXT            reduce using rule 24 (statement -> IF expression THEN statements ENDIF .)
 
 
-state 198
+state 200
 
     (25) statement -> CASE OF ID cases ENDCASE .
 
@@ -12490,7 +12573,7 @@ state 198
     NEXT            reduce using rule 25 (statement -> CASE OF ID cases ENDCASE .)
 
 
-state 199
+state 201
 
     (27) cases -> cases case .
 
@@ -12510,16 +12593,16 @@ state 199
     INTEGER         reduce using rule 27 (cases -> cases case .)
 
 
-state 200
+state 202
 
     (26) statement -> CASE OF ID LEFT_SQUARE indexes . RIGHT_SQUARE cases ENDCASE
     (12) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 227
-    COMMA           shift and go to state 144
+    RIGHT_SQUARE    shift and go to state 229
+    COMMA           shift and go to state 146
 
 
-state 201
+state 203
 
     (13) indexes -> expression .
     (17) array_items -> expression .
@@ -12559,13 +12642,13 @@ state 201
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! RIGHT_SQUARE    [ reduce using rule 17 (array_items -> expression .) ]
   ! COMMA           [ reduce using rule 17 (array_items -> expression .) ]
 
 
-state 202
+state 204
 
     (29) case -> case_expression COLON . statements SEMICOLON
     (1) statements -> . statements statement
@@ -12613,207 +12696,11 @@ state 202
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
-    (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
-    (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
-    (40) expression -> . ID
-    (41) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (42) expression -> . expression OR expression
-    (43) expression -> . expression AND expression
-    (44) expression -> . NOT expression
-    (45) expression -> . expression EQUAL expression
-    (46) expression -> . expression NOT_EQUAL expression
-    (47) expression -> . expression LESS expression
-    (48) expression -> . expression GREATER expression
-    (49) expression -> . expression LESS_EQUAL expression
-    (50) expression -> . expression GREATER_EQUAL expression
-    (51) expression -> . expression MOD expression
-    (52) expression -> . expression DIV expression
-    (53) expression -> . expression MUL expression
-    (54) expression -> . expression N_DIV expression
-    (55) expression -> . MINUS expression
-    (56) expression -> . PLUS expression
-    (57) expression -> . expression PLUS expression
-    (58) expression -> . expression MINUS expression
-    (59) expression -> . expression CONNECT expression
-    (60) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (61) expression -> . DATE
-    (62) expression -> . BOOLEAN
-    (63) expression -> . CHAR
-    (64) expression -> . STRING
-    (65) expression -> . REAL
-    (66) expression -> . INTEGER
-    (90) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
-    (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
-    (103) expression -> . expression DOT expression
-
-    DELETE          shift and go to state 3
-    DECLARE         shift and go to state 5
-    CONSTANT        shift and go to state 6
-    ID              shift and go to state 4
-    INPUT           shift and go to state 9
-    OUTPUT          shift and go to state 10
-    IF              shift and go to state 11
-    CASE            shift and go to state 12
-    FOR             shift and go to state 13
-    REPEAT          shift and go to state 14
-    WHILE           shift and go to state 15
-    PROCEDURE       shift and go to state 16
-    CALL            shift and go to state 18
-    FUNCTION        shift and go to state 19
-    RETURN          shift and go to state 20
-    OPENFILE        shift and go to state 21
-    READFILE        shift and go to state 22
-    WRITEFILE       shift and go to state 23
-    CLOSEFILE       shift and go to state 24
-    SEEK            shift and go to state 25
-    TYPE            shift and go to state 26
-    PASS            shift and go to state 27
-    IMPORT          shift and go to state 28
-    PRIVATE         shift and go to state 29
-    PUBLIC          shift and go to state 30
-    LEFT_SQUARE     shift and go to state 8
-    NOT             shift and go to state 31
-    MINUS           shift and go to state 32
-    PLUS            shift and go to state 33
-    LEFT_PAREN      shift and go to state 17
-    DATE            shift and go to state 34
-    BOOLEAN         shift and go to state 35
-    CHAR            shift and go to state 36
-    STRING          shift and go to state 37
-    REAL            shift and go to state 38
-    INTEGER         shift and go to state 39
-
-    statements                     shift and go to state 228
-    statement                      shift and go to state 2
-    expression                     shift and go to state 7
-
-state 203
-
-    (30) case -> otherwise_statement SEMICOLON .
-
-    ENDCASE         reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    OTHERWISE       reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    LEFT_SQUARE     reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    ID              reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    NOT             reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    MINUS           reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    PLUS            reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    LEFT_PAREN      reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    DATE            reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    BOOLEAN         reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    CHAR            reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    STRING          reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    REAL            reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-    INTEGER         reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
-
-
-state 204
-
-    (31) case_expression -> expression TO . expression
-    (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
-    (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
-    (40) expression -> . ID
-    (41) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (42) expression -> . expression OR expression
-    (43) expression -> . expression AND expression
-    (44) expression -> . NOT expression
-    (45) expression -> . expression EQUAL expression
-    (46) expression -> . expression NOT_EQUAL expression
-    (47) expression -> . expression LESS expression
-    (48) expression -> . expression GREATER expression
-    (49) expression -> . expression LESS_EQUAL expression
-    (50) expression -> . expression GREATER_EQUAL expression
-    (51) expression -> . expression MOD expression
-    (52) expression -> . expression DIV expression
-    (53) expression -> . expression MUL expression
-    (54) expression -> . expression N_DIV expression
-    (55) expression -> . MINUS expression
-    (56) expression -> . PLUS expression
-    (57) expression -> . expression PLUS expression
-    (58) expression -> . expression MINUS expression
-    (59) expression -> . expression CONNECT expression
-    (60) expression -> . LEFT_PAREN expression RIGHT_PAREN
-    (61) expression -> . DATE
-    (62) expression -> . BOOLEAN
-    (63) expression -> . CHAR
-    (64) expression -> . STRING
-    (65) expression -> . REAL
-    (66) expression -> . INTEGER
-    (90) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
-    (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
-    (103) expression -> . expression DOT expression
-
-    LEFT_SQUARE     shift and go to state 8
-    ID              shift and go to state 66
-    NOT             shift and go to state 31
-    MINUS           shift and go to state 32
-    PLUS            shift and go to state 33
-    LEFT_PAREN      shift and go to state 17
-    DATE            shift and go to state 34
-    BOOLEAN         shift and go to state 35
-    CHAR            shift and go to state 36
-    STRING          shift and go to state 37
-    REAL            shift and go to state 38
-    INTEGER         shift and go to state 39
-
-    expression                     shift and go to state 229
-
-state 205
-
-    (33) otherwise_statement -> OTHERWISE COLON . statements
-    (1) statements -> . statements statement
-    (2) statements -> . statement
-    (3) statement -> . DELETE ID
-    (4) statement -> . DECLARE ID COLON ID
-    (5) statement -> . CONSTANT ID EQUAL expression
-    (6) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
-    (10) statement -> . ID ASSIGN expression
-    (11) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
-    (18) statement -> . INPUT ID
-    (19) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (20) statement -> . OUTPUT output_expression
-    (23) statement -> . IF expression THEN statements ELSE statements ENDIF
-    (24) statement -> . IF expression THEN statements ENDIF
-    (25) statement -> . CASE OF ID cases ENDCASE
-    (26) statement -> . CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE
-    (34) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
-    (35) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
-    (36) statement -> . REPEAT statements UNTIL expression
-    (37) statement -> . WHILE expression DO statements ENDWHILE
-    (38) statement -> . WHILE expression statements ENDWHILE
-    (39) statement -> . expression
-    (80) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-    (81) statement -> . PROCEDURE ID statements ENDPROCEDURE
-    (82) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
-    (83) statement -> . CALL ID
-    (84) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
-    (85) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
-    (86) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
-    (87) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
-    (88) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION
-    (89) statement -> . FUNCTION ID RETURNS ARRAY OF ID statements ENDFUNCTION
-    (92) statement -> . RETURN expression
-    (93) statement -> . OPENFILE expression FOR READ
-    (94) statement -> . OPENFILE expression FOR WRITE
-    (95) statement -> . OPENFILE expression FOR APPEND
-    (96) statement -> . OPENFILE expression FOR RANDOM
-    (97) statement -> . READFILE expression COMMA ID LEFT_SQUARE indexes RIGHT_SQUARE
-    (98) statement -> . READFILE expression COMMA ID
-    (99) statement -> . WRITEFILE expression COMMA expression
-    (100) statement -> . CLOSEFILE expression
-    (101) statement -> . SEEK expression COMMA expression
-    (102) statement -> . TYPE ID statements ENDTYPE
-    (104) statement -> . expression DOT statement
-    (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
-    (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -12888,10 +12775,29 @@ state 205
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
+state 205
+
+    (30) case -> otherwise_statement SEMICOLON .
+
+    ENDCASE         reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    OTHERWISE       reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    LEFT_SQUARE     reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    ID              reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    NOT             reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    MINUS           reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    PLUS            reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    LEFT_PAREN      reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    DATE            reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    BOOLEAN         reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    CHAR            reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    STRING          reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    REAL            reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+    INTEGER         reduce using rule 30 (case -> otherwise_statement SEMICOLON .)
+
+
 state 206
 
-    (34) statement -> FOR ID ASSIGN expression TO . expression STEP expression statements NEXT ID
-    (35) statement -> FOR ID ASSIGN expression TO . expression statements NEXT ID
+    (31) case_expression -> expression TO . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -12941,6 +12847,185 @@ state 206
     expression                     shift and go to state 231
 
 state 207
+
+    (33) otherwise_statement -> OTHERWISE COLON . statements
+    (1) statements -> . statements statement
+    (2) statements -> . statement
+    (3) statement -> . DELETE ID
+    (4) statement -> . DECLARE ID COLON ID
+    (5) statement -> . CONSTANT ID EQUAL expression
+    (6) statement -> . DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
+    (10) statement -> . ID ASSIGN expression
+    (11) statement -> . ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression
+    (18) statement -> . INPUT ID
+    (19) statement -> . INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (20) statement -> . OUTPUT output_expression
+    (23) statement -> . IF expression THEN statements ELSE statements ENDIF
+    (24) statement -> . IF expression THEN statements ENDIF
+    (25) statement -> . CASE OF ID cases ENDCASE
+    (26) statement -> . CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE
+    (34) statement -> . FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
+    (35) statement -> . FOR ID ASSIGN expression TO expression statements NEXT ID
+    (36) statement -> . REPEAT statements UNTIL expression
+    (37) statement -> . WHILE expression DO statements ENDWHILE
+    (38) statement -> . WHILE expression statements ENDWHILE
+    (39) statement -> . expression
+    (80) statement -> . PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
+    (81) statement -> . PROCEDURE ID statements ENDPROCEDURE
+    (82) statement -> . CALL ID LEFT_PAREN parameters RIGHT_PAREN
+    (83) statement -> . CALL ID
+    (84) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+    (85) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
+    (86) statement -> . FUNCTION ID RETURNS ID statements ENDFUNCTION
+    (87) statement -> . FUNCTION ID RETURNS ARRAY statements ENDFUNCTION
+    (88) statement -> . FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION
+    (89) statement -> . FUNCTION ID RETURNS ARRAY OF ID statements ENDFUNCTION
+    (92) statement -> . RETURN expression
+    (93) statement -> . OPENFILE expression FOR READ
+    (94) statement -> . OPENFILE expression FOR WRITE
+    (95) statement -> . OPENFILE expression FOR APPEND
+    (96) statement -> . OPENFILE expression FOR RANDOM
+    (97) statement -> . READFILE expression COMMA ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (98) statement -> . READFILE expression COMMA ID
+    (99) statement -> . WRITEFILE expression COMMA expression
+    (100) statement -> . CLOSEFILE expression
+    (101) statement -> . SEEK expression COMMA expression
+    (102) statement -> . TYPE ID statements ENDTYPE
+    (104) statement -> . expression DOT statement
+    (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
+    (108) statement -> . TYPE ID EQUAL POINTER ID
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
+    (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
+    (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
+    (40) expression -> . ID
+    (41) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (42) expression -> . expression OR expression
+    (43) expression -> . expression AND expression
+    (44) expression -> . NOT expression
+    (45) expression -> . expression EQUAL expression
+    (46) expression -> . expression NOT_EQUAL expression
+    (47) expression -> . expression LESS expression
+    (48) expression -> . expression GREATER expression
+    (49) expression -> . expression LESS_EQUAL expression
+    (50) expression -> . expression GREATER_EQUAL expression
+    (51) expression -> . expression MOD expression
+    (52) expression -> . expression DIV expression
+    (53) expression -> . expression MUL expression
+    (54) expression -> . expression N_DIV expression
+    (55) expression -> . MINUS expression
+    (56) expression -> . PLUS expression
+    (57) expression -> . expression PLUS expression
+    (58) expression -> . expression MINUS expression
+    (59) expression -> . expression CONNECT expression
+    (60) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (61) expression -> . DATE
+    (62) expression -> . BOOLEAN
+    (63) expression -> . CHAR
+    (64) expression -> . STRING
+    (65) expression -> . REAL
+    (66) expression -> . INTEGER
+    (90) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
+    (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
+    (103) expression -> . expression DOT expression
+
+    DELETE          shift and go to state 3
+    DECLARE         shift and go to state 5
+    CONSTANT        shift and go to state 6
+    ID              shift and go to state 4
+    INPUT           shift and go to state 9
+    OUTPUT          shift and go to state 10
+    IF              shift and go to state 11
+    CASE            shift and go to state 12
+    FOR             shift and go to state 13
+    REPEAT          shift and go to state 14
+    WHILE           shift and go to state 15
+    PROCEDURE       shift and go to state 16
+    CALL            shift and go to state 18
+    FUNCTION        shift and go to state 19
+    RETURN          shift and go to state 20
+    OPENFILE        shift and go to state 21
+    READFILE        shift and go to state 22
+    WRITEFILE       shift and go to state 23
+    CLOSEFILE       shift and go to state 24
+    SEEK            shift and go to state 25
+    TYPE            shift and go to state 26
+    PASS            shift and go to state 27
+    IMPORT          shift and go to state 28
+    PRIVATE         shift and go to state 29
+    PUBLIC          shift and go to state 30
+    LEFT_SQUARE     shift and go to state 8
+    NOT             shift and go to state 31
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 33
+    LEFT_PAREN      shift and go to state 17
+    DATE            shift and go to state 34
+    BOOLEAN         shift and go to state 35
+    CHAR            shift and go to state 36
+    STRING          shift and go to state 37
+    REAL            shift and go to state 38
+    INTEGER         shift and go to state 39
+
+    statements                     shift and go to state 232
+    statement                      shift and go to state 2
+    expression                     shift and go to state 7
+
+state 208
+
+    (34) statement -> FOR ID ASSIGN expression TO . expression STEP expression statements NEXT ID
+    (35) statement -> FOR ID ASSIGN expression TO . expression statements NEXT ID
+    (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
+    (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
+    (40) expression -> . ID
+    (41) expression -> . ID LEFT_SQUARE indexes RIGHT_SQUARE
+    (42) expression -> . expression OR expression
+    (43) expression -> . expression AND expression
+    (44) expression -> . NOT expression
+    (45) expression -> . expression EQUAL expression
+    (46) expression -> . expression NOT_EQUAL expression
+    (47) expression -> . expression LESS expression
+    (48) expression -> . expression GREATER expression
+    (49) expression -> . expression LESS_EQUAL expression
+    (50) expression -> . expression GREATER_EQUAL expression
+    (51) expression -> . expression MOD expression
+    (52) expression -> . expression DIV expression
+    (53) expression -> . expression MUL expression
+    (54) expression -> . expression N_DIV expression
+    (55) expression -> . MINUS expression
+    (56) expression -> . PLUS expression
+    (57) expression -> . expression PLUS expression
+    (58) expression -> . expression MINUS expression
+    (59) expression -> . expression CONNECT expression
+    (60) expression -> . LEFT_PAREN expression RIGHT_PAREN
+    (61) expression -> . DATE
+    (62) expression -> . BOOLEAN
+    (63) expression -> . CHAR
+    (64) expression -> . STRING
+    (65) expression -> . REAL
+    (66) expression -> . INTEGER
+    (90) expression -> . ID LEFT_PAREN parameters RIGHT_PAREN
+    (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
+    (103) expression -> . expression DOT expression
+
+    LEFT_SQUARE     shift and go to state 8
+    ID              shift and go to state 66
+    NOT             shift and go to state 31
+    MINUS           shift and go to state 32
+    PLUS            shift and go to state 33
+    LEFT_PAREN      shift and go to state 17
+    DATE            shift and go to state 34
+    BOOLEAN         shift and go to state 35
+    CHAR            shift and go to state 36
+    STRING          shift and go to state 37
+    REAL            shift and go to state 38
+    INTEGER         shift and go to state 39
+
+    expression                     shift and go to state 233
+
+state 209
 
     (37) statement -> WHILE expression DO statements ENDWHILE .
 
@@ -12992,17 +13077,17 @@ state 207
     NEXT            reduce using rule 37 (statement -> WHILE expression DO statements ENDWHILE .)
 
 
-state 208
+state 210
 
     (69) declare_parameter -> ID COLON . ID
     (70) declare_parameter -> ID COLON . ARRAY
     (75) declare_parameter -> ID COLON . ARRAY OF ID
 
-    ID              shift and go to state 232
-    ARRAY           shift and go to state 233
+    ID              shift and go to state 234
+    ARRAY           shift and go to state 235
 
 
-state 209
+state 211
 
     (80) statement -> PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN . statements ENDPROCEDURE
     (1) statements -> . statements statement
@@ -13050,10 +13135,11 @@ state 209
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -13124,11 +13210,11 @@ state 209
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 234
+    statements                     shift and go to state 236
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
-state 210
+state 212
 
     (67) declare_parameters -> declare_parameters COMMA . declare_parameter
     (69) declare_parameter -> . ID COLON ID
@@ -13141,31 +13227,31 @@ state 210
     (76) declare_parameter -> . BYREF ID COLON ARRAY OF ID
     (77) declare_parameter -> . BYVAL ID COLON ARRAY OF ID
 
-    ID              shift and go to state 176
-    BYREF           shift and go to state 172
-    BYVAL           shift and go to state 173
+    ID              shift and go to state 178
+    BYREF           shift and go to state 174
+    BYVAL           shift and go to state 175
 
-    declare_parameter              shift and go to state 235
+    declare_parameter              shift and go to state 237
 
-state 211
+state 213
 
     (71) declare_parameter -> BYREF ID . COLON ID
     (72) declare_parameter -> BYREF ID . COLON ARRAY
     (76) declare_parameter -> BYREF ID . COLON ARRAY OF ID
 
-    COLON           shift and go to state 236
+    COLON           shift and go to state 238
 
 
-state 212
+state 214
 
     (73) declare_parameter -> BYVAL ID . COLON ID
     (74) declare_parameter -> BYVAL ID . COLON ARRAY
     (77) declare_parameter -> BYVAL ID . COLON ARRAY OF ID
 
-    COLON           shift and go to state 237
+    COLON           shift and go to state 239
 
 
-state 213
+state 215
 
     (82) statement -> CALL ID LEFT_PAREN parameters RIGHT_PAREN .
 
@@ -13217,16 +13303,16 @@ state 213
     NEXT            reduce using rule 82 (statement -> CALL ID LEFT_PAREN parameters RIGHT_PAREN .)
 
 
-state 214
+state 216
 
     (84) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN . RETURNS ID statements ENDFUNCTION
     (85) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN . RETURNS ARRAY statements ENDFUNCTION
     (88) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN . RETURNS ARRAY OF ID statements ENDFUNCTION
 
-    RETURNS         shift and go to state 238
+    RETURNS         shift and go to state 240
 
 
-state 215
+state 217
 
     (86) statement -> FUNCTION ID RETURNS ID statements . ENDFUNCTION
     (1) statements -> statements . statement
@@ -13273,10 +13359,11 @@ state 215
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -13310,7 +13397,7 @@ state 215
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDFUNCTION     shift and go to state 239
+    ENDFUNCTION     shift and go to state 241
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -13351,7 +13438,7 @@ state 215
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 216
+state 218
 
     (87) statement -> FUNCTION ID RETURNS ARRAY statements . ENDFUNCTION
     (1) statements -> statements . statement
@@ -13398,10 +13485,11 @@ state 216
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -13435,7 +13523,7 @@ state 216
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDFUNCTION     shift and go to state 240
+    ENDFUNCTION     shift and go to state 242
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -13476,14 +13564,14 @@ state 216
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 217
+state 219
 
     (89) statement -> FUNCTION ID RETURNS ARRAY OF . ID statements ENDFUNCTION
 
-    ID              shift and go to state 241
+    ID              shift and go to state 243
 
 
-state 218
+state 220
 
     (97) statement -> READFILE expression COMMA ID LEFT_SQUARE . indexes RIGHT_SQUARE
     (12) indexes -> . indexes COMMA expression
@@ -13534,10 +13622,10 @@ state 218
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 94
-    indexes                        shift and go to state 242
+    expression                     shift and go to state 95
+    indexes                        shift and go to state 244
 
-state 219
+state 221
 
     (107) enumerate_items -> ID .
 
@@ -13545,16 +13633,16 @@ state 219
     COMMA           reduce using rule 107 (enumerate_items -> ID .)
 
 
-state 220
+state 222
 
     (105) statement -> TYPE ID EQUAL LEFT_PAREN enumerate_items . RIGHT_PAREN
     (106) enumerate_items -> enumerate_items . COMMA ID
 
-    RIGHT_PAREN     shift and go to state 243
-    COMMA           shift and go to state 244
+    RIGHT_PAREN     shift and go to state 245
+    COMMA           shift and go to state 246
 
 
-state 221
+state 223
 
     (108) statement -> TYPE ID EQUAL POINTER ID .
 
@@ -13606,7 +13694,7 @@ state 221
     NEXT            reduce using rule 108 (statement -> TYPE ID EQUAL POINTER ID .)
 
 
-state 222
+state 224
 
     (11) statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression .
     (42) expression -> expression . OR expression
@@ -13687,22 +13775,22 @@ state 222
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
   ! MINUS           [ reduce using rule 11 (statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression .) ]
   ! PLUS            [ reduce using rule 11 (statement -> ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression .) ]
 
 
-state 223
+state 225
 
     (6) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions . RIGHT_SQUARE OF ID
     (7) dimensions -> dimensions . COMMA dimension
 
-    RIGHT_SQUARE    shift and go to state 245
-    COMMA           shift and go to state 246
+    RIGHT_SQUARE    shift and go to state 247
+    COMMA           shift and go to state 248
 
 
-state 224
+state 226
 
     (8) dimensions -> dimension .
 
@@ -13710,7 +13798,7 @@ state 224
     COMMA           reduce using rule 8 (dimensions -> dimension .)
 
 
-state 225
+state 227
 
     (9) dimension -> expression . COLON expression
     (42) expression -> expression . OR expression
@@ -13730,7 +13818,7 @@ state 225
     (59) expression -> expression . CONNECT expression
     (103) expression -> expression . DOT expression
 
-    COLON           shift and go to state 247
+    COLON           shift and go to state 249
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -13746,10 +13834,10 @@ state 225
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 226
+state 228
 
     (23) statement -> IF expression THEN statements ELSE statements . ENDIF
     (1) statements -> statements . statement
@@ -13796,10 +13884,11 @@ state 226
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -13833,7 +13922,7 @@ state 226
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDIF           shift and go to state 248
+    ENDIF           shift and go to state 250
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -13874,7 +13963,7 @@ state 226
     expression                     shift and go to state 7
     statement                      shift and go to state 40
 
-state 227
+state 229
 
     (26) statement -> CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE . cases ENDCASE
     (27) cases -> . cases case
@@ -13917,7 +14006,7 @@ state 227
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    OTHERWISE       shift and go to state 162
+    OTHERWISE       shift and go to state 164
     LEFT_SQUARE     shift and go to state 8
     ID              shift and go to state 66
     NOT             shift and go to state 31
@@ -13931,13 +14020,13 @@ state 227
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    cases                          shift and go to state 249
-    case                           shift and go to state 158
-    case_expression                shift and go to state 159
-    otherwise_statement            shift and go to state 160
-    expression                     shift and go to state 161
+    cases                          shift and go to state 251
+    case                           shift and go to state 160
+    case_expression                shift and go to state 161
+    otherwise_statement            shift and go to state 162
+    expression                     shift and go to state 163
 
-state 228
+state 230
 
     (29) case -> case_expression COLON statements . SEMICOLON
     (1) statements -> statements . statement
@@ -13984,10 +14073,11 @@ state 228
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -14021,7 +14111,7 @@ state 228
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    SEMICOLON       shift and go to state 250
+    SEMICOLON       shift and go to state 252
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -14062,7 +14152,7 @@ state 228
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 229
+state 231
 
     (31) case_expression -> expression TO expression .
     (42) expression -> expression . OR expression
@@ -14098,10 +14188,10 @@ state 229
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 230
+state 232
 
     (33) otherwise_statement -> OTHERWISE COLON statements .
     (1) statements -> statements . statement
@@ -14148,10 +14238,11 @@ state 230
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -14226,7 +14317,7 @@ state 230
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 231
+state 233
 
     (34) statement -> FOR ID ASSIGN expression TO expression . STEP expression statements NEXT ID
     (35) statement -> FOR ID ASSIGN expression TO expression . statements NEXT ID
@@ -14291,10 +14382,11 @@ state 231
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -14328,7 +14420,7 @@ state 231
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    STEP            shift and go to state 251
+    STEP            shift and go to state 253
     OR              shift and go to state 48
     AND             shift and go to state 49
     EQUAL           shift and go to state 50
@@ -14341,10 +14433,10 @@ state 231
     DIV             shift and go to state 57
     MUL             shift and go to state 58
     N_DIV           shift and go to state 59
-    PLUS            shift and go to state 129
-    MINUS           shift and go to state 130
+    PLUS            shift and go to state 130
+    MINUS           shift and go to state 131
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -14381,10 +14473,10 @@ state 231
     INTEGER         shift and go to state 39
 
     expression                     shift and go to state 7
-    statements                     shift and go to state 252
+    statements                     shift and go to state 254
     statement                      shift and go to state 2
 
-state 232
+state 234
 
     (69) declare_parameter -> ID COLON ID .
 
@@ -14392,17 +14484,17 @@ state 232
     COMMA           reduce using rule 69 (declare_parameter -> ID COLON ID .)
 
 
-state 233
+state 235
 
     (70) declare_parameter -> ID COLON ARRAY .
     (75) declare_parameter -> ID COLON ARRAY . OF ID
 
     RIGHT_PAREN     reduce using rule 70 (declare_parameter -> ID COLON ARRAY .)
     COMMA           reduce using rule 70 (declare_parameter -> ID COLON ARRAY .)
-    OF              shift and go to state 253
+    OF              shift and go to state 255
 
 
-state 234
+state 236
 
     (80) statement -> PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements . ENDPROCEDURE
     (1) statements -> statements . statement
@@ -14449,10 +14541,11 @@ state 234
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -14486,7 +14579,7 @@ state 234
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDPROCEDURE    shift and go to state 254
+    ENDPROCEDURE    shift and go to state 256
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -14527,7 +14620,7 @@ state 234
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 235
+state 237
 
     (67) declare_parameters -> declare_parameters COMMA declare_parameter .
 
@@ -14535,37 +14628,37 @@ state 235
     COMMA           reduce using rule 67 (declare_parameters -> declare_parameters COMMA declare_parameter .)
 
 
-state 236
+state 238
 
     (71) declare_parameter -> BYREF ID COLON . ID
     (72) declare_parameter -> BYREF ID COLON . ARRAY
     (76) declare_parameter -> BYREF ID COLON . ARRAY OF ID
 
-    ID              shift and go to state 255
-    ARRAY           shift and go to state 256
+    ID              shift and go to state 257
+    ARRAY           shift and go to state 258
 
 
-state 237
+state 239
 
     (73) declare_parameter -> BYVAL ID COLON . ID
     (74) declare_parameter -> BYVAL ID COLON . ARRAY
     (77) declare_parameter -> BYVAL ID COLON . ARRAY OF ID
 
-    ID              shift and go to state 257
-    ARRAY           shift and go to state 258
+    ID              shift and go to state 259
+    ARRAY           shift and go to state 260
 
 
-state 238
+state 240
 
     (84) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS . ID statements ENDFUNCTION
     (85) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS . ARRAY statements ENDFUNCTION
     (88) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS . ARRAY OF ID statements ENDFUNCTION
 
-    ID              shift and go to state 259
-    ARRAY           shift and go to state 260
+    ID              shift and go to state 261
+    ARRAY           shift and go to state 262
 
 
-state 239
+state 241
 
     (86) statement -> FUNCTION ID RETURNS ID statements ENDFUNCTION .
 
@@ -14617,7 +14710,7 @@ state 239
     NEXT            reduce using rule 86 (statement -> FUNCTION ID RETURNS ID statements ENDFUNCTION .)
 
 
-state 240
+state 242
 
     (87) statement -> FUNCTION ID RETURNS ARRAY statements ENDFUNCTION .
 
@@ -14669,7 +14762,7 @@ state 240
     NEXT            reduce using rule 87 (statement -> FUNCTION ID RETURNS ARRAY statements ENDFUNCTION .)
 
 
-state 241
+state 243
 
     (89) statement -> FUNCTION ID RETURNS ARRAY OF ID . statements ENDFUNCTION
     (1) statements -> . statements statement
@@ -14717,10 +14810,11 @@ state 241
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -14791,20 +14885,20 @@ state 241
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 261
+    statements                     shift and go to state 263
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
-state 242
+state 244
 
     (97) statement -> READFILE expression COMMA ID LEFT_SQUARE indexes . RIGHT_SQUARE
     (12) indexes -> indexes . COMMA expression
 
-    RIGHT_SQUARE    shift and go to state 262
-    COMMA           shift and go to state 144
+    RIGHT_SQUARE    shift and go to state 264
+    COMMA           shift and go to state 146
 
 
-state 243
+state 245
 
     (105) statement -> TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN .
 
@@ -14856,21 +14950,21 @@ state 243
     NEXT            reduce using rule 105 (statement -> TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN .)
 
 
-state 244
+state 246
 
     (106) enumerate_items -> enumerate_items COMMA . ID
 
-    ID              shift and go to state 263
+    ID              shift and go to state 265
 
 
-state 245
+state 247
 
     (6) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE . OF ID
 
-    OF              shift and go to state 264
+    OF              shift and go to state 266
 
 
-state 246
+state 248
 
     (7) dimensions -> dimensions COMMA . dimension
     (9) dimension -> . expression COLON expression
@@ -14920,10 +15014,10 @@ state 246
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    dimension                      shift and go to state 265
-    expression                     shift and go to state 225
+    dimension                      shift and go to state 267
+    expression                     shift and go to state 227
 
-state 247
+state 249
 
     (9) dimension -> expression COLON . expression
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -14972,9 +15066,9 @@ state 247
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 266
+    expression                     shift and go to state 268
 
-state 248
+state 250
 
     (23) statement -> IF expression THEN statements ELSE statements ENDIF .
 
@@ -15026,7 +15120,7 @@ state 248
     NEXT            reduce using rule 23 (statement -> IF expression THEN statements ELSE statements ENDIF .)
 
 
-state 249
+state 251
 
     (26) statement -> CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE cases . ENDCASE
     (27) cases -> cases . case
@@ -15068,8 +15162,8 @@ state 249
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDCASE         shift and go to state 267
-    OTHERWISE       shift and go to state 162
+    ENDCASE         shift and go to state 269
+    OTHERWISE       shift and go to state 164
     LEFT_SQUARE     shift and go to state 8
     ID              shift and go to state 66
     NOT             shift and go to state 31
@@ -15083,12 +15177,12 @@ state 249
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    case                           shift and go to state 199
-    case_expression                shift and go to state 159
-    otherwise_statement            shift and go to state 160
-    expression                     shift and go to state 161
+    case                           shift and go to state 201
+    case_expression                shift and go to state 161
+    otherwise_statement            shift and go to state 162
+    expression                     shift and go to state 163
 
-state 250
+state 252
 
     (29) case -> case_expression COLON statements SEMICOLON .
 
@@ -15108,7 +15202,7 @@ state 250
     INTEGER         reduce using rule 29 (case -> case_expression COLON statements SEMICOLON .)
 
 
-state 251
+state 253
 
     (34) statement -> FOR ID ASSIGN expression TO expression STEP . expression statements NEXT ID
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
@@ -15157,9 +15251,9 @@ state 251
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    expression                     shift and go to state 268
+    expression                     shift and go to state 270
 
-state 252
+state 254
 
     (35) statement -> FOR ID ASSIGN expression TO expression statements . NEXT ID
     (1) statements -> statements . statement
@@ -15206,10 +15300,11 @@ state 252
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -15243,7 +15338,7 @@ state 252
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    NEXT            shift and go to state 269
+    NEXT            shift and go to state 271
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -15284,14 +15379,14 @@ state 252
     expression                     shift and go to state 7
     statement                      shift and go to state 40
 
-state 253
+state 255
 
     (75) declare_parameter -> ID COLON ARRAY OF . ID
 
-    ID              shift and go to state 270
+    ID              shift and go to state 272
 
 
-state 254
+state 256
 
     (80) statement -> PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE .
 
@@ -15343,7 +15438,7 @@ state 254
     NEXT            reduce using rule 80 (statement -> PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE .)
 
 
-state 255
+state 257
 
     (71) declare_parameter -> BYREF ID COLON ID .
 
@@ -15351,17 +15446,17 @@ state 255
     COMMA           reduce using rule 71 (declare_parameter -> BYREF ID COLON ID .)
 
 
-state 256
+state 258
 
     (72) declare_parameter -> BYREF ID COLON ARRAY .
     (76) declare_parameter -> BYREF ID COLON ARRAY . OF ID
 
     RIGHT_PAREN     reduce using rule 72 (declare_parameter -> BYREF ID COLON ARRAY .)
     COMMA           reduce using rule 72 (declare_parameter -> BYREF ID COLON ARRAY .)
-    OF              shift and go to state 271
+    OF              shift and go to state 273
 
 
-state 257
+state 259
 
     (73) declare_parameter -> BYVAL ID COLON ID .
 
@@ -15369,17 +15464,17 @@ state 257
     COMMA           reduce using rule 73 (declare_parameter -> BYVAL ID COLON ID .)
 
 
-state 258
+state 260
 
     (74) declare_parameter -> BYVAL ID COLON ARRAY .
     (77) declare_parameter -> BYVAL ID COLON ARRAY . OF ID
 
     RIGHT_PAREN     reduce using rule 74 (declare_parameter -> BYVAL ID COLON ARRAY .)
     COMMA           reduce using rule 74 (declare_parameter -> BYVAL ID COLON ARRAY .)
-    OF              shift and go to state 272
+    OF              shift and go to state 274
 
 
-state 259
+state 261
 
     (84) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID . statements ENDFUNCTION
     (1) statements -> . statements statement
@@ -15427,10 +15522,11 @@ state 259
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -15501,11 +15597,11 @@ state 259
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 273
+    statements                     shift and go to state 275
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
-state 260
+state 262
 
     (85) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY . statements ENDFUNCTION
     (88) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY . OF ID statements ENDFUNCTION
@@ -15554,10 +15650,11 @@ state 260
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -15591,7 +15688,7 @@ state 260
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    OF              shift and go to state 275
+    OF              shift and go to state 277
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -15629,11 +15726,11 @@ state 260
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 274
+    statements                     shift and go to state 276
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
-state 261
+state 263
 
     (89) statement -> FUNCTION ID RETURNS ARRAY OF ID statements . ENDFUNCTION
     (1) statements -> statements . statement
@@ -15680,10 +15777,11 @@ state 261
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -15717,7 +15815,7 @@ state 261
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDFUNCTION     shift and go to state 276
+    ENDFUNCTION     shift and go to state 278
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -15758,7 +15856,7 @@ state 261
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 262
+state 264
 
     (97) statement -> READFILE expression COMMA ID LEFT_SQUARE indexes RIGHT_SQUARE .
 
@@ -15810,7 +15908,7 @@ state 262
     NEXT            reduce using rule 97 (statement -> READFILE expression COMMA ID LEFT_SQUARE indexes RIGHT_SQUARE .)
 
 
-state 263
+state 265
 
     (106) enumerate_items -> enumerate_items COMMA ID .
 
@@ -15818,14 +15916,14 @@ state 263
     COMMA           reduce using rule 106 (enumerate_items -> enumerate_items COMMA ID .)
 
 
-state 264
+state 266
 
     (6) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF . ID
 
-    ID              shift and go to state 277
+    ID              shift and go to state 279
 
 
-state 265
+state 267
 
     (7) dimensions -> dimensions COMMA dimension .
 
@@ -15833,7 +15931,7 @@ state 265
     COMMA           reduce using rule 7 (dimensions -> dimensions COMMA dimension .)
 
 
-state 266
+state 268
 
     (9) dimension -> expression COLON expression .
     (42) expression -> expression . OR expression
@@ -15870,10 +15968,10 @@ state 266
     PLUS            shift and go to state 60
     MINUS           shift and go to state 61
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
 
 
-state 267
+state 269
 
     (26) statement -> CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE .
 
@@ -15925,7 +16023,7 @@ state 267
     NEXT            reduce using rule 26 (statement -> CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE .)
 
 
-state 268
+state 270
 
     (34) statement -> FOR ID ASSIGN expression TO expression STEP expression . statements NEXT ID
     (42) expression -> expression . OR expression
@@ -15989,10 +16087,11 @@ state 268
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -16038,10 +16137,10 @@ state 268
     DIV             shift and go to state 57
     MUL             shift and go to state 58
     N_DIV           shift and go to state 59
-    PLUS            shift and go to state 129
-    MINUS           shift and go to state 130
+    PLUS            shift and go to state 130
+    MINUS           shift and go to state 131
     CONNECT         shift and go to state 62
-    DOT             shift and go to state 119
+    DOT             shift and go to state 120
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -16078,17 +16177,17 @@ state 268
     INTEGER         shift and go to state 39
 
     expression                     shift and go to state 7
-    statements                     shift and go to state 278
+    statements                     shift and go to state 280
     statement                      shift and go to state 2
 
-state 269
+state 271
 
     (35) statement -> FOR ID ASSIGN expression TO expression statements NEXT . ID
 
-    ID              shift and go to state 279
+    ID              shift and go to state 281
 
 
-state 270
+state 272
 
     (75) declare_parameter -> ID COLON ARRAY OF ID .
 
@@ -16096,21 +16195,21 @@ state 270
     COMMA           reduce using rule 75 (declare_parameter -> ID COLON ARRAY OF ID .)
 
 
-state 271
+state 273
 
     (76) declare_parameter -> BYREF ID COLON ARRAY OF . ID
 
-    ID              shift and go to state 280
+    ID              shift and go to state 282
 
 
-state 272
+state 274
 
     (77) declare_parameter -> BYVAL ID COLON ARRAY OF . ID
 
-    ID              shift and go to state 281
+    ID              shift and go to state 283
 
 
-state 273
+state 275
 
     (84) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements . ENDFUNCTION
     (1) statements -> statements . statement
@@ -16157,10 +16256,11 @@ state 273
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -16194,7 +16294,7 @@ state 273
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDFUNCTION     shift and go to state 282
+    ENDFUNCTION     shift and go to state 284
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -16235,7 +16335,7 @@ state 273
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 274
+state 276
 
     (85) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements . ENDFUNCTION
     (1) statements -> statements . statement
@@ -16282,10 +16382,11 @@ state 274
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -16319,7 +16420,7 @@ state 274
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDFUNCTION     shift and go to state 283
+    ENDFUNCTION     shift and go to state 285
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -16360,14 +16461,14 @@ state 274
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 275
+state 277
 
     (88) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF . ID statements ENDFUNCTION
 
-    ID              shift and go to state 284
+    ID              shift and go to state 286
 
 
-state 276
+state 278
 
     (89) statement -> FUNCTION ID RETURNS ARRAY OF ID statements ENDFUNCTION .
 
@@ -16419,7 +16520,7 @@ state 276
     NEXT            reduce using rule 89 (statement -> FUNCTION ID RETURNS ARRAY OF ID statements ENDFUNCTION .)
 
 
-state 277
+state 279
 
     (6) statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID .
 
@@ -16471,7 +16572,7 @@ state 277
     NEXT            reduce using rule 6 (statement -> DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID .)
 
 
-state 278
+state 280
 
     (34) statement -> FOR ID ASSIGN expression TO expression STEP expression statements . NEXT ID
     (1) statements -> statements . statement
@@ -16518,10 +16619,11 @@ state 278
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -16555,7 +16657,7 @@ state 278
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    NEXT            shift and go to state 285
+    NEXT            shift and go to state 287
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -16596,7 +16698,7 @@ state 278
     expression                     shift and go to state 7
     statement                      shift and go to state 40
 
-state 279
+state 281
 
     (35) statement -> FOR ID ASSIGN expression TO expression statements NEXT ID .
 
@@ -16648,7 +16750,7 @@ state 279
     NEXT            reduce using rule 35 (statement -> FOR ID ASSIGN expression TO expression statements NEXT ID .)
 
 
-state 280
+state 282
 
     (76) declare_parameter -> BYREF ID COLON ARRAY OF ID .
 
@@ -16656,7 +16758,7 @@ state 280
     COMMA           reduce using rule 76 (declare_parameter -> BYREF ID COLON ARRAY OF ID .)
 
 
-state 281
+state 283
 
     (77) declare_parameter -> BYVAL ID COLON ARRAY OF ID .
 
@@ -16664,7 +16766,7 @@ state 281
     COMMA           reduce using rule 77 (declare_parameter -> BYVAL ID COLON ARRAY OF ID .)
 
 
-state 282
+state 284
 
     (84) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION .
 
@@ -16716,7 +16818,7 @@ state 282
     NEXT            reduce using rule 84 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION .)
 
 
-state 283
+state 285
 
     (85) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION .
 
@@ -16768,7 +16870,7 @@ state 283
     NEXT            reduce using rule 85 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION .)
 
 
-state 284
+state 286
 
     (88) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID . statements ENDFUNCTION
     (1) statements -> . statements statement
@@ -16816,10 +16918,11 @@ state 284
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -16890,18 +16993,18 @@ state 284
     REAL            shift and go to state 38
     INTEGER         shift and go to state 39
 
-    statements                     shift and go to state 286
+    statements                     shift and go to state 288
     statement                      shift and go to state 2
     expression                     shift and go to state 7
 
-state 285
+state 287
 
     (34) statement -> FOR ID ASSIGN expression TO expression STEP expression statements NEXT . ID
 
-    ID              shift and go to state 287
+    ID              shift and go to state 289
 
 
-state 286
+state 288
 
     (88) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements . ENDFUNCTION
     (1) statements -> statements . statement
@@ -16948,10 +17051,11 @@ state 286
     (104) statement -> . expression DOT statement
     (105) statement -> . TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN
     (108) statement -> . TYPE ID EQUAL POINTER ID
-    (109) statement -> . PASS
-    (110) statement -> . IMPORT expression
-    (111) statement -> . PRIVATE statement
-    (112) statement -> . PUBLIC statement
+    (109) statement -> . ID ASSIGN POINTER ID
+    (110) statement -> . PASS
+    (111) statement -> . IMPORT expression
+    (112) statement -> . PRIVATE statement
+    (113) statement -> . PUBLIC statement
     (14) expression -> . LEFT_SQUARE array_items RIGHT_SQUARE
     (15) expression -> . LEFT_SQUARE RIGHT_SQUARE
     (40) expression -> . ID
@@ -16985,7 +17089,7 @@ state 286
     (91) expression -> . ID LEFT_PAREN RIGHT_PAREN
     (103) expression -> . expression DOT expression
 
-    ENDFUNCTION     shift and go to state 288
+    ENDFUNCTION     shift and go to state 290
     DELETE          shift and go to state 3
     DECLARE         shift and go to state 5
     CONSTANT        shift and go to state 6
@@ -17026,7 +17130,7 @@ state 286
     statement                      shift and go to state 40
     expression                     shift and go to state 7
 
-state 287
+state 289
 
     (34) statement -> FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID .
 
@@ -17078,7 +17182,7 @@ state 287
     NEXT            reduce using rule 34 (statement -> FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID .)
 
 
-state 288
+state 290
 
     (88) statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .
 
@@ -17121,3 +17225,25 @@ state 288
     $end            reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
     UNTIL           reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
     ENDWHILE        reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
+    ENDPROCEDURE    reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
+    ENDTYPE         reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
+    ELSE            reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
+    ENDIF           reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
+    ENDFUNCTION     reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
+    SEMICOLON       reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
+    NEXT            reduce using rule 88 (statement -> FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for LEFT_SQUARE in state 4 resolved as shift
+WARNING: shift/reduce conflict for LEFT_PAREN in state 4 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 7 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 7 resolved as shift
+WARNING: shift/reduce conflict for LEFT_SQUARE in state 66 resolved as shift
+WARNING: shift/reduce conflict for LEFT_PAREN in state 66 resolved as shift
+WARNING: shift/reduce conflict for LEFT_SQUARE in state 67 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 69 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 69 resolved as shift
+WARNING: shift/reduce conflict for LEFT_PAREN in state 77 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 79 resolved as shift
