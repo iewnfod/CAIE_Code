@@ -24,6 +24,10 @@
     ```
     Abs(x : REAL) RETURNS REAL
     ```
+* Sum 为一个数组求和
+    ```
+    Sum(BYREF arr : ARRAY, BYVAL start : INTEGER, end : INTEGER) RETURNS REAL
+    ```
 * PI π
 
 ## [Sort](./sort.cpc)

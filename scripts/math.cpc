@@ -40,6 +40,14 @@ FUNCTION Abs(x : REAL) RETURNS REAL
     ENDIF
 ENDFUNCTION
 
+FUNCTION Sum(BYREF arr : ARRAY, BYVAL start : INTEGER, end : INTEGER) RETURNS REAL
+    DECLARE sum : REAL
+    FOR i <- start TO end
+        sum <- sum + arr[i]
+    NEXT i
+    RETURN sum
+ENDFUNCTION
+
 // π
 DECLARE temp : REAL
 temp <- PYTHON("from math import pi; _result=pi")
