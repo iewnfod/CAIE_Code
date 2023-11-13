@@ -464,7 +464,11 @@ def p_enumerate_items(p):
 
 def p_pointer_type_statement(p):
     """statement : TYPE ID EQUAL POINTER ID"""
-    p[0] = AST.Pointer(p[2], p[5], p=p)
+    p[0] = AST.TypePointerStatement(p[2], p[5], p=p)
+
+def p_pointer_statement(p):
+    """statement : ID ASSIGN POINTER ID"""
+    p[0] = AST.PointerStatement(p[1], p[4], p=p)
 
 def p_pass_statement(p):
     """statement : PASS"""

@@ -90,7 +90,7 @@ class For(AST_Node):
 
             # 核对id是否相同
             if self.id != self.next_id:
-                print(f'Expect `{self.id}` for next id, but found `{self.next_id}`')
+                add_error_message(f'Expect `{self.id}` for next id, but found `{self.next_id}`', self)
                 return
 
             # 创建 index 变量
@@ -106,7 +106,7 @@ class For(AST_Node):
             stack.remove_variable(self.id)
 
         else:
-            print(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`')
+            add_error_message(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`', self)
 
 class Case(AST_Node):
     def __init__(self, id, cases, *args, **kwargs):

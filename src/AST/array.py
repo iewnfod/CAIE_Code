@@ -86,6 +86,9 @@ class Array_assign(AST_Node):
     def set_value(self, arr, index, value):
         if len(index) == 1:
             index = index[0]
+            if index not in arr:
+                add_error_message(f'Array index `{index}` out of bounds', self)
+                return
             try:
                 arr[index][0].set_value(value[0])
             except:
@@ -139,7 +142,7 @@ class Array_get(AST_Node):
             if index[0] in arr.keys():
                 return arr[index[0]][0]
             else:
-                add_error_message(f'List index `{index[0]}` out of range', self)
+                add_error_message(f'Array index `{index[0]}` out of bounds', self)
         else:
             return self.get_value(arr[index[0]][0][0], index[1:])
 

@@ -140,15 +140,29 @@ class Composite_type_statement(AST_Node):
         # 将空间放回子空间列表
         stack.pop_subspace()
 
-class Pointer(AST_Node):
+class TypePointerStatement(AST_Node):
     def __init__(self, new_id, old_id, *args, **kwargs):
-        self.type = 'POINTER'
+        self.type = 'TYPE_POINTER_STATEMENT'
         self.new_id = new_id
         self.old_id = old_id
         super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level+1) + str(self.new_id) + '\n' + LEVEL_STR * (level+1) + str(self.old_id)
+        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level+1) + str(self.old_id) + ' ' + str(self.new_id)
 
     def exe(self):
         stack.add_struct(self.new_id, stack.structs[self.old_id])
+
+class PointerStatement(AST_Node):
+    def __init__(self, new_id, id, *args, **kwargs):
+        self.type = 'POINTER_STATEMENT'
+        self.id = id
+        self.new_id = new_id
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + LEVEL_STR * (level+1) + str(self.id) + ' ' + str(self.new_id)
+
+    def exe(self):
+        v = stack.get_variable(self.id)
+        stack.force_set_variable(self.new_id, v, v[1])

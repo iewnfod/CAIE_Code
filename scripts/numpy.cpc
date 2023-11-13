@@ -1,0 +1,28 @@
+FUNCTION ArrayOne(BYVAL row : INTEGER, col : INTEGER) RETURNS ARRAY
+    DECLARE arr : ARRAY[1:row,1:col] OF INTEGER
+    FOR i <- 1 TO row
+        FOR j <- 1 TO col
+            arr[i,j] <- 1
+        NEXT j
+    NEXT i
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION ArrayArrange(BYVAL low : INTEGER, high: INTEGER, div : REAL) RETURNS ARRAY
+    DECLARE arr : ARRAY[1:INT(high/div)] OF REAL
+    FOR i <- 1 TO INT(high/div)
+        arr[i] <- low + (i-1)*div
+    NEXT i
+    RETURN arr
+ENDFUNCTION
+
+FUNCTION ArrayLinSpace(BYVAL low : INTEGER, high: INTEGER, num : INTEGER) RETURNS ARRAY
+    DECLARE arr : ARRAY[1:num] OF REAL
+    DECLARE div : REAL
+    div <- (high-low)/(num-1)
+    FOR i <- 1 TO num
+        arr[i] <- low + (i-1)*div
+    NEXT i
+    RETURN arr
+ENDFUNCTION
+
