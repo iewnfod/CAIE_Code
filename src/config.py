@@ -75,3 +75,9 @@ class Config:
 			return self.config[opt_name].val
 		else:
 			self.err_config(opt_name)
+
+	def get_default_config(self, opt_name):
+		if opt_name in self.config:
+			return self.config[opt_name].default_val
+		else:
+			self.err_config(opt_name)
