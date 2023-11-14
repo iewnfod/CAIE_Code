@@ -45,8 +45,13 @@ class Config:
 		for key, val in self.config.items():
 			d[key] = val.val
 
+		sd = sorted(d, key=lambda x:x[0])
+		result = {}
+		for key in sd:
+			result[key] = d[key]
+
 		with open(self.config_path, 'w') as f:
-			f.write(json.dumps(d, indent=4))
+			f.write(json.dumps(result, indent=4))
 
 	def update_config(self, opt_name, value):
 		if opt_name in self.config:
