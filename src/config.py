@@ -29,7 +29,7 @@ class Config:
 			'rl': _Config('recursion-limit', 1000, recursive_limit),
 			'dev.simulate-update': _Config('dev.simulate-update', False, simulate_update),
 			'auto-update': _Config('auto-update', True, auto_update),
-			'last-update': _Config('last-update', 0, last_update),
+			'last-auto-check': _Config('last-auto-check', 0, last_auto_check),
 			'interval-update': _Config('interval-update', 86400, interval_update)
 		}
 		# 如果已经存在配置文件，那就加载配置文件

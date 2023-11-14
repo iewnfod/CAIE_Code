@@ -186,10 +186,10 @@ def main(input_=None, output_=None, addition_file_name=None):
 
     #自动更新
     from src.global_var import config
-    if  config.get_config('auto-update') and not config.get_config('dev') and update.update_expired():
+    if config.get_config('dev.simulate-update') or (config.get_config('auto-update') and not config.get_config('dev') and update.update_expired()):
         from src.update import update
         update()
-        config.update_config('last-update', time.time())
+        config.update_config('last-auto-check', time.time())
     
     # 预加载文件
     preload_scripts()
