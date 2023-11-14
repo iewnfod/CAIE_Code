@@ -32,6 +32,8 @@ def check_update(repo: git.Repo, remote: git.Remote):
     # 比较时间戳
     if local_commit_time < remote_commit_time:
         return True
+    elif config.get_config('simulate'):
+        return True
     elif local_commit_time > remote_commit_time:
         print(f"Good! Good! You are faster than \033[1m{get_current_branch()}\033[0m branch!")
         print("At", *get_commit_hash_msg())

@@ -26,7 +26,9 @@ class Config:
 			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', remote_update),
 			'dev': _Config('dev', False, dev_mod),
 			'branch': _Config('branch', 'stable', branch_update),
-			'rl': _Config('recursion-limit', 1000, recursive_limit)
+			'rl': _Config('recursion-limit', 1000, recursive_limit),
+			'simulate': _Config('simulate', False, simulate_update),
+			'auto-update': _Config('auto-update', True, auto_update)
 		}
 		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):
