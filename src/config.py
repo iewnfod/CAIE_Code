@@ -33,20 +33,20 @@ class Config:
 		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):
 			with open(self.config_path, 'r') as f:
-				dict = json.loads(f.read())
-				for key, val in dict.items():
+				d = json.loads(f.read())
+				for key, val in d.items():
 					if key in self.config:
 						self.config[key]._init_update(val)
 
 		self.write_config()
 
 	def write_config(self):
-		dict = {}
+		d = {}
 		for key, val in self.config.items():
-			dict[key] = val.val
+			d[key] = val.val
 
 		with open(self.config_path, 'w') as f:
-			f.write(json.dumps(dict))
+			f.write(json.dumps(d, indent=4))
 
 	def update_config(self, opt_name, value):
 		if opt_name in self.config:
