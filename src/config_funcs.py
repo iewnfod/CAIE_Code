@@ -50,3 +50,7 @@ simulate_update = DictConfig({'true': True, 'false': False})
 auto_update = DictConfig({'true': True, 'false': False})
 
 recursive_limit = TypeConfig(int)
+
+last_update = TypeConfig(int)
+
+interval_update = TypeConfig(int)

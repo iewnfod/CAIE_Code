@@ -3,6 +3,7 @@ from .animation import new_animation
 import os
 import git
 import requests
+import time
 
 VERSION = ''
 
@@ -10,6 +11,13 @@ super_fast = False
 
 with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
+
+def update_expired():
+    from .global_var import config
+    if time.time() - config.get_config('last-update') > config.get_config('interval-update'):
+        return True
+    else:
+        return False
 
 def check_github_connectivity():
     url = "https://github.com/"
