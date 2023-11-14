@@ -89,12 +89,19 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 
   > In a developer mod, your remote will not be changed by config and the branch will be locked in `dev`.
 
-- `dev`
-  - `true`: Enable the developer mode.
-  - `false`: Disable the developer mode.
-
 - `recursion-limit(rl)`
     all integer number as the recursion depth limit of the interpreter.
+    
+- `dev`
+    
+    - `true`: Enable the developer mode.
+    - `false`: Disable the developer mode.
+    
+- Developer Options
+
+    - `dev.simulate-update`
+      - `true`: Enable simulation updates
+      - `false`: Disable simulation updates
 
 ## FAQs
 
@@ -389,11 +396,11 @@ The following items give the `DATATYPE`, its description, and the default value 
         ```
     * records(classes)
     > In this case, the program will not check the data types when assigning a variable of this type to another. The program will assign the other variable as the *reference* for this one.
-    > ```
-    > TYPE <identifier>
-           <statements>
+        ```
+        TYPE <identifier>
+            <statements>
         ENDTYPE
-         ```
+        ```
 ### Special Syntax of **CPC** Interpreter
 * delete a variable or constant on RAM
         ```

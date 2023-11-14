@@ -2,6 +2,8 @@ from .history import HOME_PATH
 from .animation import new_animation
 import os
 import git
+import requests
+from time import time
 
 VERSION = ''
 
@@ -10,6 +12,21 @@ super_fast = False
 with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
 
+def update_expired():
+    from .global_var import config
+    if time() - config.get_config('last-auto-check') > config.get_config('interval-update'):
+        return True
+    else:
+        return False
+
+def check_github_connectivity():
+    url = "https://github.com/"
+    try:
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        return True
+    except requests.RequestException:
+        return False
 
 def check_update(repo: git.Repo, remote: git.Remote):
     remote.fetch()
@@ -22,6 +39,9 @@ def check_update(repo: git.Repo, remote: git.Remote):
     remote_commit_time = remote_branch.commit.committed_datetime
     # 比较时间戳
     if local_commit_time < remote_commit_time:
+        return True
+    elif config.get_config('dev.simulate-update') and config.get_config('dev'):
+        print("You are using simulate update, we will simulate an update.")
         return True
     elif local_commit_time > remote_commit_time:
         print(f"Good! Good! You are faster than \033[1m{get_current_branch()}\033[0m branch!")
@@ -57,6 +77,12 @@ def get_commit_hash_msg():
 def update():
     from .global_var import config
     git_remote = config.get_config('remote')
+    # 检查是否能连接到 GitHub
+    if git_remote == config.get_default_config('remote') and not check_github_connectivity():
+        print('Failed to connect to GitHub, switch to Gitee as remote.')
+        config.update_config('remote', 'gitee')
+        git_remote = config.get_config('remote')
+    # 正式开始更新
     repo = git.Repo(HOME_PATH)
     remote = repo.remote()
     if config.get_config('dev'):
