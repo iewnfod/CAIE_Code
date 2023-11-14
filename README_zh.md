@@ -83,7 +83,7 @@ cpc [file_paths] [options]
   - `true`：启用自动更新。
   - `false`：关闭自动更新。
 
-- `last-auto-check`
+- `last-auto-update`
     接受所有非负实数，由系统自动更新。
 
 - `interval-update`

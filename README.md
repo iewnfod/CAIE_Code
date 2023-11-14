@@ -96,7 +96,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
   - `true`：Enable auto update.
   - `false`：Disable auto update.
 
-- `last-auto-check`
+- `last-auto-update`
     All non-negative real numbers are accepted and automatically updated by the system.
 
 - `interval-update`
