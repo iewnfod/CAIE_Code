@@ -20,6 +20,7 @@ from src.history import HOME_PATH
 from src.quit import quit
 from src.line_commands import run_command
 from src.update import update
+from src.update import update_expired
 
 import sys
 import os
@@ -186,7 +187,7 @@ def main(input_=None, output_=None, addition_file_name=None):
         file_paths.add(addition_file_name)
 
     #自动更新
-    if config.get_config('dev.simulate-update') or (config.get_config('auto-update') and not config.get_config('dev') and update.update_expired()):
+    if config.get_config('dev.simulate-update') or (config.get_config('auto-update') and not config.get_config('dev') and update_expired()):
         update()
         config.update_config('last-auto-check', str(time()))
     
