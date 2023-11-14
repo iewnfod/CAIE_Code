@@ -189,7 +189,7 @@ def main(input_=None, output_=None, addition_file_name=None):
     if config.get_config('dev.simulate-update') or (config.get_config('auto-update') and not config.get_config('dev') and update.update_expired()):
         from src.update import update
         update()
-        config.update_config('last-auto-check', time.time())
+        config.update_config('last-auto-check', time())
     
     # 预加载文件
     preload_scripts()
