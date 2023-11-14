@@ -111,8 +111,10 @@ def migrate_files(directory):
 
 def list_configs():
     from .global_var import config
+    configs = sorted(config.config, key=lambda x : x[0])
     result = {}
-    for key, val in config.config.items():
+    for key in configs:
+        val = config.config[key]
         if val.name != key:
             left = f'{val.name}({key})'
         else:

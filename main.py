@@ -184,6 +184,12 @@ def main(input_=None, output_=None, addition_file_name=None):
     if addition_file_name:
         file_paths.add(addition_file_name)
 
+    #自动更新
+    from src.global_var import config
+    if  config.get_config('auto-update') and not config.get_config('dev'):
+        from src.update import update
+        update()
+    
     # 预加载文件
     preload_scripts()
 

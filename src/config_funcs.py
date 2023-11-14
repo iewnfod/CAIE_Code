@@ -45,4 +45,8 @@ dev_mod = DictConfig({'true': True, 'false': False})
 
 branch_update = SetConfig({'stable', 'nightly', 'dev'})
 
+simulate_update = DictConfig({'true': True, 'false': False})
+
+auto_update = DictConfig({'true': True, 'false': False})
+
 recursive_limit = TypeConfig(int)
