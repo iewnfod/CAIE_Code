@@ -27,7 +27,7 @@ class Config:
 			'dev': _Config('dev', False, dev_mod),
 			'branch': _Config('branch', 'stable', branch_update),
 			'rl': _Config('recursion-limit', 1000, recursive_limit),
-			'simulate': _Config('simulate', False, simulate_update),
+			'dev.simulate-update': _Config('dev.simulate-update', False, simulate_update),
 			'auto-update': _Config('auto-update', True, auto_update)
 		}
 		# 如果已经存在配置文件，那就加载配置文件

@@ -78,12 +78,23 @@ cpc [file_paths] [options]
 
   > 在开发者模式中，您的远程配置不会被更改，分支将被锁定在 `dev`。
 
-- `dev`
-  - `true`： 启用开发者模式。
-  - `false`： 关闭开发者模式。
+- `auto-update`
+  - `true`：启用自动更新。
+  - `false`：关闭自动更新。
 
 - `recursion-limit(rl)`
     接受所有整数，作为解释器的递归深度限制。
+
+- `dev`
+
+  - `true`： 启用开发者模式。
+  - `false`： 关闭开发者模式。
+
+- 开发者选项
+
+  - `dev.simulate-update`
+    - `true`: 开启模拟更新
+    - `false`: 关闭模拟更新
 
 ### 常见问题
 
