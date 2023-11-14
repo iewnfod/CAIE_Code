@@ -102,7 +102,7 @@
     Import(target : STRING) RETURNS ImportObj
     ```
 
-## [Numpy](./numpy.cpc)
+## [Array](./array.cpc)
 * ArrayOne sets the contents of an array of custom length and width to 1
     ```
     ArrayOne(BYVAL row : INTEGER, col : INTEGER) RETURNS ARRAY

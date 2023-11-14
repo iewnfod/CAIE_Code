@@ -102,7 +102,7 @@
     Import(target : STRING) RETURNS ImportObj
     ```
 
-## [Numpy](./numpy.cpc)
+## [Array](./array.cpc)
 * ArrayOne设置一个自定义长宽的数组内容为1
   ```
   ArrayOne(BYVAL row : INTEGER, col : INTEGER) RETURNS ARRAY
