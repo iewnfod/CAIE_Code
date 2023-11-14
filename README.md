@@ -396,11 +396,11 @@ The following items give the `DATATYPE`, its description, and the default value 
         ```
     * records(classes)
     > In this case, the program will not check the data types when assigning a variable of this type to another. The program will assign the other variable as the *reference* for this one.
-    > ```
-    > TYPE <identifier>
-           <statements>
+        ```
+        TYPE <identifier>
+            <statements>
         ENDTYPE
-         ```
+        ```
 ### Special Syntax of **CPC** Interpreter
 * delete a variable or constant on RAM
         ```
