@@ -51,6 +51,6 @@ auto_update = DictConfig({'true': True, 'false': False})
 
 recursive_limit = TypeConfig(int)
 
-last_auto_check = TypeConfig(int)
+last_auto_check = TypeConfig(float)
 
 interval_update = TypeConfig(int)
