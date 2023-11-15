@@ -4,9 +4,9 @@ DECLARE t : REAL
 test_num <- 370
 
 FUNCTION aux(n:INTEGER, acc1:INTEGER, acc2:INTEGER) RETURNS INTEGER
-    IF n = 1 THEN RETURN acc1 ENDIF
-    IF n = 2 THEN RETURN acc2 ENDIF
-    RETURN aux(n - 1, acc2, acc1 + acc2)
+    IF n = 1 THEN RETURN acc1 ENDIF
+    IF n = 2 THEN RETURN acc2 ENDIF
+    RETURN aux(n - 1, acc2, acc1 + acc2)
 ENDFUNCTION
 
 t <- Time()
