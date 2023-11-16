@@ -4,6 +4,8 @@ from ..global_var import *
 from .var import *
 from .array import *
 from ..stack import Space
+from ..data_types import base
+from .function import Call_function
 
 class Enumerate_type(AST_Node):
     def __init__(self, id, enumerate_items, *args, **kwargs):
@@ -51,8 +53,9 @@ class Composite_type(AST_Node):
     def exe(self):
         that = self
 
-        class t:
-            def __init__(self, name):
+        class t(base):
+            def __init__(self, name, *args, **kwargs):
+                super().__init__(*args, **kwargs)
                 self.name = name
                 self.type = that.id
                 self.body = that.body
@@ -91,6 +94,87 @@ class Composite_type(AST_Node):
                     add_stack_error_message(f'Cannot assign `{value.type}` to `{self.type}`')
 
         stack.add_struct(self.id, t)
+
+class Class(AST_Node):
+    def __init__(self, id, body, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'CLASS'
+        self.id = id
+        self.body = body
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + self.id + '\n' + self.body.get_tree(level+1)
+
+    def exe(self):
+        that = self
+
+        class c(base):
+            def __init__(self, name, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                self.name = name
+                self.type = that.id
+                self.body = that.body
+                self.is_struct = True
+                self.space = Space(self.type, {'SELF': (self, False)}, {})
+                stack.push_subspace(self.space)
+                self.body.exe()
+                stack.pop_subspace()
+
+            def load_init(self, param):
+                stack.push_subspace(self.space)
+                Call_function('NEW', param).exe()
+                stack.pop_subspace()
+
+            def __getitem__(self, key):
+                if key == 1:
+                    return self.type
+                else:
+                    return self
+
+            def __str__(self):
+                space = self.space
+                s = self.type
+                if space.variables:
+                    str_variables = {}
+                    for key, value in space.variables.items():
+                        if key == 'SELF':
+                            str_variables[str(key)] = 'SELF'
+                        else:
+                            str_variables[str(key)] = str(value[0])
+                    s += f' {str_variables}'
+                if space.functions:
+                    str_functions = {}
+                    for key, value in space.functions.items():
+                        str_functions[str(key)] = str(value)
+                    s += f' {str_functions}'
+                return s
+
+            def set_value(self, value):
+                # 将对方的 subspace 设置为自己的
+                if value.type == self.type:
+                    self.space = value.space
+                else:
+                    add_stack_error_message(f'Cannot assign `{value.type}` to `{self.type}`')
+
+        stack.add_struct(self.id, c)
+
+class Class_expression(AST_Node):
+    def __init__(self, id, param, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'CLASS_EXPRESSION'
+        self.id = id
+        self.param = param
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + self.id + '\n' + self.param.get_tree(level+1)
+
+    def exe(self):
+        s = stack.structs[self.id](None)
+        try:
+            s.load_init(self.param)
+        except:
+            add_error_message(f'`{self.id}` is not a class that can new')
+        return s
 
 class Composite_type_expression(AST_Node):
     def __init__(self, exp1, exp2, *args, **kwargs):

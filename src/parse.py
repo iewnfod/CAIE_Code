@@ -359,7 +359,9 @@ def p_parameters(p):
 
 def p_procedure_statement(p):
     """statement : PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-            | PROCEDURE ID statements ENDPROCEDURE"""
+            | PROCEDURE NEW LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
+            | PROCEDURE ID statements ENDPROCEDURE
+            | PROCEDURE NEW statements ENDPROCEDURE"""
     if len(p) == 5:
         p[0] = AST.Function(p[2], None, p[3], p=p)
     else:
@@ -491,3 +493,15 @@ def p_new_assign_statement(p):
 
 # def p_public_statement(p):
 #     """statement : PUBLIC statement"""
+
+def p_class_statement(p):
+    """statement : CLASS ID statements ENDCLASS"""
+    p[0] = AST.Class(p[2], p[3], p=p)
+
+def p_class_expression(p):
+    """expression : NEW ID
+            | NEW ID LEFT_PAREN parameters RIGHT_PAREN"""
+    if len(p) == 3:
+        p[0] = AST.Class_expression(p[2], None, p=p)
+    else:
+        p[0] = AST.Class_expression(p[2], p[4], p=p)

@@ -1,0 +1,11 @@
+CLASS Pet
+	DECLARE Name : STRING
+	PROCEDURE NEW(GivenName : STRING)
+		Name <- GivenName
+	ENDPROCEDURE
+ENDCLASS
+
+DECLARE a : Pet
+a <- NEW Pet("Hello")
+
+OUTPUT a
