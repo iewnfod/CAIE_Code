@@ -28,20 +28,20 @@ IF number < 10 THEN
   OUTPUT "Number is less than 10"
 ENDIF
 
-// FUNCTION add_num_fn(BYVAl a : REAL, b : REAL) RETURNS REAL
-//   DECLARE result : REAL
-//   result <- a + b
-//   RETURN result
-// ENDFUNCTION
+FUNCTION add_num_fn(BYVAL a : REAL, b : REAL) RETURNS REAL
+  DECLARE result : REAL
+  result <- a + b
+  RETURN result
+ENDFUNCTION
 
-// PROCEDURE add_num_pro(BYVAl a : REAL, b : REAL)
-//   DECLARE result : REAL
-//   result <- a + b
-//   OUTPUT result
-// ENDPROCEDURE
+PROCEDURE add_num_pro(BYVAL a : REAL, b : REAL)
+  DECLARE result : REAL
+  result <- a + b
+  OUTPUT result
+ENDPROCEDURE
 
-// OUTPUT add_num_fn(1,2.3)
-// CALL add_num_pro(1,2.3)
+OUTPUT add_num_fn(1,2.3)
+CALL add_num_pro(1,2.3)
 
 OPENFILE "test/test.txt" FOR WRITE
 WRITEFILE "test/test.txt", "Hello World"
