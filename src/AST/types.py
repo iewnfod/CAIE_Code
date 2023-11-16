@@ -166,3 +166,15 @@ class PointerStatement(AST_Node):
     def exe(self):
         v = stack.get_variable(self.id)
         stack.force_set_variable(self.new_id, v, v[1])
+
+class Pointer(AST_Node):
+    def __init__(self, item, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'POINTER'
+        self.item = item
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.item.get_tree(level+1)
+
+    def exe(self):
+        pass

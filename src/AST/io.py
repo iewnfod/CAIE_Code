@@ -33,16 +33,16 @@ class Output_expression(AST_Node):
         self.expressions.append(expression)
 
     def exe(self):
-        result = ''
+        result = []
         for i in self.expressions:
             t = i.exe()
             if t[1] == 'ARRAY':
-                result += str(t)
+                result.append(str(t))
             elif t[1] == 'BOOLEAN':
-                result += {True: 'TRUE', False: 'FALSE'}[t[0]]
+                result.append({True: 'TRUE', False: 'FALSE'}[t[0]])
             else:
-                result += str(t[0])
-        return result
+                result.append(str(t[0]))
+        return ' '.join(result)
 
 class Input(AST_Node):
     def __init__(self, id, *args, **kwargs):

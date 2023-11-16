@@ -143,36 +143,36 @@ cpc -u
 * Python 版本： PyPy 3.9.16
 
 ### 基础测试
-* 赋值： 1000w/s
+* 赋值： 1200w/s
 ```
 DECLARE a : INTEGER
+FOR i <- 1 TO 12000000
+    a <- i
+NEXT i
+```
+* 显式转换+赋值： 760w/s
+```
+DECLARE a : STRING
+FOR i <- 1 TO 7600000
+    a <- STRING(i)
+NEXT i
+```
+* 隐式转换+赋值： 1000w/s
+```
+DECLARE a : STRING
 FOR i <- 1 TO 10000000
     a <- i
 NEXT i
 ```
-* 显式转换+赋值： 740w/s
+* 输出： 65w/s
 ```
-DECLARE a : STRING
-FOR i <- 1 TO 7400000
-    a <- STRING(i)
-NEXT i
-```
-* 隐式转换+赋值： 920w/s
-```
-DECLARE a : STRING
-FOR i <- 1 TO 9200000
-    a <- i
-NEXT i
-```
-* 输出： 72w/s
-```
-FOR i <- 1 TO 720000
+FOR i <- 1 TO 650000
     OUTPUT i
 NEXT i
 ```
 
 ### 常见运算测试
-* [随机生成10w数据+希尔排序](test/sort_test.cpc)： 2.5s 左右
+* [随机生成10w数据+希尔排序](test/sort_test.cpc)：3.5s 左右
 
 
 ## 标准
@@ -276,7 +276,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-        
+
         IF <condition> THEN
             <statements>
         ELSE
@@ -317,7 +317,7 @@ NEXT i
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-        
+
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -325,7 +325,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier>
-        
+
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -334,7 +334,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-        
+
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -342,7 +342,7 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-        
+
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。

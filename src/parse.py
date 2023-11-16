@@ -444,9 +444,9 @@ def p_composite_type_expression(p):
     """expression : expression DOT expression"""
     p[0] = AST.Composite_type_expression(p[1], p[3])
 
-def p_composite_type_statement(p):
-    """statement : expression DOT statement"""
-    p[0] = AST.Composite_type_statement(p[1], p[3])
+# def p_composite_type_statement(p):
+#     """statement : expression DOT statement"""
+#     p[0] = AST.Composite_type_statement(p[1], p[3])
 
 def p_enumerate_type_statement(p):
     """statement : TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN"""
@@ -464,6 +464,7 @@ def p_enumerate_items(p):
 
 def p_pointer_expression(p):
     """expression : POINTER expression"""
+    p[0] = AST.Pointer(p[2], p=p)
 
 def p_pointer_type_statement(p):
     """statement : TYPE ID EQUAL POINTER ID"""
