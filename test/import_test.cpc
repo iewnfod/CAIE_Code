@@ -1,3 +1,5 @@
-DECLARE test_string : STRING
-
-test_string <- "Test String"
+FUNCTION add_num_fn(BYVAL a : REAL, b : REAL) RETURNS REAL
+    DECLARE result : REAL
+    result <- a + b
+    RETURN result
+ENDFUNCTION

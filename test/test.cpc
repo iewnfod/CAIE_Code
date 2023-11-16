@@ -43,6 +43,9 @@ ENDPROCEDURE
 OUTPUT add_num_fn(1,2.3)
 CALL add_num_pro(1,2.3)
 
+CONSTANT import_test = Import("test/import_test.cpc")
+OUTPUT import_test.add_num_fn(1,8)
+
 OPENFILE "test/test.txt" FOR WRITE
 WRITEFILE "test/test.txt", "Hello World"
 CLOSEFILE "test/test.txt"
