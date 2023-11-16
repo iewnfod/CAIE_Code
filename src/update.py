@@ -14,7 +14,7 @@ with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
 
 def update_expired():
     from .global_var import config
-    if time() - config.get_config('last-auto-check') > config.get_config('interval-update'):
+    if time() - config.get_config('last-auto-update') > config.get_config('interval-update'):
         return True
     else:
         return False

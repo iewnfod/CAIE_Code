@@ -189,8 +189,8 @@ def main(input_=None, output_=None, addition_file_name=None):
     #自动更新
     if config.get_config('dev.simulate-update') or (config.get_config('auto-update') and not config.get_config('dev') and update_expired()):
         update()
-        config.update_config('last-auto-check', str(time()))
-    
+        config.update_config('last-auto-update', str(time()))
+
     # 预加载文件
     preload_scripts()
 

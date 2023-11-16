@@ -6,9 +6,9 @@ from ..quit import *
 
 class Int_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'INTEGER_CONVERT'
         self.expression = expression
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -28,9 +28,9 @@ class Int_convert(AST_Node):
 
 class Str_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'STRING_CONVERT'
         self.expression = expression
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -50,9 +50,9 @@ class Str_convert(AST_Node):
 
 class Char_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'CHAR_CONVERT'
         self.expression = expression
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -80,9 +80,9 @@ class Char_convert(AST_Node):
 
 class Real_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'REAL_CONVERT'
         self.expression = expression
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -102,9 +102,9 @@ class Real_convert(AST_Node):
 
 class Bool_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'BOOLEAN_CONVERT'
         self.expression = expression
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
@@ -125,9 +125,9 @@ class Bool_convert(AST_Node):
 
 class Right(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'RIGHT'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -147,9 +147,9 @@ class Right(AST_Node):
 
 class Length(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'LENGTH'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -170,9 +170,9 @@ class Length(AST_Node):
 
 class Mid(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'MID'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -193,9 +193,9 @@ class Mid(AST_Node):
 
 class Lcase(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'LCASE'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -214,9 +214,9 @@ class Lcase(AST_Node):
 
 class Ucase(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'UCASE'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -236,10 +236,10 @@ class Ucase(AST_Node):
 
 class Rand(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'RAND'
         self.parameters = parameters
         self.rate = 100
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -259,9 +259,9 @@ class Rand(AST_Node):
 
 class Eof(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'EOF'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -285,9 +285,9 @@ class Eof(AST_Node):
 
 class Pow(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'POW'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -301,9 +301,9 @@ class Pow(AST_Node):
 
 class Exit(AST_Node):
     def __init__(self, parameters=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'EXIT'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -322,9 +322,9 @@ class Exit(AST_Node):
 
 class Round(AST_Node):
     def __init__(self, parameters=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'ROUND'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
@@ -343,9 +343,9 @@ class Round(AST_Node):
 
 class Python(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'PYTHON'
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)

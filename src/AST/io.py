@@ -6,9 +6,9 @@ from .data_types import *
 
 class Output(AST_Node):
     def __init__(self, value, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'OUTPUT'
         self.value = value
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.value.get_tree(level+1)
@@ -19,9 +19,9 @@ class Output(AST_Node):
 
 class Output_expression(AST_Node):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'OUTPUT_EXPRESSION'
         self.expressions = []
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         r = LEVEL_STR * level + self.type
@@ -33,22 +33,22 @@ class Output_expression(AST_Node):
         self.expressions.append(expression)
 
     def exe(self):
-        result = ''
+        result = []
         for i in self.expressions:
             t = i.exe()
             if t[1] == 'ARRAY':
-                result += str(t)
+                result.append(str(t))
             elif t[1] == 'BOOLEAN':
-                result += {True: 'TRUE', False: 'FALSE'}[t[0]]
+                result.append({True: 'TRUE', False: 'FALSE'}[t[0]])
             else:
-                result += str(t[0])
-        return result
+                result.append(str(t[0]))
+        return ' '.join(result)
 
 class Input(AST_Node):
     def __init__(self, id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'INPUT'
         self.id = id
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id)
@@ -58,10 +58,10 @@ class Input(AST_Node):
 
 class Array_input(AST_Node):
     def __init__(self, id, indexes, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'ARRAY_INPUT'
         self.id = id
         self.indexes = indexes
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)
@@ -78,9 +78,9 @@ class Array_input(AST_Node):
 
 class Raw_output(AST_Node):
     def __init__(self, expression, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'RAW_OUTPUT'
         self.expression = expression
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
