@@ -45,16 +45,26 @@ def p_delete_statement(p):
     p[0] = AST.Delete(p[2], p=p)
 
 def p_declare_statement(p):
-    """statement : DECLARE ID COLON ID"""
+    """statement : DECLARE ID COLON ID
+            | PUBLIC ID COLON ID"""
     p[0] = AST.Variable(p[2], p[4], p=p)
+
+def p_private_declare_statement(p):
+    """statement : PRIVATE ID COLON ID"""
+    p[0] = AST.PrivateVariable(p[2], p[4], p=p)
 
 def p_const_declare_statement(p):
     """statement : CONSTANT ID EQUAL expression"""
     p[0] = AST.Constant(p[2], p[4], p=p)
 
 def p_array_declare_statement(p):
-    """statement : DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID"""
+    """statement : DECLARE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID
+            | PUBLIC ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID"""
     p[0] = AST.Array(p[2], p[6], p[9], p=p)
+
+def p_private_array_declare_statement(p):
+    """statement : PRIVATE ID COLON ARRAY LEFT_SQUARE dimensions RIGHT_SQUARE OF ID"""
+    p[0] = AST.PrivateArray(p[2], p[6], p[9], p=p)
 
 def p_dimensions_expression(p):
     """dimensions : dimensions COMMA dimension
@@ -491,12 +501,6 @@ def p_import_statement(p):
 def p_new_assign_statement(p):
     """statement : expression ASSIGN expression"""
     p[0] = AST.NewAssign(p[1], p[3], p=p)
-
-# def p_private_statement(p):
-#     """statement : PRIVATE statement"""
-
-# def p_public_statement(p):
-#     """statement : PUBLIC statement"""
 
 def p_class_statement(p):
     """statement : CLASS ID statements ENDCLASS"""

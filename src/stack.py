@@ -70,7 +70,16 @@ class Stack:
     def get_variable(self, id):
         for i in self.spaces:
             if id in i.variables.keys():
-                return i.variables[id][0]
+                v = i.variables[id][0]
+                if v.current_space is None: return v
+                else:
+                    # 判断是否是在外部访问
+                    # 从后向前遍历，如果这个变量中记录的space存在于我的上面的话，那就可以
+                    for i in range(len(self.spaces)-2, 0, -1):
+                        if self.spaces[i] == v.current_space:
+                            return v
+                    else:
+                        add_stack_error_message(f'Private variable `{id}` is not accessible')
         else:
             add_stack_error_message(f'No variable or constant have id: `{id}`')
 

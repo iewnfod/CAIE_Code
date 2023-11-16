@@ -1,11 +1,18 @@
 CLASS Pet
-	DECLARE Name : STRING
+	PRIVATE Name : STRING
+	PUBLIC NameArr : ARRAY[1:10] OF STRING
+
 	PROCEDURE NEW(GivenName : STRING)
 		Name <- GivenName
 	ENDPROCEDURE
+
+	FUNCTION get_name RETURNS STRING
+		RETURN Name
+	ENDFUNCTION
 ENDCLASS
 
 DECLARE a : Pet
 a <- NEW Pet("Hello")
 
-OUTPUT a
+OUTPUT a.get_name()
+OUTPUT a.NameArr

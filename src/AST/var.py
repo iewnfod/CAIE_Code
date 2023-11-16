@@ -89,3 +89,17 @@ class NewAssign(AST_Node):
                 add_error_message(f'Cannot assign `{assign_item}` to `{target_item}`', self)
         else:
             add_error_message(f'Target item does not exist', self)
+
+class PrivateVariable(AST_Node):
+    def __init__(self, id, type, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'PRIVATE_VARIABLE'
+        self.id = id
+        self.type = type
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + self.id + '\n' + LEVEL_STR * (level+1) + self.type
+
+    def exe(self):
+        stack.new_variable(self.id, self.type)
+        stack.get_variable(self.id).current_space = stack.current_space()
