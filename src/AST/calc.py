@@ -4,10 +4,10 @@ from ..global_var import *
 
 class Op_minus(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'MINUS'
         self.left = left
         self.right = right
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
@@ -26,10 +26,10 @@ class Op_minus(AST_Node):
 
 class Op_plus(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'PLUS'
         self.left = left
         self.right = right
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
@@ -48,10 +48,10 @@ class Op_plus(AST_Node):
 
 class Op_mul(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'MUL'
         self.left = left
         self.right = right
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
@@ -70,10 +70,10 @@ class Op_mul(AST_Node):
 
 class Op_div(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'DIV'
         self.left = left
         self.right = right
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
@@ -97,10 +97,10 @@ class Op_div(AST_Node):
 
 class Op_connect(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'CONNECT'
         self.left = left
         self.right = right
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
@@ -116,10 +116,10 @@ class Op_connect(AST_Node):
 
 class Op_mod(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'MOD'
         self.left = left
         self.right = right
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
@@ -138,10 +138,10 @@ class Op_mod(AST_Node):
 
 class Op_exact_div(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'EXACT_DIV'
         self.left = left
         self.right = right
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)

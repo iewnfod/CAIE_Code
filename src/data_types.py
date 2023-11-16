@@ -14,9 +14,9 @@ class base:
 
 class INTEGER(base):
     def __init__(self, value=0, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.value = int(value)
         self.type = 'INTEGER'
-        super().__init__(*args, **kwargs)
 
     def set_value(self, new_value):
         self.value = int(new_value)
@@ -26,18 +26,18 @@ class INTEGER(base):
 
 class REAL(base):
     def __init__(self, value=.0, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.value = float(value)
         self.type = 'REAL'
-        super().__init__(*args, **kwargs)
 
     def set_value(self, new_value):
         self.value = float(new_value)
 
 class STRING(base):
     def __init__(self, value='', *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.value = str(value)
         self.type = 'STRING'
-        super().__init__(*args, **kwargs)
 
     def set_value(self, new_value):
         self.value = str(new_value)
@@ -47,9 +47,9 @@ class STRING(base):
 
 class CHAR(base):
     def __init__(self, value='', *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.set_value(value)
         self.type = 'CHAR'
-        super().__init__(*args, **kwargs)
 
     def set_value(self, new_value):
         if new_value == '':
@@ -62,6 +62,7 @@ class CHAR(base):
 
 class BOOLEAN(base):
     def __init__(self, value=False, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         if value == 'FALSE':
             self.value = False
         elif value == 'TRUE':
@@ -69,7 +70,6 @@ class BOOLEAN(base):
         else:
             self.value = bool(value)
         self.type = 'BOOLEAN'
-        super().__init__(*args, **kwargs)
 
     def __str__(self) -> str:
         return {True: 'TRUE', False: 'FALSE'}[self.value]
@@ -80,9 +80,9 @@ class BOOLEAN(base):
 import time
 class DATE(base):
     def __init__(self, value=time.strftime("%d/%m/%Y", time.localtime()), *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.day, self.month, self.year = value.split('/')
         self.type = 'DATE'
-        super().__init__(*args, **kwargs)
 
     def __str__(self):
         return f'{self.day}/{self.month}/{self.year}'
@@ -98,9 +98,9 @@ class DATE(base):
 
 class ARRAY(base):
     def __init__(self, value={}, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.value = value
         self.type = 'ARRAY'
-        super().__init__(*args, **kwargs)
 
     def get_str(self, v):
         if v[1] == 'ARRAY':
@@ -153,9 +153,9 @@ class ARRAY(base):
 from enum import Enum
 class ENUM(base):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.value = None
         self.type = 'ENUM'
-        super().__init__(*args, **kwargs)
 
     def set_value(self, value):
         self.value = Enum(self.name, value)

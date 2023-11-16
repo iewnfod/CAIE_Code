@@ -5,13 +5,13 @@ import copy
 
 class Function(AST_Node):
     def __init__(self, id, parameters, statements, returns=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'FUNCTION'
         self.id = id
         self.parameters = parameters
         self.statements = statements
         self.returns = returns
         self.arr_type = None
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         if self.parameters:
@@ -24,13 +24,13 @@ class Function(AST_Node):
 
 class ArrFunction(AST_Node):
     def __init__(self, id, parameters, arr_type, statements, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'FUNCTION'
         self.id = id
         self.parameters = parameters
         self.statements = statements
         self.returns = 'ARRAY'
         self.arr_type = arr_type
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         if self.parameters:
@@ -43,10 +43,10 @@ class ArrFunction(AST_Node):
 
 class Call_function(AST_Node):
     def __init__(self, id, parameters=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'CALL_FUNCTION'
         self.id = id
         self.parameters = parameters
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         if self.parameters:
@@ -127,11 +127,11 @@ class Call_function(AST_Node):
 
 class Declare_parameter(AST_Node):
     def __init__(self, id, type, by_ref=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'DECLARE_PARAMETER'
         self.id = id
         self.var_type = type
         self.by_ref = by_ref
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
@@ -141,12 +141,12 @@ class Declare_parameter(AST_Node):
 
 class Declare_arr_parameter(AST_Node):
     def __init__(self, id, arr_type, by_ref=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'DECLARE_ARR_PARAMETER'
         self.id = id
         self.var_type = 'ARRAY'
         self.arr_type = arr_type
         self.by_ref = by_ref
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level + 1) + str(self.var_type) + ' ' + str(self.arr_type)
@@ -156,9 +156,9 @@ class Declare_arr_parameter(AST_Node):
 
 class Declare_parameters(AST_Node):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'DECLARE_PARAMETERS'
         self.parameters = []
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type + '\n'
@@ -186,9 +186,9 @@ class Declare_parameters(AST_Node):
 
 class Parameters(AST_Node):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'PARAMETERS'
         self.parameters = []
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type + '\n'
@@ -210,9 +210,9 @@ class Parameters(AST_Node):
 
 class Return(AST_Node):
     def __init__(self, expression, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'RETURN'
         self.expression = expression
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.expression.get_tree(level+1)
