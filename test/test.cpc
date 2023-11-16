@@ -1,29 +1,54 @@
-DECLARE Result : ARRAY[1:1000,1:2] OF INTEGER
+DECLARE variable : INTEGER
+variable <- 10
+OUTPUT "Variable", variable
 
-FOR stu <- 1 TO 1000
-  Result[stu] <- [stu,RANDOM(100)]
-NEXT stu
+DECLARE array : ARRAY[1:5] OF INTEGER
+array[1] <- 1
+array[2] <- 2
+array[3] <- 3
+array[4] <- 4
+array[5] <- 5
+array <- [6, 7, 8, 9, 10]
+OUTPUT "Array", array
 
-OUTPUT Result
+DECLARE counter : INTEGER
+WHILE counter < 5 DO
+  counter <- counter + 1
+ENDWHILE
+OUTPUT "Counter", counter
 
+DECLARE i : INTEGER
+FOR i <- 1 TO 5
+  OUTPUT "i is", i
+NEXT i
 
+DECLARE number : INTEGER
+number <- 7
+IF number < 10 THEN
+  OUTPUT "Number is less than 10"
+ENDIF
 
-PROCEDURE Sort(array:ARRAY)
-  DECLARE tmp : INTEGER
-  FOR i <- 1 TO 1000
-    FOR j <- i TO 999
-      IF array[j] > array[j+1] THEN
-        tmp <- array[j,1]
-        array[j,1] <- array[j+1,1]
-        array[j+1,1] <- tmp
+// FUNCTION add_num_fn(BYVAl a : REAL, b : REAL) RETURNS REAL
+//   DECLARE result : REAL
+//   result <- a + b
+//   RETURN result
+// ENDFUNCTION
 
-        tmp <- array[j,2]
-        array[j,2] <- array[j+1,2]
-        array[j+1,2] <- tmp
-      ENDIF
-    NEXT j
-  NEXT
-ENDPROCEDURE
+// PROCEDURE add_num_pro(BYVAl a : REAL, b : REAL)
+//   DECLARE result : REAL
+//   result <- a + b
+//   OUTPUT result
+// ENDPROCEDURE
 
-CALL Sort()
-OUTPUT Result
+// OUTPUT add_num_fn(1,2.3)
+// CALL add_num_pro(1,2.3)
+
+OPENFILE "test/test.txt" FOR WRITE
+WRITEFILE "test/test.txt", "Hello World"
+CLOSEFILE "test/test.txt"
+
+OPENFILE "test/test.txt" FOR READ
+DECLARE file_contents : STRING
+READFILE "test/test.txt", file_contents
+CLOSEFILE "test/test.txt"
+OUTPUT file_contents
