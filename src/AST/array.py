@@ -6,15 +6,16 @@ from ..data_types import ARRAY
 from copy import copy
 
 class Array(AST_Node):
-    def __init__(self, id, dimensions, type, *args, **kwargs):
+    def __init__(self, id, dimensions, type, private=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.type = 'ARRAY'
         self.id = id
         self.dimensions = dimensions
         self.var_type = type
+        self.private = private
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + LEVEL_STR * (level+1) + str(self.var_type) + '\n' + LEVEL_STR * (level+1) + str(self.private)
 
     def add_variables(self, dimensions):
         result = {}
@@ -32,35 +33,8 @@ class Array(AST_Node):
         dimensions = self.dimensions.exe()
         result = self.add_variables(dimensions)
         stack.new_variable(self.id, 'ARRAY', result)
-
-class PrivateArray(AST_Node):
-    def __init__(self, id, dimensions, type, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.type = 'PRIVATE_ARRAY'
-        self.id = id
-        self.dimensions = dimensions
-        self.var_type = type
-
-    def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
-
-    def add_variables(self, dimensions):
-        result = {}
-        result['left'] = dimensions[0][0]
-        result['right'] = dimensions[0][1]
-        if len(dimensions) == 1:
-            for i in range(dimensions[0][0], dimensions[0][1]+1):
-                result[i] = (stack.structs[self.var_type](name=i), self.var_type)
-        else:
-            for i in range(dimensions[0][0], dimensions[0][1]+1):
-                result[i] = (ARRAY(self.add_variables(dimensions[1:])), 'ARRAY')
-        return result
-
-    def exe(self):
-        dimensions = self.dimensions.exe()
-        result = self.add_variables(dimensions)
-        stack.new_variable(self.id, 'ARRAY', result)
-        stack.get_variable(self.id).current_space = stack.current_space()
+        if self.private:
+            stack.get_variable(self.id).current_space = stack.current_space()
 
 class Dimensions(AST_Node):
     def __init__(self, *args, **kwargs):

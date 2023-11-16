@@ -140,7 +140,15 @@ class Stack:
     def get_function(self, id):
         for i in range(len(self.spaces)):
             if id in self.spaces[i].functions.keys():
-                return self.spaces[i].functions[id]
+                f = self.spaces[i].functions[id]
+                if f.current_space is None: return f
+                else:
+                    # 与获取变量同理
+                    for i in range(len(self.spaces)-2, 0, -1):
+                        if self.spaces[i] == f.current_space:
+                            return f
+                    else:
+                        add_stack_error_message(f'Private function `{id}` is not accessible')
         else:
             add_stack_error_message(f'No function with id: `{id}`')
 
