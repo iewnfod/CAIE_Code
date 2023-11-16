@@ -468,6 +468,10 @@ def p_pointer_expression(p):
     """expression : POINTER expression"""
     p[0] = AST.Pointer(p[2], p=p)
 
+def p_solve_pointer_expression(p):
+    """expression : expression POINTER"""
+    p[0] = AST.SolvePointer(p[1], p=p)
+
 def p_pointer_type_statement(p):
     """statement : TYPE ID EQUAL POINTER ID"""
     p[0] = AST.TypePointerStatement(p[2], p[5], p=p)

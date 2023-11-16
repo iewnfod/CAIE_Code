@@ -2,6 +2,7 @@ class base:
     def __init__(self, name=None):
         self.name = name
         self.is_struct = False
+        self.current_space = None
 
     def __str__(self):
         return str(self.value)
@@ -159,3 +160,15 @@ class ENUM(base):
 
     def set_value(self, value):
         self.value = Enum(self.name, value)
+
+class POINTER(base):
+    def __init__(self, value=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.value = value
+        self.type = 'POINTER'
+
+    def set_value(self, value):
+        self.value = value
+
+    def solve_value(self):
+        return self.value

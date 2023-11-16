@@ -4,7 +4,7 @@ from ..global_var import *
 from .var import *
 from .array import *
 from ..stack import Space
-from ..data_types import base
+from ..data_types import base, POINTER
 from .function import Call_function
 
 class Enumerate_type(AST_Node):
@@ -173,7 +173,7 @@ class Class_expression(AST_Node):
         try:
             s.load_init(self.param)
         except:
-            add_error_message(f'`{self.id}` is not a class that can new')
+            add_error_message(f'`{self.id}` is not a valid class', self)
         return s
 
 class Composite_type_expression(AST_Node):
@@ -261,4 +261,22 @@ class Pointer(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.item.get_tree(level+1)
 
     def exe(self):
-        pass
+        try:
+            return POINTER(self.item.exe())
+        except:
+            add_error_message(f'Cannot create pointer for `{self.item}`', self)
+
+class SolvePointer(AST_Node):
+    def __init__(self, pointer, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'SOLVE_POINTER'
+        self.pointer = pointer
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.pointer.get_tree(level+1)
+
+    def exe(self):
+        try:
+            return self.pointer.solve_value()
+        except:
+            add_error_message(f'Cannot solve pointer `{self.item}`', self)
