@@ -68,3 +68,24 @@ class Delete(AST_Node):
 
     def exe(self):
         stack.remove_variable(self.id)
+
+class NewAssign(AST_Node):
+    def __init__(self, target_expr, assign_expr, *args, **kwargs):
+        self.type = 'NEW_ASSIGN'
+        self.target_expr = target_expr
+        self.assign_expr = assign_expr
+        super().__init__(*args, **kwargs)
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.target_expr.get_tree(level+1) + '\n' + self.assign_expr.get_tree(level+1)
+
+    def exe(self):
+        assign_item = self.assign_expr.exe()
+        target_item = self.target_expr.exe()
+        if target_item is not None:
+            try:
+                target_item.set_value(assign_item[0])
+            except:
+                add_error_message(f'Cannot assign `{assign_item}` to `{target_item}`', self)
+        else:
+            add_error_message(f'Target item does not exist', self)
