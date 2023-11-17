@@ -35,6 +35,10 @@
     ```
     Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
     ```
+* `QuickSort` quick sort
+    ```
+    QuickSort(BYREF a : ARRAY, BYVAL low : INTEGER, high : INTEGER)
+    ```
 
 ## [String](./string.cpc)
 * `Split`: truncate a string
