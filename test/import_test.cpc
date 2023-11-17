@@ -1,3 +1,7 @@
 DECLARE test_string : STRING
 
 test_string <- "Test String"
+
+FUNCTION get_test_string RETURNS STRING
+	RETURN test_string
+ENDFUNCTION

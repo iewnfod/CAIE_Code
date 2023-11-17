@@ -7,11 +7,11 @@ from copy import copy
 
 class Array(AST_Node):
     def __init__(self, id, dimensions, type, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'ARRAY'
         self.id = id
         self.var_type = type
         self.dimensions = dimensions
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
@@ -35,9 +35,9 @@ class Array(AST_Node):
 
 class Dimensions(AST_Node):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'DIMENSIONS'
         self.dimensions = []
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         r = LEVEL_STR * level + self.type
@@ -56,10 +56,10 @@ class Dimensions(AST_Node):
 
 class Dimension(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'DIMENSION'
         self.left = left
         self.right = right
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
@@ -74,11 +74,11 @@ class Dimension(AST_Node):
 
 class Array_assign(AST_Node):
     def __init__(self, id, indexes, value, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'ARRAY_ASSIGN'
         self.id = id
         self.indexes = indexes
         self.value = value
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.value.get_tree(level+1)
@@ -106,9 +106,9 @@ class Array_assign(AST_Node):
 
 class Indexes(AST_Node):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'INDEXES'
         self.indexes = []
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type
@@ -129,10 +129,10 @@ class Indexes(AST_Node):
 
 class Array_get(AST_Node):
     def __init__(self, id, indexes, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'ARRAY_GET'
         self.id = id
         self.indexes = indexes
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)
@@ -154,9 +154,9 @@ class Array_get(AST_Node):
 
 class Array_items(AST_Node):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'ARRAY_ITEMS'
         self.items = []
-        super().__init__(*args, **kwargs)
 
     def add_item(self, item):
         self.items.append(item)
@@ -172,9 +172,9 @@ class Array_items(AST_Node):
 
 class Array_expression(AST_Node):
     def __init__(self, items, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'ARRAY_EXPRESSION'
         self.items = items
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.items.get_tree(level+1)

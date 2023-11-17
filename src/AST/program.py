@@ -6,9 +6,9 @@ from os.path import exists
 
 class Statements(AST_Node):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'STATEMENTS'
         self.statements = []
-        super().__init__(*args, **kwargs)
 
     def add_statement(self, statement):
         self.statements.append(statement)
@@ -36,11 +36,11 @@ class Statements(AST_Node):
 
 class If(AST_Node):
     def __init__(self, condition, true_statement, false_statement=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'IF'
         self.condition = condition
         self.true_statement = true_statement
         self.false_statement = false_statement
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level
@@ -59,6 +59,7 @@ class If(AST_Node):
 
 class For(AST_Node):
     def __init__(self, id, left, right, step, body_statement, next_id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'FOR'
         self.id = id
         self.left = left
@@ -66,7 +67,6 @@ class For(AST_Node):
         self.step = step
         self.body_statement = body_statement
         self.next_id = next_id
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level
@@ -110,10 +110,10 @@ class For(AST_Node):
 
 class Case(AST_Node):
     def __init__(self, id, cases, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'CASE'
         self.id = id
         self.cases = cases
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.cases.get_tree(level+1)
@@ -124,11 +124,11 @@ class Case(AST_Node):
 
 class Case_array(AST_Node):
     def __init__(self, id, indexes, cases, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'CASE_ARRAY'
         self.id = id
         self.indexes = indexes
         self.cases = cases
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1) + '\n' + self.cases.get_tree(level+1)
@@ -139,10 +139,10 @@ class Case_array(AST_Node):
 
 class Cases(AST_Node):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'CASES'
         self.cases = []
         self.otherwise = None
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         result = LEVEL_STR * level + self.type
@@ -167,11 +167,11 @@ class Cases(AST_Node):
 
 class A_case(AST_Node):
     def __init__(self, condition, true_statement, is_otherwise=False, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'A_CASE'
         self.condition = condition
         self.true_statement = true_statement
         self.is_otherwise = is_otherwise
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.condition.get_tree(level+1) + '\n' + self.true_statement.get_tree(level+1)
@@ -189,10 +189,10 @@ class A_case(AST_Node):
 
 class Range(AST_Node):
     def __init__(self, start, end, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'RANGE'
         self.start = start
         self.end = end
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.start.get_tree(level+1) + '\n' + self.end.get_tree(level+1)
@@ -210,10 +210,10 @@ class Range(AST_Node):
 
 class Repeat(AST_Node):
     def __init__(self, true_statement, condition, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'REPEAT'
         self.true_statement = true_statement
         self.condition = condition
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.true_statement.get_tree(level+1) + '\n' + self.condition.get_tree(level+1)
@@ -226,10 +226,10 @@ class Repeat(AST_Node):
 
 class While(AST_Node):
     def __init__(self, condition, true_statement, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'WHILE'
         self.condition = condition
         self.true_statement = true_statement
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.condition.get_tree(level+1) + '\n' + self.true_statement.get_tree(level+1)
@@ -240,8 +240,8 @@ class While(AST_Node):
 
 class Pass(AST_Node):
     def __init__(self, *args, **kwargs):
-        self.type = 'WHILE'
         super().__init__(*args, **kwargs)
+        self.type = 'WHILE'
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type
@@ -251,9 +251,9 @@ class Pass(AST_Node):
 
 class Import(AST_Node):
     def __init__(self, target, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'IMPORT'
         self.target = target
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.target.get_tree(level+1)

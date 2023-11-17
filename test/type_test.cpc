@@ -1,0 +1,11 @@
+TYPE test_type
+	DECLARE a : INTEGER
+ENDTYPE
+
+DECLARE b : test_type
+OUTPUT "b.a (before): ", b.a
+DECLARE a : INTEGER
+a <- 10
+OUTPUT "a", a
+b.a <- a
+OUTPUT "b.a (after): ", b.a
