@@ -6,10 +6,10 @@ from .data_types import *
 
 class Open_file(AST_Node):
     def __init__(self, file_path, file_mode, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'OPENFILE'
         self.file_path = file_path
         self.file_mode = file_mode
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + self.file_mode.get_tree(level+1)
@@ -28,9 +28,9 @@ class Open_file(AST_Node):
 
 class Close_file(AST_Node):
     def __init__(self, file_path, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'CLOSEFILE'
         self.file_path = file_path
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1)
@@ -46,10 +46,10 @@ class Close_file(AST_Node):
 
 class Read_file(AST_Node):
     def __init__(self, file_path, id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'READFILE'
         self.file_path = file_path
         self.id = id
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.id)
@@ -65,11 +65,11 @@ class Read_file(AST_Node):
 
 class Read_file_array(AST_Node):
     def __init__(self, file_path, id, indexes, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'READFILE_ARRAY'
         self.file_path = file_path
         self.id = id
         self.indexes = indexes
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.file_path(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.id) + '\n' + self.indexes.get_tree(level+1)
@@ -91,10 +91,10 @@ class Read_file_array(AST_Node):
 
 class Write_file(AST_Node):
     def __init__(self, file_path, value, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'WRITEFILE'
         self.file_path = file_path
         self.value = value
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + self.value.get_tree(level+1)
@@ -111,10 +111,10 @@ class Write_file(AST_Node):
 
 class Seek(AST_Node):
     def __init__(self, file_path, ad, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.type = 'SEEK'
         self.file_path = file_path
         self.ad = ad
-        super().__init__(*args, **kwargs)
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + self.ad.get_tree(level+1)

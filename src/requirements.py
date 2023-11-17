@@ -3,6 +3,7 @@ requirements = [
     ('chardet', 'chardet'),
     ('GitPython', 'git'),
     ('colorama', 'colorama'),
+    ('requests', 'requests'),
 ]
 
 tuna = 'https://pypi.tuna.tsinghua.edu.cn/simple/'

@@ -26,25 +26,34 @@ class Config:
 			'remote': _Config('remote', 'https://github.com/iewnfod/CAIE_Code.git', remote_update),
 			'dev': _Config('dev', False, dev_mod),
 			'branch': _Config('branch', 'stable', branch_update),
-			'rl': _Config('recursion-limit', 1000, recursive_limit)
+			'rl': _Config('recursion-limit', 1000, recursive_limit),
+			'dev.simulate-update': _Config('dev.simulate-update', False, simulate_update),
+			'auto-update': _Config('auto-update', True, auto_update),
+			'last-auto-update': _Config('last-auto-update', 0, last_auto_update),
+			'interval-update': _Config('interval-update', 86400, interval_update)
 		}
 		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):
 			with open(self.config_path, 'r') as f:
-				dict = json.loads(f.read())
-				for key, val in dict.items():
+				d = json.loads(f.read())
+				for key, val in d.items():
 					if key in self.config:
 						self.config[key]._init_update(val)
 
 		self.write_config()
 
 	def write_config(self):
-		dict = {}
+		d = {}
 		for key, val in self.config.items():
-			dict[key] = val.val
+			d[key] = val.val
+
+		sd = sorted(d, key=lambda x:x[0])
+		result = {}
+		for key in sd:
+			result[key] = d[key]
 
 		with open(self.config_path, 'w') as f:
-			f.write(json.dumps(dict))
+			f.write(json.dumps(result, indent=4))
 
 	def update_config(self, opt_name, value):
 		if opt_name in self.config:
@@ -73,5 +82,11 @@ class Config:
 	def get_config(self, opt_name):
 		if opt_name in self.config:
 			return self.config[opt_name].val
+		else:
+			self.err_config(opt_name)
+
+	def get_default_config(self, opt_name):
+		if opt_name in self.config:
+			return self.config[opt_name].default_val
 		else:
 			self.err_config(opt_name)

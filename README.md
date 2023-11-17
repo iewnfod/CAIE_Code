@@ -16,9 +16,10 @@
 ### Installation Preliminaries
 
 1. Have `python3` installed on your computer.
+
 > It is suggested to use `pypy3` to achieve the best efficiency.
 
-2. Have `git` installed on your computer. If you do not know what `git` is, see https://git-scm.com/downloads.
+1. Have `git` installed on your computer. If you do not know what `git` is, see https://git-scm.com/downloads.
 
 > For **macOS** users ensure you installed `Command Line Tools for Xcode`.
 
@@ -47,9 +48,11 @@
 6. If you cannot execute the complied files, please submit the problems on our [issue page](https://github.com/iewnfod/CAIE_Code/issues).
 
 ### Update
-If you followed the instructions and used `git` or PKG to install `cpc`, you can update easily using `cpc -u`.
+* If you followed the instructions and used `git` or PKG to install `cpc`, you can update easily using `cpc -u`.
 
-Otherwise, you should manually re-install the whole project.
+* An auto-update feature is introduced after `dc0cd71` to automatically detect updates once a day.
+
+* Otherwise, you should manually re-install the whole project.
 
 ## Usage
 
@@ -89,12 +92,29 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 
   > In a developer mod, your remote will not be changed by config and the branch will be locked in `dev`.
 
-- `dev`
-  - `true`: Enable the developer mode.
-  - `false`: Disable the developer mode.
+- `auto-update`
+  - `true`：Enable auto update.
+  - `false`：Disable auto update.
+
+- `last-auto-update`
+    All non-negative real numbers are accepted and automatically updated by the system.
+
+- `interval-update`
+    All non-negative integers, in seconds, are accepted as the automatic update interval.
 
 - `recursion-limit(rl)`
     all integer number as the recursion depth limit of the interpreter.
+
+- `dev`
+    
+    - `true`: Enable developer mode.
+    - `false`: Disable developer mode.
+    
+- Developer Options
+
+    - `dev.simulate-update`
+      - `true`: Enable simulation updates
+      - `false`: Disable simulation updates
 
 ## FAQs
 
@@ -389,11 +409,11 @@ The following items give the `DATATYPE`, its description, and the default value 
         ```
     * records(classes)
     > In this case, the program will not check the data types when assigning a variable of this type to another. The program will assign the other variable as the *reference* for this one.
-    > ```
-    > TYPE <identifier>
-           <statements>
+        ```
+        TYPE <identifier>
+            <statements>
         ENDTYPE
-         ```
+        ```
 ### Special Syntax of **CPC** Interpreter
 * delete a variable or constant on RAM
         ```

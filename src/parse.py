@@ -70,13 +70,13 @@ def p_dimension_expression(p):
     """dimension : expression COLON expression"""
     p[0] = AST.Dimension(p[1], p[3], p=p)
 
-def p_assign_statement(p):
-    """statement : ID ASSIGN expression"""
-    p[0] = AST.Assign(p[1], p[3], p=p)
+# def p_assign_statement(p):
+#     """statement : ID ASSIGN expression"""
+#     p[0] = AST.Assign(p[1], p[3], p=p)
 
-def p_array_assign_statement(p):
-    """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"""
-    p[0] = AST.Array_assign(p[1], p[3], p[6], p=p)
+# def p_array_assign_statement(p):
+#     """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"""
+#     p[0] = AST.Array_assign(p[1], p[3], p[6], p=p)
 
 def p_indexes(p):
     """indexes : indexes COMMA expression
@@ -444,9 +444,9 @@ def p_composite_type_expression(p):
     """expression : expression DOT expression"""
     p[0] = AST.Composite_type_expression(p[1], p[3])
 
-def p_composite_type_statement(p):
-    """statement : expression DOT statement"""
-    p[0] = AST.Composite_type_statement(p[1], p[3])
+# def p_composite_type_statement(p):
+#     """statement : expression DOT statement"""
+#     p[0] = AST.Composite_type_statement(p[1], p[3])
 
 def p_enumerate_type_statement(p):
     """statement : TYPE ID EQUAL LEFT_PAREN enumerate_items RIGHT_PAREN"""
@@ -462,13 +462,17 @@ def p_enumerate_items(p):
         p[1].add_item(p[3])
         p[0] = p[1]
 
+def p_pointer_expression(p):
+    """expression : POINTER expression"""
+    p[0] = AST.Pointer(p[2], p=p)
+
 def p_pointer_type_statement(p):
     """statement : TYPE ID EQUAL POINTER ID"""
     p[0] = AST.TypePointerStatement(p[2], p[5], p=p)
 
-def p_pointer_statement(p):
-    """statement : ID ASSIGN POINTER ID"""
-    p[0] = AST.PointerStatement(p[1], p[4], p=p)
+# def p_pointer_statement(p):
+#     """statement : ID ASSIGN POINTER ID"""
+#     p[0] = AST.PointerStatement(p[1], p[4], p=p)
 
 def p_pass_statement(p):
     """statement : PASS"""
@@ -478,8 +482,12 @@ def p_import_statement(p):
     """statement : IMPORT expression"""
     p[0] = AST.Import(p[2], p=p)
 
-def p_private_statement(p):
-    """statement : PRIVATE statement"""
+def p_new_assign_statement(p):
+    """statement : expression ASSIGN expression"""
+    p[0] = AST.NewAssign(p[1], p[3], p=p)
 
-def p_public_statement(p):
-    """statement : PUBLIC statement"""
+# def p_private_statement(p):
+#     """statement : PRIVATE statement"""
+
+# def p_public_statement(p):
+#     """statement : PUBLIC statement"""

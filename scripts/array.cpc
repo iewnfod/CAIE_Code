@@ -25,4 +25,3 @@ FUNCTION ArrayLinSpace(BYVAL low : INTEGER, high: INTEGER, num : INTEGER) RETURN
     NEXT i
     RETURN arr
 ENDFUNCTION
-
