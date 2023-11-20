@@ -28,14 +28,6 @@ def check_github_connectivity():
     except requests.RequestException:
         return False
 
-def reverse_changes():
-    try:
-        repo = git.Repo(HOME_PATH)
-        repo.git.reset(hard=True)
-        print("Successfully reverse changes.")
-    except git.exc.GitCommandError as e:
-        print("Reverse Error:", e)
-
 def check_update(repo: git.Repo, remote: git.Remote):
     remote.fetch()
     local_branch = repo.active_branch

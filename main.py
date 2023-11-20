@@ -21,7 +21,6 @@ from src.quit import quit
 from src.line_commands import run_command
 from src.update import update
 from src.update import update_expired
-from src.update import reverse_changes
 
 import sys
 import os
@@ -186,10 +185,6 @@ def main(input_=None, output_=None, addition_file_name=None):
 
     if addition_file_name:
         file_paths.add(addition_file_name)
-
-    #撤销更改
-    if not config.get_config('dev'):
-        reverse_changes()
 
     #自动更新
     if config.get_config('dev.simulate-update') or (config.get_config('auto-update') and not config.get_config('dev') and update_expired()):
