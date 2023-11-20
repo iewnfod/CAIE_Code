@@ -135,11 +135,11 @@ cpc -u
 
 ## 效率测试
 ### 测试环境：
-* 机型： 2020 Macbook Pro
+* 机型： 2020 Macbook Pro (A2338)
 * 处理器： Apple M1
 * 内存： 8GB
 * 核心： 8个 (4能效，4性能)
-* 系统版本： MacOS 13.3.1 (22E261)
+* 系统版本： macOS 14.1.1 (23B81)
 * Python 版本： PyPy 3.9.16
 
 ### 基础测试
@@ -390,7 +390,47 @@ NEXT i
             <statements>
         ENDTYPE
         ```
-10. 由此解释器提供的特殊语法
+10. 面对对象
+    * 定义对象
+        ```
+        CLASS <identifier>
+            PUBLIC PROCEDURE NEW (<params>)
+                <statements>
+            ENDPROCEDURE
+            <statements>
+        ENDCLASS
+        ```
+    * 私有/公有变量
+        ```
+        PRIVATE <identifier> : <type>
+        PUBLIC <identifier> : <type>
+        ```
+    * 私有/公有函数
+        ```
+        PRIVATE PROCEDURE <identifier> (<params>)
+            <statements>
+        ENDPROCEDURE
+
+        PUBLIC PROCEDURE <identifier> (<params>)
+            <statements>
+        ENDPROCEDURE
+
+        PRIVATE FUNCTION <identifier> (<params>) RETURNS <type>
+            <statements>
+        ENDFUNCTION
+
+        PUBLIC FUNCTION <identifier> (<params>) RETURNS <type>
+            <statements>
+        ENDFUNCTION
+        ```
+    * 创建实例
+        ```
+        NEW <identifier> (<values>)
+        ```
+
+    > 若不标明变量或函数的访问权限，默认为公有
+
+11. 由此解释器提供的特殊语法
     * DELETE 删除变量或常量
         ```
         DELETE <identifier>
@@ -403,11 +443,11 @@ NEXT i
         ```
         IMPORT <expression>
         ```
-        * 此处的`expression`通常为一个被双引号包裹的字符串
-        * 导入操作并不会做任何隔离，也就是说，被导入的文件的所有内容都会完全暴露给当前文件，因此请注意变量名重复使用的问题
-        * 因此推荐使用[`Import`](./scripts/import.cpc)函数进行导入操作
+        > 此处的`expression`通常为一个被双引号包裹的字符串
+        > 导入操作并不会做任何隔离，也就是说，被导入的文件的所有内容都会完全暴露给当前文件，因此请注意变量名重复使用的问题
+        > 因此推荐使用[`Import`](./scripts/import.cpc)函数进行导入操作
         ```
-        CONSTANT test = Import("test/import_test.cpc")
+        CONSTANT <identifier> = Import("<path to import file>")
         ```
 
 ### 内置函数
@@ -467,10 +507,10 @@ NEXT i
 - [x] 基础功能实现
 - [x] 函数实现
 - [x] 实现 `TYPE`
-- [ ] 实现 `CLASS`
+- [x] 实现 `CLASS` (还差 `INHERIT`)
 - [x] 实现文件读写（还剩 `GETRECORD` 和 `PUTRECORD`，这需要等自定义类型实现后才能实现）
 - [ ] 提供更多[非官方函数](./scripts/README.md)
-- [ ] 提高效率（正在进行）
+- [ ] 提高效率
 
 
 ## 作者与贡献者

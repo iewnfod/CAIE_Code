@@ -23,3 +23,29 @@ PROCEDURE Sort(BYREF arr : ARRAY, BYVAL left : INTEGER, right : INTEGER)
         gap <- gap / 3
     ENDWHILE
 ENDPROCEDURE
+
+
+// 快排
+FUNCTION _QuickSort(BYREF a : ARRAY, BYVAL low : INTEGER, high : INTEGER) RETURNS INTEGER
+    CONSTANT pivot = a[low]
+    WHILE low < high DO
+        WHILE low < high AND a[high] >= pivot DO
+            high <- high - 1
+        ENDWHILE
+        a[low] <- a[high]
+        WHILE low < high AND a[low] <= pivot DO
+            low <- low + 1
+        ENDWHILE
+        a[high] <- a[low]
+    ENDWHILE
+    a[low] <- pivot
+    RETURN low
+ENDFUNCTION
+
+PROCEDURE QuickSort(BYREF a : ARRAY, BYVAL low : INTEGER, high : INTEGER)
+    IF low < high THEN
+        CONSTANT pivot = _QuickSort(a, low, high)
+        QuickSort(a, low, pivot-1)
+        QuickSort(a, pivot+1, high)
+    ENDIF
+ENDPROCEDURE

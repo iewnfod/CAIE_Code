@@ -18,17 +18,20 @@ class Constant(AST_Node):
         stack.new_constant(self.id, value)
 
 class Variable(AST_Node):
-    def __init__(self, id, type, *args, **kwargs):
+    def __init__(self, id, type, private=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.type = 'VARIABLE'
         self.id = id
         self.var_type = type
+        self.private = private
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + LEVEL_STR * (level+1) + str(self.var_type) + '\n' + LEVEL_STR * (level+1) + str(self.private)
 
     def exe(self):
         stack.new_variable(self.id, self.var_type)
+        if self.private:
+            stack.get_variable(self.id).current_space = stack.current_space()
 
 class Assign(AST_Node):
     def __init__(self, id, expression, *args, **kwargs):

@@ -6,15 +6,16 @@ from ..data_types import ARRAY
 from copy import copy
 
 class Array(AST_Node):
-    def __init__(self, id, dimensions, type, *args, **kwargs):
+    def __init__(self, id, dimensions, type, private=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.type = 'ARRAY'
         self.id = id
-        self.var_type = type
         self.dimensions = dimensions
+        self.var_type = type
+        self.private = private
 
     def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + LEVEL_STR * (level+1) + str(self.var_type)
+        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.dimensions.get_tree(level + 1) + '\n' + LEVEL_STR * (level+1) + str(self.var_type) + '\n' + LEVEL_STR * (level+1) + str(self.private)
 
     def add_variables(self, dimensions):
         result = {}
@@ -32,6 +33,8 @@ class Array(AST_Node):
         dimensions = self.dimensions.exe()
         result = self.add_variables(dimensions)
         stack.new_variable(self.id, 'ARRAY', result)
+        if self.private:
+            stack.get_variable(self.id).current_space = stack.current_space()
 
 class Dimensions(AST_Node):
     def __init__(self, *args, **kwargs):

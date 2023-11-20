@@ -8,5 +8,6 @@ NEXT i
 
 OUTPUT "FINISH GENERATING ARRAY"
 
+// CALL QuickSort(arr, 1, n)
 CALL Sort(arr, 1, n)
 OUTPUT arr

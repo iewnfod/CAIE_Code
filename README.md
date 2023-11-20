@@ -106,10 +106,10 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
     all integer number as the recursion depth limit of the interpreter.
 
 - `dev`
-    
+
     - `true`: Enable developer mode.
     - `false`: Disable developer mode.
-    
+
 - Developer Options
 
     - `dev.simulate-update`
@@ -148,44 +148,43 @@ If it still fails after re-installation, please report it to us on the [issue pa
 - processor: Apple M1
 - RAM: 8GB
 - Cores: 8 (4 efficient, 4 performance)
-- OS: macOS 13.3.1 (22E261)
+- OS: macOS 14.1.1 (23B81)
 - Python version: PyPy 3.9.16
 
 ### Basic Tests
-- assignment: 10m/s
+- assignment: 1200w/s
 ```
 DECLARE a : INTEGER
+FOR i <- 1 TO 12000000
+    a <- i
+NEXT i
+```
+
+- explicit conversion and assignment: 760w/s
+```
+DECLARE a : STRING
+FOR i <- 1 TO 7600000
+    a <- STRING(i)
+NEXT i
+```
+
+- implicit conversion and assignment: 1000w/s
+```
+DECLARE a : STRING
 FOR i <- 1 TO 10000000
     a <- i
 NEXT i
 ```
 
-- explicit conversion and assignment: 7.4m/s
+- print to terminal: 65w/s
 ```
-DECLARE a : STRING
-FOR i <- 1 TO 7400000
-    a <- STRING(i)
-NEXT i
-```
-
-- implicit conversion and assignment: 9.2m/s
-```
-DECLARE a : STRING
-FOR i <- 1 TO 9200000
-    a <- i
-NEXT i
-```
-
-- print to terminal: 720k/s
-```
-DECLARE a : STRING
-FOR i <- 1 TO 9200000
-    a <- i
+FOR i <- 1 TO 650000
+    OUTPUT i
 NEXT i
 ```
 
 ### Computation Tests
-- [generating 100k randoms and shell sorting](https://github.com/iewnfod/CAIE_Code/blob/master/test/sort_test.cpc): about 2.5s
+- [generating 100k randoms and shell sorting](test/sort_test.cpc): about 3.5s
 
 
 ## Standards
@@ -299,7 +298,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         IF <condition> THEN
             <statements>
         ENDIF
-        
+
         IF <condition> THEN
             <statements>
         ELSE
@@ -340,7 +339,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         PROCEDURE <identifier>
             <statements>
         ENDPROCEDURE
-        
+
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -348,7 +347,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a procedure
         ```
         CALL <identifier>
-        
+
         CALL <identifier> (<value>, ...)
         ```
     * functions with return values
@@ -357,7 +356,7 @@ The following items give the `DATATYPE`, its description, and the default value 
             <statements>
             RETURN <value>
         ENDFUNCTION
-        
+
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -365,7 +364,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a function with return values
         ```
         <identifier> ()
-        
+
         <identifier> (<value>, ...)
         ```
     * Before the parameters of those sub-routines, you *can* use `BYREF` or `BYVAL` to force the program to pass those parameters by reference or by-value respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the prior parameter. If the program cannot find a clear indication it will, by default pass parameters by value.
@@ -414,27 +413,66 @@ The following items give the `DATATYPE`, its description, and the default value 
             <statements>
         ENDTYPE
         ```
+10. Object Oriented Programme
+    * define an object
+        ```
+        CLASS <identifier>
+            PUBLIC PROCEDURE NEW (<params>)
+                <statements>
+            ENDPROCEDURE
+            <statements>
+        ENDCLASS
+        ```
+    * private or public variable
+        ```
+        PRIVATE <identifier> : <type>
+        PUBLIC <identifier> : <type>
+        ```
+    * private or public procedure and function
+        ```
+        PRIVATE PROCEDURE <identifier> (<params>)
+            <statements>
+        ENDPROCEDURE
+
+        PUBLIC PROCEDURE <identifier> (<params>)
+            <statements>
+        ENDPROCEDURE
+
+        PRIVATE FUNCTION <identifier> (<params>) RETURNS <type>
+            <statements>
+        ENDFUNCTION
+
+        PUBLIC FUNCTION <identifier> (<params>) RETURNS <type>
+            <statements>
+        ENDFUNCTION
+        ```
+    * create an object
+        ```
+        NEW <identifier> (<values>)
+        ```
+
+    > If you do not sign a variable or procedure or function explicitly, it will be public by default.
+
 ### Special Syntax of **CPC** Interpreter
 * delete a variable or constant on RAM
-        ```
-        DELETE <identifier>
-        ```
-    * do nothing
-        ```
-        PASS
-        ```
-    * import **CPC** files
-        ```
-        IMPORT <expression>
-        ```
-        * `expression` here should be a string within double quotes.
-        * There is no isolation between the imported file and the
-        main file. Identifiers may collide.
-        * It is suggested to use the [`Import`](scripts/import.cpc) function
-        to import a package instead.
-        ```
-        CONSTANT test = Import("test/import_test.cpc")
-        ```
+    ```
+    DELETE <identifier>
+    ```
+* do nothing
+    ```
+    PASS
+    ```
+* import **CPC** files
+    ```
+    IMPORT <expression>
+    ```
+    > `expression` here should be a string within double quotes.
+    > There is no isolation between the imported file and the main file. Identifiers may collide.
+    > It is suggested to use the [`Import`](scripts/import.cpc) function to import a package instead.
+    ```
+    CONSTANT <identifier> = Import("<path to import file>")
+    ```
+
 ### Built-in Functions from CAIE Standard
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
     ```
@@ -504,10 +542,10 @@ and PRs are welcome.
 - [x] basic operations
 - [x] functions and procedures
 - [x] materialize `TYPE`
-- [ ] materialize `CLASS`
-- [x] full file I/O support (`GETRECORD` and `PUTRECORD` not yet implemented)
+- [x] materialize `CLASS` (`INHERIT` is not yet implemented)
+- [x] full file I/O support (`GETRECORD` and `PUTRECORD` are not yet implemented)
 - [ ] more [non-official functions](./scripts/README.md)
-- [ ] improve efficiency (now improving)
+- [ ] improve efficiency
 
 ## Author and Contributors
 <a href="https://github.com/iewnfod/CAIE_Code/graphs/contributors">

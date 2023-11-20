@@ -4,41 +4,47 @@ from ..global_var import *
 import copy
 
 class Function(AST_Node):
-    def __init__(self, id, parameters, statements, returns=None, *args, **kwargs):
+    def __init__(self, id, parameters, statements, returns=None, private=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.type = 'FUNCTION'
         self.id = id
+        self.private = private
         self.parameters = parameters
         self.statements = statements
         self.returns = returns
         self.arr_type = None
+        self.current_space = None
 
     def get_tree(self, level=0):
         if self.parameters:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.private)
         else:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.private)
 
     def exe(self):
+        if self.private: self.current_space = stack.current_space()
         stack.add_function(self)
 
 class ArrFunction(AST_Node):
-    def __init__(self, id, parameters, arr_type, statements, *args, **kwargs):
+    def __init__(self, id, parameters, arr_type, statements, private=False, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.type = 'FUNCTION'
         self.id = id
+        self.private = private
         self.parameters = parameters
         self.statements = statements
         self.returns = 'ARRAY'
         self.arr_type = arr_type
+        self.current_space = None
 
     def get_tree(self, level=0):
         if self.parameters:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.parameters.get_tree(level+1) + '\n' + self.statements.get_tree(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.private)
         else:
-            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1)
+            return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.statements.get_tree(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.private)
 
     def exe(self):
+        if self.private: self.current_space = stack.current_space()
         stack.add_function(self)
 
 class Call_function(AST_Node):
