@@ -1,6 +1,7 @@
 # CAIE Code (cpc)
 
 <br/>
+
 <p align="center">
 <a href="./assets/cpc.svg">
 <img src="./assets/cpc.svg" width="100" height="100" alt="logo">
@@ -124,6 +125,7 @@ pip install -r requirements.txt
 进入`cpc`安装目录，可使用
 删除`.cpc_history`文件
 更新`cpc`
+
 ```shell
 cd $(which cpc)/../..
 rm -rf .cpc_history
