@@ -461,6 +461,8 @@ def p_private_arr_function_statement(p):
 
 def p_call_function_expression(p):
     """expression : ID LEFT_PAREN parameters RIGHT_PAREN
+            | MOD LEFT_PAREN parameters RIGHT_PAREN
+            | DIV LEFT_PAREN parameters RIGHT_PAREN
             | ID LEFT_PAREN RIGHT_PAREN"""
     if len(p) == 4:
         if p[1] in insert_functions:

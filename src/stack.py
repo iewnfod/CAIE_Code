@@ -91,7 +91,10 @@ class Stack:
 
     def new_constant(self, id, value):
         # 复制值
-        clone = copy(value)
+        if type(value) == tuple:
+            clone = self.structs[value[1]](value[0])
+        else:
+            clone = copy(value)
         # 赋值
         self.spaces[0].new_variable(id, clone, True)
 
@@ -172,6 +175,11 @@ class Stack:
             return self.files[path][1]
         else:
             add_stack_error_message(f'File `{path}` has not opened')
+
+    def close_all_files(self):
+        for path, f in self.files.items():
+            add_stack_error_message(f'Program exit before closing file `{path}`')
+            f[0].close()
 
     def add_struct(self, id, obj):
         self.structs[id] = obj

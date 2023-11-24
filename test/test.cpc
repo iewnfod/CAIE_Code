@@ -51,10 +51,15 @@ file_path <- "test/test.txt"
 
 OPENFILE file_path FOR WRITE
 WRITEFILE file_path, "Hello World"
+WRITEFILE file_path, "\nNext line"
+// EXIT()
 CLOSEFILE file_path
 
 OPENFILE file_path FOR READ
 DECLARE file_contents : STRING
-READFILE file_path, file_contents
+WHILE EOF(file_path) = FALSE DO
+  READFILE file_path, file_contents
+  OUTPUT file_contents
+ENDWHILE
 CLOSEFILE file_path
-OUTPUT file_contents
+// OUTPUT file_contents
