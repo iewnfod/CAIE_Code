@@ -51,6 +51,7 @@ file_path <- "test/test.txt"
 
 OPENFILE file_path FOR WRITE
 WRITEFILE file_path, "Hello World"
+WRITEFILE file_path, "\nNext line"
 // EXIT()
 CLOSEFILE file_path
 
