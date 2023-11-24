@@ -173,6 +173,11 @@ class Stack:
         else:
             add_stack_error_message(f'File `{path}` has not opened')
 
+    def close_all_files(self):
+        for path, f in self.files.items():
+            add_stack_error_message(f'Program exit before closing file `{path}`')
+            f[0].close()
+
     def add_struct(self, id, obj):
         self.structs[id] = obj
 
