@@ -1,0 +1,23 @@
+CLASS Pet
+	PRIVATE Name : STRING
+	PUBLIC NameArr : ARRAY[1:10] OF STRING
+
+	PUBLIC PROCEDURE NEW(GivenName : STRING)
+		Name <- GivenName
+	ENDPROCEDURE
+
+	PUBLIC FUNCTION get_name RETURNS STRING
+		RETURN Name
+	ENDFUNCTION
+
+	PRIVATE FUNCTION get_name_arr RETURNS ARRAY
+		RETURN NameArr
+	ENDFUNCTION
+ENDCLASS
+
+DECLARE a : Pet
+a <- NEW Pet("Hello")
+
+OUTPUT a.get_name()
+OUTPUT a.NameArr
+// OUTPUT a.get_name_arr()

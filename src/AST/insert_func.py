@@ -376,6 +376,44 @@ class Python(AST_Node):
         else:
             add_error_message(f'Python interface only have 1 parameters, but found 0', self)
 
+class Mod(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'MOD'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(self.parameters) == 2:
+                return (parameters[0][0] % parameters[1][0], 'REAL')
+            else:
+                add_error_message(f'Mod only have 2 parameters, but found {len(self.parameters)}')
+        else:
+            add_error_message(f'Mod only have 2 parameters, but found 0', self)
+
+class Div(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'DIV'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(self.parameters) == 2:
+                return (parameters[0][0] // parameters[1][0], 'REAL')
+            else:
+                add_error_message(f'Mod only have 2 parameters, but found {len(self.parameters)}')
+        else:
+            add_error_message(f'Mod only have 2 parameters, but found 0', self)
+
 
 insert_functions = {
     "INT": Int_convert,
@@ -390,9 +428,12 @@ insert_functions = {
     "LCASE": Lcase,
     "UCASE": Ucase,
     "RAND": Rand,
+    "RANDOM": Rand,
     "EOF": Eof,
     "POW": Pow,
     "EXIT": Exit,
     "ROUND": Round,
     "PYTHON": Python,
+    "MOD": Mod,
+    "DIV": Div,
 }

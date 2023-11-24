@@ -60,6 +60,8 @@ reserved = {
     "DELETE",
     "PASS",
     "IMPORT",
+    "SUPER",
+    "SELF"
 }
 
 tokens = (
