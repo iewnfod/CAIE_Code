@@ -91,7 +91,10 @@ class Stack:
 
     def new_constant(self, id, value):
         # 复制值
-        clone = copy(value)
+        if type(value) == tuple:
+            clone = self.structs[value[1]](value[0])
+        else:
+            clone = copy(value)
         # 赋值
         self.spaces[0].new_variable(id, clone, True)
 
