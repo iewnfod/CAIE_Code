@@ -88,6 +88,10 @@ def p_dimension_expression(p):
 #     """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"""
 #     p[0] = AST.Array_assign(p[1], p[3], p[6], p=p)
 
+def p_new_assign_statement(p):
+    """statement : expression ASSIGN expression"""
+    p[0] = AST.NewAssign(p[1], p[3], p=p)
+
 def p_indexes(p):
     """indexes : indexes COMMA expression
             | expression"""
@@ -116,13 +120,17 @@ def p_array_items(p):
         p[1].add_item(p[3])
         p[0] = p[1]
 
-def p_input_statement(p):
-    """statement : INPUT ID"""
-    p[0] = AST.Input(p[2], p=p)
+# def p_input_statement(p):
+#     """statement : INPUT ID"""
+#     p[0] = AST.Input(p[2], p=p)
 
-def p_array_input(p):
-    """statement : INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE"""
-    p[0] = AST.Array_input(p[2], p[4], p=p)
+# def p_array_input(p):
+#     """statement : INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE"""
+#     p[0] = AST.Array_input(p[2], p[4], p=p)
+
+def p_new_input_statement(p):
+    """statement : INPUT expression"""
+    p[0] = AST.NewInput(p[2], p=p)
 
 def p_output_statement(p):
     """statement : OUTPUT output_expression"""
@@ -556,13 +564,13 @@ def p_import_statement(p):
     """statement : IMPORT expression"""
     p[0] = AST.Import(p[2], p=p)
 
-def p_new_assign_statement(p):
-    """statement : expression ASSIGN expression"""
-    p[0] = AST.NewAssign(p[1], p[3], p=p)
-
 def p_class_statement(p):
     """statement : CLASS ID statements ENDCLASS"""
     p[0] = AST.Class(p[2], p[3], p=p)
+
+def p_class_inherit_statement(p):
+    """statement : CLASS ID INHERITS ID statements ENDCLASS"""
+    p[0] = AST.Class(p[2], p[5], p[4], p=p)
 
 def p_class_expression(p):
     """expression : NEW ID

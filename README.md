@@ -536,16 +536,18 @@ The following items give the `DATATYPE`, its description, and the default value 
 * For more non-official scripts, please see [scripts](./scripts).
 
 ## Targets
-The following are the development targets of this project. Issues
-and PRs are welcome.
-
-- [x] basic operations
-- [x] functions and procedures
-- [x] materialize `TYPE`
-- [x] materialize `CLASS` (`INHERIT` is not yet implemented)
-- [x] full file I/O support (`GETRECORD` and `PUTRECORD` are not yet implemented)
-- [ ] more [non-official functions](./scripts/README.md)
-- [ ] improve efficiency
+### Version 0.1.x Target
+- [ ] Implement all features provided by [official document](./Pseudocode%20Guide%20for%20Teachers.pdf).
+- [ ] Increase the stability for running to achieve a relatively useable situation.
+### Version 0.2.x Target
+- [ ] Give the kernel a great update and optimization.
+- [ ] Implement a high performance virtual machine to run. (Similar as the solution of Java)
+### Version 0.3.x Target
+- [ ] Allow building into executable binary file.
+### 长期目标
+- [ ] Provide more [unofficial functions](./scripts/README.md).
+- [ ] Increase running speed and stability.
+- [ ] Implement bootstrap.
 
 ## Author and Contributors
 <a href="https://github.com/iewnfod/CAIE_Code/graphs/contributors">

@@ -44,37 +44,37 @@ class Output_expression(AST_Node):
                 result.append(str(t[0]))
         return ' '.join(result)
 
-class Input(AST_Node):
-    def __init__(self, id, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.type = 'INPUT'
-        self.id = id
+# class Input(AST_Node):
+#     def __init__(self, id, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.type = 'INPUT'
+#         self.id = id
 
-    def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id)
+#     def get_tree(self, level=0):
+#         return LEVEL_STR * level + self.type + ' ' + str(self.id)
 
-    def exe(self):
-        stack.set_variable(self.id, str(input_()), 'STRING')
+#     def exe(self):
+#         stack.set_variable(self.id, str(input_()), 'STRING')
 
-class Array_input(AST_Node):
-    def __init__(self, id, indexes, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.type = 'ARRAY_INPUT'
-        self.id = id
-        self.indexes = indexes
+# class Array_input(AST_Node):
+#     def __init__(self, id, indexes, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.type = 'ARRAY_INPUT'
+#         self.id = id
+#         self.indexes = indexes
 
-    def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)
+#     def get_tree(self, level=0):
+#         return LEVEL_STR * level + self.type + ' ' + str(self.id) + '\n' + self.indexes.get_tree(level+1)
 
-    def exe(self):
-        inp = input()
-        Array_assign(
-            self.id,
-            self.indexes,
-            String(inp, lineno=self.lineno, lexpos=self.lexpos),
-            lineno=self.lineno,
-            lexpos=self.lexpos
-        ).exe()
+#     def exe(self):
+#         inp = input()
+#         Array_assign(
+#             self.id,
+#             self.indexes,
+#             String(inp, lineno=self.lineno, lexpos=self.lexpos),
+#             lineno=self.lineno,
+#             lexpos=self.lexpos
+#         ).exe()
 
 class Raw_output(AST_Node):
     def __init__(self, expression, *args, **kwargs):
@@ -107,3 +107,20 @@ class Raw_output(AST_Node):
                 self._output(v)
         else:
             self._output(v)
+
+class NewInput(AST_Node):
+    def __init__(self, expr, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'NEW_INPUT'
+        self.expr = expr
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + ' ' + str(self.id)
+
+    def exe(self):
+        expr = self.expr.exe()
+        try:
+            data = input_()
+            expr.set_value(data)
+        except:
+            add_error_message(f'Cannot assign `{data}` to `{expr}`', self)
