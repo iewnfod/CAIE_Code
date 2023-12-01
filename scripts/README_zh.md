@@ -93,6 +93,10 @@
     ```
     StartsWith(base : STRING, prefix : STRING) RETURNS BOOLEAN
     ```
+* `STR_TO_NUM`: 把字符串转换为数字
+    ```
+    STR_TO_NUM(s : STRING) RETURNS REAL
+    ```
 
 ## [Time](./time.cpc)
 * Time 获取当前时间戳
@@ -108,16 +112,14 @@
 
 ## [Array](./array.cpc)
 * ArrayOne设置一个自定义长宽的数组内容为1
-  ```
-  ArrayOne(BYVAL row : INTEGER, col : INTEGER) RETURNS ARRAY
-  ```
-
+    ```
+    ArrayOne(BYVAL row : INTEGER, col : INTEGER) RETURNS ARRAY
+    ```
 * ArrayArrange在闭包范围内生成均匀的间隔为n的数字
-  ```
-  ArrayArrange(BYVAL low : INTEGER, high: INTEGER, div : REAL) RETURNS ARRAY
-  ```
-
+    ```
+    ArrayArrange(BYVAL low : INTEGER, high: INTEGER, div : REAL) RETURNS ARRAY
+    ```
 * ArrayLinSpace在闭包范围内生成间隔均匀的n个数字
-  ```
-  ArrayLinSpace(BYVAL low : INTEGER, high: INTEGER, num : INTEGER) RETURNS ARRAY
-  ```
+    ```
+    ArrayLinSpace(BYVAL low : INTEGER, high: INTEGER, num : INTEGER) RETURNS ARRAY
+    ```
