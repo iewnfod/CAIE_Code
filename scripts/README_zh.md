@@ -97,7 +97,7 @@
 ## [Time](./time.cpc)
 * Time 获取当前时间戳
     ```
-    Time RETURNS REAL
+    Time() RETURNS REAL
     ```
 
 ## [Import](./import.cpc)

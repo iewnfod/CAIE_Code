@@ -316,7 +316,7 @@ NEXT i
 7. 函数
     * 无返回值函数定义
         ```
-        PROCEDURE <identifier>
+        PROCEDURE <identifier> ()
             <statements>
         ENDPROCEDURE
 
@@ -326,7 +326,7 @@ NEXT i
         ```
     * 无返回值函数调用
         ```
-        CALL <identifier>
+        CALL <identifier> ()
 
         CALL <identifier> (<value>, ...)
         ```

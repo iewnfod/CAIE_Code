@@ -336,7 +336,7 @@ The following items give the `DATATYPE`, its description, and the default value 
 7. functions
     * functions without a return value (procedure)
         ```
-        PROCEDURE <identifier>
+        PROCEDURE <identifier> ()
             <statements>
         ENDPROCEDURE
 
@@ -346,7 +346,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         ```
     * call a procedure
         ```
-        CALL <identifier>
+        CALL <identifier> ()
 
         CALL <identifier> (<value>, ...)
         ```

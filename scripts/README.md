@@ -97,7 +97,7 @@
 ## [Time](./time.cpc)
 * `Time`: get current timestamp
     ```
-    Time RETURNS REAL
+    Time() RETURNS REAL
     ```
 
 ## [Import](./import.cpc)
