@@ -93,30 +93,30 @@
     ```
     StartsWith(base : STRING, prefix : STRING) RETURNS BOOLEAN
     ```
+* `STR_TO_NUM`: transform a string `s` to a number
+    ```
+    STR_TO_NUM(s : STRING) RETURNS REAL
+    ```
 
 ## [Time](./time.cpc)
 * `Time`: get current timestamp
     ```
-    Time RETURNS REAL
+    Time() RETURNS REAL
     ```
-
 ## [Import](./import.cpc)
 * `Import`: import another *cpc* file
     ```
     Import(target : STRING) RETURNS ImportObj
     ```
-
 ## [Array](./array.cpc)
 * ArrayOne sets the contents of an array of custom length and width to 1
     ```
     ArrayOne(BYVAL row : INTEGER, col : INTEGER) RETURNS ARRAY
     ```
-
 * ArrayArrange generates evenly spaced n numbers within the closure range
     ```
     ArrayArrange(BYVAL low : INTEGER, high: INTEGER, div : REAL) RETURNS ARRAY
     ```
-
 * ArrayLinSpace generates n evenly spaced numbers in the closure range
     ```
     ArrayLinSpace(BYVAL low : INTEGER, high: INTEGER, num : INTEGER) RETURNS ARRAY

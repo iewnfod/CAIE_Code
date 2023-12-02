@@ -22,7 +22,7 @@ def get_value(value):
     return options_dict[value]
 
 def standard_output():
-    print(f'CAIE Pseudocode Interpreter v{VERSION} ({get_commit_hash_msg()[0]})')
+    print(f'CAIE Pseudocode Interpreter v{VERSION} ({get_current_branch()}/{get_commit_hash_msg()[0]})')
     print(f'Using {PLATFORM}')
     print('Repository at \033[4mhttps://github.com/iewnfod/CAIE_Code/\33[0m')
     print('Copyright (c) 2023 Iewnfod. ')

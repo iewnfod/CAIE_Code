@@ -357,9 +357,9 @@ class Python(AST_Node):
             global_space = {}
 
             # 尝试导入参数
-            for var in parameters[1:]:
+            for i in range(1, len(parameters)):
                 try:
-                    global_space[var.name] = var[0]
+                    global_space[self.parameters.parameters[i].id] = parameters[i][0]
                 except:
                     add_error_message(f'Pythons interface only accept variables with basic data types', self)
 

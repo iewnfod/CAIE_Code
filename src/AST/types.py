@@ -54,7 +54,7 @@ class Composite_type(AST_Node):
         that = self
 
         class t(base):
-            def __init__(self, name, *args, **kwargs):
+            def __init__(self, name=that.id, *args, **kwargs):
                 super().__init__(*args, **kwargs)
                 self.name = name
                 self.type = that.id
@@ -96,11 +96,12 @@ class Composite_type(AST_Node):
         stack.add_struct(self.id, t)
 
 class Class(AST_Node):
-    def __init__(self, id, body, *args, **kwargs):
+    def __init__(self, id, body, inherit_id='', *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.type = 'CLASS'
         self.id = id
         self.body = body
+        self.inherit_id = inherit_id
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + ' ' + self.id + '\n' + self.body.get_tree(level+1)
@@ -109,13 +110,21 @@ class Class(AST_Node):
         that = self
 
         class c(base):
-            def __init__(self, name, *args, **kwargs):
+            def __init__(self, name=that.id, *args, **kwargs):
                 super().__init__(*args, **kwargs)
                 self.name = name
                 self.type = that.id
                 self.body = that.body
                 self.is_struct = True
-                self.space = Space(self.type, {'SELF': (self, False)}, {})
+                if that.inherit_id:
+                    if that.inherit_id in stack.structs:
+                        inherit_obj = stack.structs[that.inherit_id]()
+                    else:
+                        add_stack_error_message(f'Cannot inherit from an unknown class: `{that.inherit_id}`')
+                        return
+                    self.space = Space(self.type, {'SELF': (self, False), 'SUPER': (inherit_obj, False)}, {})
+                else:
+                    self.space = Space(self.type, {'SELF': (self, False)}, {})
                 stack.push_subspace(self.space)
                 self.body.exe()
                 stack.pop_subspace()
