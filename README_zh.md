@@ -52,6 +52,7 @@ cpc [file_paths] [options]
 | Mnemonic | Option | Description |
 | -------- | ------ | ----------- |
 | `-c` | `--config` | 对解释器进行设置 |
+| `-d` | `--document` | 使用系统默认方式打开官方规范文件 |
 | `-h` | `--help` | 显示帮助页面 |
 | `-k` | `--keywords` | 显示所有的关键字 |
 | `-m` | `--migrate` | 将一个目录中的所有 `.p` 文件切换为 `.cpc` |
@@ -61,8 +62,8 @@ cpc [file_paths] [options]
 | `-v` | `--version` | 显示解释器当前版本 |
 | `-gt` | `--get-tree` | 显示脚本解析后生成的可运行的树 |
 | `-lc` | `--list-configs` | 显示解释器的所有设置 |
-| `-rc` | `--reset-configs` | 删除解释器的所有设置 |
 | `-ne` | `--no-error` | 禁止所有错误的输出 |
+| `-rc` | `--reset-configs` | 删除解释器的所有设置 |
 
 ### 可选配置
 

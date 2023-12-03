@@ -579,3 +579,6 @@ def p_class_expression(p):
         p[0] = AST.Class_expression(p[2], None, p=p)
     else:
         p[0] = AST.Class_expression(p[2], p[4], p=p)
+
+def p_set_statement(p):
+    """statement : TYPE ID EQUAL SET OF ID"""

@@ -64,6 +64,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 | Mnemonic | Option | Description |
 | -------- | ------ | ----------- |
 | `-c` | `--config` | To set configs of this interpreter |
+| `-d` | `--document` | To show the official document |
 | `-h` | `--help` | To show the help page |
 | `-k` | `--keywords` | To show all the keywords |
 | `-m` | `--migrate` | To migrate `.p` files to `.cpc` in a specified directory |
@@ -73,8 +74,8 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 | `-v` | `--version` | To show the version of this interpreter |
 | `-gt` | `--get-tree` | To show the tree of the program after being parsed |
 | `-lc` | `--list-configs` | To list all the configs of the interpreter |
-| `-rc` | `--reset-configs` | To reset all the configs of the interpreter |
 | `-ne` | `--no-error` | To remove all error messages |
+| `-rc` | `--reset-configs` | To reset all the configs of the interpreter |
 
 ### Config
 
