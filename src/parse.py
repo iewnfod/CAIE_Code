@@ -88,6 +88,10 @@ def p_dimension_expression(p):
 #     """statement : ID LEFT_SQUARE indexes RIGHT_SQUARE ASSIGN expression"""
 #     p[0] = AST.Array_assign(p[1], p[3], p[6], p=p)
 
+def p_new_assign_statement(p):
+    """statement : expression ASSIGN expression"""
+    p[0] = AST.NewAssign(p[1], p[3], p=p)
+
 def p_indexes(p):
     """indexes : indexes COMMA expression
             | expression"""
@@ -116,13 +120,17 @@ def p_array_items(p):
         p[1].add_item(p[3])
         p[0] = p[1]
 
-def p_input_statement(p):
-    """statement : INPUT ID"""
-    p[0] = AST.Input(p[2], p=p)
+# def p_input_statement(p):
+#     """statement : INPUT ID"""
+#     p[0] = AST.Input(p[2], p=p)
 
-def p_array_input(p):
-    """statement : INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE"""
-    p[0] = AST.Array_input(p[2], p[4], p=p)
+# def p_array_input(p):
+#     """statement : INPUT ID LEFT_SQUARE indexes RIGHT_SQUARE"""
+#     p[0] = AST.Array_input(p[2], p[4], p=p)
+
+def p_new_input_statement(p):
+    """statement : INPUT expression"""
+    p[0] = AST.NewInput(p[2], p=p)
 
 def p_output_statement(p):
     """statement : OUTPUT output_expression"""
@@ -370,37 +378,37 @@ def p_parameters(p):
 def p_procedure_statement(p):
     """statement : PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
             | PROCEDURE NEW LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-            | PROCEDURE ID statements ENDPROCEDURE
-            | PROCEDURE NEW statements ENDPROCEDURE"""
-    if len(p) == 5:
-        p[0] = AST.Function(p[2], None, p[3], p=p)
+            | PROCEDURE ID LEFT_PAREN RIGHT_PAREN statements ENDPROCEDURE
+            | PROCEDURE NEW LEFT_PAREN RIGHT_PAREN statements ENDPROCEDURE"""
+    if len(p) == 7:
+        p[0] = AST.Function(p[2], None, p[5], p=p)
     else:
         p[0] = AST.Function(p[2], p[4], p[6], p=p)
 
 def p_public_procedure_statement(p):
     """statement : PUBLIC PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
             | PUBLIC PROCEDURE NEW LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-            | PUBLIC PROCEDURE ID statements ENDPROCEDURE
-            | PUBLIC PROCEDURE NEW statements ENDPROCEDURE"""
-    if len(p) == 6:
-        p[0] = AST.Function(p[3], None, p[4], p=p)
+            | PUBLIC PROCEDURE ID LEFT_PAREN RIGHT_PAREN statements ENDPROCEDURE
+            | PUBLIC PROCEDURE NEW LEFT_PAREN RIGHT_PAREN statements ENDPROCEDURE"""
+    if len(p) == 8:
+        p[0] = AST.Function(p[3], None, p[6], p=p)
     else:
         p[0] = AST.Function(p[3], p[5], p[7], p=p)
 
 def p_private_procedure_statement(p):
     """statement : PRIVATE PROCEDURE ID LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
             | PRIVATE PROCEDURE NEW LEFT_PAREN declare_parameters RIGHT_PAREN statements ENDPROCEDURE
-            | PRIVATE PROCEDURE ID statements ENDPROCEDURE
-            | PRIVATE PROCEDURE NEW statements ENDPROCEDURE"""
-    if len(p) == 6:
-        p[0] = AST.Function(p[3], None, p[4], private=True, p=p)
+            | PRIVATE PROCEDURE ID LEFT_PAREN RIGHT_PAREN statements ENDPROCEDURE
+            | PRIVATE PROCEDURE NEW LEFT_PAREN RIGHT_PAREN statements ENDPROCEDURE"""
+    if len(p) == 8:
+        p[0] = AST.Function(p[3], None, p[6], private=True, p=p)
     else:
         p[0] = AST.Function(p[3], p[5], p[7], private=True, p=p)
 
 def p_call_procedure_statement(p):
     """statement : CALL ID LEFT_PAREN parameters RIGHT_PAREN
-            | CALL ID"""
-    if len(p) == 3:
+            | CALL ID LEFT_PAREN RIGHT_PAREN"""
+    if len(p) == 5:
         p[0] = AST.Call_function(p[2], p=p)
     else:
         p[0] = AST.Call_function(p[2], p[4], p=p)
@@ -408,54 +416,54 @@ def p_call_procedure_statement(p):
 def p_function_statement(p):
     """statement : FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
             | FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
-            | FUNCTION ID RETURNS ID statements ENDFUNCTION
-            | FUNCTION ID RETURNS ARRAY statements ENDFUNCTION"""
-    if len(p) == 7:
-        p[0] = AST.Function(p[2], None, p[5], p[4], p=p)
+            | FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+            | FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION"""
+    if len(p) == 9:
+        p[0] = AST.Function(p[2], None, p[7], p[6], p=p)
     else:
         p[0] = AST.Function(p[2], p[4], p[8], p[7], p=p)
 
 def p_public_function_statement(p):
     """statement : PUBLIC FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
             | PUBLIC FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
-            | PUBLIC FUNCTION ID RETURNS ID statements ENDFUNCTION
-            | PUBLIC FUNCTION ID RETURNS ARRAY statements ENDFUNCTION"""
-    if len(p) == 8:
-        p[0] = AST.Function(p[3], None, p[6], p[5], p=p)
+            | PUBLIC FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+            | PUBLIC FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION"""
+    if len(p) == 10:
+        p[0] = AST.Function(p[3], None, p[8], p[7], p=p)
     else:
         p[0] = AST.Function(p[3], p[5], p[9], p[8], p=p)
 
 def p_private_function_statement(p):
     """statement : PRIVATE FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ID statements ENDFUNCTION
             | PRIVATE FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION
-            | PRIVATE FUNCTION ID RETURNS ID statements ENDFUNCTION
-            | PRIVATE FUNCTION ID RETURNS ARRAY statements ENDFUNCTION"""
-    if len(p) == 8:
-        p[0] = AST.Function(p[3], None, p[6], p[5], private=True, p=p)
+            | PRIVATE FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ID statements ENDFUNCTION
+            | PRIVATE FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ARRAY statements ENDFUNCTION"""
+    if len(p) == 10:
+        p[0] = AST.Function(p[3], None, p[8], p[7], private=True, p=p)
     else:
         p[0] = AST.Function(p[3], p[5], p[9], p[8], private=True, p=p)
 
 def p_arr_function_statement(p):
     """statement : FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION
-            | FUNCTION ID RETURNS ARRAY OF ID statements ENDFUNCTION"""
-    if len(p) == 9:
-        p[0] = AST.ArrFunction(p[2], None, p[6], p[7], p=p)
+            | FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION"""
+    if len(p) == 11:
+        p[0] = AST.ArrFunction(p[2], None, p[8], p[9], p=p)
     else:
         p[0] = AST.ArrFunction(p[2], p[4], p[9], p[10], p=p)
 
 def p_public_arr_function_statement(p):
     """statement : PUBLIC FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION
-            | PUBLIC FUNCTION ID RETURNS ARRAY OF ID statements ENDFUNCTION"""
-    if len(p) == 10:
-        p[0] = AST.ArrFunction(p[3], None, p[7], p[8], p=p)
+            | PUBLIC FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION"""
+    if len(p) == 12:
+        p[0] = AST.ArrFunction(p[3], None, p[9], p[10], p=p)
     else:
         p[0] = AST.ArrFunction(p[3], p[5], p[10], p[11], p=p)
 
 def p_private_arr_function_statement(p):
     """statement : PRIVATE FUNCTION ID LEFT_PAREN declare_parameters RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION
-            | PRIVATE FUNCTION ID RETURNS ARRAY OF ID statements ENDFUNCTION"""
-    if len(p) == 10:
-        p[0] = AST.ArrFunction(p[3], None, p[7], p[8], private=True, p=p)
+            | PRIVATE FUNCTION ID LEFT_PAREN RIGHT_PAREN RETURNS ARRAY OF ID statements ENDFUNCTION"""
+    if len(p) == 12:
+        p[0] = AST.ArrFunction(p[3], None, p[9], p[10], private=True, p=p)
     else:
         p[0] = AST.ArrFunction(p[3], p[5], p[10], p[11], private=True, p=p)
 
@@ -556,13 +564,13 @@ def p_import_statement(p):
     """statement : IMPORT expression"""
     p[0] = AST.Import(p[2], p=p)
 
-def p_new_assign_statement(p):
-    """statement : expression ASSIGN expression"""
-    p[0] = AST.NewAssign(p[1], p[3], p=p)
-
 def p_class_statement(p):
     """statement : CLASS ID statements ENDCLASS"""
     p[0] = AST.Class(p[2], p[3], p=p)
+
+def p_class_inherit_statement(p):
+    """statement : CLASS ID INHERITS ID statements ENDCLASS"""
+    p[0] = AST.Class(p[2], p[5], p[4], p=p)
 
 def p_class_expression(p):
     """expression : NEW ID
