@@ -6,7 +6,7 @@
 <a href="./assets/cpc.svg">
 <img src="./assets/cpc.svg" width="100" height="100" alt="logo">
 </a>
-<h3 align="center">the CAIE Pseudocode Interpreter</h3>
+<h3 align="center">CAIE 伪代码解释器</h3>
 </p>
 <p align="center">
 <a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
