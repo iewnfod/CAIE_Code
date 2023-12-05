@@ -97,6 +97,10 @@
     ```
     STR_TO_NUM(s : STRING) RETURNS REAL
     ```
+* `NUM_TO_STR`: transform a number `s` to a string
+    ```
+    NUM_TO_STR(s : REAL) RETURNS STRING
+    ```
 
 ## [Time](./time.cpc)
 * `Time`: get current timestamp
@@ -109,15 +113,15 @@
     Import(target : STRING) RETURNS ImportObj
     ```
 ## [Array](./array.cpc)
-* ArrayOne sets the contents of an array of custom length and width to 1
+* `ArrayOne` sets the contents of an array of custom length and width to 1
     ```
     ArrayOne(BYVAL row : INTEGER, col : INTEGER) RETURNS ARRAY
     ```
-* ArrayArrange generates evenly spaced n numbers within the closure range
+* `ArrayArrange` generates evenly spaced n numbers within the closure range
     ```
     ArrayArrange(BYVAL low : INTEGER, high: INTEGER, div : REAL) RETURNS ARRAY
     ```
-* ArrayLinSpace generates n evenly spaced numbers in the closure range
+* `ArrayLinSpace` generates n evenly spaced numbers in the closure range
     ```
     ArrayLinSpace(BYVAL low : INTEGER, high: INTEGER, num : INTEGER) RETURNS ARRAY
     ```
