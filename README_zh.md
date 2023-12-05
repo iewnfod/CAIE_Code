@@ -503,6 +503,7 @@ NEXT i
         > PYTHON("_result=a+1", a)
         1
         ```
+* `VARTYPE(v)` 获取`v`的数据类型并以字符串的形式返回
 
 * 更多非官方内置函数，请查阅 [scripts](./scripts)
 

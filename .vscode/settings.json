@@ -33,6 +33,7 @@
         "Ucase",
         "UMINUS",
         "UPLUS",
+        "VARTYPE",
         "WRITEFILE"
     ]
 }
