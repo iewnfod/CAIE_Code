@@ -307,7 +307,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         ENDIF
         ```
     * CASE statements
-        > IMPORTANT: official standards do not have semicolons;` here
+        > IMPORTANT: official standards do not have semicolons `;` here
         ```
         CASE OF <identifier>
             <value> : <statements>;
@@ -535,6 +535,8 @@ The following items give the `DATATYPE`, its description, and the default value 
     > you *must* pass all variables used in the Python code in `*args`, otherwise, it will not run correctly.
 
 * `VARTYPE(v)` is an interface to get the type of `v` and return it as a string.
+
+* `ANY` is a type that used to allow some unknown type data.
 
 * For more non-official scripts, please see [scripts](./scripts).
 

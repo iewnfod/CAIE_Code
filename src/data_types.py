@@ -172,3 +172,12 @@ class POINTER(base):
 
     def solve_value(self):
         return self.value
+
+class ANY(base):
+    def __init__(self, value=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.value = value
+        self.type = 'ANY'
+
+    def set_value(self, value):
+        self.value = value

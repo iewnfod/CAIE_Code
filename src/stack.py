@@ -57,6 +57,7 @@ class Stack:
             'DATE': DATE,
             'ARRAY' : ARRAY,
             'ENUM' : ENUM,
+            'ANY': ANY,
         }  # {结构名: 结构实例}
         self.return_variables = None
         self.return_request = False
