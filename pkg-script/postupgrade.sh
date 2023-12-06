@@ -18,6 +18,11 @@ if [ $(arch) = "arm64" ]; then
    ln -sf ${current_dir}/bin/cpc_arm /usr/local/bin/cpc || exit 1
 elif [ $(arch) = "x86_64" ]; then
    ln -sf ${current_dir}/bin/cpc_x86 /usr/local/bin/cpc || exit 1
+elif [ $(arch) = "i386" ]; then
+   ln -sf ${current_dir}/bin/cpc_x86 /usr/local/bin/cpc || exit 1
+else
+   echo "Unknown architecture"
+   exit 1
 fi
 
 # 链接到 man 目录，如果失败则返回退出代码1
