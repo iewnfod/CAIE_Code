@@ -5,6 +5,7 @@ test_requirements()
 from ply import yacc
 from ply import lex
 from chardet import detect
+import signal
 # 导入色彩基础库，保证\033能正确的转译
 import colorama
 colorama.init()
@@ -31,6 +32,11 @@ preline = '>'
 multi_preline = '.'
 home_path = HOME_PATH
 
+# 处理keyboard interrupt
+def signal_handler(_signal, _frame):
+    stack.raise_keyboard_interrupt()
+
+signal.signal(signal.SIGINT, signal_handler)
 
 # 错误的argument
 def wrong_argument(msg):
@@ -112,6 +118,7 @@ def with_line():
     options.standard_output()
     # 运行
     while 1:
+        stack.reset_keyboard_interrupt()
         text = multi_input()
         lexer.lineno = 1
         # 尝试运行特殊指令

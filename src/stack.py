@@ -61,6 +61,7 @@ class Stack:
         }  # {结构名: 结构实例}
         self.return_variables = None
         self.return_request = False
+        self.keyboard_interrupt = False
 
     def global_space(self):
         return self.spaces[-1]
@@ -193,3 +194,9 @@ class Stack:
 
     def delete(self):
         del self
+
+    def raise_keyboard_interrupt(self):
+        self.keyboard_interrupt = True
+
+    def reset_keyboard_interrupt(self):
+        self.keyboard_interrupt = False
