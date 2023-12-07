@@ -151,6 +151,8 @@ def with_file(path, preload=False):
         text = remove_comment(f.read())
     if not text:
         return
+    # reset stack
+    stack.reset_keyboard_interrupt()
 
     # 尝试运行
     try:

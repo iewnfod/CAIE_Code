@@ -24,7 +24,6 @@ class Statements(AST_Node):
         for statement in self.statements:
             # 如果存在keyboard interrupt，那就退出
             if stack.keyboard_interrupt:
-                print('Keyboard Interrupt')
                 break
             # 如果当前请求返回了，那就直接停止运行这个表达式块
             if stack.return_request:

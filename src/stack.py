@@ -196,6 +196,7 @@ class Stack:
         del self
 
     def raise_keyboard_interrupt(self):
+        print("Keyboard Interrupt")
         self.keyboard_interrupt = True
 
     def reset_keyboard_interrupt(self):
