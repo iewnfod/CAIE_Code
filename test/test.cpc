@@ -43,7 +43,7 @@ ENDPROCEDURE
 OUTPUT add_num_fn(1,2.3)
 CALL add_num_pro(1,2.3)
 
-CONSTANT import_test = Import("import_test.cpc")
+CONSTANT import_test = Import("import_test")
 OUTPUT import_test.hello_add_test_string()
 
 DECLARE file_path : STRING

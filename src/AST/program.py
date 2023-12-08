@@ -272,12 +272,15 @@ class Import(AST_Node):
             mkdir(default_package_path)
 
         path = self.target.exe()[0]
-        final_path = ''
+        if Path.splitext(path)[1] != '.cpc':
+            path += '.cpc'
+        final_path = path
         # 尝试选择路径
         if Path.exists(Path.join(default_package_path, path)):
             final_path = Path.join(default_package_path, path)
         if Path.exists(path):
             final_path = path
+        # 导入
         if Path.exists(final_path):
             # 运行导入程序
             from main import with_file
