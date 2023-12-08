@@ -1,7 +1,5 @@
 # CAIE Code (cpc)
 
-<br/>
-
 <p align="center">
 <a href="./assets/cpc.svg">
 <img src="./assets/cpc.svg" width="100" height="100" alt="logo">
@@ -11,8 +9,6 @@
 <p align="center">
 <a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
 </p>
-
-[TOC]
 
 ## 安装与使用
 
