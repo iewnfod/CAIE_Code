@@ -2,7 +2,8 @@ from .data import *
 from ..AST_Base import *
 from ..global_var import *
 from .array import *
-from os.path import exists
+from os import path as Path
+from os import mkdir
 
 class Statements(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -266,13 +267,23 @@ class Import(AST_Node):
         last_file = get_running_path()
         last_mod = get_running_mod()
         # 获取要导入的路径
+        default_package_path = config.get_config('default-package-path')
+        if not Path.exists(default_package_path):
+            mkdir(default_package_path)
+
         path = self.target.exe()[0]
-        if exists(path):
+        final_path = ''
+        # 尝试选择路径
+        if Path.exists(Path.join(default_package_path, path)):
+            final_path = Path.join(default_package_path, path)
+        if Path.exists(path):
+            final_path = path
+        if Path.exists(final_path):
             # 运行导入程序
             from main import with_file
-            with_file(path)
+            with_file(final_path)
             # 修改回之前的路径，以及类型
             set_running_path(last_file)
             set_running_mod(last_mod)
         else:
-            add_error_message(f'Cannot find `{path}` to import', self)
+            add_error_message(f'Cannot find `{final_path}` to import', self)
