@@ -1,6 +1,5 @@
 # CAIE Code (cpc)
 
-<br/>
 <p align="center">
 <a href="./assets/cpc.svg">
 <img src="./assets/cpc.svg" width="100" height="100" alt="logo">
@@ -10,6 +9,7 @@
 <p align="center">
 <a href="./README_zh.md">中文</a> | <a href="./README.md">English</a>
 </p>
+[TOC]
 
 ## Installation and Update
 
@@ -116,6 +116,9 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
     - `dev.simulate-update`
       - `true`: Enable simulation updates
       - `false`: Disable simulation updates
+### Package Management
+
+Packages are placed in `packages/` without `.cpc` suffix. You can freely create, share and modify your packages. These packages are not loaded by default, but only when `IMPORT <NAME>` is written in a cpc script.
 
 ## FAQs
 
@@ -299,7 +302,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         IF <condition> THEN
             <statements>
         ENDIF
-
+        
         IF <condition> THEN
             <statements>
         ELSE
@@ -340,7 +343,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         PROCEDURE <identifier> ()
             <statements>
         ENDPROCEDURE
-
+        
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -348,7 +351,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a procedure
         ```
         CALL <identifier> ()
-
+        
         CALL <identifier> (<value>, ...)
         ```
     * functions with return values
@@ -357,7 +360,7 @@ The following items give the `DATATYPE`, its description, and the default value 
             <statements>
             RETURN <value>
         ENDFUNCTION
-
+        
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -365,7 +368,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a function with return values
         ```
         <identifier> ()
-
+        
         <identifier> (<value>, ...)
         ```
     * Before the parameters of those sub-routines, you *can* use `BYREF` or `BYVAL` to force the program to pass those parameters by reference or by-value respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the prior parameter. If the program cannot find a clear indication it will, by default pass parameters by value.
@@ -434,15 +437,15 @@ The following items give the `DATATYPE`, its description, and the default value 
         PRIVATE PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-
+        
         PUBLIC PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-
+        
         PRIVATE FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
-
+        
         PUBLIC FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
@@ -549,8 +552,8 @@ The following items give the `DATATYPE`, its description, and the default value 
 - [ ] Implement a high performance virtual machine to run. (Similar as the solution of Java)
 ### Version 0.3.x Target
 - [ ] Allow building into executable binary file.
-### 长期目标
-- [ ] Provide more [unofficial functions](./scripts/README.md).
+### Long-term Targets
+- [ ] Provide more packages for use.
 - [ ] Increase running speed and stability.
 - [ ] Implement bootstrap.
 

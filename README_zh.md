@@ -12,6 +12,8 @@
 <a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
 </p>
 
+[TOC]
+
 ## 安装与使用
 
 ### 安装前提
@@ -105,24 +107,28 @@ cpc [file_paths] [options]
     - `true`: 开启模拟更新
     - `false`: 关闭模拟更新
 
-### 常见问题
+### 包管理
 
-#### 出现 `Import Error`
+默认的包位置在 `packages/` 目录下，并且没有任何后缀名。您可以在此目录下创建、更改、分享任何包。这些包不会默认加载，仅当使用 `IMPORT <NAME>` 是才会加载在代码中。
+
+## 常见问题
+
+### 出现 `Import Error`
 尝试手动安装依赖：
 ```shell
 pip install -r requirements.txt
 ```
 
-#### 成功执行了第四步的依赖安装但还是无法正常运行
+### 成功执行了第四步的依赖安装但还是无法正常运行
 `cpc`文件会优先选择 `PyPy3` 运行
 因此，在安装依赖时，请确保安装在了正确版本的 `Python3` 上
 可以使用 `<指定Python版本> -m pip install -r requirements.txt` 进行安装
 
-#### Playground 模式下，上下左右键无法正常使用
+### Playground 模式下，上下左右键无法正常使用
 使用 `pip install readline` 安装依赖并尝试运行
 若 `readline` 无法正常安装，请安装 `gnureadline`，即 `pip install gnureadline`，再尝试运行
 
-#### cpc在启动时报OSError
+### cpc在启动时报OSError
 进入`cpc`安装目录，可使用
 删除`.cpc_history`文件
 更新`cpc`
@@ -279,7 +285,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-
+        
         IF <condition> THEN
             <statements>
         ELSE
@@ -320,7 +326,7 @@ NEXT i
         PROCEDURE <identifier> ()
             <statements>
         ENDPROCEDURE
-
+        
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -328,7 +334,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier> ()
-
+        
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -337,7 +343,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-
+        
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -345,7 +351,7 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-
+        
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。
@@ -413,15 +419,15 @@ NEXT i
         PRIVATE PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-
+        
         PUBLIC PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-
+        
         PRIVATE FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
-
+        
         PUBLIC FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
@@ -520,7 +526,7 @@ NEXT i
 ### Version 0.3.x 目标
 - [ ] 支持直接编译为可执行文件
 ### 长期目标
-- [ ] 提供更多[非官方函数](./scripts/README.md)
+- [ ] 提供更多包
 - [ ] 提高运行速度与效率
 - [ ] 实现自举
 
