@@ -3,6 +3,7 @@ class base:
         self.name = name
         self.is_struct = False
         self.current_space = None
+        self.is_const = False
 
     def __str__(self):
         return str(self.value)
