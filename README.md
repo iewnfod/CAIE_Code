@@ -62,19 +62,20 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 
 | Mnemonic | Option | Description |
 | -------- | ------ | ----------- |
-| `-c` | `--config` | To set configs of this interpreter |
-| `-d` | `--document` | To show the official document |
-| `-h` | `--help` | To show the help page |
-| `-k` | `--keywords` | To show all the keywords |
-| `-m` | `--migrate` | To migrate `.p` files to `.cpc` in a specified directory |
-| `-p` | `--parse` | To show parse information during running |
-| `-t` | `--time` | To show the time for the script to run |
-| `-u` | `--update` | To update the version |
-| `-v` | `--version` | To show the version of this interpreter |
-| `-gt` | `--get-tree` | To show the tree of the program after being parsed |
-| `-lc` | `--list-configs` | To list all the configs of the interpreter |
-| `-ne` | `--no-error` | To remove all error messages |
-| `-rc` | `--reset-configs` | To reset all the configs of the interpreter |
+| `-c` | `--[c]onfig` | To set configs of this interpreter |
+| `-d` | `--[d]ocument` | To show the official document |
+| `-g` | `--packa[g]e` | To start the package manager|
+| `-h` | `--[h]elp` | To show the help page |
+| `-k` | `--[k]eywords` | To show all the keywords |
+| `-m` | `--[m]igrate` | To migrate `.p` files to `.cpc` in a specified directory |
+| `-p` | `--[p]arse` | To show parse information during running |
+| `-t` | `--[t]ime` | To show the time for the script to run |
+| `-u` | `--[u]pdate` | To update the version |
+| `-v` | `--[v]ersion` | To show the version of this interpreter |
+| `-gt` | `--[g]et-[t]ree` | To show the tree of the program after being parsed |
+| `-lc` | `--[l]ist-[c]onfigs` | To list all the configs of the interpreter |
+| `-ne` | `--[n]o-[e]rror` | To remove all error messages |
+| `-rc` | `--[r]eset-[c]onfigs` | To reset all the configs of the interpreter |
 
 ### Config
 

@@ -1,6 +1,7 @@
 import platform
 from .update import VERSION, update, get_commit_hash_msg, get_current_branch
 import os
+from .package import option_package
 
 PLATFORM = f'[ {platform.python_implementation()} {platform.python_version()} ] on {platform.system()}'
 
@@ -32,7 +33,7 @@ def open_parse_info():
     options_dict['show_parse'] = True
 
 def version():
-    print(f'Version \033[1m{VERSION}\033[0m ({get_current_branch()}/{get_commit_hash_msg()[0]})')
+    print(f'Version \033[1m{VERSION}\033[0m ({get_current_branch()}/\033[31m{get_commit_hash_msg()[0]}\033[0m)')
     print(f'Using {PLATFORM}')
     print('Current Version Notes:', get_commit_hash_msg()[1])
 
@@ -96,7 +97,7 @@ def change_config(opt_name, value):
 
 def migrate_files(directory):
     if os.path.isfile(directory):
-        print('Please enter a dir path instead of a single file.')
+        print('Please enter a directory path instead of a single file.')
         return
     for root, dirs, files in os.walk(directory):
         # Filter out directories starting with a dot
@@ -140,6 +141,7 @@ def doc():
         os.system(f'open "{file_path}"')
 
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
+# IF value_num = -1 THEN pass all parameters
 class Opt:
     def __init__(self, short_arg, long_arg, func, description, exit_program, value_num=0, *args, **kwargs):
         self.short_arg = short_arg
@@ -155,7 +157,11 @@ class Opt:
         return t == self.short_arg or t == self.long_arg
 
     def run(self, value):
-        self.func(*value[1:self.value_num+1], *self.args, **self.kwargs)
+        if self.value_num == -1:
+            # to pass all parameters
+            self.func(*value[1:], *self.args, **self.kwargs)
+        else:
+            self.func(*value[1:self.value_num+1], *self.args, **self.kwargs)
         if self.exit_program:
             quit(0)
 
@@ -179,5 +185,6 @@ arguments = [
     Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1),
     Opt('-lc', '--list-configs', list_configs, 'To list all the configs of the interpreter', True),
     Opt('-rc', '--reset-configs', reset_configs, 'To reset all the configs of the interpreter', True),
-    Opt('-d', '--document', doc, 'To show the official document', True)
+    Opt('-d', '--document', doc, 'To show the official document', True),
+    Opt('-g', '--package', option_package, 'To start the package manager', True, -1) # -1 to choose pass parameters
 ]
