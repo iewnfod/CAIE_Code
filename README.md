@@ -118,7 +118,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
       - `false`: Disable simulation updates
 ### Package Management
 
-Packages are placed in `packages/` without `.cpc` suffix. You can freely create, share and modify your packages. These packages are not loaded by default, but only when `IMPORT <NAME>` is written in a cpc script.
+Packages are placed in `packages/` with `.cpg` suffix. You can freely create, share and modify your packages. These packages are not loaded by default, but only when `IMPORT <NAME>` is written in a cpc script.
 
 ## FAQs
 
