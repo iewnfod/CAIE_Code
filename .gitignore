@@ -11,3 +11,10 @@ target/
 temp/
 *.log
 .cpc_config.json
+
+# packages by default, DO NOT upload to main branch
+# Let users download by cpc -g install <pkgname>
+# package originals are in other repository
+packages/
+!packages/README.md
+!packages/example.cpg 
