@@ -3,6 +3,7 @@ class base:
         self.name = name
         self.is_struct = False
         self.current_space = None
+        self.is_const = False
 
     def __str__(self):
         return str(self.value)
@@ -172,3 +173,12 @@ class POINTER(base):
 
     def solve_value(self):
         return self.value
+
+class ANY(base):
+    def __init__(self, value=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.value = value
+        self.type = 'ANY'
+
+    def set_value(self, value):
+        self.value = value

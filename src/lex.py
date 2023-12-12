@@ -61,7 +61,9 @@ reserved = {
     "PASS",
     "IMPORT",
     "SUPER",
-    "SELF"
+    "SELF",
+    "SET",
+    "DEFINE",
 }
 
 tokens = (

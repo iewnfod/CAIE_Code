@@ -1,5 +1,6 @@
 from .global_var import *
 from .data_types import *
+from .history import HOME_PATH
 from copy import copy
 
 # (空间名, {变量名: (类实例, 是否是常量)}, {函数名: 函数AST实例})
@@ -57,9 +58,13 @@ class Stack:
             'DATE': DATE,
             'ARRAY' : ARRAY,
             'ENUM' : ENUM,
+            'ANY': ANY,
         }  # {结构名: 结构实例}
         self.return_variables = None
         self.return_request = False
+        self.keyboard_interrupt = False
+        # 内置常量
+        self.new_constant('__HOME__', STRING(HOME_PATH))
 
     def global_space(self):
         return self.spaces[-1]
@@ -96,6 +101,7 @@ class Stack:
         else:
             clone = copy(value)
         # 赋值
+        clone.is_const = True
         self.spaces[0].new_variable(id, clone, True)
 
     def set_variable(self, id, value, type):
@@ -192,3 +198,10 @@ class Stack:
 
     def delete(self):
         del self
+
+    def raise_keyboard_interrupt(self):
+        print("Keyboard Interrupt")
+        self.keyboard_interrupt = True
+
+    def reset_keyboard_interrupt(self):
+        self.keyboard_interrupt = False

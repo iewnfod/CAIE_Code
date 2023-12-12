@@ -128,6 +128,16 @@ def reset_configs():
     from .global_var import config
     config.reset_config()
 
+def doc():
+    from .history import HOME_PATH
+    system = platform.system()
+    file_path = os.path.join(HOME_PATH, 'Pseudocode Guide.pdf')
+    if system == 'Windows':
+        os.startfile(file_path)
+    elif system == 'Linux':
+        os.system(f'xdg-open "{file_path}"')
+    elif system == 'Darwin':
+        os.system(f'open "{file_path}"')
 
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
 class Opt:
@@ -168,5 +178,6 @@ arguments = [
     Opt('-c', '--config', change_config, 'To set configs of this interpreter', True, 2),
     Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1),
     Opt('-lc', '--list-configs', list_configs, 'To list all the configs of the interpreter', True),
-    Opt('-rc', '--reset-configs', reset_configs, 'To reset all the configs of the interpreter', True)
+    Opt('-rc', '--reset-configs', reset_configs, 'To reset all the configs of the interpreter', True),
+    Opt('-d', '--document', doc, 'To show the official document', True)
 ]

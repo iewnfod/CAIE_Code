@@ -19,8 +19,8 @@ cpc - An interpreter for CAIE Pseudocode.
 **-c**, **--config**
 : To set configs of this interpreter
 
-**-gt**, **--get-tree**
-: To show the tree of the program after being parsed
+**-d**, **--document**
+: To show the official document
 
 **-h**, **--help**
 : To show the help page
@@ -30,9 +30,6 @@ cpc - An interpreter for CAIE Pseudocode.
 
 **-m**, **--migrate**
 : To migrate .p files in a specified directory
-
-**-ne**, **--no-error**
-: To remove all error messages
 
 **-p**, **--parse**
 : To show parse information during running
@@ -46,8 +43,17 @@ cpc - An interpreter for CAIE Pseudocode.
 **-v**, **--version**
 : To show the version of installed *cpc*
 
+**-gt**, **--get-tree**
+: To show the tree of the program after being parsed
+
 **-lc**, **--list-configs**
 : To show all configs of the interpreter
+
+**-ne**, **--no-error**
+: To remove all error messages
+
+**-rc**, **--reset-configs**
+: To reset all the configs of the interpreter
 
 ## CONFIGS
 **remote** - *Github* *Gitee*

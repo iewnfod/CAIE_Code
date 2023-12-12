@@ -1,12 +1,10 @@
 # CAIE Code (cpc)
 
-<br/>
-
 <p align="center">
 <a href="./assets/cpc.svg">
 <img src="./assets/cpc.svg" width="100" height="100" alt="logo">
 </a>
-<h3 align="center">the CAIE Pseudocode Interpreter</h3>
+<h3 align="center">CAIE 伪代码解释器</h3>
 </p>
 <p align="center">
 <a href="./README_cn.md">中文</a> | <a href="./README.md">English</a>
@@ -52,6 +50,7 @@ cpc [file_paths] [options]
 | Mnemonic | Option | Description |
 | -------- | ------ | ----------- |
 | `-c` | `--config` | 对解释器进行设置 |
+| `-d` | `--document` | 使用系统默认方式打开官方规范文件 |
 | `-h` | `--help` | 显示帮助页面 |
 | `-k` | `--keywords` | 显示所有的关键字 |
 | `-m` | `--migrate` | 将一个目录中的所有 `.p` 文件切换为 `.cpc` |
@@ -61,8 +60,8 @@ cpc [file_paths] [options]
 | `-v` | `--version` | 显示解释器当前版本 |
 | `-gt` | `--get-tree` | 显示脚本解析后生成的可运行的树 |
 | `-lc` | `--list-configs` | 显示解释器的所有设置 |
-| `-rc` | `--reset-configs` | 删除解释器的所有设置 |
 | `-ne` | `--no-error` | 禁止所有错误的输出 |
+| `-rc` | `--reset-configs` | 删除解释器的所有设置 |
 
 ### 可选配置
 
@@ -104,24 +103,24 @@ cpc [file_paths] [options]
     - `true`: 开启模拟更新
     - `false`: 关闭模拟更新
 
-### 常见问题
+## 常见问题
 
-#### 出现 `Import Error`
+### 出现 `Import Error`
 尝试手动安装依赖：
 ```shell
 pip install -r requirements.txt
 ```
 
-#### 成功执行了第四步的依赖安装但还是无法正常运行
+### 成功执行了第四步的依赖安装但还是无法正常运行
 `cpc`文件会优先选择 `PyPy3` 运行
 因此，在安装依赖时，请确保安装在了正确版本的 `Python3` 上
 可以使用 `<指定Python版本> -m pip install -r requirements.txt` 进行安装
 
-#### Playground 模式下，上下左右键无法正常使用
+### Playground 模式下，上下左右键无法正常使用
 使用 `pip install readline` 安装依赖并尝试运行
 若 `readline` 无法正常安装，请安装 `gnureadline`，即 `pip install gnureadline`，再尝试运行
 
-#### cpc在启动时报OSError
+### cpc在启动时报OSError
 进入`cpc`安装目录，可使用
 删除`.cpc_history`文件
 更新`cpc`
@@ -278,7 +277,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-
+        
         IF <condition> THEN
             <statements>
         ELSE
@@ -319,7 +318,7 @@ NEXT i
         PROCEDURE <identifier> ()
             <statements>
         ENDPROCEDURE
-
+        
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -327,7 +326,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier> ()
-
+        
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -336,7 +335,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-
+        
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -344,7 +343,7 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-
+        
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。
@@ -412,15 +411,15 @@ NEXT i
         PRIVATE PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-
+        
         PUBLIC PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-
+        
         PRIVATE FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
-
+        
         PUBLIC FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
@@ -503,6 +502,10 @@ NEXT i
         1
         ```
 
+* `VARTYPE(v)` 获取`v`的数据类型并以字符串的形式返回
+
+* `ANY` 这是一个任意类型用于允许一些未知类型的输入
+
 * 更多非官方内置函数，请查阅 [scripts](./scripts)
 
 ## 目标
@@ -515,7 +518,7 @@ NEXT i
 ### Version 0.3.x 目标
 - [ ] 支持直接编译为可执行文件
 ### 长期目标
-- [ ] 提供更多[非官方函数](./scripts/README.md)
+- [ ] 提供更多包
 - [ ] 提高运行速度与效率
 - [ ] 实现自举
 
