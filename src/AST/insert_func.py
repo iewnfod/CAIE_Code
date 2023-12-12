@@ -414,6 +414,24 @@ class Div(AST_Node):
         else:
             add_error_message(f'Mod only have 2 parameters, but found 0', self)
 
+class VarType(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'VAR_TYPE'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) == 1:
+                return (parameters[0][1], 'STRING')
+            else:
+                add_error_message(f'Type only have 1 parameters, but found {len(parameters)}', self)
+        else:
+            add_error_message(f'Type only have 1 parameters, but found 0', self)
 
 insert_functions = {
     "INT": Int_convert,
@@ -436,4 +454,5 @@ insert_functions = {
     "PYTHON": Python,
     "MOD": Mod,
     "DIV": Div,
+    "VARTYPE": VarType,
 }

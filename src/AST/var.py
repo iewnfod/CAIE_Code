@@ -87,7 +87,10 @@ class NewAssign(AST_Node):
         target_item = self.target_expr.exe()
         if target_item is not None:
             try:
-                target_item.set_value(assign_item[0])
+                if target_item.is_const == False:
+                    target_item.set_value(assign_item[0])
+                else:
+                    add_error_message(f'Cannot assign value to a constant', self)
             except:
                 add_error_message(f'Cannot assign `{assign_item}` to `{target_item}`', self)
         else:

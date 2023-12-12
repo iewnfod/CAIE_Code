@@ -54,3 +54,5 @@ recursive_limit = TypeConfig(int)
 last_auto_update = TypeConfig(float)
 
 interval_update = TypeConfig(int)
+
+default_package_path = TypeConfig(str)
