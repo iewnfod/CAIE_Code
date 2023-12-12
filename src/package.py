@@ -1,9 +1,11 @@
 import os
 from .history import HOME_PATH
-PKG_PATH = os.path.join(HOME_PATH, "packages")
+from .global_var import config
+from wget import download
+PKG_PATH = config.get_config('default-package-path')
+REMOTE_REPO = config.get_config('remote-package-repo')
 ALLOWED_PKG_SUFFIX = '.cpg'
 DIS_FOLDER = ".disabled"
-# though, said to be .cpg, allow all others
 
 
 def get_enabled():
@@ -30,8 +32,10 @@ def get_disabled():
 
 
 def install_remote(packagename):
-    # later I will materialize it
-    print("Jing Qing Qi Dai")
+    # install from remote repo
+    # default: REMOTE_REPO
+    print(download)
+    
 
 
 def show_info():

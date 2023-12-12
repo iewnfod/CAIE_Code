@@ -32,6 +32,7 @@ class Config:
 			'last-auto-update': _Config('last-auto-update', 0, last_auto_update),
 			'interval-update': _Config('interval-update', 86400, interval_update),
 			'default-package-path': _Config('default-package-path', os.path.join(HOME_PATH, 'packages'), default_package_path),
+			'remote-package-repo': _Config('remote-package-repo', "https://raw.githubusercontent.com/bbwanjia/CPC-packages/main/", remote_package_repo)
 		}
 		# 如果已经存在配置文件，那就加载配置文件
 		if os.path.exists(self.config_path):
