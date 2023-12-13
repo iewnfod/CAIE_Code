@@ -14,16 +14,7 @@ git config --global --add safe.directory /usr/local/sbin/CAIE_Code || exit 1
 chown -R $loggedInUser $current_dir || exit 1
 
 # 链接到 bin 目录
-if [ $(arch) = "arm64" ]; then
-   ln -sf ${current_dir}/bin/cpc_arm /usr/local/bin/cpc || exit 1
-elif [ $(arch) = "x86_64" ]; then
-   ln -sf ${current_dir}/bin/cpc_x86 /usr/local/bin/cpc || exit 1
-elif [ $(arch) = "i386" ]; then
-   ln -sf ${current_dir}/bin/cpc_x86 /usr/local/bin/cpc || exit 1
-else
-   echo "Unknown architecture"
-   exit 1
-fi
+ln -sf ${current_dir}/bin/cpc /usr/local/bin/cpc || exit 1
 
 # 链接到 man 目录，如果失败则返回退出代码1
 ln -f ${current_dir}/man/cpc.1 /usr/local/share/man/man1/cpc.1 || exit 1
