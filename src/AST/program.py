@@ -141,6 +141,20 @@ class Case_array(AST_Node):
         value = Array_get(self.id, self.indexes, lineno=self.lineno, lexpos=self.lexpos)
         self.cases.exe(value)
 
+class NewCase(AST_Node):
+    def __init__(self, expr, cases, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'NEW_CASE'
+        self.expr = expr
+        self.cases = cases
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.expr.get_tree(level+1) + '\n' + self.cases.get_tree(level+1)
+
+    def exe(self):
+        value = self.expr.exe()
+        self.cases.exe(value)
+
 class Cases(AST_Node):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
