@@ -101,6 +101,14 @@
     ```
     NUM_TO_STR(s : REAL) RETURNS STRING
     ```
+* `CHR`: get the ASCII value of an integer `n`
+    ```
+    CHR(n : INTEGER) RETURNS CHAR
+    ```
+* `ORD`: get the ASCII index of a char
+    ```
+    ORD(s : CHAR) RETURNS INTEGER
+    ```
 
 ## [Time](./time.cpc)
 * `Time`: get current timestamp
