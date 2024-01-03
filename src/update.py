@@ -55,11 +55,14 @@ def check_update(repo: git.Repo, remote: git.Remote):
 def _update(remote, repo):
     try:
         from .global_var import config
-        branch = config.get_config('branch') if not config.get_config('dev') else 'dev'
-        repo.git.reset('--hard', f'origin/{branch}')
-        repo.git.checkout(branch)
-        remote.pull()
-        print('\033[1mUpdate Successful\033[0m')
+        if not config.get_config('dev.simulate-update'):
+            branch = config.get_config('branch') if not config.get_config('dev') else 'dev'
+            repo.git.reset('--hard', f'origin/{branch}')
+            repo.git.checkout(branch)
+            remote.pull()
+            print('\033[1mUpdate Successful\033[0m')
+        else:
+            print('\033[1mSimulate Update Successful\033[0m')
     except:
         print('\033[31;1mFailed to Update\033[0m')
 
@@ -95,7 +98,6 @@ def update():
 
     if new_animation('Checking Update', 3, check_update, failed_msg='Failed to Check Update', repo=repo, remote=remote):
         # 更新后再次获取新的commit记录
-        _update(remote, repo)
         latest_commit_hash, latest_commit_message = get_commit_hash_msg()
         # 询问是否更新
         u = input(f'There is a new \033[1m{get_current_branch()}\033[0m version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n] ').strip().lower()
