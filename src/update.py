@@ -73,7 +73,9 @@ def get_current_branch():
 
 def get_commit_hash_msg():
     repo = git.Repo(HOME_PATH)
-    latest_commit_hash = repo.head.reference.commit.hexsha[:7]
+    from .global_var import config
+    branch = config.get_config('branch') if not config.get_config('dev') else 'dev'
+    latest_commit_hash = repo.rev_parse(f'origin/{branch}').hexsha[:7]
     latest_commit_message = repo.head.reference.commit.message.strip()
     return latest_commit_hash, latest_commit_message
 
