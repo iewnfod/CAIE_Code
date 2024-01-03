@@ -106,9 +106,6 @@ class For(AST_Node):
                 # 执行内部操作
                 self.body_statement.exe()
 
-            # 循环结束，删除变量
-            stack.remove_variable(self.id)
-
         else:
             add_error_message(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`', self)
 
