@@ -17,4 +17,4 @@ chown -R $loggedInUser $current_dir || exit 1
 ln -sf ${current_dir}/bin/cpc /usr/local/bin/cpc || exit 1
 
 # 链接到 man 目录，如果失败则返回退出代码1
-ln -f ${current_dir}/man/cpc.1 /usr/local/share/man/man1/cpc.1 || exit 1
+mkdir -p /usr/local/share/man/man1 && ln -f ${current_dir}/man/cpc.1 /usr/local/share/man/man1/cpc.1 || exit 1
