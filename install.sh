@@ -16,6 +16,7 @@ git config --global --add safe.directory ${current_dir} || exit_install_failure
 sudo ln -sf ${current_dir}/bin/cpc /usr/local/bin/cpc || exit_install_failure
 
 # 链接到 man 目录
+sudo mkir -p /usr/local/share/man/man1
 sudo ln -f ${current_dir}/man/cpc.1 /usr/local/share/man/man1/cpc.1 || exit_install_failure
 
 echo "安装完成"
