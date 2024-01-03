@@ -12,8 +12,23 @@ loggedInUser=$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')
 
 git config --global --add safe.directory ${current_dir} || exit_install_failure
 
-# 链接到 bin 目录
-sudo ln -sf ${current_dir}/bin/cpc /usr/local/bin/cpc || exit_install_failure
+# 获取 macOS 版本号
+os_version=$(sw_vers -productVersion)
+# 分割版本号并提取主要版本号
+IFS='.' read -r -a version_parts <<< "$os_version"
+major_version="${version_parts[0]}"
+# 检查主要版本号是否大于等于 12
+if [[ "$major_version" -ge 12 ]]; then
+    # 链接到 bin 目录
+    sudo ln -sf ${current_dir}/bin/cpc /usr/local/bin/cpc || exit_install_failure
+else
+    arch=$(uname -m)
+    if [[ "$arch" == "arm64" ]]; then
+        sudo ln -sf ${current_dir}/bin/cpc_arm /usr/local/bin/cpc || exit_install_failure
+    else
+        sudo ln -sf ${current_dir}/bin/cpc_x86 /usr/local/bin/cpc || exit_install_failure
+    fi
+fi
 
 # 链接到 man 目录
 sudo mkir -p /usr/local/share/man/man1
