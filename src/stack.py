@@ -62,7 +62,6 @@ class Stack:
         }  # {结构名: 结构实例}
         self.return_variables = None
         self.return_request = False
-        self.keyboard_interrupt = False
         # 内置常量
         self.new_constant('__HOME__', STRING(HOME_PATH))
 
@@ -198,10 +197,3 @@ class Stack:
 
     def delete(self):
         del self
-
-    def raise_keyboard_interrupt(self):
-        print("Keyboard Interrupt")
-        self.keyboard_interrupt = True
-
-    def reset_keyboard_interrupt(self):
-        self.keyboard_interrupt = False

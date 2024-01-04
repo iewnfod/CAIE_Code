@@ -298,7 +298,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         IF <condition> THEN
             <statements>
         ENDIF
-        
+
         IF <condition> THEN
             <statements>
         ELSE
@@ -339,7 +339,7 @@ The following items give the `DATATYPE`, its description, and the default value 
         PROCEDURE <identifier> ()
             <statements>
         ENDPROCEDURE
-        
+
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -347,7 +347,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a procedure
         ```
         CALL <identifier> ()
-        
+
         CALL <identifier> (<value>, ...)
         ```
     * functions with return values
@@ -356,7 +356,7 @@ The following items give the `DATATYPE`, its description, and the default value 
             <statements>
             RETURN <value>
         ENDFUNCTION
-        
+
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -364,7 +364,7 @@ The following items give the `DATATYPE`, its description, and the default value 
     * call a function with return values
         ```
         <identifier> ()
-        
+
         <identifier> (<value>, ...)
         ```
     * Before the parameters of those sub-routines, you *can* use `BYREF` or `BYVAL` to force the program to pass those parameters by reference or by-value respectively. If no `BYREF` nor `BYVAL` is given, the program will follow the prior parameter. If the program cannot find a clear indication it will, by default pass parameters by value.
@@ -433,15 +433,15 @@ The following items give the `DATATYPE`, its description, and the default value 
         PRIVATE PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-        
+
         PUBLIC PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-        
+
         PRIVATE FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
-        
+
         PUBLIC FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
@@ -557,23 +557,3 @@ The following items give the `DATATYPE`, its description, and the default value 
 <a href="https://github.com/iewnfod/CAIE_Code/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=iewnfod/CAIE_Code">
 </a>
-
-## License
-MIT License
-
-Copyright (c) 2023 Iewnfod
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software
-and associated documentation files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or
-substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
-BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

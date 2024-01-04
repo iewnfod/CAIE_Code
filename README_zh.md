@@ -277,7 +277,7 @@ NEXT i
         IF <condition> THEN
             <statements>
         ENDIF
-        
+
         IF <condition> THEN
             <statements>
         ELSE
@@ -318,7 +318,7 @@ NEXT i
         PROCEDURE <identifier> ()
             <statements>
         ENDPROCEDURE
-        
+
         PROCEDURE <identifier> (<param> : <data type>, ...)
             <statements>
         ENDPROCEDURE
@@ -326,7 +326,7 @@ NEXT i
     * 无返回值函数调用
         ```
         CALL <identifier> ()
-        
+
         CALL <identifier> (<value>, ...)
         ```
     * 有返回值函数定义
@@ -335,7 +335,7 @@ NEXT i
             <statements>
             RETURN <value>
         ENDFUNCTION
-        
+
         FUNCTION <identifier> (<param> : <data type>, ...) RETURNS <data type>
             <statements>
             RETURN <value>
@@ -343,7 +343,7 @@ NEXT i
     * 有返回值函数调用
         ```
         <identifier> ()
-        
+
         <identifier> (<value>, ...)
         ```
     * 在定义函数的每个参数前，都可以使用 `BYREF` 或是 `BYVAL` 声明是需要引用还是复制。若一个参数前没有声明传入方式，会向上一个参数靠齐。在没有全部都没有声明，或者没有前一个参数可供参考时，默认的传入方式为 `BYVAL`。
@@ -411,15 +411,15 @@ NEXT i
         PRIVATE PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-        
+
         PUBLIC PROCEDURE <identifier> (<params>)
             <statements>
         ENDPROCEDURE
-        
+
         PRIVATE FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
-        
+
         PUBLIC FUNCTION <identifier> (<params>) RETURNS <type>
             <statements>
         ENDFUNCTION
@@ -527,23 +527,3 @@ NEXT i
 <a href="https://github.com/iewnfod/CAIE_Code/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=iewnfod/CAIE_Code">
 </a>
-
-## License
-MIT License
-
-Copyright (c) 2023 Iewnfod
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software
-and associated documentation files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or
-substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
-BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

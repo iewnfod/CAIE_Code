@@ -97,6 +97,14 @@
     ```
     STR_TO_NUM(s : STRING) RETURNS REAL
     ```
+* `CHR`: 获取一个整数对应的ASCII值
+    ```
+    CHR(n : INTEGER) RETURNS CHAR
+    ```
+* `ORD`: 获取一个字符的ASCII码
+    ```
+    ORD(s : CHAR) RETURNS INTEGER
+    ```
 
 ## [Time](./time.cpc)
 * `Time` 获取当前时间戳

@@ -154,13 +154,17 @@ def p_if_statement(p):
     else:
         p[0] = AST.If(p[2], p[4], p[6], p=p)
 
-def p_case_statement(p):
-    """statement : CASE OF ID cases ENDCASE"""
-    p[0] = AST.Case(p[3], p[4], p=p)
+# def p_case_statement(p):
+#     """statement : CASE OF ID cases ENDCASE"""
+#     p[0] = AST.Case(p[3], p[4], p=p)
 
-def p_case_array_statement(p):
-    """statement : CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE"""
-    p[0] = AST.Case_array(p[3], p[5], p[7], p=p)
+# def p_case_array_statement(p):
+#     """statement : CASE OF ID LEFT_SQUARE indexes RIGHT_SQUARE cases ENDCASE"""
+#     p[0] = AST.Case_array(p[3], p[5], p[7], p=p)
+
+def p_new_case_statement(p):
+    """statement : CASE OF expression cases ENDCASE"""
+    p[0] = AST.NewCase(p[3], p[4], p=p)
 
 def p_cases(p):
     """cases : cases case

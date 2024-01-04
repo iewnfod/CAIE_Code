@@ -23,9 +23,6 @@ class Statements(AST_Node):
     def exe(self):
         result = []
         for statement in self.statements:
-            # 如果存在keyboard interrupt，那就退出
-            if stack.keyboard_interrupt:
-                break
             # 如果当前请求返回了，那就直接停止运行这个表达式块
             if stack.return_request:
                 break
@@ -106,9 +103,6 @@ class For(AST_Node):
                 # 执行内部操作
                 self.body_statement.exe()
 
-            # 循环结束，删除变量
-            stack.remove_variable(self.id)
-
         else:
             add_error_message(f'Expect `INTEGER` for index and step, but found `{left[1]}`, `{right[1]}` and `{step[1]}`', self)
 
@@ -139,6 +133,20 @@ class Case_array(AST_Node):
 
     def exe(self):
         value = Array_get(self.id, self.indexes, lineno=self.lineno, lexpos=self.lexpos)
+        self.cases.exe(value)
+
+class NewCase(AST_Node):
+    def __init__(self, expr, cases, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'NEW_CASE'
+        self.expr = expr
+        self.cases = cases
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.expr.get_tree(level+1) + '\n' + self.cases.get_tree(level+1)
+
+    def exe(self):
+        value = self.expr.exe()
         self.cases.exe(value)
 
 class Cases(AST_Node):

@@ -61,7 +61,6 @@ reserved = {
     "PASS",
     "IMPORT",
     "SUPER",
-    "SELF",
     "SET",
     "DEFINE",
 }
