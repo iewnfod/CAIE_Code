@@ -74,10 +74,13 @@ def get_current_branch():
 def get_commit_hash_msg():
     repo = git.Repo(HOME_PATH)
     from .global_var import config
-    branch = config.get_config('branch') if not config.get_config('dev') else 'dev'
-    latest_commit_hash = repo.rev_parse(f'origin/{branch}').hexsha[:7]
-    latest_commit_message = repo.head.reference.commit.message.strip()
-    return latest_commit_hash, latest_commit_message
+    from re import sub
+    remote_branch = config.get_config('branch') if not config.get_config('dev') else 'dev'
+    latest_commit_hash = repo.rev_parse(f'origin/{remote_branch}').hexsha[:7]
+    latest_commit_message = repo.rev_parse(f'origin/{remote_branch}').message.strip()
+    local_commit_hash = repo.head.commit.hexsha[:7]
+    local_commit_message = repo.head.reference.commit.message.strip()
+    return latest_commit_hash, latest_commit_message, local_commit_hash, local_commit_message
 
 def update():
     from .global_var import config
@@ -95,12 +98,11 @@ def update():
         print('You can close the developer mod by using `cpc -c dev false`.')
     else:
         remote.set_url(git_remote)
-    # 获取当前commit记录
-    latest_commit_hash, latest_commit_message = get_commit_hash_msg()
+
+    #获取提交信息
+    latest_commit_hash, latest_commit_message, local_commit_hash, local_commit_message = get_commit_hash_msg()
 
     if new_animation('Checking Update', 3, check_update, failed_msg='Failed to Check Update', repo=repo, remote=remote):
-        # 更新后再次获取新的commit记录
-        latest_commit_hash, latest_commit_message = get_commit_hash_msg()
         # 询问是否更新
         u = input(f'There is a new \033[1m{get_current_branch()}\033[0m version of the program\n{latest_commit_hash}: {latest_commit_message}\nDo you want to update it? [Y/n] ').strip().lower()
         if u == '' or u == 'y':
@@ -110,6 +112,4 @@ def update():
             print('Stop Updating')
     else:
         if not super_fast:
-            # 更新后再次获取新的commit记录
-            latest_commit_hash, latest_commit_message = get_commit_hash_msg()
-            print(f'Good! You are using the latest \033[1m{get_current_branch()}\033[0m version!\nAt {latest_commit_hash}: {latest_commit_message}')
+            print(f'Good! You are using the latest \033[1m{get_current_branch()}\033[0m version!\nAt {local_commit_hash}: {local_commit_message}')
