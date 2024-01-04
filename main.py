@@ -34,10 +34,10 @@ home_path = HOME_PATH
 
 # 处理keyboard interrupt
 def signal_handler(_signal, _frame):
-    print("Keyboard Interrupt")
     quit(1)
 
 signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 # 错误的argument
 def wrong_argument(msg):
