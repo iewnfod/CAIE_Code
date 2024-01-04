@@ -34,9 +34,10 @@ home_path = HOME_PATH
 
 # 处理keyboard interrupt
 def signal_handler(_signal, _frame):
-    stack.raise_keyboard_interrupt()
+    quit(1)
 
 signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
 
 # 错误的argument
 def wrong_argument(msg):
@@ -118,7 +119,6 @@ def with_line():
     options.standard_output()
     # 运行
     while 1:
-        stack.reset_keyboard_interrupt()
         text = multi_input()
         lexer.lineno = 1
         # 尝试运行特殊指令
@@ -151,8 +151,6 @@ def with_file(path, preload=False):
         text = remove_comment(f.read())
     if not text:
         return
-    # reset stack
-    stack.reset_keyboard_interrupt()
 
     # 尝试运行
     try:
@@ -230,10 +228,10 @@ if __name__ == '__main__':
         main()
     except EOFError:
         print("EXIT")
-        quit(0)
+        quit(2)
     except KeyboardInterrupt:
         print('Keyboard Interrupt')
-        quit(0)
+        quit(1)
     except Exception as e:
         print(e)
-        quit(1)
+        quit(3)
