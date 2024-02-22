@@ -38,7 +38,7 @@
 
 ### 更新
 * 如果您是完全使用以上步骤进行安装的，您可以使用`cpc -u`快速更新
-* 在`dc0cd71`之后引入自动更新功能，每天自动检测一次更新，可由选项配置
+* 在`dc0cd71`之后引入自动更新功能，每周自动检测一次更新，可由选项配置
 * 如果您并没有使用`git`进行安装，您需要手动下载新的版本，并使用和您之前相同的方法安装
 
 ## 用法
@@ -452,6 +452,11 @@ NEXT i
         ```
 
 ### 内置函数
+* `LEFT(ThisString : STRING, x : INTEGER) RETURNS STRING`
+    ```
+    $ LEFT("ABCDEFGH", 3)
+    "ABC"
+    ```
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
     ```
     $ RIGHT("ABCDEFGH", 3)

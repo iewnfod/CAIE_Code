@@ -63,6 +63,7 @@ reserved = {
     "SUPER",
     "SET",
     "DEFINE",
+    "_OUTPUT",
 }
 
 tokens = (

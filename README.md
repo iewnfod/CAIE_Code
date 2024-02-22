@@ -49,7 +49,7 @@
 ### Update
 * If you followed the instructions and used `git` or PKG to install `cpc`, you can update easily using `cpc -u`.
 
-* An auto-update feature is introduced after `dc0cd71` to automatically detect updates once a day.
+* An auto-update feature is introduced after `dc0cd71` to automatically detect updates once a week.
 
 * Otherwise, you should manually re-install the whole project.
 
@@ -474,6 +474,11 @@ The following items give the `DATATYPE`, its description, and the default value 
     ```
 
 ### Built-in Functions from CAIE Standard
+* `LEFT(ThisString : STRING, x : INTEGER) RETURNS STRING`
+    ```
+    $ LEFT("ABCDEFGH", 3)
+    "ABC"
+    ```
 * `RIGHT(ThisString : STRING, x : INTEGER) RETURNS STRING`
     ```
     $ RIGHT("ABCDEFGH", 3)

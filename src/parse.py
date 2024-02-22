@@ -136,6 +136,10 @@ def p_output_statement(p):
     """statement : OUTPUT output_expression"""
     p[0] = AST.Output(p[2], p=p)
 
+def p_no_end_output_statement(p):
+    """statement : _OUTPUT output_expression"""
+    p[0] = AST.Output(p[2], end="", p=p)
+
 def p_output_expression(p):
     """output_expression : output_expression COMMA expression
             | expression"""
