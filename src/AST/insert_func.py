@@ -123,6 +123,28 @@ class Bool_convert(AST_Node):
             add_error_message(f'Cannot convert `{result[0]}` into `BOOLEAN`', self)
 
 
+class Left(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'LEFT'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        parameters = self.parameters.exe()
+        if len(parameters) != 2:
+            add_error_message(f'Function `{self.type}` expect 2 parameters, but found `{len(parameters)}`', self)
+            return
+
+        s = parameters[0]
+        x = parameters[1]
+        if s[1] == 'STRING' and x[1] == 'INTEGER':
+            return (s[0][0:x[0]], 'STRING')
+        else:
+            add_error_message(f'Function `{self.type}` expect `STRING` and `INTEGER`, but found `{s[1]}` and `{x[1]}`', self)
+
 class Right(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -440,6 +462,7 @@ insert_functions = {
     "STRING": Str_convert,
     "BOOLEAN": Bool_convert,
     "CHAR": Char_convert,
+    "LEFT": Left,
     "RIGHT": Right,
     "LENGTH": Length,
     "MID": Mid,
