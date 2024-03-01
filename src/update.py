@@ -67,20 +67,25 @@ def _update(remote, repo):
         print('\033[31;1mFailed to Update\033[0m')
 
 def get_current_branch():
+    if os.environ.get('CODESPACES'):
+        return 'online'
     repo = git.Repo(HOME_PATH)
     current_branch = repo.git.rev_parse("--abbrev-ref", "HEAD")
     return current_branch
 
 def get_commit_hash_msg():
-    repo = git.Repo(HOME_PATH)
-    from .global_var import config
-    from re import sub
-    remote_branch = config.get_config('branch') if not config.get_config('dev') else 'dev'
-    latest_commit_hash = repo.rev_parse(f'origin/{remote_branch}').hexsha[:7]
-    latest_commit_message = repo.rev_parse(f'origin/{remote_branch}').message.strip()
-    local_commit_hash = repo.head.commit.hexsha[:7]
-    local_commit_message = repo.head.reference.commit.message.strip()
-    return latest_commit_hash, latest_commit_message, local_commit_hash, local_commit_message
+    if os.environ.get('CODESPACES'):
+        return '000000', 'Online IDE', '000000', 'Online IDE'
+    else:
+        repo = git.Repo(HOME_PATH)
+        from .global_var import config
+        from re import sub
+        remote_branch = config.get_config('branch') if not config.get_config('dev') else 'dev'
+        latest_commit_hash = repo.rev_parse(f'origin/{remote_branch}').hexsha[:7]
+        latest_commit_message = repo.rev_parse(f'origin/{remote_branch}').message.strip()
+        local_commit_hash = repo.head.commit.hexsha[:7]
+        local_commit_message = repo.head.reference.commit.message.strip()
+        return latest_commit_hash, latest_commit_message, local_commit_hash, local_commit_message
 
 def update():
     from .global_var import config
