@@ -12,6 +12,8 @@
 
 ## 安装与使用
 
+> [在线版本](https://github.com/createchstudio/caie-code-environment)
+
 ### 安装前提
 1. `Python3` 环境 *推荐使用 PyPy3 以获得更好的性能*
 2. `git` 指令

@@ -12,6 +12,8 @@
 
 ## Installation and Update
 
+> [Online Version](https://github.com/createchstudio/caie-code-environment)
+
 ### Installation Preliminaries
 
 1. Have `python3` installed on your computer.
