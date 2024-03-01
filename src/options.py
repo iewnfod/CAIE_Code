@@ -88,7 +88,7 @@ def remove_error():
     options_dict['show_error'] = False
 
 def update_version():
-    if os.environ['CODESPACES']:
+    if os.getenv('CODESPACES'):
         print('You are using a GitHub Codespace, where update function is not allowed.')
         return
     update()
