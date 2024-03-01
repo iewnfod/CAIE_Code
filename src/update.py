@@ -84,6 +84,9 @@ def get_commit_hash_msg():
 
 def update():
     from .global_var import config
+    if os.getenv('CODESPACES'):
+        print('You are using a GitHub Codespace, where update function is not allowed.')
+        return
     git_remote = config.get_config('remote')
     # 检查是否能连接到 GitHub
     if git_remote == config.get_default_config('remote') and not check_github_connectivity():
