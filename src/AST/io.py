@@ -5,17 +5,18 @@ from .array import *
 from .data_types import *
 
 class Output(AST_Node):
-    def __init__(self, value, *args, **kwargs):
+    def __init__(self, value, end="\n", *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.type = 'OUTPUT'
         self.value = value
+        self.end = end
 
     def get_tree(self, level=0):
         return LEVEL_STR * level + self.type + '\n' + self.value.get_tree(level+1)
 
     def exe(self):
         v = self.value.exe()
-        print_(v if v != None else '')
+        print_(v if v != None else '', end=self.end)
 
 class Output_expression(AST_Node):
     def __init__(self, *args, **kwargs):

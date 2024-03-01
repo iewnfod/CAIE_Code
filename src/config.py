@@ -28,9 +28,9 @@ class Config:
 			'branch': _Config('branch', 'stable', branch_update),
 			'rl': _Config('recursion-limit', 1000, recursive_limit),
 			'dev.simulate-update': _Config('dev.simulate-update', False, simulate_update),
-			'auto-update': _Config('auto-update', True, auto_update),
+			'auto-update': _Config('auto-update', True if not os.environ['CODESPACES'] else False, auto_update),
 			'last-auto-update': _Config('last-auto-update', 0, last_auto_update),
-			'interval-update': _Config('interval-update', 86400, interval_update),
+			'interval-update': _Config('interval-update', 604800, interval_update),
 			'default-package-path': _Config('default-package-path', os.path.join(HOME_PATH, 'packages'), default_package_path),
 		}
 		# 如果已经存在配置文件，那就加载配置文件
