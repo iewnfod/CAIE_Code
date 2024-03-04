@@ -77,6 +77,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 | `-lc` | `--list-configs` | To list all the configs of the interpreter |
 | `-ne` | `--no-error` | To remove all error messages |
 | `-rc` | `--reset-configs` | To reset all the configs of the interpreter |
+| `-init` | `--init-requirements` | To install all dependences |
 
 ### Config
 

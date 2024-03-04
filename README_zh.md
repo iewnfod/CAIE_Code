@@ -64,6 +64,7 @@ cpc [file_paths] [options]
 | `-lc` | `--list-configs` | 显示解释器的所有设置 |
 | `-ne` | `--no-error` | 禁止所有错误的输出 |
 | `-rc` | `--reset-configs` | 删除解释器的所有设置 |
+| `-init` | `--init-requirements` | 安装所有的依赖 |
 
 ### 可选配置
 
