@@ -18,4 +18,7 @@ def test_requirements():
             importlib.import_module(import_name)
         except:
             print(f'Missing Important Dependence `{package_name}`\nTrying to Install for You...')
-            os.system(f'{sys.executable} -m pip install {package_name} -i {tuna}')
+            if os.environ.get('CODESPACES'):
+                os.system(f'{sys.executable} -m pip install {package_name}')
+            else:
+                os.system(f'{sys.executable} -m pip install {package_name} -i {tuna}')

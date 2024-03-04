@@ -139,6 +139,10 @@ def doc():
     elif system == 'Darwin':
         os.system(f'open "{file_path}"')
 
+def init_requirements():
+    from .requirements import test_requirements
+    test_requirements()
+
 # 输入参数: (参数简写, 参数全称, 运行函数, 描述, 是否需要退出, 是否需要参数，参数数量，函数所需参数)
 class Opt:
     def __init__(self, short_arg, long_arg, func, description, exit_program, value_num=0, *args, **kwargs):
@@ -179,5 +183,6 @@ arguments = [
     Opt('-m', '--migrate', migrate_files, 'To migrate .p files to .cpc in a specified directory', True, 1),
     Opt('-lc', '--list-configs', list_configs, 'To list all the configs of the interpreter', True),
     Opt('-rc', '--reset-configs', reset_configs, 'To reset all the configs of the interpreter', True),
-    Opt('-d', '--document', doc, 'To show the official document', True)
+    Opt('-d', '--document', doc, 'To show the official document', True),
+    Opt('-init', '--init-requirements', init_requirements, 'To install all dependences', True)
 ]
