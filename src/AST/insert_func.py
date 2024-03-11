@@ -231,6 +231,8 @@ class Lcase(AST_Node):
         c = parameters[0]
         if c[1] == 'CHAR':
             return (c[0].lower(), 'CHAR')
+        elif c[1] == 'STRING':
+            return (c[0].lower(), 'STRING')
         else:
             add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
 
@@ -252,6 +254,8 @@ class Ucase(AST_Node):
         c = parameters[0]
         if c[1] == 'CHAR':
             return (c[0].upper(), 'CHAR')
+        elif c[1] == 'STRING':
+            return (c[0].upper(), 'STRING')
         else:
             add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
 
