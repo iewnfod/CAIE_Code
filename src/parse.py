@@ -54,7 +54,8 @@ def p_private_declare_statement(p):
     p[0] = AST.Variable(p[2], p[4], private=True, p=p)
 
 def p_const_declare_statement(p):
-    """statement : CONSTANT ID EQUAL expression"""
+    """statement : CONSTANT ID EQUAL expression
+            | CONSTANT ID ASSIGN expression"""
     p[0] = AST.Constant(p[2], p[4], p=p)
 
 def p_array_declare_statement(p):
