@@ -115,6 +115,28 @@
     ```
     Time() RETURNS REAL
     ```
+* `Day`: get the day of a date
+    ```
+    Day(d: DATE) RETURNS INTEGER
+    ```
+* `Month`: get the month of a date
+    ```
+    Month(d: DATE) RETURNS INTEGER
+    ```
+* `Year`: get the year of a date
+    ```
+    Year(d: DATE) RETURNS INTEGER
+    ```
+* `DayIndex`: get the day of a week
+    ```
+    DayIndex(d: DATE) RETURNS INTEGER
+    ```
+    > where Sunday = 1, Monday = 2 etc.
+* `Today`: get the current date
+    ```
+    Today() RETURNS DATE
+    ```
+
 ## [Import](./import.cpc)
 * `Import`: import another *cpc* file
     ```
