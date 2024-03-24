@@ -96,7 +96,7 @@ class DATE(base):
             return str(self)
 
     def set_value(self, new_value):
-        self.year, self.month, self.day = str(new_value).split('/')
+        self.day, self.month, self.year = str(new_value).split('/')
 
 class ARRAY(base):
     def __init__(self, value={}, *args, **kwargs):
