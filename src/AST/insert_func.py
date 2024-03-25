@@ -459,6 +459,56 @@ class VarType(AST_Node):
         else:
             add_error_message(f'Type only have 1 parameters, but found 0', self)
 
+class ToUpper(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'TO_UPPER'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) == 1:
+                p = parameters[0]
+                if p[1] == 'CHAR':
+                    return (p[0].upper(), 'CHAR')
+                elif p[1] == 'STRING':
+                    return (p[0].upper(), 'STRING')
+                else:
+                    add_error_message(f'TO_UPPER expect a parameter with type `CAHR` or `STRING`, but found `{p[1]}`', self)
+            else:
+                add_error_message(f'TO_UPPER only have 1 parameters, but found {len(parameters)}', self)
+        else:
+            add_error_message(f'TO_UPPER only have 1 parameters, but found 0', self)
+
+class ToLower(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'TO_LOWER'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) == 1:
+                p = parameters[0]
+                if p[1] == 'CHAR':
+                    return (p[0].lower(), 'CHAR')
+                elif p[1] == 'STRING':
+                    return (p[0].lower(), 'STRING')
+                else:
+                    add_error_message(f'TO_LOWER expect a parameter with type `CAHR` or `STRING`, but found `{p[1]}`', self)
+            else:
+                add_error_message(f'TO_LOWER only have 1 parameters, but found {len(parameters)}', self)
+        else:
+            add_error_message(f'TO_LOWER only have 1 parameters, but found 0', self)
+
 insert_functions = {
     "INT": Int_convert,
     "INTEGER": Int_convert,
@@ -482,4 +532,6 @@ insert_functions = {
     "MOD": Mod,
     "DIV": Div,
     "VARTYPE": VarType,
+    "TO_UPPER": ToUpper,
+    "TO_LOWER": ToLower
 }
