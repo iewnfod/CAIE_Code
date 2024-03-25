@@ -111,27 +111,6 @@
     ```
     Time() RETURNS REAL
     ```
-* `Day`: 获取一个日期的天数
-    ```
-    Day(d: DATE) RETURNS INTEGER
-    ```
-* `Month`: 获取一个日期的月份
-    ```
-    Month(d: DATE) RETURNS INTEGER
-    ```
-* `Year`: 获取一个日期的年份
-    ```
-    Year(d: DATE) RETURNS INTEGER
-    ```
-* `DayIndex`: 获取一个日期的星期
-    ```
-    DayIndex(d: DATE) RETURNS INTEGER
-    ```
-    > 返回值为1-7，分别代表星期日到星期六
-* `Today`: 获取今天的日期
-    ```
-    Today() RETURNS DATE
-    ```
 
 ## [Import](./import.cpc)
 * `Import` 导入另一个文件

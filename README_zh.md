@@ -517,6 +517,38 @@ NEXT i
     ```
 * `EOF(file_path : STRING) RETURNS BOOLEAN`
 * `POW(x: REAL, y: REAL) RETURNS REAL`
+* `DAY(ThisDate : DATE) RETURNS INTEGER`
+  ```
+    $ DAY(25/07/2023)
+    25
+  ```
+* `MONTH(ThisDate : DATE) RETURNS INTEGER`
+  ```
+    $ MONTH(25/07/2023)
+    7
+  ```
+* `YEAR(ThisDate : DATE) RETURNS INTEGER`
+  ```
+    $ YEAR(12/12/2005)
+    2005
+  ```
+* `DAYINDEX(ThisDate : DATE) RETURNS INTEGER`
+> 周日返回1，周一返回2，以此类推
+  ```
+    $ DAYINDEX(25/03/2024)
+    2
+  ```
+* `SETDATE(day : INTEGER, month : INTEGER, year : INTEGER) RETURNS DATE`
+  ```
+    $ SETDATE(25, 03, 2024)
+    25/03/2024
+  ```
+* `TODAY() RETURNS DATE`
+  ```
+    $ TODAY()
+    25/03/2024
+  ```
+
 
 **(以下方法均不属于CAIE提供的标准方法)**
 * `EXIT(code : INTEGER)` 以code为退出码，退出程序 (若不填写code，则默认为0)
