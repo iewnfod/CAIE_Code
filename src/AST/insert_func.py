@@ -558,7 +558,7 @@ class Year(AST_Node):
 class DayIndex(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.type = 'DATE'
+        self.type = 'DAY_INDEX'
         self.parameters = parameters
 
     def get_tree(self, level=0):
@@ -573,11 +573,34 @@ class DayIndex(AST_Node):
                     from datetime import datetime
                     return (datetime.strptime(p[0], '%d/%m/%Y').weekday() + 1) % 7 + 1
                 else:
-                    add_error_message(f'DAY expect a parameter with type `DATE`, but found `{p[1]}`', self)
+                    add_error_message(f'DAYINDEX expect a parameter with type `DATE`, but found `{p[1]}`', self)
             else:
-                add_error_message(f'DAY only have 1 parameters, but found {len(parameters)}', self)
+                add_error_message(f'DAYINDEX only have 1 parameters, but found {len(parameters)}', self)
         else:
-            add_error_message(f'DAY only have 1 parameters, but found 0', self)
+            add_error_message(f'DAYINDEX only have 1 parameters, but found 0', self)
+
+class SetDate(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'SET_DATE'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+    
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(self.parameters) == 3:
+                p = parameters[0]
+                if p[1] == 'INTEGER':
+                    return (f'{parameters[0][0]:02}/{parameters[1][0]:02}/{parameters[2][0]:04}', 'DATE')
+                else:
+                    add_error_message(f'SETDATE expect a parameter with type `DATE`, but found `{p[1]}`', self)
+            else:
+                add_error_message(f'SETDATE only have 3 parameters, but found {len(parameters)}', self)
+        else:
+            add_error_message(f'SETDATE only have 3 parameters, but found 0', self)
 
 class Today(AST_Node):
     def __init__(self, *args, **kwargs):
@@ -620,5 +643,6 @@ insert_functions = {
     "MONTH": Month,
     "YEAR": Year,
     "DAYINDEX": DayIndex,
+    "SETDATE": SetDate,
     "TODAY": Today
 }
