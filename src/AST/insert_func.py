@@ -486,6 +486,111 @@ class ToLower(Lcase):
         super().__init__(parameters, *args, **kwargs)
         self.type = 'TO_LOWER'
 
+class Day(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'DAY'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+    
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) == 1:
+                p = parameters[0]
+                if p[1] == 'DATE':
+                    return (int(p[0].split('/')[0]), 'INTEGER')
+                else:
+                    add_error_message(f'DAY expect a parameter with type `DATE`, but found `{p[1]}`', self)
+            else:
+                add_error_message(f'DAY only have 1 parameters, but found {len(parameters)}', self)
+        else:
+            add_error_message(f'DAY only have 1 parameters, but found 0', self)
+
+class Month(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'MONTH'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+    
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) == 1:
+                p = parameters[0]
+                if p[1] == 'DATE':
+                    return (int(p[0].split('/')[1]), 'INTEGER')
+                else:
+                    add_error_message(f'MONTH expect a parameter with type `DATE`, but found `{p[1]}`', self)
+            else:
+                add_error_message(f'MONTH only have 1 parameters, but found {len(parameters)}', self)
+        else:
+            add_error_message(f'MONTH only have 1 parameters, but found 0', self)
+
+class Year(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'YEAR'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+    
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) == 1:
+                p = parameters[0]
+                if p[1] == 'DATE':
+                    return (int(p[0].split('/')[2]), 'INTEGER')
+                else:
+                    add_error_message(f'YEAR expect a parameter with type `DATE`, but found `{p[1]}`', self)
+            else:
+                add_error_message(f'YEAR only have 1 parameters, but found {len(parameters)}', self)
+        else:
+            add_error_message(f'YEAR only have 1 parameters, but found 0', self)
+
+class DayIndex(AST_Node):
+    def __init__(self, parameters, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'DATE'
+        self.parameters = parameters
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
+    
+    def exe(self):
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) == 1:
+                p = parameters[0]
+                if p[1] == 'DATE':
+                    from datetime import datetime
+                    return (datetime.strptime(p[0], '%d/%m/%Y').weekday() + 1) % 7 + 1
+                else:
+                    add_error_message(f'DAY expect a parameter with type `DATE`, but found `{p[1]}`', self)
+            else:
+                add_error_message(f'DAY only have 1 parameters, but found {len(parameters)}', self)
+        else:
+            add_error_message(f'DAY only have 1 parameters, but found 0', self)
+
+class Today(AST_Node):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'TODAY'
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type
+
+    def exe(self):
+        from datetime import datetime
+        return (datetime.now().strftime('%d/%m/%Y'), 'DATE')
+
 insert_functions = {
     "INT": Int_convert,
     "INTEGER": Int_convert,
@@ -510,5 +615,10 @@ insert_functions = {
     "DIV": Div,
     "VARTYPE": VarType,
     "TO_UPPER": ToUpper,
-    "TO_LOWER": ToLower
+    "TO_LOWER": ToLower,
+    "DAY": Day,
+    "MONTH": Month,
+    "YEAR": Year,
+    "DAYINDEX": DayIndex,
+    "TODAY": Today
 }
