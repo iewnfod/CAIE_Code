@@ -498,15 +498,35 @@ The following items give the `DATATYPE`, its description, and the default value 
     "BCD"
     ```
 * `LCASE(ThisChar : CHAR) RETURNS CHAR`
+> Decrapricated since 2023
     ```
     $ LCASE('W')
     'w'
     ```
 * `UCASE(ThisChar : CHAR) RETURNS CHAR`
+> Decrapricated since 2023
     ```
     $ UCASE('h')
     'H'
     ```
+* `TO_UPPER(x : <datatype>) RETURNS <datatype>`
+> <datatype> may be `CHAR` or `STRING`
+  ```
+    $ TO_UPPER("hello")
+    "HELLO"
+
+    $ TO_UPPER('a')
+    'A'
+  ```
+* `TO_LOWER(x : <datatype>) RETURNS <datatype>`
+> <datatype> may be `CHAR` or `STRING`
+  ```
+    $ TO_LOWER("HELLO")
+    "hello"
+
+    $ TO_LOWER('A')
+    'a'
+  ```
 * `INT(x : REAL) RETURNS INTEGER`
     ```
     $ INT(27.5415)

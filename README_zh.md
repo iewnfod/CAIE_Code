@@ -476,15 +476,35 @@ NEXT i
     "BCD"
     ```
 * `LCASE(ThisChar : CHAR) RETURNS CHAR`
+> 从2023年开始弃用
     ```
     $ LCASE('W')
     'w'
     ```
 * `UCASE(ThisChar : CHAR) RETURNS CHAR`
+> 从2023年开始弃用
     ```
     $ UCASE('h')
     'H'
     ```
+* `TO_UPPER(x : <datatype>) RETURNS <datatype>`
+> <datatype> 可以是 `CAHR` 或者 `STRING`
+  ```
+    $ TO_UPPER("hello")
+    "HELLO"
+
+    $ TO_UPPER('a')
+    'A'
+  ```
+* `TO_LOWER(x : <datatype>) RETURNS <datatype>`
+> <datatype> 可以是 `CAHR` 或者 `STRING`
+  ```
+    $ TO_LOWER("HELLO")
+    "hello"
+
+    $ TO_LOWER('A')
+    'a'
+  ```
 * `INT(x : REAL) RETURNS INTEGER`
     ```
     $ INT(27.5415)
