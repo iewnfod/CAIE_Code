@@ -4,6 +4,17 @@ from ..AST_Base import *
 from ..global_var import *
 from ..quit import *
 
+def _wrong_param_number(name: str, expect_num: str, get_num: str, obj):
+    add_error_message(f'Function {name} expect {expect_num} parameters, but found {get_num}', obj)
+
+def _wrong_param_type(name: str, expect_types: list, get_types: list, obj):
+    expect_type_list = [f'`{i}`' for i in expect_types]
+    expect_type_str = ', '.join(expect_type_list)
+    get_type_list = [f'`{i}`' for i in get_types]
+    get_type_str = ', '.join(get_type_list)
+
+    add_error_message(f'Function {name} expect parameter with type {expect_type_str}, but found {get_type_str}', obj)
+
 class Int_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -223,18 +234,21 @@ class Lcase(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
 
     def exe(self):
-        parameters = self.parameters.exe()
-        if len(parameters) != 1:
-            add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
-            return
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) != 1:
+                add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
+                return
 
-        c = parameters[0]
-        if c[1] == 'CHAR':
-            return (c[0].lower(), 'CHAR')
-        elif c[1] == 'STRING':
-            return (c[0].lower(), 'STRING')
+            c = parameters[0]
+            if c[1] == 'CHAR':
+                return (c[0].lower(), 'CHAR')
+            elif c[1] == 'STRING':
+                return (c[0].lower(), 'STRING')
+            else:
+                add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
         else:
-            add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
+            add_error_message(f'Function `{self.type}` expect 1 parameters, but found 0', self)
 
 class Ucase(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -246,18 +260,21 @@ class Ucase(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
 
     def exe(self):
-        parameters = self.parameters.exe()
-        if len(parameters) != 1:
-            add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
-            return
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(parameters) != 1:
+                add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
+                return
 
-        c = parameters[0]
-        if c[1] == 'CHAR':
-            return (c[0].upper(), 'CHAR')
-        elif c[1] == 'STRING':
-            return (c[0].upper(), 'STRING')
+            c = parameters[0]
+            if c[1] == 'CHAR':
+                return (c[0].upper(), 'CHAR')
+            elif c[1] == 'STRING':
+                return (c[0].upper(), 'STRING')
+            else:
+                add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
         else:
-            add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
+            add_error_message(f'Function `{self.type}` expect 1 parameters, but found 0', self)
 
 
 class Rand(AST_Node):
@@ -307,7 +324,7 @@ class Eof(AST_Node):
             else:
                 return (False, 'BOOLEAN')
         else:
-            add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)
+            add_error_message(f'Function `{self.type}` expect `STRING` for a file path, but found `{fp[1]}`', self)
 
 class Pow(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -459,55 +476,15 @@ class VarType(AST_Node):
         else:
             add_error_message(f'Type only have 1 parameters, but found 0', self)
 
-class ToUpper(AST_Node):
+class ToUpper(Ucase):
     def __init__(self, parameters, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(parameters, *args, **kwargs)
         self.type = 'TO_UPPER'
-        self.parameters = parameters
 
-    def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
-
-    def exe(self):
-        if self.parameters:
-            parameters = self.parameters.exe()
-            if len(parameters) == 1:
-                p = parameters[0]
-                if p[1] == 'CHAR':
-                    return (p[0].upper(), 'CHAR')
-                elif p[1] == 'STRING':
-                    return (p[0].upper(), 'STRING')
-                else:
-                    add_error_message(f'TO_UPPER expect a parameter with type `CAHR` or `STRING`, but found `{p[1]}`', self)
-            else:
-                add_error_message(f'TO_UPPER only have 1 parameters, but found {len(parameters)}', self)
-        else:
-            add_error_message(f'TO_UPPER only have 1 parameters, but found 0', self)
-
-class ToLower(AST_Node):
+class ToLower(Lcase):
     def __init__(self, parameters, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(parameters, *args, **kwargs)
         self.type = 'TO_LOWER'
-        self.parameters = parameters
-
-    def get_tree(self, level=0):
-        return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
-
-    def exe(self):
-        if self.parameters:
-            parameters = self.parameters.exe()
-            if len(parameters) == 1:
-                p = parameters[0]
-                if p[1] == 'CHAR':
-                    return (p[0].lower(), 'CHAR')
-                elif p[1] == 'STRING':
-                    return (p[0].lower(), 'STRING')
-                else:
-                    add_error_message(f'TO_LOWER expect a parameter with type `CAHR` or `STRING`, but found `{p[1]}`', self)
-            else:
-                add_error_message(f'TO_LOWER only have 1 parameters, but found {len(parameters)}', self)
-        else:
-            add_error_message(f'TO_LOWER only have 1 parameters, but found 0', self)
 
 insert_functions = {
     "INT": Int_convert,

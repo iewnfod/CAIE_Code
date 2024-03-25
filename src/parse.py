@@ -483,7 +483,7 @@ def p_call_function_expression(p):
             | ID LEFT_PAREN RIGHT_PAREN"""
     if len(p) == 4:
         if p[1] in insert_functions:
-            p[0] = insert_functions[p[1]](p=p)
+            p[0] = insert_functions[p[1]](None, p=p)
         else:
             p[0] = AST.Call_function(p[1], p=p)
     else:
