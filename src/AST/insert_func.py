@@ -4,8 +4,8 @@ from ..AST_Base import *
 from ..global_var import *
 from ..quit import *
 
-def _wrong_param_number(name: str, expect_num: str, get_num: str, obj):
-    add_error_message(f'Function {name} expect {expect_num} parameters, but found {get_num}', obj)
+def _wrong_param_number(name: str, expect_num: int, get_num: int, obj):
+    add_error_message(f'Function `{name}` expect {expect_num} parameters, but found {get_num}', obj)
 
 def _wrong_param_type(name: str, expect_types: list, get_types: list, obj):
     expect_type_list = [f'`{i}`' for i in expect_types]
@@ -13,7 +13,7 @@ def _wrong_param_type(name: str, expect_types: list, get_types: list, obj):
     get_type_list = [f'`{i}`' for i in get_types]
     get_type_str = ', '.join(get_type_list)
 
-    add_error_message(f'Function {name} expect parameter with type {expect_type_str}, but found {get_type_str}', obj)
+    add_error_message(f'Function `{name}` expect parameter with type {expect_type_str}, but found {get_type_str}', obj)
 
 class Int_convert(AST_Node):
     def __init__(self, expression, *args, **kwargs):
@@ -27,7 +27,7 @@ class Int_convert(AST_Node):
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            add_error_message(f'`{self.type}` could only convert one parameter', self)
+            _wrong_param_number("INT", 1, len(result), self)
             return
         else:
             result = result[0]
@@ -49,7 +49,7 @@ class Str_convert(AST_Node):
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            add_error_message(f'`{self.type}` could only convert one parameter', self)
+            _wrong_param_number("STRING", 1, len(result), self)
             return
         else:
             result = result[0]
@@ -71,7 +71,7 @@ class Char_convert(AST_Node):
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            add_error_message(f'`{self.type}` could only convert one parameter', self)
+            _wrong_param_number("CHAR", 1, len(result), self)
             return
         else:
             result = result[0]
@@ -101,7 +101,7 @@ class Real_convert(AST_Node):
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            add_error_message(f'`{self.type}` could only convert one parameter', self)
+            _wrong_param_number("REAL", 1, len(result), self)
             return
         else:
             result = result[0]
@@ -123,7 +123,7 @@ class Bool_convert(AST_Node):
     def exe(self):
         result = self.expression.exe()
         if len(result) != 1:
-            add_error_message(f'`{self.type}` could only convert one parameter', self)
+            _wrong_param_number("BOOLEAN", 1, len(result), self)
             return
         else:
             result = result[0]
@@ -146,7 +146,7 @@ class Left(AST_Node):
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 2:
-            add_error_message(f'Function `{self.type}` expect 2 parameters, but found `{len(parameters)}`', self)
+            _wrong_param_number("LEFT", 2, len(parameters), self)
             return
 
         s = parameters[0]
@@ -154,7 +154,7 @@ class Left(AST_Node):
         if s[1] == 'STRING' and x[1] == 'INTEGER':
             return (s[0][0:x[0]], 'STRING')
         else:
-            add_error_message(f'Function `{self.type}` expect `STRING` and `INTEGER`, but found `{s[1]}` and `{x[1]}`', self)
+            _wrong_param_type("LEFT", ['STRING', 'INTEGER'], [s[1], x[1]], self)
 
 class Right(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -168,7 +168,7 @@ class Right(AST_Node):
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 2:
-            add_error_message(f'Function `{self.type}` expect 2 parameters, but found `{len(parameters)}`', self)
+            _wrong_param_number("RIGHT", 2, len(parameters), self)
             return
 
         s = parameters[0]
@@ -176,7 +176,7 @@ class Right(AST_Node):
         if s[1] == 'STRING' and x[1] == 'INTEGER':
             return (s[0][len(s[0])-x[0]:], 'STRING')
         else:
-            add_error_message(f'Function `{self.type}` expect `STRING` and `INTEGER`, but found `{s[1]}` and `{x[1]}`', self)
+            _wrong_param_type("RIGHT", ['STRING', 'INTEGER'], [s[1], x[1]], self)
 
 class Length(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -190,7 +190,7 @@ class Length(AST_Node):
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 1:
-            add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
+            _wrong_param_number("LENGTH", 1, len(parameters), self)
             return
 
         s = parameters[0]
@@ -199,7 +199,7 @@ class Length(AST_Node):
         elif s[1] == 'ARRAY':
             return (len(s), 'INTEGER')
         else:
-            add_error_message(f'Function `{self.type}` expect `STRING` or `ARRAY`, but found `{s[1]}`', self)
+            _wrong_param_type("LENGTH", ['STRING'], [s[1]], self)
 
 class Mid(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -213,7 +213,7 @@ class Mid(AST_Node):
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 3:
-            add_error_message(f'Function `{self.type}` expect 3 parameters, but found `{len(parameters)}`', self)
+            _wrong_param_number("MID", 3, len(parameters), self)
             return
 
         s = parameters[0]
@@ -222,7 +222,7 @@ class Mid(AST_Node):
         if s[1] == 'STRING' and x[1] == 'INTEGER' and y[1] == 'INTEGER':
             return (s[0][x[0]-1:x[0]+y[0]-1], 'STRING')
         else:
-            add_error_message(f'Function `{self.type}` expect `STRING` and `INTEGER` and `INTEGER`, but found `{self.s[1]}` and `{self.x[1]}` and `{self.y[1]}`', self)
+            _wrong_param_type("MID", ['STRING', 'INTEGER', 'INTEGER'], [s[1], x[1], y[1], self])
 
 class Lcase(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -237,7 +237,7 @@ class Lcase(AST_Node):
         if self.parameters:
             parameters = self.parameters.exe()
             if len(parameters) != 1:
-                add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
+                _wrong_param_number(self.type, 1, len(parameters), self)
                 return
 
             c = parameters[0]
@@ -246,9 +246,9 @@ class Lcase(AST_Node):
             elif c[1] == 'STRING':
                 return (c[0].lower(), 'STRING')
             else:
-                add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
+                _wrong_param_type(self.type, ['CHAR', 'STRING'], [c[1]], self)
         else:
-            add_error_message(f'Function `{self.type}` expect 1 parameters, but found 0', self)
+            _wrong_param_number(self.type, 1, 0, self)
 
 class Ucase(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -263,7 +263,7 @@ class Ucase(AST_Node):
         if self.parameters:
             parameters = self.parameters.exe()
             if len(parameters) != 1:
-                add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
+                _wrong_param_number(self.type, 1, len(parameters), self)
                 return
 
             c = parameters[0]
@@ -272,9 +272,9 @@ class Ucase(AST_Node):
             elif c[1] == 'STRING':
                 return (c[0].upper(), 'STRING')
             else:
-                add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{c[1]}`', self)
+                _wrong_param_type(self.type, ['CHAR', 'STRING'], [c[1]], self)
         else:
-            add_error_message(f'Function `{self.type}` expect 1 parameters, but found 0', self)
+            _wrong_param_number(self.type, 1, 0, self)
 
 
 class Rand(AST_Node):
@@ -290,14 +290,14 @@ class Rand(AST_Node):
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 1:
-            add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
+            _wrong_param_number("RAND", 1, len(parameters), self)
             return
 
         n = parameters[0]
         if n[1] == 'INTEGER':
             return ( randint(0, n[0]*self.rate)/self.rate , "REAL")
         else:
-            add_error_message(f'Function `{self.type}` expect `CHAR`, but found `{n[1]}`', self)
+            _wrong_param_type("RAND", ['INTEGER'], [n[1]], self)
 
 
 class Eof(AST_Node):
@@ -312,7 +312,7 @@ class Eof(AST_Node):
     def exe(self):
         parameters = self.parameters.exe()
         if len(parameters) != 1:
-            add_error_message(f'Function `{self.type}` expect 1 parameters, but found `{len(parameters)}`', self)
+            _wrong_param_number("EOF", 1, len(parameters), self)
             return
 
         fp = parameters[0]
@@ -324,7 +324,7 @@ class Eof(AST_Node):
             else:
                 return (False, 'BOOLEAN')
         else:
-            add_error_message(f'Function `{self.type}` expect `STRING` for a file path, but found `{fp[1]}`', self)
+            _wrong_param_type("EOF", ['STRING'], [fp[1]], self)
 
 class Pow(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -336,11 +336,17 @@ class Pow(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.parameters.get_tree(level+1)
 
     def exe(self):
-        parameters = self.parameters.exe()
-        try:
-            return (parameters[0][0] ** parameters[1][0], 'REAL')
-        except:
-            add_error_message(f'Cannot power `{parameters[0][1]}` with `{parameters[1][1]}`', self)
+        if self.parameters:
+            parameters = self.parameters.exe()
+            if len(self.parameters) == 2:
+                p = parameters[0]
+                if p[1] == 'INTEGER' or p[1] == 'REAL':
+                    try:
+                        return (parameters[0][0] ** parameters[1][0], 'REAL')
+                    except:
+                        add_error_message(f'Cannot power `{parameters[0][1]}` with `{parameters[1][1]}`', self)
+                else:
+                    _wrong_param_type("POW", ['REAL'], [p[1]], self)
 
 class Exit(AST_Node):
     def __init__(self, parameters=None, *args, **kwargs):
@@ -376,13 +382,15 @@ class Round(AST_Node):
         if self.parameters:
             parameters = self.parameters.exe()
             if len(self.parameters) == 1:
-                return (round(parameters[0][0]), 'INTEGER')
+                if parameters[0][1] == 'INTEGER':
+                    return (round(parameters[0][0]), 'INTEGER')
             elif len(self.parameters) == 2:
-                return (round(parameters[0][0], parameters[1][0]), 'REAL')
+                if parameters[0][1] == 'REAL' and parameters[1][1] == 'INTEGER':
+                    return (round(parameters[0][0], parameters[1][0]), 'REAL')
             else:
-                add_error_message(f'Round only have 1 or 2 parameters, but found {len(self.parameters)}', self)
+                add_error_message(f'Function `ROUND` expect 1 or 2 parameters, but found {len(self.parameters)}', self)
         else:
-            add_error_message(f'Round only have 1 or 2 parameters, but found 0', self)
+            add_error_message(f'Function `ROUND` expect 1 or 2 parameters, but found 0', self)
 
 class Python(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -404,7 +412,7 @@ class Python(AST_Node):
                 try:
                     global_space[self.parameters.parameters[i].id] = parameters[i][0]
                 except:
-                    add_error_message(f'Pythons interface only accept variables with basic data types', self)
+                    add_error_message(f'`PYTHON` interface only accept variables with basic data types', self)
 
             return_name = '_result'
             global_space[return_name] = None
@@ -417,7 +425,7 @@ class Python(AST_Node):
 
             return (global_space[return_name], None)  # None 表示未知类型
         else:
-            add_error_message(f'Python interface only have 1 parameters, but found 0', self)
+            add_error_message(f'`PYTHON` interface only have 1 parameters, but found 0', self)
 
 class Mod(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -434,9 +442,9 @@ class Mod(AST_Node):
             if len(self.parameters) == 2:
                 return (parameters[0][0] % parameters[1][0], 'REAL')
             else:
-                add_error_message(f'Mod only have 2 parameters, but found {len(self.parameters)}')
+                _wrong_param_number("MOD", 2, len(self.parameters), self)
         else:
-            add_error_message(f'Mod only have 2 parameters, but found 0', self)
+            _wrong_param_number("MOD", 2, 0, self)
 
 class Div(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -453,9 +461,9 @@ class Div(AST_Node):
             if len(self.parameters) == 2:
                 return (parameters[0][0] // parameters[1][0], 'REAL')
             else:
-                add_error_message(f'Mod only have 2 parameters, but found {len(self.parameters)}')
+                _wrong_param_number("DIV", 2, len(self.parameters), self)
         else:
-            add_error_message(f'Mod only have 2 parameters, but found 0', self)
+            _wrong_param_number("DIV", 2, len(self.parameters), self)
 
 class VarType(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -472,9 +480,9 @@ class VarType(AST_Node):
             if len(parameters) == 1:
                 return (parameters[0][1], 'STRING')
             else:
-                add_error_message(f'Type only have 1 parameters, but found {len(parameters)}', self)
+                _wrong_param_number("VARTYPE", 1, len(parameters), self)
         else:
-            add_error_message(f'Type only have 1 parameters, but found 0', self)
+            _wrong_param_number("VARTYPE", 1, 0, self)
 
 class ToUpper(Ucase):
     def __init__(self, parameters, *args, **kwargs):
@@ -503,11 +511,11 @@ class Day(AST_Node):
                 if p[1] == 'DATE':
                     return (int(p[0].split('/')[0]), 'INTEGER')
                 else:
-                    add_error_message(f'DAY expect a parameter with type `DATE`, but found `{p[1]}`', self)
+                    _wrong_param_type("DAY", ['DATE'], [p[1]], self)
             else:
-                add_error_message(f'DAY only have 1 parameters, but found {len(parameters)}', self)
+                _wrong_param_number("DAY", 1, len(parameters), self)
         else:
-            add_error_message(f'DAY only have 1 parameters, but found 0', self)
+            _wrong_param_number("DAY", 1, 0, self)
 
 class Month(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -526,11 +534,11 @@ class Month(AST_Node):
                 if p[1] == 'DATE':
                     return (int(p[0].split('/')[1]), 'INTEGER')
                 else:
-                    add_error_message(f'MONTH expect a parameter with type `DATE`, but found `{p[1]}`', self)
+                    _wrong_param_type("MONTH", ['DATE'], [p[1]], self)
             else:
-                add_error_message(f'MONTH only have 1 parameters, but found {len(parameters)}', self)
+                _wrong_param_number("MONTH", 1, len(parameters), self)
         else:
-            add_error_message(f'MONTH only have 1 parameters, but found 0', self)
+            _wrong_param_number("MONTH", 1, 0, self)
 
 class Year(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -549,11 +557,11 @@ class Year(AST_Node):
                 if p[1] == 'DATE':
                     return (int(p[0].split('/')[2]), 'INTEGER')
                 else:
-                    add_error_message(f'YEAR expect a parameter with type `DATE`, but found `{p[1]}`', self)
+                    _wrong_param_type("YEAR", ['DATE'], [p[1]], self)
             else:
-                add_error_message(f'YEAR only have 1 parameters, but found {len(parameters)}', self)
+                _wrong_param_number("YEAR", 1, len(parameters), self)
         else:
-            add_error_message(f'YEAR only have 1 parameters, but found 0', self)
+            _wrong_param_number("YEAR", 1, 0, self)
 
 class DayIndex(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -573,11 +581,11 @@ class DayIndex(AST_Node):
                     from datetime import datetime
                     return (datetime.strptime(p[0], '%d/%m/%Y').weekday() + 1) % 7 + 1
                 else:
-                    add_error_message(f'DAYINDEX expect a parameter with type `DATE`, but found `{p[1]}`', self)
+                    _wrong_param_type("DAYINDEX", ['DATE'], [p[1]], self)
             else:
-                add_error_message(f'DAYINDEX only have 1 parameters, but found {len(parameters)}', self)
+                _wrong_param_number("DAYINDEX", 1, len(parameters), self)
         else:
-            add_error_message(f'DAYINDEX only have 1 parameters, but found 0', self)
+            _wrong_param_number("DAYINDEX", 1, 0, self)
 
 class SetDate(AST_Node):
     def __init__(self, parameters, *args, **kwargs):
@@ -596,14 +604,14 @@ class SetDate(AST_Node):
                 if p[1] == 'INTEGER':
                     return (f'{parameters[0][0]:02}/{parameters[1][0]:02}/{parameters[2][0]:04}', 'DATE')
                 else:
-                    add_error_message(f'SETDATE expect a parameter with type `DATE`, but found `{p[1]}`', self)
+                    _wrong_param_type("SETDATE", ['INTEGER', 'INTEGER', 'INTEGER'], [p[1]], self)
             else:
-                add_error_message(f'SETDATE only have 3 parameters, but found {len(parameters)}', self)
+                _wrong_param_number("SETDATE", 3, len(parameters), self)
         else:
-            add_error_message(f'SETDATE only have 3 parameters, but found 0', self)
+            _wrong_param_number("SETDATE", 3, 0, self)
 
 class Today(AST_Node):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, parameters, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.type = 'TODAY'
 
@@ -611,8 +619,12 @@ class Today(AST_Node):
         return LEVEL_STR * level + self.type
 
     def exe(self):
-        from datetime import datetime
-        return (datetime.now().strftime('%d/%m/%Y'), 'DATE')
+        if not self.parameters:
+            from datetime import datetime
+            return (datetime.now().strftime('%d/%m/%Y'), 'DATE')
+        else:
+            parameters = self.parameters.exe()
+            _wrong_param_number("TODAY", 0, len(parameters), self)
 
 insert_functions = {
     "INT": Int_convert,
