@@ -54,7 +54,8 @@ def p_private_declare_statement(p):
     p[0] = AST.Variable(p[2], p[4], private=True, p=p)
 
 def p_const_declare_statement(p):
-    """statement : CONSTANT ID EQUAL expression"""
+    """statement : CONSTANT ID EQUAL expression
+            | CONSTANT ID ASSIGN expression"""
     p[0] = AST.Constant(p[2], p[4], p=p)
 
 def p_array_declare_statement(p):
@@ -482,7 +483,7 @@ def p_call_function_expression(p):
             | ID LEFT_PAREN RIGHT_PAREN"""
     if len(p) == 4:
         if p[1] in insert_functions:
-            p[0] = insert_functions[p[1]](p=p)
+            p[0] = insert_functions[p[1]](None, p=p)
         else:
             p[0] = AST.Call_function(p[1], p=p)
     else:

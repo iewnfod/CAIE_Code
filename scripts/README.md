@@ -115,6 +115,7 @@
     ```
     Time() RETURNS REAL
     ```
+
 ## [Import](./import.cpc)
 * `Import`: import another *cpc* file
     ```
