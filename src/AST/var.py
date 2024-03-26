@@ -95,3 +95,37 @@ class NewAssign(AST_Node):
                 add_error_message(f'Cannot assign `{assign_item}` to `{target_item}`', self)
         else:
             add_error_message(f'Target item does not exist', self)
+
+class Ids(AST_Node):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'IDS'
+        self.ids = []
+
+    def get_tree(self, level=0):
+        r = LEVEL_STR * level + self.type
+        for i in self.ids:
+            r += '\n' + LEVEL_STR * (level + 1) + i
+        return r
+
+    def add_id(self, id):
+        self.ids.append(id)
+
+    def exe(self):
+        return self.ids
+
+class MultiVariables(AST_Node):
+    def __init__(self, ids, var_type, private=False, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'MULTI_VARIABLES'
+        self.ids = ids
+        self.var_type = var_type
+        self.private = private
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + "\n" + self.ids.get_tree(level+1) + "\n" + LEVEL_STR * (level+1) + str(self.var_type)
+
+    def exe(self):
+        id_list = self.ids.exe()
+        for id in id_list:
+            Variable(id, self.var_type, self.private).exe()

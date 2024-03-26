@@ -49,9 +49,28 @@ def p_declare_statement(p):
             | PUBLIC ID COLON ID"""
     p[0] = AST.Variable(p[2], p[4], p=p)
 
+def p_multi_declare_statement(p):
+    """statement : DECLARE ids COLON ID
+            | PUBLIC ids COLON ID"""
+    p[0] = AST.MultiVariables(p[2], p[4], p=p)
+
+def p_multi_id_expression(p):
+    """ids : ids COMMA ID
+        | ID"""
+    if len(p) == 2:
+        p[0] = AST.Ids(p=p)
+        p[0].add_id(p[1])
+    else:
+        p[1].add_id(p[3])
+        p[0] = p[1]
+
 def p_private_declare_statement(p):
     """statement : PRIVATE ID COLON ID"""
     p[0] = AST.Variable(p[2], p[4], private=True, p=p)
+
+def p_private_multi_declare_statement(p):
+    """statement : PRIVATE ids COLON ID"""
+    p[0] = AST.MultiVariables(p[2], p[4], private=True, p=p)
 
 def p_const_declare_statement(p):
     """statement : CONSTANT ID EQUAL expression
