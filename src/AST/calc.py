@@ -108,11 +108,13 @@ class Op_connect(AST_Node):
     def exe(self):
         s1 = self.left.exe()
         s2 = self.right.exe()
-        try:
-            return (s1[0] + s2[0], 'STRING')
-        except:
+        if all(i[1] in ('STRING', 'CHAR') for i in [s1, s2]):
+            try:
+                return (s1[0] + s2[0], 'STRING')
+            except:
+                add_error_message(f'Cannot connect `{s1[1]}` with `{s2[1]}`', self)
+        else:
             add_error_message(f'Cannot connect `{s1[1]}` with `{s2[1]}`', self)
-
 
 class Op_mod(AST_Node):
     def __init__(self, left, right, *args, **kwargs):
