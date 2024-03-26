@@ -93,10 +93,10 @@ class DATE(base):
         if key == 1:
             return self.type
         else:
-            return (self.year, self.month, self.day)
+            return str(self)
 
     def set_value(self, new_value):
-        self.year, self.month, self.day = new_value
+        self.day, self.month, self.year = str(new_value).split('/')
 
 class ARRAY(base):
     def __init__(self, value={}, *args, **kwargs):

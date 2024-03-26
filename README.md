@@ -498,15 +498,35 @@ The following items give the `DATATYPE`, its description, and the default value 
     "BCD"
     ```
 * `LCASE(ThisChar : CHAR) RETURNS CHAR`
+> Decrapricated since 2023
     ```
     $ LCASE('W')
     'w'
     ```
 * `UCASE(ThisChar : CHAR) RETURNS CHAR`
+> Decrapricated since 2023
     ```
     $ UCASE('h')
     'H'
     ```
+* `TO_UPPER(x : <datatype>) RETURNS <datatype>`
+> <datatype> may be `CHAR` or `STRING`
+  ```
+    $ TO_UPPER("hello")
+    "HELLO"
+
+    $ TO_UPPER('a')
+    'A'
+  ```
+* `TO_LOWER(x : <datatype>) RETURNS <datatype>`
+> <datatype> may be `CHAR` or `STRING`
+  ```
+    $ TO_LOWER("HELLO")
+    "hello"
+
+    $ TO_LOWER('A')
+    'a'
+  ```
 * `INT(x : REAL) RETURNS INTEGER`
     ```
     $ INT(27.5415)
@@ -519,6 +539,37 @@ The following items give the `DATATYPE`, its description, and the default value 
     ```
 * `EOF(file_path : STRING) RETURNS BOOLEAN`
 * `POW(x: REAL, y: REAL) RETURNS REAL`
+* `DAY(ThisDate : DATE) RETURNS INTEGER`
+  ```
+    $ DAY(25/07/2023)
+    25
+  ```
+* `MONTH(ThisDate : DATE) RETURNS INTEGER`
+  ```
+    $ MONTH(25/07/2023)
+    7
+  ```
+* `YEAR(ThisDate : DATE) RETURNS INTEGER`
+  ```
+    $ YEAR(12/12/2005)
+    2005
+  ```
+* `DAYINDEX(ThisDate : DATE) RETURNS INTEGER`
+> Where Sunday = 1, Monday = 2 etc
+  ```
+    $ DAYINDEX(25/03/2024)
+    2
+  ```
+* `SETDATE(day : INTEGER, month : INTEGER, year : INTEGER) RETURNS DATE`
+  ```
+    $ SETDATE(25, 03, 2024)
+    25/03/2024
+  ```
+* `TODAY() RETURNS DATE`
+  ```
+    $ TODAY()
+    25/03/2024
+  ```
 
 ### Built-in Functions of this Interpreter
 > These functions are fairly useful, but they are not included in the [CAIE standard](https://www.cambridgeinternational.org/Images/697401-2026-syllabus-legacy-notice.pdf).
