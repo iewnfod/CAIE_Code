@@ -14,6 +14,7 @@ git config --global --add safe.directory /usr/local/sbin/CAIE_Code || exit 1
 chown -R $loggedInUser $current_dir || exit 1
 
 # 链接到 bin 目录
+mkdir -p /usr/local/bin
 ln -sf ${current_dir}/bin/cpc /usr/local/bin/cpc || exit 1
 
 # 链接到 man 目录，如果失败则返回退出代码1
