@@ -61,15 +61,15 @@ fn main() {
 
     // 通过系统查找 Python
     let mut system_python = vec![];
+    for py in PYTHON {
+        system_python.push(PathBuf::from_str(py).unwrap());
+    }
+
     if cfg!(target_os = "macos") {
         system_python = [system_python, solve_system_python(MAC_PYTHON_HOME)].concat();
     }
 
     // println!("{:?}", system_python);
-
-    for py in PYTHON {
-        system_python.push(PathBuf::from_str(py).unwrap());
-    }
 
     for py in system_python {
         let mut cmd = Command::new(py);
