@@ -26,6 +26,11 @@
 curl -fsSL https://atcrea.tech/cpc.sh | sh
 ```
 
+> 对于想要一并Visual Studio Code以及配套[拓展](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension)的用户，请使用以下脚本：
+> ```shell
+> curl -fsSL https://atcrea.tech/cpc.sh | sh -s -- --with-vsc
+> ```
+
  *对于其他用户...*
 
 1. 克隆此项目
