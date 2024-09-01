@@ -90,7 +90,7 @@ class For(AST_Node):
                 diff = 1
 
             # 核对id是否相同
-            if self.id != self.next_id:
+            if self.id != self.next_id and self.next_id is not None:
                 add_error_message(f'Expect `{self.id}` for next id, but found `{self.next_id}`', self)
                 return
 

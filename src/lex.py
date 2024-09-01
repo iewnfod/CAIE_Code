@@ -108,7 +108,7 @@ tokens = (
 ) + tuple(reserved)
 
 # 匹配正则表达式
-t_ASSIGN = r"<-"
+t_ASSIGN = r"(<-+)|←"
 t_PLUS = r"\+"
 t_MINUS = r"\-"
 t_MUL = r"\*"

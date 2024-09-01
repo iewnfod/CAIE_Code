@@ -33,6 +33,11 @@
 curl -fsSL https://atcrea.tech/cpc.sh | sh
 ```
 
+> For those who want to install with Visual Studio Code as well as its [extension](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension), you can use the following script:
+> ```shell
+> curl -fsSL https://atcrea.tech/cpc.sh | sh -s -- --with-vsc
+> ```
+
   *For other users...*
 
 1. Clone the project to your computer using

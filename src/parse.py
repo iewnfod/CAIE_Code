@@ -222,9 +222,15 @@ def p_otherwise_statement(p):
 
 def p_for_statement(p):
     """statement : FOR ID ASSIGN expression TO expression STEP expression statements NEXT ID
-            | FOR ID ASSIGN expression TO expression statements NEXT ID"""
-    if len(p) == 10:
+            | FOR ID ASSIGN expression TO expression STEP expression statements NEXT
+            | FOR ID ASSIGN expression TO expression statements NEXT ID
+            | FOR ID ASSIGN expression TO expression statements NEXT"""
+    if len(p) == 9:
+        p[0] = AST.For(p[2], p[4], p[6], AST.Integer(1, p=p), p[7], None, p=p)
+    elif len(p) == 10:
         p[0] = AST.For(p[2], p[4], p[6], AST.Integer(1, p=p), p[7], p[9], p=p)
+    elif len(p) == 11:
+        p[0] = AST.For(p[2], p[4], p[6], p[8], p[9], None, p=p)
     else:
         p[0] = AST.For(p[2], p[4], p[6], p[8], p[9], p[11], p=p)
 
