@@ -1,6 +1,6 @@
 {
-    "type": "add",
+    "type": "update",
     "branch": ["stable","nightly","dev"],
-    "expiry_date": "2024-09-01",
-    "content": "A new syntax has been added for declaring array parameters in a FUNCTION. \n  e.g. FUNCTION fn(p1[] : type) RETURNS type"
+    "expiry_date": "2024-09-10",
+    "content": "The step variable is no longer needed behind FOR...NEXT. \n  e.g. \n  FOR i <- 1 TO 10 \n     <function>\n  NEXT"
 }
