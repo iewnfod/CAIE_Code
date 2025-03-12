@@ -14,6 +14,16 @@ super_fast = False
 with open(os.path.join(HOME_PATH, 'VERSION'), 'r') as f:
     VERSION = f.read().strip()
 
+def init_git():
+    from .global_var import config
+    if not os.path.exists(os.path.join(HOME_PATH, '.git')):
+        repo = git.Repo.init(HOME_PATH)
+        branch = config.get_config('branch')
+        remote = repo.create_remote('origin', config.get_config('remote'))
+        remote.fetch()
+        repo.git.reset("--hard", f"origin/{branch}")
+        repo.git.checkout(branch)
+
 def update_expired():
     from .global_var import config
     if time() - config.get_config('last-auto-update') > config.get_config('interval-update'):
@@ -116,13 +126,15 @@ def show_notification(_branch):
             elif notification_data['type'] == 'add':
                 print(f"\033[1m🎉NEW FEATURE NOTIFICATION🎉\33[1m")
                 print(f"👉{notification_data['content']}\033[0m")
-        else: 
+        else:
             print("🙁No developer notification available.")
-    else: 
+    else:
         print("🙁No developer notification available.")
 
 def integrity_protection():
     if not os.environ.get('CODESPACES'):
+        init_git()
+
         repo = git.Repo(HOME_PATH)
         current_branch = get_current_branch()
         local_commit = repo.head.commit
