@@ -1,0 +1,27 @@
+$ErrorActionPreference = 'Stop' # stop on all errors
+
+$packageName = 'CAIE_Code'
+
+Write-Output "Selecting Source ..."
+$response = Invoke-WebRequest -Uri "https://cdn.createchstudio.com/cdn-cgi/trace" -UseBasicParsing
+$location = ($response.Content -split "`n" | Where-Object { $_ -match "^loc=" }) -replace "loc=",""
+
+if ($location -eq "CN") {
+    $url = "http://github.createchstudio.com/https://github.com/iewnfod/CAIE_Code/archive/refs/heads/stable.zip"
+} else {
+    $url = "https://github.com/iewnfod/CAIE_Code/archive/refs/heads/stable.zip"
+}
+
+$toolsdir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
+
+$packageargs = @{
+    packagename   = $packagename
+    unzipLocation = $toolsdir
+    url           = $url
+    checksum      = GITHUB_ACTION_CHOCO_PKG_SHA256
+    checksumType  = 'sha256'
+}
+
+Install-ChocolateyZipPackage @packageargs
+
+Install-ChocolateyPath "$toolsdir\CAIE_Code-stable\bin" -PathType 'User'

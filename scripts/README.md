@@ -109,6 +109,10 @@
     ```
     ORD(s : CHAR) RETURNS INTEGER
     ```
+* `ASCII`: get the ASCII index of a char (Same as `ORD`)
+    ```
+    ASCII(s : CHAR) RETURNS INTEGER
+    ```
 
 ## [Time](./time.cpc)
 * `Time`: get current timestamp

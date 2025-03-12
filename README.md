@@ -173,7 +173,7 @@ If it still fails after re-installation, please report it to us on the [issue pa
 - Python version: PyPy 3.9.16
 
 ### Basic Tests
-- assignment: 1200w/s
+- assignment: 12M/s
 ```
 DECLARE a : INTEGER
 FOR i <- 1 TO 12000000
@@ -181,7 +181,7 @@ FOR i <- 1 TO 12000000
 NEXT i
 ```
 
-- explicit conversion and assignment: 760w/s
+- explicit conversion and assignment: 7.6M/s
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 7600000
@@ -189,7 +189,7 @@ FOR i <- 1 TO 7600000
 NEXT i
 ```
 
-- implicit conversion and assignment: 1000w/s
+- implicit conversion and assignment: 10M/s
 ```
 DECLARE a : STRING
 FOR i <- 1 TO 10000000
@@ -197,7 +197,7 @@ FOR i <- 1 TO 10000000
 NEXT i
 ```
 
-- print to terminal: 65w/s
+- print to terminal: 650K/s
 ```
 FOR i <- 1 TO 650000
     OUTPUT i
