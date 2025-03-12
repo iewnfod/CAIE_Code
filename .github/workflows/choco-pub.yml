@@ -34,6 +34,9 @@ jobs:
         run: |
           (Get-Content choco-pkg\tools\chocolateyinstall.ps1) -replace "GITHUB_ACTION_CHOCO_PKG_SHA256", "${{ env.SHA256 }}" | Set-Content choco-pkg\tools\chocolateyinstall.ps1
 
+      - name: Pack Chocolatey Package
+        run: choco pack choco-pkg/*.nuspec --outputdirectory choco-pkg
+
       - name: Setup Chocolatey API Key
         run: choco apiKey add --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
 
