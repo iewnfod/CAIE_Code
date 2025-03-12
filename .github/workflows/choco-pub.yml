@@ -32,7 +32,7 @@ jobs:
           (Get-Content choco-pkg\tools\chocolateyinstall.ps1) -replace "GITHUB_ACTION_CHOCO_PKG_SHA256", "${{ env.SHA256 }}" | Set-Content choco-pkg\tools\chocolateyinstall.ps1
 
       - name: Pack Chocolatey Package
-        run: choco pack choco-pkg/caie_code.nuspec --outputdirectory choco-pkg
+        run: choco pack choco-pkg/caie-code.nuspec --outputdirectory choco-pkg
 
       - name: Find .nupkg File
         id: find_nupkg
