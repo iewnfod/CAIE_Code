@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <!-- == PACKAGE SPECIFIC SECTION == -->
-    <id>caie_code</id>
+    <id>caie-code</id>
     <version>0.1.4</version>
     <packageSourceUrl>https://github.com/iewnfod/CAIE_Code</packageSourceUrl>
     <owners>lightum_cc</owners>
 
     <!-- == SOFTWARE SPECIFIC SECTION == -->
-    <title>CAIE_Code</title>
+    <title>CAIE-Code</title>
     <authors>Iewnfod</authors>
     <projectUrl>https://github.com/Iewnfod/CAIE_Code</projectUrl>
     <iconUrl>https://cdn.jsdelivr.net/gh/iewnfod/CAIE_Code@stable/assets/cpc.png</iconUrl>
@@ -18,7 +18,7 @@
     <projectSourceUrl>https://github.com/iewnfod/CAIE_Code</projectSourceUrl>
     <docsUrl>https://github.com/iewnfod/CAIE_Code</docsUrl>
     <bugTrackerUrl>https://github.com/iewnfod/CAIE_Code/issues</bugTrackerUrl>
-    <tags>CAIE_Code 0.1.4</tags>
+    <tags>CAIE-Code 0.1.4</tags>
     <summary>An interpreter for CAIE Pseudocode</summary>
     <description>An interpreter for CAIE Pseudocode</description>
     <dependencies>
