@@ -34,8 +34,15 @@ jobs:
       - name: Pack Chocolatey Package
         run: choco pack choco-pkg/caie_code.nuspec --outputdirectory choco-pkg
 
+      - name: Find .nupkg File
+        id: find_nupkg
+        run: |
+          $nupkgFile = Get-ChildItem -Path choco-pkg -Filter *.nupkg | Select-Object -ExpandProperty Name
+          if (-Not $nupkgFile) { Write-Host "No .nupkg file found!"; exit 1 }
+          echo "NUPKG_FILE=$nupkgFile" | Out-File -FilePath $env:GITHUB_ENV -Append
+
       - name: Setup Chocolatey API Key
         run: choco apiKey add --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
 
       - name: Push Chocolatey Package
-        run: choco push choco-pkg/*.nupkg --source https://push.chocolatey.org/
+        run: choco push "choco-pkg/${{ env.NUPKG_FILE }}" --source https://push.chocolatey.org/
