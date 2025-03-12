@@ -1,0 +1,41 @@
+name: Publish Chocolatey Package
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - stable
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout stable branch
+        uses: actions/checkout@v4
+        with:
+          ref: stable
+
+      - name: Change to choco-pkg directory
+        run: cd choco-pkg
+
+      - name: Download zip from stable branch
+        run: |
+          $zipUrl = "${{ github.server_url }}/${{ github.repository }}/archive/refs/heads/stable.zip"
+          Invoke-WebRequest -Uri $zipUrl -OutFile stable.zip
+
+      - name: Calculate SHA256 hash
+        id: compute_hash
+        run: |
+          $sha256 = (Get-FileHash stable.zip -Algorithm SHA256).Hash
+          echo "SHA256=$sha256" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Replace SHA256 in chocolateyinstall.ps1
+        run: |
+          (Get-Content choco-pkg\tools\chocolateyinstall.ps1) -replace "GITHUB_ACTION_CHOCO_PKG_SHA256", "${{ env.SHA256 }}" | Set-Content choco-pkg\tools\chocolateyinstall.ps1
+
+      - name: Setup Chocolatey API Key
+        run: choco apiKey add --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
+
+      - name: Push Chocolatey Package
+        run: choco push choco-pkg/*.nupkg --source https://push.chocolatey.org/
