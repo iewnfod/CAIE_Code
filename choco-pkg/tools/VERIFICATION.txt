@@ -1,0 +1,13 @@
+﻿
+Note: Include this file if including binaries you have the right to distribute.
+Otherwise delete. this file. If you are the software author, you can mention
+this.
+
+===DELETE ABOVE THIS LINE AND THIS LINE===
+
+VERIFICATION
+Verification is intended to assist the Chocolatey moderators and community
+in verifying that this package's contents are trustworthy.
+
+Binary is built from the source code available at: https://github.com/iewnfod/CAIE_Code
+I, this package distributor, is one of the contributors to the source code as [lightumcc](https://github.com/lightumcc)

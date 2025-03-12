@@ -105,6 +105,10 @@
     ```
     ORD(s : CHAR) RETURNS INTEGER
     ```
+* `ASCII`: 获取一个字符的ASCII码 (和 `ORD` 一样)
+    ```
+    ASCII(s : CHAR) RETURNS INTEGER
+    ```
 
 ## [Time](./time.cpc)
 * `Time` 获取当前时间戳

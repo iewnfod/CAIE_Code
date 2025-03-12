@@ -11,3 +11,4 @@ target/
 temp/
 *.log
 .cpc_config.json
+*.nupkg

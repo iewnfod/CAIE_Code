@@ -22,11 +22,10 @@ def get_value(value):
     return options_dict[value]
 
 def standard_output():
-    import datetime
     print(f'CAIE Pseudocode Interpreter v{VERSION} ({get_current_branch()}/{get_commit_hash_msg()[0]})')
     print(f'Using {PLATFORM}')
     print('Repository at \033[4mhttps://github.com/iewnfod/CAIE_Code/\33[0m')
-    print(f'Copyright © {datetime.datetime.now().year} Iewnfod. ')
+    print(f'Copyright (c) 2025 Iewnfod. ')
     print('All Rights Reserved. ')
 
 def open_parse_info():

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <!-- == PACKAGE SPECIFIC SECTION == -->
+    <id>caie_code</id>
+    <version>0.1.4</version>
+    <packageSourceUrl>https://github.com/iewnfod/CAIE_Code</packageSourceUrl>
+    <owners>lightum_cc</owners>
+
+    <!-- == SOFTWARE SPECIFIC SECTION == -->
+    <title>CAIE_Code</title>
+    <authors>Iewnfod</authors>
+    <projectUrl>https://github.com/Iewnfod/CAIE_Code</projectUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/iewnfod/CAIE_Code@stable/assets/cpc.png</iconUrl>
+    <copyright>Copyright © 2023 - Now Iewnfod.</copyright>
+    <licenseUrl>https://github.com/iewnfod/CAIE_Code/blob/stable/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/iewnfod/CAIE_Code</projectSourceUrl>
+    <docsUrl>https://github.com/iewnfod/CAIE_Code</docsUrl>
+    <bugTrackerUrl>https://github.com/iewnfod/CAIE_Code/issues</bugTrackerUrl>
+    <tags>CAIE_Code 0.1.4</tags>
+    <summary>An interpreter for CAIE Pseudocode</summary>
+    <description>An interpreter for CAIE Pseudocode</description>
+    <dependencies>
+      <dependency id="pypy3" version="7.3.4.20210425"/>
+      <dependency id="git" version="2.48.1"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
