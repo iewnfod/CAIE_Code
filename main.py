@@ -197,7 +197,7 @@ def main(input_=None, output_=None, addition_file_name=None):
     if not config.get_config('dev') and config.get_config('integrity-protection'):
         integrity_protection()
 
-    #自动更新
+    # 自动更新
     if config.get_config('dev.simulate-update') or (config.get_config('auto-update') and not config.get_config('dev') and update_expired()):
         update()
         config.update_config('last-auto-update', str(time()))
