@@ -15,7 +15,7 @@ requirements = [
 tuna = 'https://pypi.tuna.tsinghua.edu.cn/simple/'
 
 def check_pip() -> bool:
-    process = subprocess.Popen(f'"{sys.executable}" -m pip', stdout=subprocess.DEVNULL)
+    process = subprocess.Popen([sys.executable, "-m", "pip"], stdout=subprocess.DEVNULL)
     process.wait()
     return process.returncode == 0
 
