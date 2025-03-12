@@ -16,26 +16,33 @@ jobs:
         with:
           ref: stable
 
-      - name: Change to choco-pkg directory
-        run: cd choco-pkg
-
       - name: Download zip from stable branch
         run: |
           $zipUrl = "${{ github.server_url }}/${{ github.repository }}/archive/refs/heads/stable.zip"
-          Invoke-WebRequest -Uri $zipUrl -OutFile stable.zip
+          Invoke-WebRequest -Uri $zipUrl -OutFile choco-pkg/stable.zip
 
       - name: Calculate SHA256 hash
         id: compute_hash
         run: |
-          $sha256 = (Get-FileHash stable.zip -Algorithm SHA256).Hash
+          $sha256 = (Get-FileHash choco-pkg/stable.zip -Algorithm SHA256).Hash
           echo "SHA256=$sha256" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - name: Replace SHA256 in chocolateyinstall.ps1
         run: |
           (Get-Content choco-pkg\tools\chocolateyinstall.ps1) -replace "GITHUB_ACTION_CHOCO_PKG_SHA256", "${{ env.SHA256 }}" | Set-Content choco-pkg\tools\chocolateyinstall.ps1
 
+      - name: Pack Chocolatey Package
+        run: choco pack choco-pkg/caie_code.nuspec --outputdirectory choco-pkg
+
+      - name: Find .nupkg File
+        id: find_nupkg
+        run: |
+          $nupkgFile = Get-ChildItem -Path choco-pkg -Filter *.nupkg | Select-Object -ExpandProperty Name
+          if (-Not $nupkgFile) { Write-Host "No .nupkg file found!"; exit 1 }
+          echo "NUPKG_FILE=$nupkgFile" | Out-File -FilePath $env:GITHUB_ENV -Append
+
       - name: Setup Chocolatey API Key
         run: choco apiKey add --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
 
       - name: Push Chocolatey Package
-        run: choco push choco-pkg/*.nupkg --source https://push.chocolatey.org/
+        run: choco push "choco-pkg/${{ env.NUPKG_FILE }}" --source https://push.chocolatey.org/
