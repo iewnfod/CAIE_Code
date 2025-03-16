@@ -31,7 +31,14 @@ curl -fsSL https://atcrea.tech/cpc.sh | sh
 > curl -fsSL https://atcrea.tech/cpc.sh | sh -s -- --with-vsc
 > ```
 
- *对于其他用户...*
+1. 对于**Windows**用户，您可以直接使用以下脚本安装：
+```powershell
+irm https://atcrea.tech/cpc.ps1 | iex
+```
+
+> 您需要手动安装[拓展](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension)
+
+*对于其他用户...*
 
 1. 克隆此项目
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
