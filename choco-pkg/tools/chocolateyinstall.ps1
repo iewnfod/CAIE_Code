@@ -18,7 +18,6 @@ $packageargs = @{
     packagename   = $packagename
     unzipLocation = $toolsdir
     url           = $url
-    checksum      = GITHUB_ACTION_CHOCO_PKG_SHA256
     checksumType  = 'sha256'
 }
 
