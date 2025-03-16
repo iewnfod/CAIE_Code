@@ -12,7 +12,7 @@ if ($location -eq "CN") {
     $url = "https://github.com/iewnfod/CAIE_Code/archive/refs/heads/stable.zip"
 }
 
-$toolsdir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
+$toolsdir = "$env:LOCALAPPDATA\CAIE_Code"
 
 $packageargs = @{
     packagename   = $packagename
@@ -24,3 +24,5 @@ $packageargs = @{
 Install-ChocolateyZipPackage @packageargs
 
 Install-ChocolateyPath "$toolsdir\CAIE_Code-stable\bin" -PathType 'User'
+
+git config --global --add safe.directory "$toolsdir\CAIE_Code-stable"
