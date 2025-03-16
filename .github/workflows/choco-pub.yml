@@ -1,4 +1,4 @@
-name: Publish Chocolatey Package
+name: Update Chocolatey Package & Releases
 
 on:
   workflow_dispatch:
@@ -41,8 +41,36 @@ jobs:
           if (-Not $nupkgFile) { Write-Host "No .nupkg file found!"; exit 1 }
           echo "NUPKG_FILE=$nupkgFile" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      - name: Setup Chocolatey API Key
-        run: choco apiKey add --key ${{ secrets.CHOCOLATEY_API_KEY }} --source https://push.chocolatey.org/
+      - name: Read VERSION file
+        id: read_version
+        run: |
+          $version = Get-Content VERSION -Raw
+          $version = $version.Trim()
+          echo "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
 
-      - name: Push Chocolatey Package
-        run: choco push "choco-pkg/${{ env.NUPKG_FILE }}" --source https://push.chocolatey.org/
+      - name: Get latest commit hash
+        id: get_commit_hash
+        run: |
+          $commitHash = git rev-parse --short HEAD
+          echo "COMMIT_HASH=$commitHash" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Generate tag
+        id: generate_tag
+        run: |
+          $tag = "v${{ env.VERSION }}-${{ env.COMMIT_HASH }}"
+          echo "TAG_NAME=$tag" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Create GitHub Tag
+        run: |
+          git tag ${{ env.TAG_NAME }}
+          git push origin ${{ env.TAG_NAME }}
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          name: ${{ env.TAG_NAME }}
+          tag: ${{ env.TAG_NAME }}
+          artifacts: choco-pkg/${{ env.NUPKG_FILE }}
+          generateReleaseNotes: true
+          makeLatest: true
