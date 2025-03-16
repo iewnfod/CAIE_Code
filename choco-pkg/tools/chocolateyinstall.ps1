@@ -24,3 +24,5 @@ $packageargs = @{
 Install-ChocolateyZipPackage @packageargs
 
 Install-ChocolateyPath "$toolsdir\CAIE_Code-stable\bin" -PathType 'User'
+
+git config --global --add safe.directory "$toolsdir\CAIE_Code-stable"
