@@ -104,7 +104,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 - `branch`
 
   - `stable`: Updates are slow, but the most stable.
-  - `nightly`: This branch will update once a day. Early adopters can try this branch, please actively report the issue.
+  - `nightly`: Early adopters can try this branch, please actively report the issue.
   - `dev`: The latest version of CPC may contain many untested functions.
 
   > This setting needs to be run `cpc -u` once for it to take effect.
