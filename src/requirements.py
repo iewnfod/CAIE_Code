@@ -28,7 +28,7 @@ def ensure_pip():
         os.popen(pip_cmd).read()
 
 def test_requirements():
-    ensure_pip()
+    # ensure_pip()
 
     for package_name, import_name in requirements:
         try:

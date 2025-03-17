@@ -133,7 +133,7 @@ def show_notification(_branch):
 
 def integrity_protection():
     if not os.environ.get('CODESPACES'):
-        init_git()
+        # init_git()
 
         repo = git.Repo(HOME_PATH)
         current_branch = get_current_branch()
