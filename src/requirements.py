@@ -12,7 +12,7 @@ requirements = [
 ]
 
 
-tuna = 'https://pypi.tuna.tsinghua.edu.cn/simple/'
+aliyun = 'https://mirrors.aliyun.com/pypi/simple/'
 
 def check_pip() -> bool:
     process = subprocess.Popen([sys.executable, "-m", "pip"], stdout=subprocess.DEVNULL)
@@ -38,4 +38,4 @@ def test_requirements():
             if os.environ.get('CODESPACES'):
                 os.system(f'"{sys.executable}" -m pip install {package_name}')
             else:
-                os.system(f'"{sys.executable}" -m pip install {package_name} -i {tuna}')
+                os.system(f'"{sys.executable}" -m pip install {package_name} -i {aliyun}')

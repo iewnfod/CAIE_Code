@@ -31,7 +31,14 @@ curl -fsSL https://atcrea.tech/cpc.sh | sh
 > curl -fsSL https://atcrea.tech/cpc.sh | sh -s -- --with-vsc
 > ```
 
- *对于其他用户...*
+1. 对于**Windows**用户，您可以直接使用以下脚本安装：
+```powershell
+irm https://atcrea.tech/cpc.ps1 | iex
+```
+
+> 您需要手动安装[拓展](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension)
+
+*对于其他用户...*
 
 1. 克隆此项目
     ```git clone https://github.com/iewnfod/CAIE_Code.git```
@@ -87,7 +94,7 @@ cpc [file_paths] [options]
 - `branch`
 
   - `stable`：更新较慢，但最稳定。
-  - `nightly`：此分支每天更新一次。早期用户可以试用此分支，请积极报告问题。
+  - `nightly`：早期用户可以试用此分支，请积极报告问题。
   - `dev`：最新版本的 CPC，可能包含许多未经测试的功能。
 
   > 此设置需要运行一次 `cpc -u` 才能生效。

@@ -15,12 +15,12 @@
     <copyright>Copyright © 2023 - Now Iewnfod.</copyright>
     <licenseUrl>https://github.com/iewnfod/CAIE_Code/blob/stable/LICENSE</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <projectSourceUrl>https://github.com/iewnfod/CAIE_Code</projectSourceUrl>
     <docsUrl>https://github.com/iewnfod/CAIE_Code</docsUrl>
     <bugTrackerUrl>https://github.com/iewnfod/CAIE_Code/issues</bugTrackerUrl>
     <tags>CAIE-Code 0.1.4</tags>
     <summary>An interpreter for CAIE Pseudocode</summary>
     <description>An interpreter for CAIE Pseudocode</description>
+    <releaseNotes>https://github.com/iewnfod/CAIE_Code/commits/stable/</releaseNotes>
     <dependencies>
       <dependency id="pypy3" version="7.3.4.20210425"/>
       <dependency id="git" version="2.48.1"/>

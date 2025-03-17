@@ -38,7 +38,14 @@ curl -fsSL https://atcrea.tech/cpc.sh | sh
 > curl -fsSL https://atcrea.tech/cpc.sh | sh -s -- --with-vsc
 > ```
 
-  *For other users...*
+1. For **Windows** users, you can install directly using following scripts:
+```powershell
+irm https://atcrea.tech/cpc.ps1 | iex
+```
+
+> You have to manually install the [extension](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension) for Visual Studio Code.
+
+*For other users...*
 
 1. Clone the project to your computer using
     `git clone https://github.com/iewnfod/CAIE_Code.git`.
@@ -97,7 +104,7 @@ It runs the entire file if `filepath` is provided, otherwise, it enters playgrou
 - `branch`
 
   - `stable`: Updates are slow, but the most stable.
-  - `nightly`: This branch will update once a day. Early adopters can try this branch, please actively report the issue.
+  - `nightly`: Early adopters can try this branch, please actively report the issue.
   - `dev`: The latest version of CPC may contain many untested functions.
 
   > This setting needs to be run `cpc -u` once for it to take effect.
