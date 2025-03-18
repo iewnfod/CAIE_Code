@@ -21,10 +21,6 @@
     <summary>An interpreter for CAIE Pseudocode</summary>
     <description>An interpreter for CAIE Pseudocode</description>
     <releaseNotes>https://github.com/iewnfod/CAIE_Code/commits/stable/</releaseNotes>
-    <dependencies>
-      <dependency id="pypy3" version="7.3.4.20210425"/>
-      <dependency id="git" version="2.48.1"/>
-    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
