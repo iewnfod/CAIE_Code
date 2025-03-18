@@ -30,17 +30,17 @@
 
 0. For **macOS** users, you can install directly using following scripts:
 ```shell
-curl -fsSL https://atcrea.tech/cpc.sh | sh
+curl -fsSL https://atcrea.tech/cpc-mac | sh
 ```
 
 > For those who want to install with Visual Studio Code as well as its [extension](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension), you can use the following script:
 > ```shell
-> curl -fsSL https://atcrea.tech/cpc.sh | sh -s -- --with-vsc
+> curl -fsSL https://atcrea.tech/cpc-mac | sh -s -- --with-vsc
 > ```
 
 1. For **Windows** users, you can install directly using following scripts:
 ```powershell
-irm https://atcrea.tech/cpc.ps1 | iex
+irm https://atcrea.tech/cpc-win | iex
 ```
 
 > You have to manually install the [extension](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension) for Visual Studio Code.
