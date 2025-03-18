@@ -23,17 +23,17 @@
 ### 正式安装
 0. 对于 macOS 用户，可使用以下脚本一键安装：
 ```shell
-curl -fsSL https://atcrea.tech/cpc.sh | sh
+curl -fsSL https://atcrea.tech/cpc-mac | sh
 ```
 
 > 对于想要一并Visual Studio Code以及配套[拓展](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension)的用户，请使用以下脚本：
 > ```shell
-> curl -fsSL https://atcrea.tech/cpc.sh | sh -s -- --with-vsc
+> curl -fsSL https://atcrea.tech/cpc-mac | sh -s -- --with-vsc
 > ```
 
 1. 对于**Windows**用户，您可以直接使用以下脚本安装：
 ```powershell
-irm https://atcrea.tech/cpc.ps1 | iex
+irm https://atcrea.tech/cpc-win | iex
 ```
 
 > 您需要手动安装[拓展](https://marketplace.visualstudio.com/items?itemName=CreatechStudioShanghaiInc.cpc-interpreter-extension)
