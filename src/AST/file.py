@@ -18,7 +18,7 @@ class Open_file(AST_Node):
         file_path = self.file_path.exe()
         if file_path[1] == 'STRING':
             if self.file_mode in {'READ', 'WRITE', 'APPEND', 'RANDOM'}:
-                fm = {'READ': 'r', 'WRITE': 'w', 'APPEND': 'a', 'RANDOM': 'w+'}[self.file_mode]
+                fm = {'READ': 'r', 'WRITE': 'w', 'APPEND': 'a', 'RANDOM': 'ab+'}[self.file_mode]
                 f = open(file_path[0], fm)
                 stack.add_file(file_path[0], f)
             else:
@@ -123,10 +123,50 @@ class Seek(AST_Node):
         fp = self.file_path.exe()
         ad = self.ad.exe()
         if fp[1] == 'STRING':
-            if self.ad[1] == 'INTEGER':
-                f = stack.get_file(fp[0])
-                f.seek(ad[0], 0)
+            if ad[1] == 'INTEGER':
+                stack.set_seek(fp[0], ad[0])
             else:
                 add_error_message(f'Expect `INTEGER` for a address, but found `{ad[1]}`', self)
+        else:
+            add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)
+
+import pickle
+class Get_record(AST_Node):
+    def __init__(self, file_path, id, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'GETRECORD'
+        self.file_path = file_path
+        self.id = id
+    
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + LEVEL_STR * (level+1) + str(self.id)
+    
+    def exe(self):
+        fp = self.file_path.exe()
+        if fp[1] == 'STRING':
+            f = stack.get_file(fp[0])
+            f.seek(stack.get_seek(fp[0]))
+            t = pickle.load(f)
+            stack.set_variable(self.id.id, t[0], t[1])
+        else:
+            add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)
+
+class Put_record(AST_Node):
+    def __init__(self, file_path, record, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.type = 'PUTRECORD'
+        self.file_path = file_path
+        self.record = record
+
+    def get_tree(self, level=0):
+        return LEVEL_STR * level + self.type + '\n' + self.file_path.get_tree(level+1) + '\n' + self.record.get_tree(level+1)
+
+    def exe(self):
+        fp = self.file_path.exe()
+        record = self.record.exe()
+        if fp[1] == 'STRING':
+            f = stack.get_file(fp[0])
+            pickle.dump(record, f)
+            f.flush()
         else:
             add_error_message(f'Expect `STRING` for a file path, but found `{fp[1]}`', self)

@@ -9,6 +9,7 @@ requirements = [
     ('GitPython', 'git'),
     ('colorama', 'colorama'),
     ('requests', 'requests'),
+    ('pickle', 'pickle'),
 ]
 
 

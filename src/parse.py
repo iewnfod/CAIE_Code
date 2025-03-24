@@ -553,6 +553,14 @@ def p_closefile_statement(p):
 def p_seek_statement(p):
     """statement : SEEK expression COMMA expression"""
     p[0] = AST.Seek(p[2], p[4], p=p)
+    
+def p_get_record_statement(p):
+    """statement : GETRECORD expression COMMA expression"""
+    p[0] = AST.Get_record(p[2], p[4], p=p)
+
+def p_put_record_statement(p):
+    """statement : PUTRECORD expression COMMA expression"""
+    p[0] = AST.Put_record(p[2], p[4], p=p)
 
 def p_composite_type_declare_statement(p):
     """statement : TYPE ID statements ENDTYPE"""
