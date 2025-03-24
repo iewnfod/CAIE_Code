@@ -106,29 +106,34 @@ def show_notification(_branch):
     f = os.path.join(HOME_PATH, 'notification', 'notification.json')
     with open(f, 'r') as file:
         notification_data = json.load(file)
-    if _branch in notification_data['branch']:
-        expiry_date_str = notification_data['expiry_date']
-        current_time = datetime.now()
-        expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d')
-        if current_time < expiry_date:
-            if notification_data['type'] == 'deprecate':
-                print(f"\033[1m❗DEPRECATED NOTIFICATION❗\33[1m")
-                deprecate_keyword = ', '.join(notification_data['deprecation']['keyword'])
-                deprecation_date_str = notification_data['deprecation']['deprecation_date']
-                deprecation_date = datetime.strptime(deprecation_date_str, '%Y-%m-%d')
-                if current_time > deprecation_date:
-                    print(f"👉{deprecate_keyword}👈 has become deprecated since {notification_data['deprecation']['deprecation_date']}\033[0m")
-                else:
-                    print(f"👉{deprecate_keyword}👈 will be deprecated at {notification_data['deprecation']['deprecation_date']}\033[0m")
-            elif notification_data['type'] == 'update':
-                print(f"\033[1m🎉UPDATE NOTIFICATION🎉\33[1m")
-                print(f"👉{notification_data['content']}\033[0m")
-            elif notification_data['type'] == 'add':
-                print(f"\033[1m🎉NEW FEATURE NOTIFICATION🎉\33[1m")
-                print(f"👉{notification_data['content']}\033[0m")
-        else:
-            print("🙁No developer notification available.")
-    else:
+    current_time = datetime.now()
+    notifications = notification_data['notifications']
+    has_notification = False
+
+    for notification in notifications:
+        if _branch in notification['branch']:
+            expiry_date_str = notification['expiry_date']
+            expiry_date = datetime.strptime(expiry_date_str, '%Y-%m-%d')
+            if current_time < expiry_date:
+                has_notification = True
+                if notification['type'] == 'deprecate':
+                    print(f"\033[1m❗DEPRECATED NOTIFICATION❗\33[1m")
+                    deprecate_keyword = ', '.join(notification['deprecation']['keyword'])
+                    deprecation_date_str = notification['deprecation']['deprecation_date']
+                    deprecation_date = datetime.strptime(deprecation_date_str, '%Y-%m-%d')
+                    if current_time > deprecation_date:
+                        print(f"👉{deprecate_keyword}👈 has become deprecated since {notification['deprecation']['deprecation_date']}\033[0m")
+                    else:
+                        print(f"👉{deprecate_keyword}👈 will be deprecated at {notification['deprecation']['deprecation_date']}\033[0m")
+                elif notification['type'] == 'update':
+                    print(f"\033[1m🎉UPDATE NOTIFICATION🎉\33[1m")
+                    print(f"👉{notification['content']}\033[0m")
+                elif notification['type'] == 'add':
+                    print(f"\033[1m🎉NEW FEATURE NOTIFICATION🎉\33[1m")
+                    print(f"👉{notification['content']}\033[0m")
+                print("\n---------------------------------\n")
+
+    if not has_notification:
         print("🙁No developer notification available.")
 
 def integrity_protection():
