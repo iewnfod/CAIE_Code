@@ -1,10 +1,24 @@
 {
-    "type": "add|update|deprecate",
-    "branch": ["stable", "nightly", "dev"],
-    "expiry_date": "YYYY-MM-DD",
-    "content": "Update Content",
-    "deprecation": {
-        "keyword": ["Deprecated Keyword 1", "Deprecated Keyword 2"],
-        "deprecation_date": "YYYY-MM-DD"
-    }
+    "notifications": [
+        {
+            "type": "add|update|deprecate",
+            "branch": ["stable", "nightly", "dev"],
+            "expiry_date": "YYYY-MM-DD",
+            "content": "Update Content",
+            "deprecation": {
+                "keyword": ["Deprecated Keyword 1", "Deprecated Keyword 2"],
+                "deprecation_date": "YYYY-MM-DD"
+            }
+        },
+        {
+            "type": "add|update|deprecate",
+            "branch": ["stable", "nightly", "dev"],
+            "expiry_date": "YYYY-MM-DD",
+            "content": "Update Content",
+            "deprecation": {
+                "keyword": ["Deprecated Keyword 1", "Deprecated Keyword 2"],
+                "deprecation_date": "YYYY-MM-DD"
+            }
+        }
+    ]
 }
