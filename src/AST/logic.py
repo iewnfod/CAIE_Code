@@ -13,14 +13,10 @@ class Logic_and(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        try:
-            left_result = self.left.exe()[0]
-        except Exception:
+        left_result = self.left.exe()[0]
+        if not left_result:
             return (False, 'BOOLEAN')
-        try:
-            right_result = self.right.exe()[0]
-        except Exception:
-            return (False, 'BOOLEAN')
+        right_result = self.right.exe()[0]
         return (bool(left_result and right_result), 'BOOLEAN')
 
 class Logic_or(AST_Node):
@@ -34,15 +30,7 @@ class Logic_or(AST_Node):
         return LEVEL_STR * level + self.type + '\n' + self.left.get_tree(level+1) + '\n' + self.right.get_tree(level+1)
 
     def exe(self):
-        try:
-            left_result = self.left.exe()[0]
-        except Exception:
-            return (False, 'BOOLEAN')
-        try:
-            right_result = self.right.exe()[0]
-        except Exception:
-            return (False, 'BOOLEAN')
-        return (bool(left_result or right_result), 'BOOLEAN')
+        return (bool(self.left.exe()[0] or self.right.exe()[0]), 'BOOLEAN')
 
 class Logic_not(AST_Node):
     def __init__(self, value, *args, **kwargs):
