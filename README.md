@@ -639,7 +639,7 @@ The following items give the `DATATYPE`, its description, and the default value 
 
 ## Sponsors
 <a herf="https://1password.com/">
-    <img src="https://www.vectorlogo.zone/logos/1password/1password-ar21.svg" height="100" alt="1Password">
+    <img src="https://1password.com/logo-images/1password-logo-light@2x.png" height="100" alt="1Password">
 
 ## Author and Contributors
 <a href="https://github.com/iewnfod/CAIE_Code/graphs/contributors">
