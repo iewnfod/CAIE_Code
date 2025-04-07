@@ -612,7 +612,7 @@ NEXT i
 
 ## 赞助商
 <a herf="https://1password.com/">
-    <img src="https://www.vectorlogo.zone/logos/1password/1password-ar21.svg" height="100" alt="1Password">
+    <img src="https://1password.com/logo-images/1password-logo-dark@2x.png" height="100" alt="1Password">
 
 ## 作者与贡献者
 <a href="https://github.com/iewnfod/CAIE_Code/graphs/contributors">
