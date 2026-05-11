@@ -1,52 +1,68 @@
-name: 问题报告
-description: "如果你想反馈 Bug，请使用此模板。"
+name: Bug Report / 问题报告
+description: "If you want to report a bug, please use this template. / 如果你想反馈 Bug，请使用此模板。"
 labels: ["漏洞"]
 body:
   - type: markdown
     attributes:
       value: |
-        发Issue前请先看看[Issue列表](https://github.com/iewnfod/CAIE_Code/issues)里有没有你的问题，包括已关闭的问题。如有，请关注相关Issue而不是重复发问。
+        Before creating an issue, please check the [Issue List](https://github.com/iewnfod/CAIE_Code/issues) to see whether your problem has already been reported, including closed issues. If so, please follow the related issue instead of creating a duplicate one.
+        If you are not sure whether the issue is caused by this project or by incorrect usage, please ask first in [Discussions](https://github.com/iewnfod/CAIE_Code/discussions).
+        Please describe your issue as clearly and concisely as possible in the title.
+        There is no need to use honorifics or polite phrases. Everyone here is equal.
+        Please summarize your issue in one sentence in the title, and avoid meaningless words such as “help”, “urgent”, or “expert please”.
+
+        发 Issue 前请先看看[Issue列表](https://github.com/iewnfod/CAIE_Code/issues)里有没有你的问题，包括已关闭的问题。如有，请关注相关 Issue 而不是重复发问。
         如果你不确定你遇到的问题是本项目造成的还是你自己操作的失误，请先在[讨论·Discussions](https://github.com/iewnfod/CAIE_Code/discussions)提出。
-        请在标题栏中用最简练的语言清晰的描述你遇到的问题。
+        请在标题栏中用最简练的语言清晰地描述你遇到的问题。
         标题和内容不必加敬词，所有人都是平等的。
         请在标题内用一句话描述你遇到的问题，勿增加如“帮帮我”、“急急急”、“大神”之类的无意义词汇。
+
   - type: textarea
     id: description
     attributes:
-      label: 问题描述
-      description: 在下方的编辑框描述你的问题
-      placeholder: 请尽可能说明你遇到的问题
+      label: Problem Description / 问题描述
+      description: Describe your issue in the editor below. / 在下方的编辑框描述你的问题
+      placeholder: Please describe your issue as clearly as possible. / 请尽可能说明你遇到的问题
     validations:
       required: true
+
   - type: textarea
     id: recurrent
     attributes:
-      label: 复现方法
-      description: 在下方的编辑框描述如何触发这个漏洞（最好直接是需要用到的代码）
-      placeholder: 能看到这个？说明你没有看描述，请自己加上“1. ”
+      label: Steps to Reproduce / 复现方法
+      description: Describe how to reproduce the bug below (preferably including the required code). / 在下方的编辑框描述如何触发这个漏洞（最好直接是需要用到的代码）
+      placeholder: |
+        1. ...
       value: "1. "
     validations:
       required: true
+
   - type: textarea
     id: code
     attributes:
-      label: 你的代码
-      description: 你可以把你的代码复制到这里
+      label: Your Code / 你的代码
+      description: Paste your code here. / 你可以把你的代码复制到这里
       placeholder: |
+        Please paste your code directly to avoid indentation issues.
         请直接复制你的代码，避免缩进问题
+
+  - type: input
     id: version
     attributes:
-      label: 版本信息
-      description: 填写你正在使用的CPC版本
-      placeholder: 终端输入`cpc -v`查看
+      label: Version Information / 版本信息
+      description: Enter the CPC version you are using. / 填写你正在使用的 CPC 版本
+      placeholder: Run `cpc -v` in your terminal to check. / 终端输入 `cpc -v` 查看
     validations:
       required: true
+
   - type: textarea
     id: extra
     attributes:
-      label: 额外说明
-      description: 还有什么要补充的吗？
+      label: Additional Information / 额外说明
+      description: Anything else to add? / 还有什么要补充的吗？
       placeholder: |
+        Tips:
+        You can also provide screenshots and files.
+
         提示：
         你还可以提供截图和文件
-
