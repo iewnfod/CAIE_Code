@@ -1,33 +1,44 @@
-name: 功能建议
-description: "如果你想建议一些新的功能，请使用此模板。"
+name: Feature Request / 功能建议
+description: "If you want to suggest a new feature, please use this template. / 如果你想建议一些新的功能，请使用此模板。"
 labels: ["功能"]
 body:
   - type: markdown
     attributes:
       value: |
-        发Issue前请先看看Issue列表里有没有你的建议，包括已关闭的建议。如有，请关注相关Issue而不是重复建议。
+        Before creating an issue, please check the issue list to see whether your suggestion has already been proposed, including closed issues. If so, please follow the related issue instead of creating a duplicate one.
+        If you only have a general idea for a feature but are not sure how it could actually be implemented, please discuss it first in [Discussions](https://github.com/iewnfod/CAIE_Code/discussions).
+        Please describe your suggestion as clearly and concisely as possible in the title.
+        If you are capable of implementing the feature yourself, please open a Pull Request instead of an Issue to save time for both you and the maintainers.
+
+        发 Issue 前请先看看 Issue 列表里有没有你的建议，包括已关闭的建议。如有，请关注相关 Issue 而不是重复建议。
         如果你只有相关功能的构想而不清楚如何实际实现相关功能，请先在[讨论·Discussions](https://github.com/iewnfod/CAIE_Code/discussions)提出。
-        请在标题栏中用最简练的语言清晰的描述你的建议。
-        如果你具有相关能力，请开Pull Request而不是开Issue，这样能节约你我的时间。
+        请在标题栏中用最简练的语言清晰地描述你的建议。
+        如果你具有相关能力，请开 Pull Request 而不是开 Issue，这样能节约你我的时间。
+
   - type: textarea
     id: description
     attributes:
-      label: 功能描述
-      description: 在下方的编辑框描述你想要的功能
-      placeholder: 请尽可能完整说明你的建议，包括相关功能应该如何正确工作、何时工作等。
+      label: Feature Description / 功能描述
+      description: Describe the feature you want below. / 在下方的编辑框描述你想要的功能
+      placeholder: |
+        Please describe your suggestion as completely as possible, including how the feature should work and when it should work.
+        请尽可能完整说明你的建议，包括相关功能应该如何正确工作、何时工作等。
     validations:
       required: true
+
   - type: textarea
     id: example
     attributes:
-      label: 功能样例
-      description: 展示这样功能的例子，可以是某些语法，也可以是实现以后能够做到什么。
-      placeholder: 能看到这个？说明你没有看描述，请自己加上“1. ”
+      label: Feature Examples / 功能样例
+      description: Show examples of the feature, such as syntax examples or what could be achieved after implementation. / 展示这样功能的例子，可以是某些语法，也可以是实现以后能够做到什么。
+      placeholder: |
+        1. ...
       value: "1. "
     validations:
       required: true
+
   - type: textarea
     id: extra
     attributes:
-      label: 额外说明
-      description: 还有什么要补充的吗？
+      label: Additional Information / 额外说明
+      description: Anything else to add? / 还有什么要补充的吗？
